@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="AirRobeWidget/src/main/res/drawable/ic_airrobe_logo.xml" value="0.36354166666666665" />
+        <entry key="AirRobeWidget/src/main/res/drawable/ic_arrow.xml" value="0.36354166666666665" />
+        <entry key="AirRobeWidget/src/main/res/drawable/ic_close.xml" value="0.36354166666666665" />
+        <entry key="AirRobeWidget/src/main/res/drawable/ic_logo.xml" value="0.36354166666666665" />
+        <entry key="AirRobeWidget/src/main/res/drawable/ic_quote_text.xml" value="0.36354166666666665" />
+        <entry key="AirRobeWidget/src/main/res/layout/layout_optin.xml" value="0.5162187210379982" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
