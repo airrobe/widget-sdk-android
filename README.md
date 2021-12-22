@@ -1,1 +1,1 @@
-# widget-sdk-andriod
+# widget-sdk-android
