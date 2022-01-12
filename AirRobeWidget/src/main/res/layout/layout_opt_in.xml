@@ -39,7 +39,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Added To"
+                        android:text="@string/added_to"
                         android:textColor="#000"
                         android:textSize="16sp"
                         android:layout_marginTop="3dp"
@@ -64,7 +64,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Wear now, re-sell later"
+                        android:text="@string/description"
                         android:textColor="#000"
                         android:textSize="14sp"
 
@@ -73,7 +73,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Potential value: $100"
+                        android:text="@string/potential_value"
                         android:textColor="#000"
                         android:textSize="14sp"
                         android:textStyle="bold"
@@ -94,7 +94,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="We’ve partnered with AirRobe to enable you to join the circular fashion movement. Re-sell or rent your purchases on AirRobe’s marketplace – all with one simple click. Together, we can do our part to keep fashion out of landfill. Learn more."
+            android:text="@string/detailed_description"
             android:textColor="#000"
             android:textSize="14sp"
             android:layout_marginTop="5dp"/>
@@ -104,7 +104,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="By opting in you agree to THE ICONIC’s Privacy Policy and consent for us to share your details with AirRobe."
+        android:text="@string/extra_info"
         android:textColor="#000"
         android:textSize="14sp"
         android:layout_marginTop="5dp"/>
