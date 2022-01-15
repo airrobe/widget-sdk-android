@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AirRobeOptIn">
+        <attr name="brand" format="string" />
+        <attr name="material" format="string" />
+        <attr name="category" format="string" />
+        <attr name="priceCents" format="float" />
+        <attr name="originalFullPriceCents" format="float" />
+        <attr name="rrpCents" format="float" />
+        <attr name="currency" format="string" />
+        <attr name="locale" format="string" />
+    </declare-styleable>
+</resources>
