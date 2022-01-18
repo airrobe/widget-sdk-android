@@ -8,6 +8,10 @@ import android.widget.LinearLayout
 import com.airrobe.widgetsdk.airrobewidget.R
 import com.airrobe.widgetsdk.airrobewidget.config.Constants
 import com.airrobe.widgetsdk.airrobewidget.databinding.LayoutOptInBinding
+import com.airrobe.widgetsdk.airrobewidget.service.AirRobeApiService
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.json.JSONObject
 
 class AirRobeOptIn @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -42,6 +46,8 @@ class AirRobeOptIn @JvmOverloads constructor(
         rrpCents                = typedArray.getFloat(R.styleable.AirRobeOptIn_rrpCents, Constants.FLOAT_NULL_MAGIC_VALUE)
         currency                = typedArray.getString(R.styleable.AirRobeOptIn_currency)
         locale                  = typedArray.getString(R.styleable.AirRobeOptIn_locale)
+
+        initializeOptInWidget()
     }
 
     fun initialize(
@@ -69,6 +75,29 @@ class AirRobeOptIn @JvmOverloads constructor(
             Log.e(TAG, "Required params can't be empty")
             return
         }
-        
+        val retrofit = AirRobeApiService.categoryMappingService
+        val param = JSONObject()
+        val appId = "c43f2be28f1f"
+        param.put("query",
+            """
+                query GetMappingInfo {
+                  shop(appId: "c43f2be28f1f") {
+                    categoryMappings {
+                      from
+                      to
+                      excluded
+                    }
+                  }
+                }
+            """
+        )
+        GlobalScope.launch {
+            try {
+                val response = retrofit.getCategoryMapping(param.toString())
+                print(response)
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 }
