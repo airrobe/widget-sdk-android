@@ -1,4 +1,4 @@
-package com.airrobe.widgetsdk.AirRobeDemo
+package com.airrobe.widgetsdk.airrobedemo
 
 import org.junit.Test
 
