@@ -1,24 +1,18 @@
 package com.airrobe.widgetsdk.airrobewidget
 
-import android.app.Application
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
+import com.airrobe.widgetsdk.airrobewidget.config.CategoryModelInstance
+import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.GetCategoryMappingController
 
-class AirRobeWidget: Application() {
-    var config: AirRobeWidgetConfig? = null
+internal lateinit var configuration: AirRobeWidgetConfig
+internal val categoryModelInstance = CategoryModelInstance
 
-    override fun onCreate() {
-        super.onCreate()
-        instance = this
-    }
-
-    companion object {
-        lateinit var instance: AirRobeWidget
-            private set
-    }
-
+class AirRobeWidget {
     fun initialize(
         config: AirRobeWidgetConfig
     ) {
-        this.config = config
+        configuration = config
+        val getCategoryMappingController = GetCategoryMappingController()
+        getCategoryMappingController.start(config.appId)
     }
 }

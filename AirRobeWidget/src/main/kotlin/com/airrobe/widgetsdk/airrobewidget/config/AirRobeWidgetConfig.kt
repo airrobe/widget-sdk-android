@@ -28,8 +28,8 @@ internal class AirRobeWidgetConfigImpl (
  * @param mode Selector for production or sandbox mode
  */
 fun AirRobeWidgetConfig (
-    appId: String = "",
-    privacyPolicyURL: String = "",
+    appId: String,
+    privacyPolicyURL: String,
     color: String = "#42abc8",
     mode: Mode = Mode.PRODUCTION
 ) : AirRobeWidgetConfig = AirRobeWidgetConfigImpl(

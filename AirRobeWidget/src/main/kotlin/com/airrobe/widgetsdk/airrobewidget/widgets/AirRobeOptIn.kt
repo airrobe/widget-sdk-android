@@ -70,34 +70,10 @@ class AirRobeOptIn @JvmOverloads constructor(
         this.locale = locale
     }
 
-    fun initializeOptInWidget() {
+    private fun initializeOptInWidget() {
         if (category.isNullOrEmpty()) {
             Log.e(TAG, "Required params can't be empty")
             return
-        }
-        val retrofit = AirRobeApiService.categoryMappingService
-        val param = JSONObject()
-        val appId = "c43f2be28f1f"
-        param.put("query",
-            """
-                query GetMappingInfo {
-                  shop(appId: "c43f2be28f1f") {
-                    categoryMappings {
-                      from
-                      to
-                      excluded
-                    }
-                  }
-                }
-            """
-        )
-        GlobalScope.launch {
-            try {
-                val response = retrofit.getCategoryMapping(param.toString())
-                print(response)
-            } catch (e: java.lang.Exception) {
-                e.printStackTrace()
-            }
         }
     }
 }

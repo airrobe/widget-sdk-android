@@ -31,9 +31,6 @@ private class UserAgentInterceptor : Interceptor {
 
 object AirRobeApiService {
     val categoryMappingService: ApiInterface by lazy {
-//        val gson = GsonBuilder()
-//            .setLenient()
-//            .create()
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         val httpClient = OkHttpClient.Builder()

@@ -11,8 +11,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         AirRobeWidget().initialize(
             AirRobeWidgetConfig(
-                "123",
-                ""
+                "c43f2be28f1f",
+                "https://www.theiconic.com.au/privacy-policy"
             )
         )
     }
