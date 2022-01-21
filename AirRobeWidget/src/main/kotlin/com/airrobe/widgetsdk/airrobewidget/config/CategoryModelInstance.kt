@@ -12,7 +12,7 @@ internal object CategoryModelInstance {
 
     fun setCategoryModel(categoryModel: CategoryModel) {
         this.categoryModel = categoryModel
-        if (changeListener != null) changeListener.onChange()
+        changeListener.onChange()
     }
 
     fun setListener(changeListener: CategoryModelChangeListener) {

@@ -80,8 +80,12 @@ class AirRobeOptIn @JvmOverloads constructor(
             Log.e(TAG, "Required params can't be empty")
             return
         }
-        categoryModelInstance.getCategoryModel()
-        visibility = GONE
+        val to = categoryModelInstance.getCategoryModel()!!.checkCategoryEligible(arrayListOf(category))
+        if (to != null) {
+            Log.d(TAG, to)
+        } else {
+            Log.d(TAG, "TO is NULL")
+        }
     }
 
     override fun onChange() {
