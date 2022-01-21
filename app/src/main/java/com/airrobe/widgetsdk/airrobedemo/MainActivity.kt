@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.airrobe.widgetsdk.airrobewidget.AirRobeWidget
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
+import com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeOptIn
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,5 +16,6 @@ class MainActivity : AppCompatActivity() {
                 "https://www.theiconic.com.au/privacy-policy"
             )
         )
+        val airRobeOptIn = findViewById<AirRobeOptIn>(R.id.airriobe_optin_widget)
     }
 }

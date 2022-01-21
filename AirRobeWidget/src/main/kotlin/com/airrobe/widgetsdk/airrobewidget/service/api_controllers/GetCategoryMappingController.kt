@@ -31,8 +31,7 @@ internal class GetCategoryMappingController {
                 val response = retrofit.getCategoryMapping(param.toString())
                 val gson = Gson()
                 val categoryModel = gson.fromJson(response.body(), CategoryModel::class.java)
-                categoryModelInstance.categoryModel = categoryModel
-                print(categoryModelInstance.categoryModel)
+                categoryModelInstance.setCategoryModel(categoryModel)
             } catch (e: java.lang.Exception) {
                 e.printStackTrace()
             }

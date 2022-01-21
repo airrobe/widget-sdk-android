@@ -6,16 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.airrobe.widgetsdk.airrobewidget.R
+import com.airrobe.widgetsdk.airrobewidget.categoryModelInstance
+import com.airrobe.widgetsdk.airrobewidget.config.CategoryModelInstance
 import com.airrobe.widgetsdk.airrobewidget.config.Constants
 import com.airrobe.widgetsdk.airrobewidget.databinding.LayoutOptInBinding
-import com.airrobe.widgetsdk.airrobewidget.service.AirRobeApiService
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import org.json.JSONObject
 
 class AirRobeOptIn @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr) {
+) : LinearLayout(context, attrs, defStyleAttr), CategoryModelInstance.CategoryModelChangeListener {
     private val binding = LayoutOptInBinding.inflate(LayoutInflater.from(context));
 
     private var brand: String? = null
@@ -47,6 +45,7 @@ class AirRobeOptIn @JvmOverloads constructor(
         currency                = typedArray.getString(R.styleable.AirRobeOptIn_currency)
         locale                  = typedArray.getString(R.styleable.AirRobeOptIn_locale)
 
+        categoryModelInstance.setListener(this)
         initializeOptInWidget()
     }
 
@@ -68,12 +67,24 @@ class AirRobeOptIn @JvmOverloads constructor(
         this.rrpCents = rrpCents
         this.currency = currency
         this.locale = locale
+
+        initializeOptInWidget()
     }
 
     private fun initializeOptInWidget() {
+        if (categoryModelInstance.getCategoryModel() == null) {
+            Log.e(TAG, "Category Mapping Info is not loaded")
+            return
+        }
         if (category.isNullOrEmpty()) {
             Log.e(TAG, "Required params can't be empty")
             return
         }
+        categoryModelInstance.getCategoryModel()
+        visibility = GONE
+    }
+
+    override fun onChange() {
+        initializeOptInWidget()
     }
 }

@@ -1,6 +1,5 @@
 package com.airrobe.widgetsdk.airrobewidget.service
 
-import com.airrobe.widgetsdk.airrobewidget.service.models.CategoryModel
 import com.airrobe.widgetsdk.airrobewidget.service.models.EmailCheckResponseModel
 import com.airrobe.widgetsdk.airrobewidget.service.models.PriceEngineResponseModel
 import retrofit2.Response

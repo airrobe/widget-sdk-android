@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeOptIn
+        android:id="@+id/airriobe_optin_widget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:category="Accessories"/>
