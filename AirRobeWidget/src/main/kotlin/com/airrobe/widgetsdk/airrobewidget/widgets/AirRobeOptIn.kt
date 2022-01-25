@@ -10,10 +10,12 @@ import com.airrobe.widgetsdk.airrobewidget.categoryModelInstance
 import com.airrobe.widgetsdk.airrobewidget.config.CategoryModelInstance
 import com.airrobe.widgetsdk.airrobewidget.config.Constants
 import com.airrobe.widgetsdk.airrobewidget.databinding.LayoutOptInBinding
+import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.PriceEngineController
+import com.airrobe.widgetsdk.airrobewidget.service.listeners.PriceEngineListener
 
 class AirRobeOptIn @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr), CategoryModelInstance.CategoryModelChangeListener {
+) : LinearLayout(context, attrs, defStyleAttr), CategoryModelInstance.CategoryModelChangeListener, PriceEngineListener {
     private val binding = LayoutOptInBinding.inflate(LayoutInflater.from(context));
 
     private var brand: String? = null
@@ -74,21 +76,48 @@ class AirRobeOptIn @JvmOverloads constructor(
     private fun initializeOptInWidget() {
         if (categoryModelInstance.getCategoryModel() == null) {
             Log.e(TAG, "Category Mapping Info is not loaded")
+            visibility = GONE
             return
         }
         if (category.isNullOrEmpty()) {
             Log.e(TAG, "Required params can't be empty")
+            visibility = GONE
             return
         }
         val to = categoryModelInstance.getCategoryModel()!!.checkCategoryEligible(arrayListOf(category))
         if (to != null) {
-            Log.d(TAG, to)
+            callPriceEngine(to)
         } else {
-            Log.d(TAG, "TO is NULL")
+            Log.d(TAG, "Category is not eligible")
         }
+    }
+
+    private fun callPriceEngine(category: String) {
+        val rrp = if (originalFullPriceCents == Constants.FLOAT_NULL_MAGIC_VALUE) rrpCents else originalFullPriceCents
+        val priceEngineController = PriceEngineController()
+        priceEngineController.priceEngineListener = this
+        priceEngineController.start(priceCents, if (rrp == Constants.FLOAT_NULL_MAGIC_VALUE) null else rrp , category, brand, material)
     }
 
     override fun onChange() {
         initializeOptInWidget()
+    }
+
+    override fun onSuccessPriceEngineApi(resaleValue: Int?) {
+        if (resaleValue == null) {
+            visibility = GONE
+        } else {
+            visibility = VISIBLE
+            binding.tvPotentialValue.setText(R.string.potential_value)
+        }
+    }
+
+    override fun onFailedPriceEngineApi(error: String?) {
+        visibility = GONE
+        if (error.isNullOrEmpty()) {
+            Log.e(TAG, "PriceEngine Api failed")
+        } else {
+            Log.e(TAG, error)
+        }
     }
 }

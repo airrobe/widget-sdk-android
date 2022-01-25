@@ -2,6 +2,7 @@ package com.airrobe.widgetsdk.airrobewidget.service
 
 import com.airrobe.widgetsdk.airrobewidget.service.models.EmailCheckResponseModel
 import com.airrobe.widgetsdk.airrobewidget.service.models.PriceEngineResponseModel
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -15,11 +16,11 @@ interface ApiInterface {
     suspend fun emailCheck(@Body body: String): Response<EmailCheckResponseModel>
 
     @GET("/v1")
-    suspend fun priceEngine(
-        @Query("price") price: String,
-        @Query("rrp") rrp: Double?,
+    fun priceEngine(
+        @Query("price") price: Float,
+        @Query("rrp") rrp: Float?,
         @Query("category") category: String,
         @Query("brand") brand: String?,
         @Query("material") material: String?
-    ): Response<PriceEngineResponseModel>
+    ): Call<PriceEngineResponseModel>
 }
