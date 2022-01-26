@@ -17,6 +17,11 @@ class AirRobeOptIn @JvmOverloads constructor(
 ) : LinearLayout(context, attrs, defStyleAttr), CategoryModelInstance.CategoryModelChangeListener, PriceEngineListener {
     private var binding: LayoutOptInBinding
 
+    internal enum class ExpandType {
+        Opened,
+        Closed
+    }
+    private var expandType: ExpandType = ExpandType.Opened
     private var brand: String? = null
     private var material: String? = null
     private var category: String? = null
@@ -29,6 +34,18 @@ class AirRobeOptIn @JvmOverloads constructor(
     init {
         inflate(context, R.layout.layout_opt_in, this)
         binding = LayoutOptInBinding.bind(this)
+
+        binding.llSwitchContainer.setOnClickListener {
+            if (expandType == ExpandType.Opened) {
+                binding.tvDetailedDescription.visibility = GONE
+                expandType = ExpandType.Closed
+                binding.ivArrowDown.animate().rotation(180.0f).duration = 80
+            } else {
+                binding.tvDetailedDescription.visibility = VISIBLE
+                expandType = ExpandType.Opened
+                binding.ivArrowDown.animate().rotation(0.0f).duration = 80
+            }
+        }
         setupAttributes(attrs)
     }
 
