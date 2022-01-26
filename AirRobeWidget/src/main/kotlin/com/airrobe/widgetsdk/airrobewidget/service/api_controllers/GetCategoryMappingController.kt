@@ -1,6 +1,6 @@
 package com.airrobe.widgetsdk.airrobewidget.service.api_controllers
 
-import com.airrobe.widgetsdk.airrobewidget.categoryModelInstance
+import com.airrobe.widgetsdk.airrobewidget.widgetInstance
 import com.airrobe.widgetsdk.airrobewidget.service.AirRobeApiService
 import com.airrobe.widgetsdk.airrobewidget.service.models.CategoryModel
 import com.google.gson.Gson
@@ -31,7 +31,7 @@ internal class GetCategoryMappingController {
                 val response = retrofit.getCategoryMapping(param.toString())
                 val gson = Gson()
                 val categoryModel = gson.fromJson(response.body(), CategoryModel::class.java)
-                categoryModelInstance.setCategoryModel(categoryModel)
+                widgetInstance.setCategoryModel(categoryModel)
             } catch (e: java.lang.Exception) {
                 e.printStackTrace()
             }

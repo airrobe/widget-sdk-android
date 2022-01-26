@@ -1,20 +1,29 @@
 package com.airrobe.widgetsdk.airrobewidget.widgets
 
 import android.content.Context
+import android.text.SpannableString
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.LinearLayout
 import com.airrobe.widgetsdk.airrobewidget.R
-import com.airrobe.widgetsdk.airrobewidget.categoryModelInstance
-import com.airrobe.widgetsdk.airrobewidget.config.CategoryModelInstance
+import com.airrobe.widgetsdk.airrobewidget.widgetInstance
+import com.airrobe.widgetsdk.airrobewidget.config.WidgetInstance
 import com.airrobe.widgetsdk.airrobewidget.config.Constants
 import com.airrobe.widgetsdk.airrobewidget.databinding.LayoutOptInBinding
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.PriceEngineController
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.PriceEngineListener
+import android.text.TextPaint
+
+import android.graphics.Color
+import android.text.Html
+import android.text.Spanned
+import android.view.View
 
 class AirRobeOptIn @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr), CategoryModelInstance.CategoryModelChangeListener, PriceEngineListener {
+) : LinearLayout(context, attrs, defStyleAttr), WidgetInstance.InstanceChangeListener, PriceEngineListener {
     private var binding: LayoutOptInBinding
 
     internal enum class ExpandType {
@@ -46,6 +55,29 @@ class AirRobeOptIn @JvmOverloads constructor(
                 binding.ivArrowDown.animate().rotation(0.0f).duration = 80
             }
         }
+        val detailedDescriptionText = SpannableString(context.resources.getString(R.string.detailed_description))
+        val cs = object : ClickableSpan() {
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.isUnderlineText = true
+            }
+
+            override fun onClick(p0: View) {
+                Log.d(TAG, "Learn more clicked")
+            }
+        }
+
+        detailedDescriptionText.setSpan(cs, 229, 240, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        binding.tvDetailedDescription.text = detailedDescriptionText
+        binding.tvDetailedDescription.movementMethod = LinkMovementMethod.getInstance()
+        if (widgetInstance.getConfig() != null) {
+            binding.tvDetailedDescription.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
+            val extraInfoText = context.resources.getString(R.string.extra_info).replace("Privacy Policy", "<a href='${widgetInstance.getConfig()?.privacyPolicyURL}'>Privacy Policy</a>")
+            binding.tvExtraInfo.text = Html.fromHtml(extraInfoText)
+            binding.tvExtraInfo.movementMethod = LinkMovementMethod.getInstance()
+            binding.tvExtraInfo.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
+        }
+
         setupAttributes(attrs)
     }
 
@@ -64,7 +96,7 @@ class AirRobeOptIn @JvmOverloads constructor(
         currency                = typedArray.getString(R.styleable.AirRobeOptIn_currency)
         locale                  = typedArray.getString(R.styleable.AirRobeOptIn_locale)
 
-        categoryModelInstance.setListener(this)
+        widgetInstance.setInstanceChangeListener(this)
         initializeOptInWidget()
     }
 
@@ -91,7 +123,12 @@ class AirRobeOptIn @JvmOverloads constructor(
     }
 
     private fun initializeOptInWidget() {
-        if (categoryModelInstance.getCategoryModel() == null) {
+        if (widgetInstance.getConfig() == null) {
+            Log.e(TAG, "Widget sdk is not initialized yet")
+            visibility = GONE
+            return
+        }
+        if (widgetInstance.getCategoryModel() == null) {
             Log.e(TAG, "Category Mapping Info is not loaded")
             visibility = GONE
             return
@@ -101,7 +138,7 @@ class AirRobeOptIn @JvmOverloads constructor(
             visibility = GONE
             return
         }
-        val to = categoryModelInstance.getCategoryModel()!!.checkCategoryEligible(arrayListOf(category))
+        val to = widgetInstance.getCategoryModel()!!.checkCategoryEligible(arrayListOf(category))
         if (to != null) {
             visibility = VISIBLE
             callPriceEngine(to)
@@ -116,12 +153,6 @@ class AirRobeOptIn @JvmOverloads constructor(
         val priceEngineController = PriceEngineController()
         priceEngineController.priceEngineListener = this
         priceEngineController.start(priceCents, if (rrp == Constants.FLOAT_NULL_MAGIC_VALUE) null else rrp , category, brand, material)
-    }
-
-    override fun onChange() {
-        post {
-            initializeOptInWidget()
-        }
     }
 
     override fun onSuccessPriceEngineApi(resaleValue: Int?) {
@@ -145,5 +176,21 @@ class AirRobeOptIn @JvmOverloads constructor(
     private fun fallbackResalePrice(): String {
         val resaleValue = (priceCents * 65) / 100
         return String.format("%.2f", resaleValue)
+    }
+
+    override fun onCategoryModelChange() {
+        post {
+            initializeOptInWidget()
+        }
+    }
+
+    override fun onConfigChange() {
+        if (widgetInstance.getConfig() != null) {
+            binding.tvDetailedDescription.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
+            val extraInfoText = context.resources.getString(R.string.extra_info).replace("Privacy Policy", "<a href='${widgetInstance.getConfig()?.privacyPolicyURL}'>Privacy Policy</a>")
+            binding.tvExtraInfo.text = Html.fromHtml(extraInfoText)
+            binding.tvExtraInfo.movementMethod = LinkMovementMethod.getInstance()
+            binding.tvExtraInfo.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
+        }
     }
 }
