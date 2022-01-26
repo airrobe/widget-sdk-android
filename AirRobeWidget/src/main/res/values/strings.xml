@@ -5,7 +5,9 @@
 
     <string name="description">Wear now, re-sell later</string>
 
-    <string name="potential_value">Potential value:</string>
+    <string name="potential_value_text">Potential value:</string>
+    <string name="potential_value">Potential value: $%1$s</string>
+    <string name="potential_value_without_text">Potential value: $%1$s</string>
 
     <string name="detailed_description">We’ve partnered with AirRobe to enable you to join the circular fashion movement. Re-sell or rent your purchases on AirRobe’s marketplace – all with one simple click. Together, we can do our part to keep fashion out of landfill. Learn more.</string>
     <string name="learn_more_link_text">Learn more.</string>

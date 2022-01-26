@@ -3,7 +3,6 @@ package com.airrobe.widgetsdk.airrobewidget.widgets
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
-import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.airrobe.widgetsdk.airrobewidget.R
 import com.airrobe.widgetsdk.airrobewidget.categoryModelInstance
@@ -16,7 +15,7 @@ import com.airrobe.widgetsdk.airrobewidget.service.listeners.PriceEngineListener
 class AirRobeOptIn @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr), CategoryModelInstance.CategoryModelChangeListener, PriceEngineListener {
-    private val binding = LayoutOptInBinding.inflate(LayoutInflater.from(context));
+    private var binding: LayoutOptInBinding
 
     private var brand: String? = null
     private var material: String? = null
@@ -29,6 +28,7 @@ class AirRobeOptIn @JvmOverloads constructor(
 
     init {
         inflate(context, R.layout.layout_opt_in, this)
+        binding = LayoutOptInBinding.bind(this)
         setupAttributes(attrs)
     }
 
@@ -86,8 +86,10 @@ class AirRobeOptIn @JvmOverloads constructor(
         }
         val to = categoryModelInstance.getCategoryModel()!!.checkCategoryEligible(arrayListOf(category))
         if (to != null) {
+            visibility = VISIBLE
             callPriceEngine(to)
         } else {
+            visibility = GONE
             Log.d(TAG, "Category is not eligible")
         }
     }
@@ -100,24 +102,31 @@ class AirRobeOptIn @JvmOverloads constructor(
     }
 
     override fun onChange() {
-        initializeOptInWidget()
+        post {
+            initializeOptInWidget()
+        }
     }
 
     override fun onSuccessPriceEngineApi(resaleValue: Int?) {
         if (resaleValue == null) {
-            visibility = GONE
+            Log.e(TAG, "Resale price is null")
+            binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value, fallbackResalePrice())
         } else {
-            visibility = VISIBLE
-            binding.tvPotentialValue.setText(R.string.potential_value)
+            binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value, resaleValue.toString())
         }
     }
 
     override fun onFailedPriceEngineApi(error: String?) {
-        visibility = GONE
         if (error.isNullOrEmpty()) {
             Log.e(TAG, "PriceEngine Api failed")
         } else {
             Log.e(TAG, error)
         }
+        binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value, fallbackResalePrice())
+    }
+
+    private fun fallbackResalePrice(): String {
+        val resaleValue = (priceCents * 65) / 100
+        return String.format("%.2f", resaleValue)
     }
 }
