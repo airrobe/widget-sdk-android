@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.airrobe.widgetsdk.airrobewidget.AirRobeWidget
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
+import com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeMultiOptIn
 import com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeOptIn
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
                 "https://www.theiconic.com.au/privacy-policy"
             )
         )
-        val airRobeOptIn = findViewById<AirRobeOptIn>(R.id.airriobe_optin_widget)
+        val airRobeMultiOptIn = findViewById<AirRobeMultiOptIn>(R.id.airrobe_multi_optin_widget)
+        airRobeMultiOptIn.initialize(arrayOf("Accessories", "Accessories"))
     }
 }

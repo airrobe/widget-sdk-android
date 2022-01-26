@@ -10,5 +10,8 @@
         <attr name="currency" format="string" />
         <attr name="locale" format="string" />
     </declare-styleable>
+    <declare-styleable name="AirRobeMultiOptIn">
+        <attr name="android:entries" />
+    </declare-styleable>
     <color name="airrobe_widget_default_base_color">#42abc8</color>
 </resources>

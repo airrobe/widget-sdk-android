@@ -10,40 +10,30 @@ import android.widget.LinearLayout
 import com.airrobe.widgetsdk.airrobewidget.R
 import com.airrobe.widgetsdk.airrobewidget.widgetInstance
 import com.airrobe.widgetsdk.airrobewidget.config.WidgetInstance
-import com.airrobe.widgetsdk.airrobewidget.config.Constants
-import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.PriceEngineController
-import com.airrobe.widgetsdk.airrobewidget.service.listeners.PriceEngineListener
 import android.text.TextPaint
 
 import android.graphics.Color
 import android.text.Html
 import android.text.Spanned
 import android.view.View
-import com.airrobe.widgetsdk.airrobewidget.databinding.AirrobeOptInBinding
+import com.airrobe.widgetsdk.airrobewidget.databinding.AirrobeMultiOptInBinding
 import com.airrobe.widgetsdk.airrobewidget.utils.SharedPreferenceManager
 
-class AirRobeOptIn @JvmOverloads constructor(
+class AirRobeMultiOptIn @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr), WidgetInstance.InstanceChangeListener, PriceEngineListener {
-    private var binding: AirrobeOptInBinding
+) : LinearLayout(context, attrs, defStyleAttr), WidgetInstance.InstanceChangeListener {
+    private var binding: AirrobeMultiOptInBinding
 
     internal enum class ExpandType {
         Opened,
         Closed
     }
     private var expandType: ExpandType = ExpandType.Opened
-    private var brand: String? = null
-    private var material: String? = null
-    private var category: String? = null
-    private var priceCents: Float = 0.0f
-    private var originalFullPriceCents: Float = Constants.FLOAT_NULL_MAGIC_VALUE
-    private var rrpCents: Float = Constants.FLOAT_NULL_MAGIC_VALUE
-    private var currency: String? = "AUD"
-    private var locale: String? = "en-AU"
+    private var items: Array<CharSequence>? = arrayOf()
 
     init {
-        inflate(context, R.layout.airrobe_opt_in, this)
-        binding = AirrobeOptInBinding.bind(this)
+        inflate(context, R.layout.airrobe_multi_opt_in, this)
+        binding = AirrobeMultiOptInBinding.bind(this)
 
         binding.llSwitchContainer.setOnClickListener {
             if (expandType == ExpandType.Opened) {
@@ -92,39 +82,17 @@ class AirRobeOptIn @JvmOverloads constructor(
     }
 
     private fun setupAttributes(attrs: AttributeSet?) {
-        val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.AirRobeOptIn, 0, 0)
-        brand                   = typedArray.getString(R.styleable.AirRobeOptIn_brand)
-        category                = typedArray.getString(R.styleable.AirRobeOptIn_category)
-        material                = typedArray.getString(R.styleable.AirRobeOptIn_material)
-        priceCents              = typedArray.getFloat(R.styleable.AirRobeOptIn_priceCents, 0.0f)
-        originalFullPriceCents  = typedArray.getFloat(R.styleable.AirRobeOptIn_originalFullPriceCents, Constants.FLOAT_NULL_MAGIC_VALUE)
-        rrpCents                = typedArray.getFloat(R.styleable.AirRobeOptIn_rrpCents, Constants.FLOAT_NULL_MAGIC_VALUE)
-        currency                = typedArray.getString(R.styleable.AirRobeOptIn_currency)
-        locale                  = typedArray.getString(R.styleable.AirRobeOptIn_locale)
+        val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.AirRobeMultiOptIn, 0, 0)
+        items = typedArray.getTextArray(R.styleable.AirRobeMultiOptIn_android_entries)
 
         widgetInstance.setInstanceChangeListener(this)
         initializeOptInWidget()
     }
 
     fun initialize(
-        brand: String? = null,
-        material: String? = null,
-        category: String,
-        priceCents: Float,
-        originalFullPriceCents: Float = Constants.FLOAT_NULL_MAGIC_VALUE,
-        rrpCents: Float = Constants.FLOAT_NULL_MAGIC_VALUE,
-        currency: String = "AUD",
-        locale: String = "en-AU"
+        items: Array<CharSequence> = arrayOf()
     ) {
-        this.brand = brand
-        this.material = material
-        this.category = category
-        this.priceCents = priceCents
-        this.originalFullPriceCents = originalFullPriceCents
-        this.rrpCents = rrpCents
-        this.currency = currency
-        this.locale = locale
-
+        this.items = items
         initializeOptInWidget()
     }
 
@@ -139,48 +107,23 @@ class AirRobeOptIn @JvmOverloads constructor(
             visibility = GONE
             return
         }
-        if (category.isNullOrEmpty()) {
+        if (items.isNullOrEmpty()) {
             Log.e(TAG, "Required params can't be empty")
             visibility = GONE
+            return
         }
-        val to = widgetInstance.getCategoryModel()!!.checkCategoryEligible(arrayListOf(category!!))
+
+        val newItems = arrayListOf<String>()
+        for (item in items!!) {
+            newItems.add(item.toString())
+        }
+        val to = widgetInstance.getCategoryModel()!!.checkCategoryEligible(newItems)
         if (to != null) {
             visibility = VISIBLE
-            callPriceEngine(to)
         } else {
             visibility = GONE
             Log.d(TAG, "Category is not eligible")
         }
-    }
-
-    private fun callPriceEngine(category: String) {
-        val rrp = if (originalFullPriceCents == Constants.FLOAT_NULL_MAGIC_VALUE) rrpCents else originalFullPriceCents
-        val priceEngineController = PriceEngineController()
-        priceEngineController.priceEngineListener = this
-        priceEngineController.start(priceCents, if (rrp == Constants.FLOAT_NULL_MAGIC_VALUE) null else rrp , category, brand, material)
-    }
-
-    override fun onSuccessPriceEngineApi(resaleValue: Int?) {
-        if (resaleValue == null) {
-            Log.e(TAG, "Resale price is null")
-            binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value, fallbackResalePrice())
-        } else {
-            binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value, resaleValue.toString())
-        }
-    }
-
-    override fun onFailedPriceEngineApi(error: String?) {
-        if (error.isNullOrEmpty()) {
-            Log.e(TAG, "PriceEngine Api failed")
-        } else {
-            Log.e(TAG, error)
-        }
-        binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value, fallbackResalePrice())
-    }
-
-    private fun fallbackResalePrice(): String {
-        val resaleValue = (priceCents * 65) / 100
-        return String.format("%.2f", resaleValue)
     }
 
     override fun onCategoryModelChange() {

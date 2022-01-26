@@ -8,10 +8,15 @@
     tools:context=".MainActivity">
 
     <com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeOptIn
-        android:id="@+id/airriobe_optin_widget"
+        android:id="@+id/airrobe_optin_widget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:category="Accessories/Travel and Luggage"
         app:priceCents="120"/>
 
+    <com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeMultiOptIn
+        android:id="@+id/airrobe_multi_optin_widget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" />
 </LinearLayout>

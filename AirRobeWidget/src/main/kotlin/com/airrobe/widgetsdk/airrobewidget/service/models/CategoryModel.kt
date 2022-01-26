@@ -3,8 +3,8 @@ package com.airrobe.widgetsdk.airrobewidget.service.models
 data class CategoryModel (
     var data: DataModel,
 ) {
-    fun checkCategoryEligible(items: ArrayList<String?>): String? {
-        val eligibleItem = items.firstOrNull { bestCategoryMapping(factorize(it!!)) != null }
+    fun checkCategoryEligible(items: ArrayList<String>): String? {
+        val eligibleItem = items.firstOrNull { bestCategoryMapping(factorize(it)) != null }
         return if (eligibleItem.isNullOrEmpty()) {
             null
         } else {
