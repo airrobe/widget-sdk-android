@@ -47,6 +47,7 @@ dependencies {
     implementation "androidx.core:core-ktx:$rootProject.ext.kotlin_version"
     implementation "androidx.appcompat:appcompat:$rootProject.ext.appCompatLibVersion"
     implementation "com.google.android.material:material:$rootProject.ext.materialLibVersion"
+    implementation "androidx.preference:preference-ktx:$rootProject.ext.preferenceVersion"
 
     implementation 'com.google.code.gson:gson:2.8.8'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

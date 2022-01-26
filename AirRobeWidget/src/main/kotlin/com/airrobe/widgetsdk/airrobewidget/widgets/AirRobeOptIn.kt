@@ -20,6 +20,7 @@ import android.graphics.Color
 import android.text.Html
 import android.text.Spanned
 import android.view.View
+import com.airrobe.widgetsdk.airrobewidget.utils.SharedPreferenceManager
 
 class AirRobeOptIn @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -76,6 +77,11 @@ class AirRobeOptIn @JvmOverloads constructor(
             binding.tvExtraInfo.text = Html.fromHtml(extraInfoText)
             binding.tvExtraInfo.movementMethod = LinkMovementMethod.getInstance()
             binding.tvExtraInfo.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
+        }
+
+        binding.optInSwitch.isChecked = SharedPreferenceManager.getOptedIn(context)
+        binding.optInSwitch.setOnCheckedChangeListener { _, isChecked ->
+            SharedPreferenceManager.setOptedIn(context, isChecked)
         }
 
         setupAttributes(attrs)
