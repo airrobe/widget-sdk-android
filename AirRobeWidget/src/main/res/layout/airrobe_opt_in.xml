@@ -79,12 +79,20 @@
                         android:id="@+id/tv_potential_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/potential_value_text"
                         android:textColor="#000"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:singleLine="true"
                         android:layout_marginEnd="10dp"/>
+
+                    <ProgressBar
+                        android:id="@+id/price_loading"
+                        android:indeterminate="true"
+                        style="?android:attr/progressBarPadding"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:indeterminateTint="#333"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 

@@ -159,6 +159,8 @@ class AirRobeOptIn @JvmOverloads constructor(
     }
 
     private fun callPriceEngine(category: String) {
+        binding.priceLoading.visibility = VISIBLE
+        binding.priceLoading.animate()
         val rrp = if (originalFullPriceCents == Constants.FLOAT_NULL_MAGIC_VALUE) rrpCents else originalFullPriceCents
         val priceEngineController = PriceEngineController()
         priceEngineController.priceEngineListener = this
@@ -166,21 +168,23 @@ class AirRobeOptIn @JvmOverloads constructor(
     }
 
     override fun onSuccessPriceEngineApi(resaleValue: Int?) {
+        binding.priceLoading.visibility = GONE
         if (resaleValue == null) {
             Log.e(TAG, "Resale price is null")
-            binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value, fallbackResalePrice())
+            binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value_without_text, fallbackResalePrice())
         } else {
-            binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value, resaleValue.toString())
+            binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value_without_text, resaleValue.toString())
         }
     }
 
     override fun onFailedPriceEngineApi(error: String?) {
+        binding.priceLoading.visibility = GONE
         if (error.isNullOrEmpty()) {
             Log.e(TAG, "PriceEngine Api failed")
         } else {
             Log.e(TAG, error)
         }
-        binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value, fallbackResalePrice())
+        binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value_without_text, fallbackResalePrice())
     }
 
     private fun fallbackResalePrice(): String {
