@@ -13,6 +13,7 @@ import com.airrobe.widgetsdk.airrobewidget.config.WidgetInstance
 import android.text.TextPaint
 
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.text.Html
 import android.text.Spanned
 import android.view.View
@@ -28,22 +29,27 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         Opened,
         Closed
     }
-    private var expandType: ExpandType = ExpandType.Opened
+    private var expandType: ExpandType = ExpandType.Closed
     private var items: Array<CharSequence>? = arrayOf()
+
+    companion object {
+        private const val TAG = "AirRobeMultiOptIn"
+    }
 
     init {
         inflate(context, R.layout.airrobe_multi_opt_in, this)
         binding = AirrobeMultiOptInBinding.bind(this)
 
+        binding.tvDetailedDescription.visibility = GONE
         binding.llSwitchContainer.setOnClickListener {
             if (expandType == ExpandType.Opened) {
                 binding.tvDetailedDescription.visibility = GONE
                 expandType = ExpandType.Closed
-                binding.ivArrowDown.animate().rotation(180.0f).duration = 80
+                binding.ivArrowDown.animate().rotation(0.0f).duration = 80
             } else {
                 binding.tvDetailedDescription.visibility = VISIBLE
                 expandType = ExpandType.Opened
-                binding.ivArrowDown.animate().rotation(0.0f).duration = 80
+                binding.ivArrowDown.animate().rotation(180.0f).duration = 80
             }
         }
         val detailedDescriptionText = SpannableString(context.resources.getString(R.string.detailed_description))
@@ -54,7 +60,8 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             }
 
             override fun onClick(p0: View) {
-                Log.d(TAG, "Learn more clicked")
+                val dialog = AirRobeLearnMore(context)
+                dialog.show()
             }
         }
 
@@ -62,6 +69,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         binding.tvDetailedDescription.text = detailedDescriptionText
         binding.tvDetailedDescription.movementMethod = LinkMovementMethod.getInstance()
         if (widgetInstance.getConfig() != null) {
+            binding.ivArrowDown.setColorFilter(Color.parseColor(widgetInstance.getConfig()?.color), PorterDuff.Mode.SRC_ATOP)
             binding.tvDetailedDescription.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
             val extraInfoText = context.resources.getString(R.string.extra_info).replace("Privacy Policy", "<a href='${widgetInstance.getConfig()?.privacyPolicyURL}'>Privacy Policy</a>")
             binding.tvExtraInfo.text = Html.fromHtml(extraInfoText)
@@ -75,10 +83,6 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         }
 
         setupAttributes(attrs)
-    }
-
-    companion object {
-        private const val TAG = "AirRobeOptIn"
     }
 
     private fun setupAttributes(attrs: AttributeSet?) {
@@ -134,6 +138,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
 
     override fun onConfigChange() {
         if (widgetInstance.getConfig() != null) {
+            binding.ivArrowDown.setColorFilter(Color.parseColor(widgetInstance.getConfig()?.color), PorterDuff.Mode.SRC_ATOP)
             binding.tvDetailedDescription.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
             val extraInfoText = context.resources.getString(R.string.extra_info).replace("Privacy Policy", "<a href='${widgetInstance.getConfig()?.privacyPolicyURL}'>Privacy Policy</a>")
             binding.tvExtraInfo.text = Html.fromHtml(extraInfoText)
