@@ -19,4 +19,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp" />
+
+    <com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeConfirmation
+        android:id="@+id/airrobe_confirmation_widget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:orderId="123456"
+        app:email="raj@airrobe.com"/>
 </LinearLayout>

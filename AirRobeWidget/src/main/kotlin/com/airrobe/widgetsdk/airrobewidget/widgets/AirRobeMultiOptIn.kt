@@ -104,16 +104,19 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         if (widgetInstance.getConfig() == null) {
             Log.e(TAG, "Widget sdk is not initialized yet")
             visibility = GONE
+            SharedPreferenceManager.setOrderOptedIn(context, false)
             return
         }
         if (widgetInstance.getCategoryModel() == null) {
             Log.e(TAG, "Category Mapping Info is not loaded")
             visibility = GONE
+            SharedPreferenceManager.setOrderOptedIn(context, false)
             return
         }
         if (items.isNullOrEmpty()) {
             Log.e(TAG, "Required params can't be empty")
             visibility = GONE
+            SharedPreferenceManager.setOrderOptedIn(context, false)
             return
         }
 
@@ -124,8 +127,10 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         val to = widgetInstance.getCategoryModel()!!.checkCategoryEligible(newItems)
         if (to != null) {
             visibility = VISIBLE
+            SharedPreferenceManager.setOrderOptedIn(context, SharedPreferenceManager.getOptedIn(context))
         } else {
             visibility = GONE
+            SharedPreferenceManager.setOrderOptedIn(context, false)
             Log.d(TAG, "Category is not eligible")
         }
     }

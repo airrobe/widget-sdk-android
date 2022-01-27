@@ -72,9 +72,6 @@ object AirRobeApiService {
     }
 
     val emailCheckService: ApiInterface by lazy {
-        val gson = GsonBuilder()
-            .setLenient()
-            .create()
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         val httpClient = OkHttpClient.Builder()
@@ -87,7 +84,7 @@ object AirRobeApiService {
         Retrofit
             .Builder()
             .baseUrl(Constants.EMAIL_CHECK_HOST)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(ScalarsConverterFactory.create())
             .client(httpClient.build())
             .build()
             .create(ApiInterface::class.java)

@@ -13,5 +13,10 @@
     <declare-styleable name="AirRobeMultiOptIn">
         <attr name="android:entries" />
     </declare-styleable>
+    <declare-styleable name="AirRobeConfirmation">
+        <attr name="orderId" format="string" />
+        <attr name="email" format="string" />
+        <attr name="fraudRisk" format="boolean" />
+    </declare-styleable>
     <color name="airrobe_widget_default_base_color">#42abc8</color>
 </resources>

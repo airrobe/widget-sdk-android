@@ -13,7 +13,7 @@ interface ApiInterface {
 
     @Headers("Content-Type: application/json")
     @POST("/graphql")
-    suspend fun emailCheck(@Body body: String): Response<EmailCheckResponseModel>
+    fun emailCheck(@Body body: String): Call<String>
 
     @GET("/v1")
     fun priceEngine(
