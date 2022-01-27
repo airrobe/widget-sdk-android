@@ -7,7 +7,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.4"
+        classpath 'com.android.tools.build:gradle:7.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -27,7 +27,7 @@ ext {
     buildToolsVersion = '32.0.0'
     appCompatLibVersion = '1.4.1'
     materialLibVersion = '1.5.0'
-    preferenceVersion = '1.1.1'
+    preferenceVersion = '1.2.0'
     constraintLayoutVersion = '2.1.2'
     junitVersion = '4.13.2'
     extjunitVersion = '1.1.3'

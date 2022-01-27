@@ -12,7 +12,6 @@ android {
         targetSdk rootProject.ext.compileSdkVersion
         versionCode rootProject.ext.libVersionCode
         versionName rootProject.ext.libVersionName
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
 

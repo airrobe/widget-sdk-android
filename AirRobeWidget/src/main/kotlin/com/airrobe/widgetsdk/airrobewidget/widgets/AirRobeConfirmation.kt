@@ -1,17 +1,23 @@
 package com.airrobe.widgetsdk.airrobewidget.widgets
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.RelativeLayout
 import com.airrobe.widgetsdk.airrobewidget.R
+import com.airrobe.widgetsdk.airrobewidget.config.Constants
 import com.airrobe.widgetsdk.airrobewidget.config.WidgetInstance
 import com.airrobe.widgetsdk.airrobewidget.databinding.AirrobeConfirmationBinding
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.EmailCheckController
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.EmailCheckListener
+import com.airrobe.widgetsdk.airrobewidget.utils.AppUtils
 import com.airrobe.widgetsdk.airrobewidget.utils.SharedPreferenceManager
 import com.airrobe.widgetsdk.airrobewidget.widgetInstance
 
+@SuppressLint("ClickableViewAccessibility")
 class AirRobeConfirmation @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : RelativeLayout(context, attrs, defStyleAttr), WidgetInstance.InstanceChangeListener, EmailCheckListener {
@@ -38,6 +44,16 @@ class AirRobeConfirmation @JvmOverloads constructor(
         fraudRisk = typedArray.getBoolean(R.styleable.AirRobeConfirmation_fraudRisk, false)
 
         widgetInstance.setInstanceChangeListener(this)
+        if (widgetInstance.getConfig() != null) {
+            binding.tvAction.setOnTouchListener { v, event ->
+                if (AppUtils.touchAnimator(context, v, event)) {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data = Uri.parse(Constants.ORDER_ACTIVATE_BASE_URL + widgetInstance.getConfig()?.appId + "-" + orderId)
+                    context.startActivity(intent)
+                }
+                true
+            }
+        }
         initializeConfirmationWidget()
     }
 
@@ -107,5 +123,15 @@ class AirRobeConfirmation @JvmOverloads constructor(
     }
 
     override fun onConfigChange() {
+        if (widgetInstance.getConfig() != null) {
+            binding.tvAction.setOnTouchListener { v, event ->
+                if (AppUtils.touchAnimator(context, v, event)) {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data = Uri.parse(Constants.ORDER_ACTIVATE_BASE_URL + widgetInstance.getConfig()?.appId + "-" + orderId)
+                    context.startActivity(intent)
+                }
+                true
+            }
+        }
     }
 }

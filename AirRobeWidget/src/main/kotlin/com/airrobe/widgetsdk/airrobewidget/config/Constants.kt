@@ -7,5 +7,6 @@ internal class Constants {
         const val AIRROBE_CONNECTOR_PRODUCTION = "https://connector.airrobe.com"
         const val PRICE_ENGINE_HOST = "https://price-engine.airrobe.com"
         const val EMAIL_CHECK_HOST = "https://shop.airrobe.com"
+        const val ORDER_ACTIVATE_BASE_URL = "https://shop.airrobe.com/en/orders/"
     }
 }
