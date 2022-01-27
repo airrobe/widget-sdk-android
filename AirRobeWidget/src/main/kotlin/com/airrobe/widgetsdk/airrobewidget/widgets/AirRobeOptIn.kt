@@ -146,6 +146,7 @@ class AirRobeOptIn @JvmOverloads constructor(
         if (category.isNullOrEmpty()) {
             Log.e(TAG, "Required params can't be empty")
             visibility = GONE
+            return
         }
         val to = widgetInstance.getCategoryModel()!!.checkCategoryEligible(arrayListOf(category!!))
         if (to != null) {

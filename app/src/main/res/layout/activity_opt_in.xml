@@ -3,7 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activities.MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category: 'Accessories'  Price: 120"
+        android:textColor="#333"
+        android:padding="10dp" />
 
     <com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeOptIn
         android:id="@+id/opt_in_widget"
