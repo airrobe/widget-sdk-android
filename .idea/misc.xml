@@ -20,7 +20,11 @@
         <entry key="AirRobeWidget/src/main/res/layout/dialog_learn_more.xml" value="0.25" />
         <entry key="AirRobeWidget/src/main/res/layout/layout_opt_in.xml" value="0.29030797101449274" />
         <entry key="AirRobeWidget/src/main/res/layout/layout_optin.xml" value="0.5162187210379982" />
+        <entry key="app/src/main/res/layout/activity_confirmation.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.32019927536231885" />
+        <entry key="app/src/main/res/layout/activity_menu.xml" value="0.21197916666666666" />
+        <entry key="app/src/main/res/layout/activity_multi_opt_in.xml" value="0.21197916666666666" />
+        <entry key="app/src/main/res/layout/activity_opt_in.xml" value="0.21197916666666666" />
       </map>
     </option>
   </component>

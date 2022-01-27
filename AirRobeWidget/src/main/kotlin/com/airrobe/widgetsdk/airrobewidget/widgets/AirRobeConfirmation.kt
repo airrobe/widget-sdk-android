@@ -37,6 +37,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
         email     = typedArray.getString(R.styleable.AirRobeConfirmation_email)
         fraudRisk = typedArray.getBoolean(R.styleable.AirRobeConfirmation_fraudRisk, false)
 
+        widgetInstance.setInstanceChangeListener(this)
         initializeConfirmationWidget()
     }
 

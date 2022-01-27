@@ -5,7 +5,7 @@ import com.airrobe.widgetsdk.airrobewidget.service.models.CategoryModel
 internal object WidgetInstance {
     private var categoryModel: CategoryModel? = null
     private var configuration: AirRobeWidgetConfig? = null
-    lateinit var changeListener: InstanceChangeListener
+    var changeListener: InstanceChangeListener? = null
 
     fun getCategoryModel(): CategoryModel? {
         return categoryModel
@@ -13,7 +13,7 @@ internal object WidgetInstance {
 
     fun setCategoryModel(categoryModel: CategoryModel) {
         this.categoryModel = categoryModel
-        changeListener.onCategoryModelChange()
+        changeListener?.onCategoryModelChange()
     }
 
     fun getConfig(): AirRobeWidgetConfig? {
@@ -22,7 +22,7 @@ internal object WidgetInstance {
 
     fun setConfig(configuration: AirRobeWidgetConfig) {
         this.configuration = configuration
-        changeListener.onConfigChange()
+        changeListener?.onConfigChange()
     }
 
     fun setInstanceChangeListener(listener: InstanceChangeListener) {
