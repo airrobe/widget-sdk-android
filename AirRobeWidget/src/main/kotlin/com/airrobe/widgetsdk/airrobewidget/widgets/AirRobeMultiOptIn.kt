@@ -61,6 +61,8 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
 
             override fun onClick(p0: View) {
                 val dialog = AirRobeLearnMore(context)
+                dialog.optInSwitch = binding.optInSwitch
+                dialog.isFromMultiOptIn = true
                 dialog.show()
             }
         }
@@ -80,6 +82,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         binding.optInSwitch.isChecked = SharedPreferenceManager.getOptedIn(context)
         binding.optInSwitch.setOnCheckedChangeListener { _, isChecked ->
             SharedPreferenceManager.setOptedIn(context, isChecked)
+            SharedPreferenceManager.setOrderOptedIn(context, isChecked)
         }
 
         setupAttributes(attrs)

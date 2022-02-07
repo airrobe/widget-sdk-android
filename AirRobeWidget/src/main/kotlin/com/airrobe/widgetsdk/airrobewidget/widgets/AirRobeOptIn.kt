@@ -70,6 +70,8 @@ class AirRobeOptIn @JvmOverloads constructor(
 
             override fun onClick(p0: View) {
                 val dialog = AirRobeLearnMore(context)
+                dialog.optInSwitch = binding.optInSwitch
+                dialog.isFromMultiOptIn = false
                 dialog.show()
             }
         }

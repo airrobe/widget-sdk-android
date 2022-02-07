@@ -5,18 +5,18 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.view.*
-import com.airrobe.widgetsdk.airrobewidget.R
+import androidx.appcompat.widget.SwitchCompat
 import com.airrobe.widgetsdk.airrobewidget.databinding.DialogLearnMoreBinding
 import com.airrobe.widgetsdk.airrobewidget.utils.AppUtils
 import com.airrobe.widgetsdk.airrobewidget.utils.SharedPreferenceManager
 import com.airrobe.widgetsdk.airrobewidget.widgetInstance
 
-
 internal class AirRobeLearnMore(context: Context) : Dialog(context) {
     private lateinit var binding: DialogLearnMoreBinding
+    lateinit var optInSwitch: SwitchCompat
+    var isFromMultiOptIn: Boolean = false
 
     init {
         setCancelable(true)
@@ -35,6 +35,10 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
         binding.optInSwitch.isChecked = SharedPreferenceManager.getOptedIn(context)
         binding.optInSwitch.setOnCheckedChangeListener { _, isChecked ->
             SharedPreferenceManager.setOptedIn(context, isChecked)
+            optInSwitch.isChecked = isChecked
+            if (isFromMultiOptIn) {
+                SharedPreferenceManager.setOrderOptedIn(context, isChecked)
+            }
         }
 
         binding.tvFindOutMore.movementMethod = LinkMovementMethod.getInstance()
