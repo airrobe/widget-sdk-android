@@ -1,27 +1,26 @@
 package com.airrobe.widgetsdk.airrobewidget.widgets
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.text.Html
 import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.util.AttributeSet
 import android.util.Log
+import android.view.View
 import android.widget.LinearLayout
 import com.airrobe.widgetsdk.airrobewidget.R
-import com.airrobe.widgetsdk.airrobewidget.widgetInstance
-import com.airrobe.widgetsdk.airrobewidget.config.WidgetInstance
 import com.airrobe.widgetsdk.airrobewidget.config.Constants
+import com.airrobe.widgetsdk.airrobewidget.config.WidgetInstance
+import com.airrobe.widgetsdk.airrobewidget.databinding.AirrobeOptInBinding
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.PriceEngineController
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.PriceEngineListener
-import android.text.TextPaint
-
-import android.graphics.Color
-import android.graphics.PorterDuff
-import android.text.Html
-import android.text.Spanned
-import android.view.View
-import com.airrobe.widgetsdk.airrobewidget.databinding.AirrobeOptInBinding
 import com.airrobe.widgetsdk.airrobewidget.utils.SharedPreferenceManager
+import com.airrobe.widgetsdk.airrobewidget.widgetInstance
 
 class AirRobeOptIn @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -91,7 +90,7 @@ class AirRobeOptIn @JvmOverloads constructor(
         binding.optInSwitch.setOnCheckedChangeListener { _, isChecked ->
             SharedPreferenceManager.setOptedIn(context, isChecked)
         }
-
+        binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value_text)
         setupAttributes(attrs)
     }
 
@@ -151,11 +150,28 @@ class AirRobeOptIn @JvmOverloads constructor(
         val to = widgetInstance.getCategoryModel()!!.checkCategoryEligible(arrayListOf(category!!))
         if (to != null) {
             visibility = VISIBLE
+            checkIfPotentialValueTextCutOff()
             callPriceEngine(to)
         } else {
             visibility = GONE
             Log.d(TAG, "Category is not eligible")
         }
+    }
+
+    private fun checkIfPotentialValueTextCutOff(potentialValue: String? = null) {
+        val runnable = Runnable {
+            if (binding.tvPotentialValue.layout == null) {
+                return@Runnable
+            }
+            if (binding.tvPotentialValue.layout.getEllipsisCount(0) > 0) {
+                if (potentialValue == null) {
+                    binding.tvPotentialValue.text = ""
+                } else {
+                    binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value_without_text, potentialValue)
+                }
+            }
+        }
+        binding.tvPotentialValue.post(runnable)
     }
 
     private fun callPriceEngine(category: String) {
@@ -171,9 +187,11 @@ class AirRobeOptIn @JvmOverloads constructor(
         binding.priceLoading.visibility = GONE
         if (resaleValue == null) {
             Log.e(TAG, "Resale price is null")
-            binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value_without_text, fallbackResalePrice())
+            binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value, fallbackResalePrice())
+            checkIfPotentialValueTextCutOff(fallbackResalePrice())
         } else {
-            binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value_without_text, resaleValue.toString())
+            binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value, resaleValue.toString())
+            checkIfPotentialValueTextCutOff(resaleValue.toString())
         }
     }
 
@@ -184,7 +202,8 @@ class AirRobeOptIn @JvmOverloads constructor(
         } else {
             Log.e(TAG, error)
         }
-        binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value_without_text, fallbackResalePrice())
+        binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value, fallbackResalePrice())
+        checkIfPotentialValueTextCutOff(fallbackResalePrice())
     }
 
     private fun fallbackResalePrice(): String {
