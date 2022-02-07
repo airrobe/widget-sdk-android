@@ -11,7 +11,7 @@ class ApplicationController : Application() {
         appContext = this
 
         // Initialize SDK
-        AirRobeWidget().initialize(
+        AirRobeWidget.initialize(
             AirRobeWidgetConfig(
                 "c43f2be28f1f",
                 "https://www.theiconic.com.au/privacy-policy"

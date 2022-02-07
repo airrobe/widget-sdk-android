@@ -2,7 +2,9 @@ package com.airrobe.widgetsdk.airrobedemo.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.airrobe.widgetsdk.airrobedemo.R
+import com.airrobe.widgetsdk.airrobewidget.AirRobeWidget
 import com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeOptIn
 
 class OptInActivity : AppCompatActivity() {
