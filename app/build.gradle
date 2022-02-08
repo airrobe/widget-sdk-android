@@ -10,8 +10,8 @@ android {
         applicationId "com.airrobe.widgetsdk.AirRobeDemo"
         minSdk rootProject.ext.minSdkVersion
         targetSdk rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode rootProject.ext.demoVersionCode
+        versionName rootProject.ext.demoVersionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':AirRobeWidget')
+    implementation project(':AirRobeWidget')
 
     implementation "androidx.core:core-ktx:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$rootProject.ext.appCompatLibVersion"

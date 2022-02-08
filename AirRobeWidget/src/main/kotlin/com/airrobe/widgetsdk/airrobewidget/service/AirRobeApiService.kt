@@ -20,8 +20,8 @@ private class BearerInterceptor : Interceptor {
 }
 
 private class UserAgentInterceptor : Interceptor {
-    // For example: 'airrobeWidget/1.0.0 (build:3; Android 5.1.1)'
-    val userHeaderString: String = "airrobeWidget/${BuildConfig.VERSION_NAME} (build:${BuildConfig.VERSION_CODE}; Android ${android.os.Build.VERSION.RELEASE})"
+    // For example: 'airrobeWidget/1.0.0 (Android 5.1.1)'
+    val userHeaderString: String = "airrobeWidget/${BuildConfig.VERSION_NAME} (Android ${android.os.Build.VERSION.RELEASE})"
     override fun intercept(chain: Interceptor.Chain): Response {
         val newRequest = chain.request().newBuilder()
             .addHeader("User-Agent", this.userHeaderString).build()
