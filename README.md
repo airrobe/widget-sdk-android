@@ -160,5 +160,5 @@ confirmationWidget.initialize(
 The [example project][example] demonstrates how to include AirRobeWidget UI components.
 
 [latest-release]: https://github.com/airrobe/widget-sdk-android/releases/latest
-[example]: https://github.com/airrobe/widget-sdk-android/tree/develop/app
+[example]: https://github.com/airrobe/widget-sdk-android/tree/master/demo
 [Android-Studio]: https://developer.android.com/studio
