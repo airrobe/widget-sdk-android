@@ -1,6 +1,6 @@
 package com.airrobe.widgetsdk.airrobewidget.config
 
-internal class Constants {
+internal class AirRobeConstants {
     companion object {
         const val FLOAT_NULL_MAGIC_VALUE = 0.000003f
         const val AIRROBE_CONNECTOR_SANDBOX = "https://sandbox.connector.airrobe.com"

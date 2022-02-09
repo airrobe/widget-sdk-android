@@ -1,7 +1,7 @@
 package com.airrobe.widgetsdk.airrobewidget.service
 
 import com.airrobe.widgetsdk.airrobewidget.BuildConfig
-import com.airrobe.widgetsdk.airrobewidget.config.Constants
+import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -30,7 +30,7 @@ private class UserAgentInterceptor : Interceptor {
 }
 
 object AirRobeApiService {
-    val categoryMappingService: ApiInterface by lazy {
+    val CATEGORY_MAPPING_SERVICE: AirRobeApiInterface by lazy {
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         val httpClient = OkHttpClient.Builder()
@@ -42,14 +42,14 @@ object AirRobeApiService {
 
         Retrofit
             .Builder()
-            .baseUrl(Constants.AIRROBE_CONNECTOR_PRODUCTION)
+            .baseUrl(AirRobeConstants.AIRROBE_CONNECTOR_PRODUCTION)
             .addConverterFactory(ScalarsConverterFactory.create())
             .client(httpClient.build())
             .build()
-            .create(ApiInterface::class.java)
+            .create(AirRobeApiInterface::class.java)
     }
 
-    val priceEngineService: ApiInterface by lazy {
+    val PRICE_ENGINE_SERVICE: AirRobeApiInterface by lazy {
         val gson = GsonBuilder()
             .setLenient()
             .create()
@@ -64,14 +64,14 @@ object AirRobeApiService {
 
         Retrofit
             .Builder()
-            .baseUrl(Constants.PRICE_ENGINE_HOST)
+            .baseUrl(AirRobeConstants.PRICE_ENGINE_HOST)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(httpClient.build())
             .build()
-            .create(ApiInterface::class.java)
+            .create(AirRobeApiInterface::class.java)
     }
 
-    val emailCheckService: ApiInterface by lazy {
+    val EMAIL_CHECK_SERVICE: AirRobeApiInterface by lazy {
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         val httpClient = OkHttpClient.Builder()
@@ -83,10 +83,10 @@ object AirRobeApiService {
 
         Retrofit
             .Builder()
-            .baseUrl(Constants.EMAIL_CHECK_HOST)
+            .baseUrl(AirRobeConstants.EMAIL_CHECK_HOST)
             .addConverterFactory(ScalarsConverterFactory.create())
             .client(httpClient.build())
             .build()
-            .create(ApiInterface::class.java)
+            .create(AirRobeApiInterface::class.java)
     }
 }

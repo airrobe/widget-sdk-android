@@ -14,17 +14,17 @@ import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import com.airrobe.widgetsdk.airrobewidget.R
-import com.airrobe.widgetsdk.airrobewidget.config.Constants
-import com.airrobe.widgetsdk.airrobewidget.config.WidgetInstance
+import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
+import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
 import com.airrobe.widgetsdk.airrobewidget.databinding.AirrobeOptInBinding
-import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.PriceEngineController
-import com.airrobe.widgetsdk.airrobewidget.service.listeners.PriceEngineListener
-import com.airrobe.widgetsdk.airrobewidget.utils.SharedPreferenceManager
+import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobePriceEngineController
+import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobePriceEngineListener
+import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 import com.airrobe.widgetsdk.airrobewidget.widgetInstance
 
 class AirRobeOptIn @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr), WidgetInstance.InstanceChangeListener, PriceEngineListener {
+) : LinearLayout(context, attrs, defStyleAttr), AirRobeWidgetInstance.InstanceChangeListener, AirRobePriceEngineListener {
     private var binding: AirrobeOptInBinding
 
     internal enum class ExpandType {
@@ -36,8 +36,8 @@ class AirRobeOptIn @JvmOverloads constructor(
     private var material: String? = null
     private var category: String? = null
     private var priceCents: Float = 0.0f
-    private var originalFullPriceCents: Float = Constants.FLOAT_NULL_MAGIC_VALUE
-    private var rrpCents: Float = Constants.FLOAT_NULL_MAGIC_VALUE
+    private var originalFullPriceCents: Float = AirRobeConstants.FLOAT_NULL_MAGIC_VALUE
+    private var rrpCents: Float = AirRobeConstants.FLOAT_NULL_MAGIC_VALUE
     private var currency: String? = "AUD"
     private var locale: String? = "en-AU"
 
@@ -61,7 +61,7 @@ class AirRobeOptIn @JvmOverloads constructor(
                 binding.ivArrowDown.animate().rotation(180.0f).duration = 80
             }
         }
-        val detailedDescriptionText = SpannableString(context.resources.getString(R.string.detailed_description))
+        val detailedDescriptionText = SpannableString(context.resources.getString(R.string.airrobe_detailed_description))
         val cs = object : ClickableSpan() {
             override fun updateDrawState(ds: TextPaint) {
                 super.updateDrawState(ds)
@@ -82,17 +82,17 @@ class AirRobeOptIn @JvmOverloads constructor(
         if (widgetInstance.getConfig() != null) {
             binding.ivArrowDown.setColorFilter(Color.parseColor(widgetInstance.getConfig()?.color), PorterDuff.Mode.SRC_ATOP)
             binding.tvDetailedDescription.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
-            val extraInfoText = context.resources.getString(R.string.extra_info).replace("Privacy Policy", "<a href='${widgetInstance.getConfig()?.privacyPolicyURL}'>Privacy Policy</a>")
+            val extraInfoText = context.resources.getString(R.string.airrobe_extra_info).replace("Privacy Policy", "<a href='${widgetInstance.getConfig()?.privacyPolicyURL}'>Privacy Policy</a>")
             binding.tvExtraInfo.text = Html.fromHtml(extraInfoText)
             binding.tvExtraInfo.movementMethod = LinkMovementMethod.getInstance()
             binding.tvExtraInfo.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
         }
 
-        binding.optInSwitch.isChecked = SharedPreferenceManager.getOptedIn(context)
+        binding.optInSwitch.isChecked = AirRobeSharedPreferenceManager.getOptedIn(context)
         binding.optInSwitch.setOnCheckedChangeListener { _, isChecked ->
-            SharedPreferenceManager.setOptedIn(context, isChecked)
+            AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
         }
-        binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value_text)
+        binding.tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value_text)
         setupAttributes(attrs)
     }
 
@@ -102,8 +102,8 @@ class AirRobeOptIn @JvmOverloads constructor(
         category                = typedArray.getString(R.styleable.AirRobeOptIn_category)
         material                = typedArray.getString(R.styleable.AirRobeOptIn_material)
         priceCents              = typedArray.getFloat(R.styleable.AirRobeOptIn_priceCents, 0.0f)
-        originalFullPriceCents  = typedArray.getFloat(R.styleable.AirRobeOptIn_originalFullPriceCents, Constants.FLOAT_NULL_MAGIC_VALUE)
-        rrpCents                = typedArray.getFloat(R.styleable.AirRobeOptIn_rrpCents, Constants.FLOAT_NULL_MAGIC_VALUE)
+        originalFullPriceCents  = typedArray.getFloat(R.styleable.AirRobeOptIn_originalFullPriceCents, AirRobeConstants.FLOAT_NULL_MAGIC_VALUE)
+        rrpCents                = typedArray.getFloat(R.styleable.AirRobeOptIn_rrpCents, AirRobeConstants.FLOAT_NULL_MAGIC_VALUE)
         currency                = typedArray.getString(R.styleable.AirRobeOptIn_currency)
         locale                  = typedArray.getString(R.styleable.AirRobeOptIn_locale)
 
@@ -116,8 +116,8 @@ class AirRobeOptIn @JvmOverloads constructor(
         material: String? = null,
         category: String,
         priceCents: Float,
-        originalFullPriceCents: Float = Constants.FLOAT_NULL_MAGIC_VALUE,
-        rrpCents: Float = Constants.FLOAT_NULL_MAGIC_VALUE,
+        originalFullPriceCents: Float = AirRobeConstants.FLOAT_NULL_MAGIC_VALUE,
+        rrpCents: Float = AirRobeConstants.FLOAT_NULL_MAGIC_VALUE,
         currency: String = "AUD",
         locale: String = "en-AU"
     ) {
@@ -169,7 +169,7 @@ class AirRobeOptIn @JvmOverloads constructor(
                 if (potentialValue == null) {
                     binding.tvPotentialValue.text = ""
                 } else {
-                    binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value_without_text, potentialValue)
+                    binding.tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value_without_text, potentialValue)
                 }
             }
         }
@@ -179,20 +179,20 @@ class AirRobeOptIn @JvmOverloads constructor(
     private fun callPriceEngine(category: String) {
         binding.priceLoading.visibility = VISIBLE
         binding.priceLoading.animate()
-        val rrp = if (originalFullPriceCents == Constants.FLOAT_NULL_MAGIC_VALUE) rrpCents else originalFullPriceCents
-        val priceEngineController = PriceEngineController()
-        priceEngineController.priceEngineListener = this
-        priceEngineController.start(priceCents, if (rrp == Constants.FLOAT_NULL_MAGIC_VALUE) null else rrp , category, brand, material)
+        val rrp = if (originalFullPriceCents == AirRobeConstants.FLOAT_NULL_MAGIC_VALUE) rrpCents else originalFullPriceCents
+        val priceEngineController = AirRobePriceEngineController()
+        priceEngineController.airRobePriceEngineListener = this
+        priceEngineController.start(priceCents, if (rrp == AirRobeConstants.FLOAT_NULL_MAGIC_VALUE) null else rrp , category, brand, material)
     }
 
     override fun onSuccessPriceEngineApi(resaleValue: Int?) {
         binding.priceLoading.visibility = GONE
         if (resaleValue == null) {
             Log.e(TAG, "Resale price is null")
-            binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value, fallbackResalePrice())
+            binding.tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value, fallbackResalePrice())
             checkIfPotentialValueTextCutOff(fallbackResalePrice())
         } else {
-            binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value, resaleValue.toString())
+            binding.tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value, resaleValue.toString())
             checkIfPotentialValueTextCutOff(resaleValue.toString())
         }
     }
@@ -204,7 +204,7 @@ class AirRobeOptIn @JvmOverloads constructor(
         } else {
             Log.e(TAG, error)
         }
-        binding.tvPotentialValue.text = context.resources.getString(R.string.potential_value, fallbackResalePrice())
+        binding.tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value, fallbackResalePrice())
         checkIfPotentialValueTextCutOff(fallbackResalePrice())
     }
 
@@ -223,7 +223,7 @@ class AirRobeOptIn @JvmOverloads constructor(
         if (widgetInstance.getConfig() != null) {
             binding.ivArrowDown.setColorFilter(Color.parseColor(widgetInstance.getConfig()?.color), PorterDuff.Mode.SRC_ATOP)
             binding.tvDetailedDescription.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
-            val extraInfoText = context.resources.getString(R.string.extra_info).replace("Privacy Policy", "<a href='${widgetInstance.getConfig()?.privacyPolicyURL}'>Privacy Policy</a>")
+            val extraInfoText = context.resources.getString(R.string.airrobe_extra_info).replace("Privacy Policy", "<a href='${widgetInstance.getConfig()?.privacyPolicyURL}'>Privacy Policy</a>")
             binding.tvExtraInfo.text = Html.fromHtml(extraInfoText)
             binding.tvExtraInfo.movementMethod = LinkMovementMethod.getInstance()
             binding.tvExtraInfo.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)

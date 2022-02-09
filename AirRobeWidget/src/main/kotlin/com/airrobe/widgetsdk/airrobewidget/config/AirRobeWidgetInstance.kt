@@ -2,7 +2,7 @@ package com.airrobe.widgetsdk.airrobewidget.config
 
 import com.airrobe.widgetsdk.airrobewidget.service.models.CategoryModel
 
-internal object WidgetInstance {
+internal object AirRobeWidgetInstance {
     private var categoryModel: CategoryModel? = null
     private var configuration: AirRobeWidgetConfig? = null
     var changeListener: InstanceChangeListener? = null

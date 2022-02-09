@@ -3,7 +3,7 @@ package com.airrobe.widgetsdk.airrobewidget.utils
 import android.content.Context
 import androidx.preference.PreferenceManager
 
-internal object SharedPreferenceManager {
+internal object AirRobeSharedPreferenceManager {
     private const val OptedInKey = "OptedInKey"
     fun setOptedIn(context: Context, value: Boolean) {
         val sp = PreferenceManager.getDefaultSharedPreferences(context)

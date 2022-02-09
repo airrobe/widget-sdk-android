@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/order_confirmation_title"
+            android:text="@string/airrobe_order_confirmation_title"
             android:textSize="15sp"
             android:textColor="#333"
             android:textStyle="bold"
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/ll_title_container"
-        android:text="@string/order_confirmation_description"
+        android:text="@string/airrobe_order_confirmation_description"
         android:textSize="14sp"
         android:textColor="#333"
         android:layout_marginTop="10dp"

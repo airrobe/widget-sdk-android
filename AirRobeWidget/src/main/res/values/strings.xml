@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="added_to">Added To</string>
-    <string name="add_to">Add To</string>
+    <string name="airrobe_added_to">Added To</string>
+    <string name="airrobe_add_to">Add To</string>
 
-    <string name="description">Wear now, re-sell later</string>
+    <string name="airrobe_description">Wear now, re-sell later</string>
 
-    <string name="potential_value_text">Potential value:</string>
-    <string name="potential_value">Potential value: $%1$s</string>
-    <string name="potential_value_without_text">$%1$s</string>
+    <string name="airrobe_potential_value_text">Potential value:</string>
+    <string name="airrobe_potential_value">Potential value: $%1$s</string>
+    <string name="airrobe_potential_value_without_text">$%1$s</string>
 
-    <string name="detailed_description">We’ve partnered with AirRobe to enable you to join the circular fashion movement. Re-sell or rent your purchases on AirRobe’s marketplace – all with one simple click. Together, we can do our part to keep fashion out of landfill. Learn more.</string>
-    <string name="learn_more_link_text">Learn more.</string>
+    <string name="airrobe_detailed_description">We’ve partnered with AirRobe to enable you to join the circular fashion movement. Re-sell or rent your purchases on AirRobe’s marketplace – all with one simple click. Together, we can do our part to keep fashion out of landfill. Learn more.</string>
+    <string name="airrobe_learn_more_link_text">Learn more.</string>
 
-    <string name="extra_info">By opting in you agree to THE ICONIC’s Privacy Policy and consent for us to share your details with AirRobe.</string>
+    <string name="airrobe_extra_info">By opting in you agree to THE ICONIC’s Privacy Policy and consent for us to share your details with AirRobe.</string>
 
-    <string name="learn_more_title">HOW IT WORKS</string>
-    <string name="learn_more_step1_title">1. ADD TO AIRROBE</string>
-    <string name="learn_more_step1_description">Toggling the AirRobe "on" will save your purchase (including all product information) to your private AirRobe account to re-sell later.</string>
-    <string name="learn_more_step2_title">2. RE-SELL LATER</string>
-    <string name="learn_more_step2_description">After you`ve worn and loved your item, simply log into airrobe.com to list your item for sale on AirRobe’s marketplace – in one click.</string>
-    <string name="learn_more_question">What if I don`t have an AirRobe account?</string>
-    <string name="learn_more_answer">Don`t panic! You`ll be directed to set up your free account at the order confirmation page.</string>
-    <string name="learn_more_ready">READY TO GET STARTED?</string>
-    <string name="learn_more_toggle_on">TOGGLE ON!</string>
-    <string name="learn_more_find_more_text"><a href="https://www.theiconic.com.au/airrobe/">Find out more about AirRobe.</a></string>
+    <string name="airrobe_learn_more_title">HOW IT WORKS</string>
+    <string name="airrobe_learn_more_step1_title">1. ADD TO AIRROBE</string>
+    <string name="airrobe_learn_more_step1_description">Toggling the AirRobe "on" will save your purchase (including all product information) to your private AirRobe account to re-sell later.</string>
+    <string name="airrobe_learn_more_step2_title">2. RE-SELL LATER</string>
+    <string name="airrobe_learn_more_step2_description">After you`ve worn and loved your item, simply log into airrobe.com to list your item for sale on AirRobe’s marketplace – in one click.</string>
+    <string name="airrobe_learn_more_question">What if I don`t have an AirRobe account?</string>
+    <string name="airrobe_learn_more_answer">Don`t panic! You`ll be directed to set up your free account at the order confirmation page.</string>
+    <string name="airrobe_learn_more_ready">READY TO GET STARTED?</string>
+    <string name="airrobe_learn_more_toggle_on">TOGGLE ON!</string>
+    <string name="airrobe_learn_more_find_more_text"><a href="https://www.theiconic.com.au/airrobe/">Find out more about AirRobe.</a></string>
 
-    <string name="order_confirmation_title">Your items are in</string>
-    <string name="order_confirmation_description">Simply activate your free account below to re-sell your items back into a circular economy after you`ve worn and loved them.</string>
-    <string name="order_confirmation_activate_text">ACTIVATE YOUR AIRROBE ACCOUNT</string>
-    <string name="order_confirmation_visit_text">VISIT YOUR AIRROBE ACCOUNT</string>
+    <string name="airrobe_order_confirmation_title">Your items are in</string>
+    <string name="airrobe_order_confirmation_description">Simply activate your free account below to re-sell your items back into a circular economy after you`ve worn and loved them.</string>
+    <string name="airrobe_order_confirmation_activate_text">ACTIVATE YOUR AIRROBE ACCOUNT</string>
+    <string name="airrobe_order_confirmation_visit_text">VISIT YOUR AIRROBE ACCOUNT</string>
 </resources>

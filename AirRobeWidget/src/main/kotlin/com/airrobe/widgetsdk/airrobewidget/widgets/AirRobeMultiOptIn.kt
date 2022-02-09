@@ -9,7 +9,7 @@ import android.util.Log
 import android.widget.LinearLayout
 import com.airrobe.widgetsdk.airrobewidget.R
 import com.airrobe.widgetsdk.airrobewidget.widgetInstance
-import com.airrobe.widgetsdk.airrobewidget.config.WidgetInstance
+import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
 import android.text.TextPaint
 
 import android.graphics.Color
@@ -18,11 +18,11 @@ import android.text.Html
 import android.text.Spanned
 import android.view.View
 import com.airrobe.widgetsdk.airrobewidget.databinding.AirrobeMultiOptInBinding
-import com.airrobe.widgetsdk.airrobewidget.utils.SharedPreferenceManager
+import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 
 class AirRobeMultiOptIn @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr), WidgetInstance.InstanceChangeListener {
+) : LinearLayout(context, attrs, defStyleAttr), AirRobeWidgetInstance.InstanceChangeListener {
     private var binding: AirrobeMultiOptInBinding
 
     internal enum class ExpandType {
@@ -52,7 +52,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 binding.ivArrowDown.animate().rotation(180.0f).duration = 80
             }
         }
-        val detailedDescriptionText = SpannableString(context.resources.getString(R.string.detailed_description))
+        val detailedDescriptionText = SpannableString(context.resources.getString(R.string.airrobe_detailed_description))
         val cs = object : ClickableSpan() {
             override fun updateDrawState(ds: TextPaint) {
                 super.updateDrawState(ds)
@@ -73,16 +73,16 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         if (widgetInstance.getConfig() != null) {
             binding.ivArrowDown.setColorFilter(Color.parseColor(widgetInstance.getConfig()?.color), PorterDuff.Mode.SRC_ATOP)
             binding.tvDetailedDescription.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
-            val extraInfoText = context.resources.getString(R.string.extra_info).replace("Privacy Policy", "<a href='${widgetInstance.getConfig()?.privacyPolicyURL}'>Privacy Policy</a>")
+            val extraInfoText = context.resources.getString(R.string.airrobe_extra_info).replace("Privacy Policy", "<a href='${widgetInstance.getConfig()?.privacyPolicyURL}'>Privacy Policy</a>")
             binding.tvExtraInfo.text = Html.fromHtml(extraInfoText)
             binding.tvExtraInfo.movementMethod = LinkMovementMethod.getInstance()
             binding.tvExtraInfo.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
         }
 
-        binding.optInSwitch.isChecked = SharedPreferenceManager.getOptedIn(context)
+        binding.optInSwitch.isChecked = AirRobeSharedPreferenceManager.getOptedIn(context)
         binding.optInSwitch.setOnCheckedChangeListener { _, isChecked ->
-            SharedPreferenceManager.setOptedIn(context, isChecked)
-            SharedPreferenceManager.setOrderOptedIn(context, isChecked)
+            AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
+            AirRobeSharedPreferenceManager.setOrderOptedIn(context, isChecked)
         }
 
         setupAttributes(attrs)
@@ -107,19 +107,19 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         if (widgetInstance.getConfig() == null) {
             Log.e(TAG, "Widget sdk is not initialized yet")
             visibility = GONE
-            SharedPreferenceManager.setOrderOptedIn(context, false)
+            AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
             return
         }
         if (widgetInstance.getCategoryModel() == null) {
             Log.e(TAG, "Category Mapping Info is not loaded")
             visibility = GONE
-            SharedPreferenceManager.setOrderOptedIn(context, false)
+            AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
             return
         }
         if (items.isNullOrEmpty()) {
             Log.e(TAG, "Required params can't be empty")
             visibility = GONE
-            SharedPreferenceManager.setOrderOptedIn(context, false)
+            AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
             return
         }
 
@@ -130,10 +130,10 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         val to = widgetInstance.getCategoryModel()!!.checkCategoryEligible(newItems)
         if (to != null) {
             visibility = VISIBLE
-            SharedPreferenceManager.setOrderOptedIn(context, SharedPreferenceManager.getOptedIn(context))
+            AirRobeSharedPreferenceManager.setOrderOptedIn(context, AirRobeSharedPreferenceManager.getOptedIn(context))
         } else {
             visibility = GONE
-            SharedPreferenceManager.setOrderOptedIn(context, false)
+            AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
             Log.d(TAG, "Category is not eligible")
         }
     }
@@ -148,7 +148,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         if (widgetInstance.getConfig() != null) {
             binding.ivArrowDown.setColorFilter(Color.parseColor(widgetInstance.getConfig()?.color), PorterDuff.Mode.SRC_ATOP)
             binding.tvDetailedDescription.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
-            val extraInfoText = context.resources.getString(R.string.extra_info).replace("Privacy Policy", "<a href='${widgetInstance.getConfig()?.privacyPolicyURL}'>Privacy Policy</a>")
+            val extraInfoText = context.resources.getString(R.string.airrobe_extra_info).replace("Privacy Policy", "<a href='${widgetInstance.getConfig()?.privacyPolicyURL}'>Privacy Policy</a>")
             binding.tvExtraInfo.text = Html.fromHtml(extraInfoText)
             binding.tvExtraInfo.movementMethod = LinkMovementMethod.getInstance()
             binding.tvExtraInfo.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)

@@ -1,15 +1,13 @@
 package com.airrobe.widgetsdk.airrobewidget.service
 
-import com.airrobe.widgetsdk.airrobewidget.service.models.EmailCheckResponseModel
 import com.airrobe.widgetsdk.airrobewidget.service.models.PriceEngineResponseModel
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.*
 
-interface ApiInterface {
+interface AirRobeApiInterface {
     @Headers("Content-Type: application/json")
     @POST("/graphql")
-    suspend fun getCategoryMapping(@Body body: String): Response<String>
+    fun getCategoryMapping(@Body body: String): Call<String>
 
     @Headers("Content-Type: application/json")
     @POST("/graphql")

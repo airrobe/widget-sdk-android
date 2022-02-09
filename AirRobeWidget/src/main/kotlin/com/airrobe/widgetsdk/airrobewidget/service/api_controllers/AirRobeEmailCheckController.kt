@@ -1,8 +1,7 @@
 package com.airrobe.widgetsdk.airrobewidget.service.api_controllers
 
 import com.airrobe.widgetsdk.airrobewidget.service.AirRobeApiService
-import com.airrobe.widgetsdk.airrobewidget.service.listeners.EmailCheckListener
-import com.airrobe.widgetsdk.airrobewidget.service.models.CategoryModel
+import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeEmailCheckListener
 import com.airrobe.widgetsdk.airrobewidget.service.models.EmailCheckResponseModel
 import com.google.gson.Gson
 import org.json.JSONObject
@@ -10,10 +9,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class EmailCheckController : Callback<String> {
-    var emailCheckListener: EmailCheckListener?  =null
+class AirRobeEmailCheckController : Callback<String> {
+    var airRobeEmailCheckListener: AirRobeEmailCheckListener? = null
     fun start(email: String) {
-        val retrofit = AirRobeApiService.emailCheckService
+        val retrofit = AirRobeApiService.EMAIL_CHECK_SERVICE
         val param = JSONObject()
         param.put(
             "query",
@@ -30,14 +29,14 @@ class EmailCheckController : Callback<String> {
         if (response.isSuccessful) {
             val gson = Gson()
             val result = gson.fromJson(response.body(), EmailCheckResponseModel::class.java)
-            emailCheckListener?.onSuccessEmailCheckApi(result.data.isCustomer)
+            airRobeEmailCheckListener?.onSuccessEmailCheckApi(result.data.isCustomer)
         } else {
             val text = response.errorBody()?.string()
-            emailCheckListener?.onFailedEmailCheckApi(text)
+            airRobeEmailCheckListener?.onFailedEmailCheckApi(text)
         }
     }
 
     override fun onFailure(call: Call<String>, t: Throwable) {
-        emailCheckListener?.onFailedEmailCheckApi()
+        airRobeEmailCheckListener?.onFailedEmailCheckApi()
     }
 }

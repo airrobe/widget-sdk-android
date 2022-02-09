@@ -1,6 +1,6 @@
 package com.airrobe.widgetsdk.airrobewidget.service.listeners
 
-interface PriceEngineListener {
+interface AirRobePriceEngineListener {
     fun onSuccessPriceEngineApi(resaleValue: Int?)
     fun onFailedPriceEngineApi(error: String? = null)
 }

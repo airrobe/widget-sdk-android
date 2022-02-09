@@ -8,19 +8,19 @@ import android.util.AttributeSet
 import android.util.Log
 import android.widget.RelativeLayout
 import com.airrobe.widgetsdk.airrobewidget.R
-import com.airrobe.widgetsdk.airrobewidget.config.Constants
-import com.airrobe.widgetsdk.airrobewidget.config.WidgetInstance
+import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
+import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
 import com.airrobe.widgetsdk.airrobewidget.databinding.AirrobeConfirmationBinding
-import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.EmailCheckController
-import com.airrobe.widgetsdk.airrobewidget.service.listeners.EmailCheckListener
-import com.airrobe.widgetsdk.airrobewidget.utils.AppUtils
-import com.airrobe.widgetsdk.airrobewidget.utils.SharedPreferenceManager
+import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeEmailCheckController
+import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeEmailCheckListener
+import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
+import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 import com.airrobe.widgetsdk.airrobewidget.widgetInstance
 
 @SuppressLint("ClickableViewAccessibility")
 class AirRobeConfirmation @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : RelativeLayout(context, attrs, defStyleAttr), WidgetInstance.InstanceChangeListener, EmailCheckListener {
+) : RelativeLayout(context, attrs, defStyleAttr), AirRobeWidgetInstance.InstanceChangeListener, AirRobeEmailCheckListener {
     private var binding: AirrobeConfirmationBinding
 
     private var orderId: String? = null
@@ -46,9 +46,9 @@ class AirRobeConfirmation @JvmOverloads constructor(
         widgetInstance.setInstanceChangeListener(this)
         if (widgetInstance.getConfig() != null) {
             binding.tvAction.setOnTouchListener { v, event ->
-                if (AppUtils.touchAnimator(context, v, event)) {
+                if (AirRobeAppUtils.touchAnimator(context, v, event)) {
                     val intent = Intent(Intent.ACTION_VIEW)
-                    intent.data = Uri.parse(Constants.ORDER_ACTIVATE_BASE_URL + widgetInstance.getConfig()?.appId + "-" + orderId)
+                    intent.data = Uri.parse(AirRobeConstants.ORDER_ACTIVATE_BASE_URL + widgetInstance.getConfig()?.appId + "-" + orderId)
                     context.startActivity(intent)
                 }
                 true
@@ -84,7 +84,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
             visibility = GONE
             return
         }
-        if (SharedPreferenceManager.getOrderOptedIn(context) && !fraudRisk) {
+        if (AirRobeSharedPreferenceManager.getOrderOptedIn(context) && !fraudRisk) {
             visibility = VISIBLE
             binding.btnLoading.visibility = VISIBLE
             binding.btnLoading.animate()
@@ -96,23 +96,23 @@ class AirRobeConfirmation @JvmOverloads constructor(
     }
 
     private fun emailCheck(email: String) {
-        val emailCheckController = EmailCheckController()
-        emailCheckController.emailCheckListener = this
+        val emailCheckController = AirRobeEmailCheckController()
+        emailCheckController.airRobeEmailCheckListener = this
         emailCheckController.start(email)
     }
 
     override fun onSuccessEmailCheckApi(isCustomer: Boolean) {
         binding.btnLoading.visibility = GONE
         if (isCustomer) {
-            binding.tvAction.text = context.resources.getString(R.string.order_confirmation_visit_text)
+            binding.tvAction.text = context.resources.getString(R.string.airrobe_order_confirmation_visit_text)
         } else {
-            binding.tvAction.text = context.resources.getString(R.string.order_confirmation_activate_text)
+            binding.tvAction.text = context.resources.getString(R.string.airrobe_order_confirmation_activate_text)
         }
     }
 
     override fun onFailedEmailCheckApi(error: String?) {
         binding.btnLoading.visibility = GONE
-        binding.tvAction.text = context.resources.getString(R.string.order_confirmation_activate_text)
+        binding.tvAction.text = context.resources.getString(R.string.airrobe_order_confirmation_activate_text)
         Log.e(TAG, error ?: "Email Check Api Failed")
     }
 
@@ -125,9 +125,9 @@ class AirRobeConfirmation @JvmOverloads constructor(
     override fun onConfigChange() {
         if (widgetInstance.getConfig() != null) {
             binding.tvAction.setOnTouchListener { v, event ->
-                if (AppUtils.touchAnimator(context, v, event)) {
+                if (AirRobeAppUtils.touchAnimator(context, v, event)) {
                     val intent = Intent(Intent.ACTION_VIEW)
-                    intent.data = Uri.parse(Constants.ORDER_ACTIVATE_BASE_URL + widgetInstance.getConfig()?.appId + "-" + orderId)
+                    intent.data = Uri.parse(AirRobeConstants.ORDER_ACTIVATE_BASE_URL + widgetInstance.getConfig()?.appId + "-" + orderId)
                     context.startActivity(intent)
                 }
                 true

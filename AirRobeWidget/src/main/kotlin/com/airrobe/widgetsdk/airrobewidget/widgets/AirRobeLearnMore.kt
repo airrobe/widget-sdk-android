@@ -8,13 +8,13 @@ import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.*
 import androidx.appcompat.widget.SwitchCompat
-import com.airrobe.widgetsdk.airrobewidget.databinding.DialogLearnMoreBinding
-import com.airrobe.widgetsdk.airrobewidget.utils.AppUtils
-import com.airrobe.widgetsdk.airrobewidget.utils.SharedPreferenceManager
+import com.airrobe.widgetsdk.airrobewidget.databinding.AirrobeDialogLearnMoreBinding
+import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
+import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 import com.airrobe.widgetsdk.airrobewidget.widgetInstance
 
 internal class AirRobeLearnMore(context: Context) : Dialog(context) {
-    private lateinit var binding: DialogLearnMoreBinding
+    private lateinit var binding: AirrobeDialogLearnMoreBinding
     lateinit var optInSwitch: SwitchCompat
     var isFromMultiOptIn: Boolean = false
 
@@ -25,19 +25,19 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        binding = DialogLearnMoreBinding.inflate(LayoutInflater.from(context))
+        binding = AirrobeDialogLearnMoreBinding.inflate(LayoutInflater.from(context))
         setContentView(binding.root)
         initView()
         onClick()
     }
 
     private fun initView() {
-        binding.optInSwitch.isChecked = SharedPreferenceManager.getOptedIn(context)
+        binding.optInSwitch.isChecked = AirRobeSharedPreferenceManager.getOptedIn(context)
         binding.optInSwitch.setOnCheckedChangeListener { _, isChecked ->
-            SharedPreferenceManager.setOptedIn(context, isChecked)
+            AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
             optInSwitch.isChecked = isChecked
             if (isFromMultiOptIn) {
-                SharedPreferenceManager.setOrderOptedIn(context, isChecked)
+                AirRobeSharedPreferenceManager.setOrderOptedIn(context, isChecked)
             }
         }
 
@@ -48,7 +48,7 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
     @SuppressLint("ClickableViewAccessibility")
     private fun onClick() {
         binding.ivClose.setOnTouchListener { v, event ->
-            if (AppUtils.touchAnimator(context, v, event)) {
+            if (AirRobeAppUtils.touchAnimator(context, v, event)) {
                 dismiss()
             }
             true
