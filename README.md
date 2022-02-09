@@ -16,21 +16,11 @@ Currently, we do not support any of other installation methods, so for now choos
 
 Download the [latest release][latest-release] source zip from GitHub and unzip into to any temporary directory outside your project directory.
 
-#### Git Submodule
-
-Add the AirRobeWidget SDK as a [git submodule][git-submodule] by navigating to any temporary directory outside your project directory and running the following commands:
-
-```
-git submodule add https://github.com/airrobe/widget-sdk-android.git AirRobeWidget
-cd AirRobeWidget
-git checkout 1.0.0-alpha.1
-```
-
 #### Project Integration
-Now that the AirRobeWidge sdk resides in your temporary directory outside your project directory. You can add this sdk as a module to your project with the following steps:
+Now that the AirRobeWidget sdk resides in your temporary directory outside your project directory. You can add this sdk as a module to your project with the following steps:
 - Open your project on [Android Studio][Android-Studio] IDE.
 - Import the module by going to `File -> New -> Import Module...`
-- Choose the library by manually inputting the path or through the file browser window showing by tapping the `Browse` icon.
+- Choose the library named `AirRobeWidget` inside the downloaded repo by manually inputting the path or through the file browser window showing by tapping the `Browse` icon.
 - Add the imported module to your `build.gradle`.
 ```gradle
 dependencies {
@@ -170,6 +160,5 @@ confirmationWidget.initialize(
 The [example project][example] demonstrates how to include AirRobeWidget UI components.
 
 [latest-release]: https://github.com/airrobe/widget-sdk-android/releases/latest
-[git-submodule]: https://git-scm.com/docs/git-submodule
 [example]: https://github.com/airrobe/widget-sdk-android/tree/develop/app
 [Android-Studio]: https://developer.android.com/studio
