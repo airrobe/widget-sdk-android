@@ -12,7 +12,7 @@ android {
         targetSdk 32
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-        versionName "1.0.0"
+        versionName "1.0.0-alpha.1"
         buildConfigField("String","VERSION_NAME","\"${defaultConfig.versionName}\"")
     }
 

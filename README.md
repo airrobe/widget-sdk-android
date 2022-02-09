@@ -23,7 +23,7 @@ Add the AirRobeWidget SDK as a [git submodule][git-submodule] by navigating to a
 ```
 git submodule add https://github.com/airrobe/widget-sdk-android.git AirRobeWidget
 cd AirRobeWidget
-git checkout 1.0.0
+git checkout 1.0.0-alpha.1
 ```
 
 #### Project Integration
