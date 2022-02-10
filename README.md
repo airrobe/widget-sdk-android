@@ -1,27 +1,30 @@
 # AirRobeWidget
-The AirRobeWidget Android SDK provides conveniences to make your AirRobeWidget integration experience as smooth and straightforward as possible. We're working on crafting a great framework for developers with easy drop in components to integrate our widgets easy for your customers.
+
+The AirRobeWidget Android SDK provides Circular Wardrobe widgets for your native Android application.
 
 ## Requirements
+
 - Android 5.0 (API level 21) and above
 
 ## Installation
 
 ### Manual
 
-Currently, we do not support any of other installation methods, so for now choose to manually integrate the AirRobe SDK into your project.
-> **Note:**
-> We assume that you already have the access to our Repo since its access is restricted for purposes.
+Currently, we do not support any other installation methods, so for now the AirRobe SDK has to be manually integrated into your project.
 
 #### GitHub Release
 
 Download the [latest release][latest-release] source zip from GitHub and unzip into to any temporary directory outside your project directory.
 
 #### Project Integration
-Now that the AirRobeWidget sdk resides in your temporary directory outside your project directory. You can add this sdk as a module to your project with the following steps:
-- Open your project on [Android Studio][Android-Studio] IDE.
+
+Now that the AirRobeWidget SDK resides in your temporary directory, you can add this SDK as a module to your project with the following steps:
+
+- Open your project on [Android Studio][android-studio] IDE.
 - Import the module by going to `File -> New -> Import Module...`
 - Choose the library named `AirRobeWidget` inside the downloaded repo by manually inputting the path or through the file browser window showing by tapping the `Browse` icon.
 - Add the imported module to your `build.gradle`.
+
 ```gradle
 dependencies {
     // Other dependencies are here
@@ -29,29 +32,35 @@ dependencies {
 }
 ```
 
-You will have to keep track of the library version manually, and when you want to upgrade to a more recent version, you will have to manually download the library and replace it.
+You will need to keep track of the library version manually, and when you want to upgrade to a more recent version, you will need to manually download the library and replace it.
 
 ## ProGuard
-If you are using ProGuard you might need to add OkHttp's rules: https://github.com/square/okhttp/#r8--proguard
 
+If you are using ProGuard you might need to add OkHttp's rules: https://github.com/square/okhttp/#r8--proguard
 
 ## Getting Started
 
-The AirRobe SDK contains UI components for Opt-In, Multi-Opt-In Views as well as Confirmation View.
+The AirRobe SDK contains UI components that can be added to your product detail screens, cart screens, and order confirmation screens. The AirRobeOptIn component is intended to be used on a single product detail screens, the AirRobeMultiOptIn component on cart screen, and the AirRobeConfirmation component on the order confirmation screen.
 
 ### Integration
 
-You are going to need `AppId` from the Provider which will be used to get the Category Mapping Infos and initialize the sub-widgets.
+You are going to need your AirRobe `appId`, which is used to configure widgets and fetch up-to-date data mapping information. You can access your AppId at https://connector.airrobe.com/docs/android#android-getting_started-initialization
 
 #### Initialization
 
+The first step is to perform some global initialization of AirRobeWidgets:
+
 ```kotlin
+import com.airrobe.widgetsdk.airrobewidget.AirRobeWidget
+import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
+import com.airrobe.widgetsdk.airrobewidget.config.Mode
+
 AirRobeWidget.initialize(
     AirRobeWidgetConfig(
         appId = "APP_ID",           // required
-        privacyPolicyURL = String,  // required - privacy policy url of The Iconic
+        privacyPolicyURL = String,  // required - privacy policy url
         color = String,             // optional - color HexCode, default value is "#42abc8"
-        mode = enum                 // optional - (`Mode.production` or `Mode.sandbox`), default value is `Mode.production`
+        mode = enum                 // optional - (`Mode.PRODUCTION` or `Mode.SANDBOX`), default value is `Mode.PRODUCTION`
     )
 )
 ```
@@ -59,11 +68,16 @@ AirRobeWidget.initialize(
 > **Note:**
 > The configuration must always be set when using the SDK, and before any included widgets are initialized.
 
-
 ### Widgets
-Basically, there are 2 traditional ways to initialize the widgets, i.e. one through the XML layout design files, and the other one to use the function of the widget.
 
-#### Opt-In View Initialization
+AirRobe Widgets should be added by using XML or programmatically added inside your activity, and then configured using the `initialize` function, passing required arguments.
+
+#### AirRobeOptIn Initialization
+
+The AirRobeOptIn component should be added to your product details screen, passing arguments for the product's category and price, as well as material and brand if available. These attributes are used to fetch estimated resale price from the AirRobe Price Engine. Localisation attributes can also be provided.
+
+_Note: The widget will not be displayed unless the product is AirRobe-eligible. The AirRobeWidget Android SDK considers a product's category, price, and department when making an eligibility determination._
+
 ##### Through XML
 
 ```xml
@@ -75,34 +89,38 @@ Basically, there are 2 traditional ways to initialize the widgets, i.e. one thro
     <com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeOptIn
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:brand="String"
-        app:material="String"
-        app:category="String"
-        app:priceCents="Float"
-        app:originalFullPriceCents="Float"
-        app:rrpCents="Float"
-        app:currency="String"
-        app:locale="String" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 ```
+
 ##### Through Function
+
 ```kotlin
 val optInWidget = findViewById<AirRobeOptIn>(R.id.opt_in_widget)
 optInWidget.initialize(
-    brand = String?,                  // optional - e.g. "Chanel", can be nil
-    material = String?,               // optional - e.g. "Leather", can be nil
+    brand = String?,                  // optional - e.g. "Chanel", can be null
+    material = String?,               // optional - e.g. "Leather", can be null
     category = String,                // required - e.g. "Hats/fancy-hats"
-    priceCents = Double,              // required - e.g. 100.95
-    originalFullPriceCents = Double?, // optional - e.g. 62.00, can be nil
-    rrpCents = Double?,               // optional - e.g. 62.00, can be nil
+    department = String?,             // optional - e.g. "Kidswear"
+    priceCents = Double,              // required - e.g. 100.95f
+    originalFullPriceCents = Double?, // optional - e.g. 62.00f, can be null
+    rrpCents = Double?,               // optional - e.g. 62.00f, can be null
     currency = String,                // optional - default is "AUD"
     locale = String                   // optional - default is "en-AU"
 )
 ```
 
-#### Multi-Opt-In View Initialization
+#### AirRobeMultiOptIn Initialization
+
+The AirRobeMultiOptIn component should be added to your cart screen. A list of product categories should be passed as an argument during initialisation.
+
+_Note - The widget will not be displayed on the page if the following conditions are met:_
+
+    - The items argument has an empty array as a value.
+    - All the product categories passed in haven't been mapped to the categories in AirRobe. However, it will be displayed if any one of the categories have been mapped to AirRobe.
+
 ##### Through XML
 
 ```xml
@@ -119,6 +137,7 @@ optInWidget.initialize(
 ```
 
 ##### Through Function
+
 ```kotlin
 val multiOptInWidget = findViewById<AirRobeMultiOptIn>(R.id.multi_opt_in_widget)
 multiOptInWidget.initialize(
@@ -126,7 +145,15 @@ multiOptInWidget.initialize(
 )
 ```
 
-#### Confirmation View Initialization
+#### AirRobeConfirmation Initialization
+
+The AirRobeConfirmation component should be added to the order confirmation screen in your app. While this component should always be rendered in the activity, it will only be visible to customers if they opted in to AirRobe for their order.
+
+_Note - The widget will not be displayed on the page if the following conditions are met:_
+
+    - If orderId or email are not passed in.
+    - If the user doesn't opt in.
+
 ##### Through XML
 
 ```xml
@@ -138,14 +165,13 @@ multiOptInWidget.initialize(
     <com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeConfirmation
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:orderId="String"
-        app:email="String"
-        app:fraudRisk="Boolean" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
 ##### Through Function
+
 ```kotlin
 val confirmationWidget = findViewById<AirRobeConfirmation>(R.id.confirmation_widget)
 confirmationWidget.initialize(
@@ -155,10 +181,20 @@ confirmationWidget.initialize(
 )
 ```
 
+##### Other Functionality
+
+###### Clear Cache (Opt value reset)
+
+`AirRobeWidget.resetOptedIn()`
+
+###### Get Order-Opt-In value
+
+`AirRobeWidget.orderOptedIn()`
+
 # Examples
 
-The [example project][example] demonstrates how to include AirRobeWidget UI components.
+The [example project][example] demonstrates how to include AirRobeWidget UI components in a sample application.
 
 [latest-release]: https://github.com/airrobe/widget-sdk-android/releases/latest
 [example]: https://github.com/airrobe/widget-sdk-android/tree/master/demo
-[Android-Studio]: https://developer.android.com/studio
+[android-studio]: https://developer.android.com/studio
