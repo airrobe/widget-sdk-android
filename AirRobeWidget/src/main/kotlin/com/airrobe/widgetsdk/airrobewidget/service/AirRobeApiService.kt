@@ -30,16 +30,22 @@ private class UserAgentInterceptor : Interceptor {
 }
 
 object AirRobeApiService {
-    val CATEGORY_MAPPING_SERVICE: AirRobeApiInterface by lazy {
-        val logging = HttpLoggingInterceptor()
+    private var logging: HttpLoggingInterceptor = HttpLoggingInterceptor()
+    private val gson = GsonBuilder()
+        .setLenient()
+        .create()
+    private var httpClient: OkHttpClient.Builder
+    init {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-        val httpClient = OkHttpClient.Builder()
+        httpClient = OkHttpClient.Builder()
         httpClient.readTimeout(300, TimeUnit.SECONDS)
         httpClient.writeTimeout(300, TimeUnit.SECONDS)
         httpClient.addInterceptor(logging)
         httpClient.addInterceptor(BearerInterceptor())
         httpClient.addInterceptor(UserAgentInterceptor())
+    }
 
+    val CATEGORY_MAPPING_SERVICE_PRODUCTION: AirRobeApiInterface by lazy {
         Retrofit
             .Builder()
             .baseUrl(AirRobeConstants.AIRROBE_CONNECTOR_PRODUCTION)
@@ -49,19 +55,17 @@ object AirRobeApiService {
             .create(AirRobeApiInterface::class.java)
     }
 
-    val PRICE_ENGINE_SERVICE: AirRobeApiInterface by lazy {
-        val gson = GsonBuilder()
-            .setLenient()
-            .create()
-        val logging = HttpLoggingInterceptor()
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-        val httpClient = OkHttpClient.Builder()
-        httpClient.readTimeout(300, TimeUnit.SECONDS)
-        httpClient.writeTimeout(300, TimeUnit.SECONDS)
-        httpClient.addInterceptor(logging)
-        httpClient.addInterceptor(BearerInterceptor())
-        httpClient.addInterceptor(UserAgentInterceptor())
+    val CATEGORY_MAPPING_SERVICE_SANDBOX: AirRobeApiInterface by lazy {
+        Retrofit
+            .Builder()
+            .baseUrl(AirRobeConstants.AIRROBE_CONNECTOR_SANDBOX)
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .client(httpClient.build())
+            .build()
+            .create(AirRobeApiInterface::class.java)
+    }
 
+    val PRICE_ENGINE_SERVICE: AirRobeApiInterface by lazy {
         Retrofit
             .Builder()
             .baseUrl(AirRobeConstants.PRICE_ENGINE_HOST)
@@ -72,15 +76,6 @@ object AirRobeApiService {
     }
 
     val EMAIL_CHECK_SERVICE: AirRobeApiInterface by lazy {
-        val logging = HttpLoggingInterceptor()
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-        val httpClient = OkHttpClient.Builder()
-        httpClient.readTimeout(300, TimeUnit.SECONDS)
-        httpClient.writeTimeout(300, TimeUnit.SECONDS)
-        httpClient.addInterceptor(logging)
-        httpClient.addInterceptor(BearerInterceptor())
-        httpClient.addInterceptor(UserAgentInterceptor())
-
         Retrofit
             .Builder()
             .baseUrl(AirRobeConstants.EMAIL_CHECK_HOST)

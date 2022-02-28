@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="default_modal_bg">#FFFFFFFF</color>
+    <color name="airrobe_widget_default_modal_bg">#FFFFFFFF</color>
+    <color name="airrobe_widget_default_base_color">#42abc8</color>
 </resources>

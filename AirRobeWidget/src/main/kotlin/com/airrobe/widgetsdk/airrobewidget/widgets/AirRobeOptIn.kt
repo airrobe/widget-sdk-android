@@ -49,6 +49,8 @@ class AirRobeOptIn @JvmOverloads constructor(
         inflate(context, R.layout.airrobe_opt_in, this)
         binding = AirrobeOptInBinding.bind(this)
 
+        widgetInstance.setInstanceChangeListener(this)
+
         binding.tvDetailedDescription.visibility = GONE
         binding.llSwitchContainer.setOnClickListener {
             if (expandType == ExpandType.Opened) {
@@ -80,12 +82,12 @@ class AirRobeOptIn @JvmOverloads constructor(
         binding.tvDetailedDescription.text = detailedDescriptionText
         binding.tvDetailedDescription.movementMethod = LinkMovementMethod.getInstance()
         if (widgetInstance.getConfig() != null) {
-            binding.ivArrowDown.setColorFilter(Color.parseColor(widgetInstance.getConfig()?.color), PorterDuff.Mode.SRC_ATOP)
-            binding.tvDetailedDescription.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
+//            binding.ivArrowDown.setColorFilter(Color.parseColor(widgetInstance.getConfig()?.color), PorterDuff.Mode.SRC_ATOP)
+//            binding.tvDetailedDescription.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
             val extraInfoText = context.resources.getString(R.string.airrobe_extra_info).replace("Privacy Policy", "<a href='${widgetInstance.getConfig()?.privacyPolicyURL}'>Privacy Policy</a>")
             binding.tvExtraInfo.text = Html.fromHtml(extraInfoText)
             binding.tvExtraInfo.movementMethod = LinkMovementMethod.getInstance()
-            binding.tvExtraInfo.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
+//            binding.tvExtraInfo.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
         }
 
         binding.optInSwitch.isChecked = AirRobeSharedPreferenceManager.getOptedIn(context)
@@ -93,22 +95,13 @@ class AirRobeOptIn @JvmOverloads constructor(
             AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
         }
         binding.tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value_text)
+
         setupAttributes(attrs)
     }
 
     private fun setupAttributes(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.AirRobeOptIn, 0, 0)
-        brand                   = typedArray.getString(R.styleable.AirRobeOptIn_brand)
-        category                = typedArray.getString(R.styleable.AirRobeOptIn_category)
-        material                = typedArray.getString(R.styleable.AirRobeOptIn_material)
-        priceCents              = typedArray.getFloat(R.styleable.AirRobeOptIn_priceCents, 0.0f)
-        originalFullPriceCents  = typedArray.getFloat(R.styleable.AirRobeOptIn_originalFullPriceCents, AirRobeConstants.FLOAT_NULL_MAGIC_VALUE)
-        rrpCents                = typedArray.getFloat(R.styleable.AirRobeOptIn_rrpCents, AirRobeConstants.FLOAT_NULL_MAGIC_VALUE)
-        currency                = typedArray.getString(R.styleable.AirRobeOptIn_currency)
-        locale                  = typedArray.getString(R.styleable.AirRobeOptIn_locale)
 
-        widgetInstance.setInstanceChangeListener(this)
-        initializeOptInWidget()
     }
 
     fun initialize(
@@ -221,12 +214,12 @@ class AirRobeOptIn @JvmOverloads constructor(
 
     override fun onConfigChange() {
         if (widgetInstance.getConfig() != null) {
-            binding.ivArrowDown.setColorFilter(Color.parseColor(widgetInstance.getConfig()?.color), PorterDuff.Mode.SRC_ATOP)
-            binding.tvDetailedDescription.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
+//            binding.ivArrowDown.setColorFilter(Color.parseColor(widgetInstance.getConfig()?.color), PorterDuff.Mode.SRC_ATOP)
+//            binding.tvDetailedDescription.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
             val extraInfoText = context.resources.getString(R.string.airrobe_extra_info).replace("Privacy Policy", "<a href='${widgetInstance.getConfig()?.privacyPolicyURL}'>Privacy Policy</a>")
             binding.tvExtraInfo.text = Html.fromHtml(extraInfoText)
             binding.tvExtraInfo.movementMethod = LinkMovementMethod.getInstance()
-            binding.tvExtraInfo.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
+//            binding.tvExtraInfo.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
         }
     }
 }

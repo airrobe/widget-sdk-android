@@ -40,6 +40,8 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         inflate(context, R.layout.airrobe_multi_opt_in, this)
         binding = AirrobeMultiOptInBinding.bind(this)
 
+        widgetInstance.setInstanceChangeListener(this)
+
         binding.tvDetailedDescription.visibility = GONE
         binding.llSwitchContainer.setOnClickListener {
             if (expandType == ExpandType.Opened) {
@@ -71,12 +73,12 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         binding.tvDetailedDescription.text = detailedDescriptionText
         binding.tvDetailedDescription.movementMethod = LinkMovementMethod.getInstance()
         if (widgetInstance.getConfig() != null) {
-            binding.ivArrowDown.setColorFilter(Color.parseColor(widgetInstance.getConfig()?.color), PorterDuff.Mode.SRC_ATOP)
-            binding.tvDetailedDescription.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
+//            binding.ivArrowDown.setColorFilter(Color.parseColor(widgetInstance.getConfig()?.color), PorterDuff.Mode.SRC_ATOP)
+//            binding.tvDetailedDescription.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
             val extraInfoText = context.resources.getString(R.string.airrobe_extra_info).replace("Privacy Policy", "<a href='${widgetInstance.getConfig()?.privacyPolicyURL}'>Privacy Policy</a>")
             binding.tvExtraInfo.text = Html.fromHtml(extraInfoText)
             binding.tvExtraInfo.movementMethod = LinkMovementMethod.getInstance()
-            binding.tvExtraInfo.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
+//            binding.tvExtraInfo.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
         }
 
         binding.optInSwitch.isChecked = AirRobeSharedPreferenceManager.getOptedIn(context)
@@ -90,10 +92,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
 
     private fun setupAttributes(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.AirRobeMultiOptIn, 0, 0)
-        items = typedArray.getTextArray(R.styleable.AirRobeMultiOptIn_android_entries)
 
-        widgetInstance.setInstanceChangeListener(this)
-        initializeOptInWidget()
     }
 
     fun initialize(
@@ -146,12 +145,12 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
 
     override fun onConfigChange() {
         if (widgetInstance.getConfig() != null) {
-            binding.ivArrowDown.setColorFilter(Color.parseColor(widgetInstance.getConfig()?.color), PorterDuff.Mode.SRC_ATOP)
-            binding.tvDetailedDescription.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
+//            binding.ivArrowDown.setColorFilter(Color.parseColor(widgetInstance.getConfig()?.color), PorterDuff.Mode.SRC_ATOP)
+//            binding.tvDetailedDescription.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
             val extraInfoText = context.resources.getString(R.string.airrobe_extra_info).replace("Privacy Policy", "<a href='${widgetInstance.getConfig()?.privacyPolicyURL}'>Privacy Policy</a>")
             binding.tvExtraInfo.text = Html.fromHtml(extraInfoText)
             binding.tvExtraInfo.movementMethod = LinkMovementMethod.getInstance()
-            binding.tvExtraInfo.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
+//            binding.tvExtraInfo.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
         }
     }
 }

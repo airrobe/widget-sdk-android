@@ -42,7 +42,7 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
         }
 
         binding.tvFindOutMore.movementMethod = LinkMovementMethod.getInstance()
-        binding.tvFindOutMore.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
+//        binding.tvFindOutMore.highlightColor = Color.parseColor(widgetInstance.getConfig()?.color)
     }
 
     @SuppressLint("ClickableViewAccessibility")

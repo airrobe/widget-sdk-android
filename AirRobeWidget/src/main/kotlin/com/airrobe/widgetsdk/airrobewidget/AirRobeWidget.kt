@@ -20,7 +20,7 @@ object AirRobeWidget : AirRobeGetCategoryMappingListener {
         widgetInstance.setConfig(config)
         val getCategoryMappingController = AirRobeGetCategoryMappingController()
         getCategoryMappingController.airRobeGetCategoryMappingListener = this
-        getCategoryMappingController.start(config.appId)
+        getCategoryMappingController.start(config.appId, config.mode)
     }
 
     fun resetOptedIn(context: Context) {

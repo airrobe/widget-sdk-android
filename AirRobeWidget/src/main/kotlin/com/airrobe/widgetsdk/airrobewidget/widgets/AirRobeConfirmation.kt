@@ -34,16 +34,9 @@ class AirRobeConfirmation @JvmOverloads constructor(
     init {
         inflate(context, R.layout.airrobe_confirmation, this)
         binding = AirrobeConfirmationBinding.bind(this)
-        setupAttributes(attrs)
-    }
-
-    private fun setupAttributes(attrs: AttributeSet?) {
-        val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.AirRobeConfirmation, 0, 0)
-        orderId   = typedArray.getString(R.styleable.AirRobeConfirmation_orderId)
-        email     = typedArray.getString(R.styleable.AirRobeConfirmation_email)
-        fraudRisk = typedArray.getBoolean(R.styleable.AirRobeConfirmation_fraudRisk, false)
 
         widgetInstance.setInstanceChangeListener(this)
+
         if (widgetInstance.getConfig() != null) {
             binding.tvAction.setOnTouchListener { v, event ->
                 if (AirRobeAppUtils.touchAnimator(context, v, event)) {
@@ -54,7 +47,12 @@ class AirRobeConfirmation @JvmOverloads constructor(
                 true
             }
         }
-        initializeConfirmationWidget()
+
+        setupAttributes(attrs)
+    }
+
+    private fun setupAttributes(attrs: AttributeSet?) {
+        val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.AirRobeConfirmation, 0, 0)
     }
 
     fun initialize(
