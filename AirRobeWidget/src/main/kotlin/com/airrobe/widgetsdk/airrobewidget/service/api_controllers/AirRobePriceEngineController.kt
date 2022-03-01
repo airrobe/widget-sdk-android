@@ -7,7 +7,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AirRobePriceEngineController : Callback<PriceEngineResponseModel> {
+internal class AirRobePriceEngineController : Callback<PriceEngineResponseModel> {
     var airRobePriceEngineListener: AirRobePriceEngineListener?  =null
     fun start(price: Float, rrp: Float?, category: String, brand: String?, material: String?) {
         val retrofit = AirRobeApiService.PRICE_ENGINE_SERVICE

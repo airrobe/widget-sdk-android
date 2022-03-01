@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.RelativeLayout
@@ -53,6 +54,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
 
     private fun setupAttributes(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.AirRobeConfirmation, 0, 0)
+        
     }
 
     fun initialize(

@@ -29,7 +29,7 @@ private class UserAgentInterceptor : Interceptor {
     }
 }
 
-object AirRobeApiService {
+internal object AirRobeApiService {
     private var logging: HttpLoggingInterceptor = HttpLoggingInterceptor()
     private val gson = GsonBuilder()
         .setLenient()

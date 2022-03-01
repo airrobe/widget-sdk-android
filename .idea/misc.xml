@@ -11,12 +11,13 @@
         <entry key="AirRobeWidget/src/main/res/drawable/ic_close.xml" value="0.36354166666666665" />
         <entry key="AirRobeWidget/src/main/res/drawable/ic_logo.xml" value="0.36354166666666665" />
         <entry key="AirRobeWidget/src/main/res/drawable/ic_quote_text.xml" value="0.36354166666666665" />
-        <entry key="AirRobeWidget/src/main/res/drawable/layout_opt_in_main.xml" value="0.36354166666666665" />
+        <entry key="AirRobeWidget/src/main/res/drawable/layout_opt_in_main.xml" value="0.16" />
         <entry key="AirRobeWidget/src/main/res/drawable/learn_more_step_background.xml" value="0.228125" />
         <entry key="AirRobeWidget/src/main/res/drawable/learn_more_toggle_container_background.xml" value="0.228125" />
         <entry key="AirRobeWidget/src/main/res/layout/airrobe_confirmation.xml" value="0.40275650842266464" />
+        <entry key="AirRobeWidget/src/main/res/layout/airrobe_dialog_learn_more.xml" value="0.21822916666666667" />
         <entry key="AirRobeWidget/src/main/res/layout/airrobe_multi_opt_in.xml" value="0.21197916666666666" />
-        <entry key="AirRobeWidget/src/main/res/layout/airrobe_opt_in.xml" value="0.4433198380566802" />
+        <entry key="AirRobeWidget/src/main/res/layout/airrobe_opt_in.xml" value="0.25" />
         <entry key="AirRobeWidget/src/main/res/layout/dialog_learn_more.xml" value="0.25" />
         <entry key="AirRobeWidget/src/main/res/layout/layout_opt_in.xml" value="0.29030797101449274" />
         <entry key="AirRobeWidget/src/main/res/layout/layout_optin.xml" value="0.5162187210379982" />
@@ -25,6 +26,7 @@
         <entry key="app/src/main/res/layout/activity_menu.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/activity_multi_opt_in.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/activity_opt_in.xml" value="0.21197916666666666" />
+        <entry key="demo/src/main/res/layout/activity_opt_in.xml" value="0.33" />
       </map>
     </option>
   </component>

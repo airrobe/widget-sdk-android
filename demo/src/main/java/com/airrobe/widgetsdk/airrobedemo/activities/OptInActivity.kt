@@ -1,10 +1,9 @@
 package com.airrobe.widgetsdk.airrobedemo.activities
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.airrobe.widgetsdk.airrobedemo.R
-import com.airrobe.widgetsdk.airrobewidget.AirRobeWidget
 import com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeOptIn
 
 class OptInActivity : AppCompatActivity() {
@@ -16,5 +15,11 @@ class OptInActivity : AppCompatActivity() {
             category = "Accessories",
             priceCents = 120f
         )
+        // Way to set widget colors
+//        optInWidget.borderColor = Color.BLUE
+//        optInWidget.textColor = Color.BLUE
+//        optInWidget.switchColor = Color.BLUE
+//        optInWidget.arrowColor = Color.BLUE
+//        optInWidget.linkTextColor = Color.BLUE
     }
 }
