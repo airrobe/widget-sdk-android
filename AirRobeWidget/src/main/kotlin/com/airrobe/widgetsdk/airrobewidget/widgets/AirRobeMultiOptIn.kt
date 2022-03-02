@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.text.SpannableString
@@ -179,6 +180,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 val dialog = AirRobeLearnMore(context)
                 dialog.optInSwitch = binding.optInSwitch
                 dialog.isFromMultiOptIn = false
+                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
             }
         }

@@ -31,7 +31,6 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#333"
         android:layout_below="@id/ll_title_container" />
 
     <TextView
@@ -39,13 +38,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/divider"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         android:text="@string/airrobe_learn_more_title"
         android:textSize="18sp"
-        android:textColor="#333"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true" />
+        android:textStyle="bold" />
 
     <RelativeLayout
         android:id="@+id/rl_step1_container"
@@ -64,11 +62,11 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/tv_step1_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/airrobe_learn_more_step1_title"
                 android:textSize="16sp"
-                android:textColor="#333"
                 android:textStyle="bold"
                 android:layout_weight="1" />
 
@@ -83,7 +81,6 @@
             android:id="@+id/step1_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#333"
             android:layout_below="@id/ll_step1_title_container" />
 
         <TextView
@@ -93,9 +90,8 @@
             android:layout_below="@id/step1_divider"
             android:text="@string/airrobe_learn_more_step1_description"
             android:textSize="14sp"
-            android:textColor="#333"
             android:padding="10dp" />
-        
+
         <ImageView
             android:layout_width="14dp"
             android:layout_height="36dp"
@@ -117,7 +113,6 @@
         android:layout_marginTop="20dp"
         android:text="@string/airrobe_learn_more_question"
         android:textSize="13sp"
-        android:textColor="#333"
         android:textStyle="bold"
         android:textAlignment="center"
         android:gravity="center"/>
@@ -132,7 +127,6 @@
         android:layout_marginBottom="20dp"
         android:text="@string/airrobe_learn_more_answer"
         android:textSize="13sp"
-        android:textColor="#333"
         android:textAlignment="center"
         android:gravity="center"/>
 
@@ -153,11 +147,11 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/tv_step2_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/airrobe_learn_more_step2_title"
                 android:textSize="16sp"
-                android:textColor="#333"
                 android:textStyle="bold"
                 android:layout_weight="1" />
 
@@ -172,7 +166,6 @@
             android:id="@+id/step2_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#333"
             android:layout_below="@id/ll_step2_title_container" />
 
         <TextView
@@ -182,7 +175,6 @@
             android:layout_below="@id/step2_divider"
             android:text="@string/airrobe_learn_more_step2_description"
             android:textSize="14sp"
-            android:textColor="#333"
             android:padding="10dp" />
 
         <ImageView
@@ -206,7 +198,6 @@
         android:layout_marginTop="20dp"
         android:text="@string/airrobe_learn_more_ready"
         android:textSize="14sp"
-        android:textColor="#333"
         android:textStyle="bold"
         android:textAlignment="center"
         android:gravity="center"/>
@@ -221,7 +212,6 @@
         android:layout_marginBottom="20dp"
         android:text="@string/airrobe_learn_more_toggle_on"
         android:textSize="15sp"
-        android:textColor="#333"
         android:textAlignment="center"
         android:gravity="center"/>
 
