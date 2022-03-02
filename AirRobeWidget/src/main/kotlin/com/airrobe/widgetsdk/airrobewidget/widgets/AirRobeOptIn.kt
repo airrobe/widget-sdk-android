@@ -26,6 +26,7 @@ import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobePriceEngineL
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 import com.airrobe.widgetsdk.airrobewidget.widgetInstance
 
+@Suppress("DEPRECATION")
 class AirRobeOptIn @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr), AirRobeWidgetInstance.InstanceChangeListener, AirRobePriceEngineListener {
