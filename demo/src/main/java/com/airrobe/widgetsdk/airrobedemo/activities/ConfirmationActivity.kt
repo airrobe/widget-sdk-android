@@ -1,5 +1,6 @@
 package com.airrobe.widgetsdk.airrobedemo.activities
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.airrobe.widgetsdk.airrobedemo.R
@@ -14,5 +15,10 @@ class ConfirmationActivity : AppCompatActivity() {
             orderId = "123456",
             email = "raj@airrobe.com"
         )
+        // Way to set widget colors
+//        confirmationWidget.borderColor = Color.BLUE
+//        confirmationWidget.textColor = Color.YELLOW
+//        confirmationWidget.buttonBackgroundColor = Color.GREEN
+//        confirmationWidget.buttonTextColor = Color.GRAY
     }
 }

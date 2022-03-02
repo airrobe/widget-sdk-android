@@ -1,9 +1,6 @@
 package com.airrobe.widgetsdk.airrobewidget
 
 import android.content.Context
-import android.graphics.PorterDuff
-import android.graphics.drawable.GradientDrawable
-import android.os.Build
 import android.util.Log
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance

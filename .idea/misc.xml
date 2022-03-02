@@ -27,6 +27,7 @@
         <entry key="app/src/main/res/layout/activity_multi_opt_in.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/activity_opt_in.xml" value="0.21197916666666666" />
         <entry key="demo/src/main/res/layout/activity_confirmation.xml" value="0.24583333333333332" />
+        <entry key="demo/src/main/res/layout/activity_multi_opt_in.xml" value="0.25364583333333335" />
         <entry key="demo/src/main/res/layout/activity_opt_in.xml" value="0.33" />
       </map>
     </option>
