@@ -70,6 +70,7 @@ class AirRobeOptIn @JvmOverloads constructor(
             binding.tvDetailedDescription.setTextColor(value)
             binding.tvExtraInfo.setTextColor(value)
             binding.tvPotentialValue.setTextColor(value)
+            binding.priceLoading.indeterminateTintList = ColorStateList.valueOf(value)
         }
 
     var switchColor: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)

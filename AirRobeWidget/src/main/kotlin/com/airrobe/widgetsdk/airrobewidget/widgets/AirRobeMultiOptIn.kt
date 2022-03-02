@@ -102,29 +102,29 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
     private fun setupAttributes(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.AirRobeMultiOptIn, 0, 0)
         borderColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            typedArray.getColor(R.styleable.AirRobeOptIn_borderColor, context.getColor(widgetInstance.borderColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_borderColor, context.getColor(widgetInstance.borderColor))
         } else {
-            typedArray.getColor(R.styleable.AirRobeOptIn_borderColor, context.resources.getColor(widgetInstance.borderColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_borderColor, context.resources.getColor(widgetInstance.borderColor))
         }
         textColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            typedArray.getColor(R.styleable.AirRobeOptIn_textColor, context.getColor(widgetInstance.textColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_textColor, context.getColor(widgetInstance.textColor))
         } else {
-            typedArray.getColor(R.styleable.AirRobeOptIn_textColor, context.resources.getColor(widgetInstance.textColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_textColor, context.resources.getColor(widgetInstance.textColor))
         }
         switchColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            typedArray.getColor(R.styleable.AirRobeOptIn_switchColor, context.getColor(widgetInstance.switchColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_switchColor, context.getColor(widgetInstance.switchColor))
         } else {
-            typedArray.getColor(R.styleable.AirRobeOptIn_switchColor, context.resources.getColor(widgetInstance.switchColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_switchColor, context.resources.getColor(widgetInstance.switchColor))
         }
         arrowColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            typedArray.getColor(R.styleable.AirRobeOptIn_arrowColor, context.getColor(widgetInstance.arrowColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_arrowColor, context.getColor(widgetInstance.arrowColor))
         } else {
-            typedArray.getColor(R.styleable.AirRobeOptIn_arrowColor, context.resources.getColor(widgetInstance.arrowColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_arrowColor, context.resources.getColor(widgetInstance.arrowColor))
         }
         linkTextColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            typedArray.getColor(R.styleable.AirRobeOptIn_linkTextColor, context.getColor(widgetInstance.linkTextColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_linkTextColor, context.getColor(widgetInstance.linkTextColor))
         } else {
-            typedArray.getColor(R.styleable.AirRobeOptIn_linkTextColor, context.resources.getColor(widgetInstance.linkTextColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_linkTextColor, context.resources.getColor(widgetInstance.linkTextColor))
         }
     }
 

@@ -3,11 +3,13 @@ package com.airrobe.widgetsdk.airrobewidget.widgets
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
-import android.widget.RelativeLayout
+import android.widget.LinearLayout
 import com.airrobe.widgetsdk.airrobewidget.R
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
@@ -19,18 +21,54 @@ import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 import com.airrobe.widgetsdk.airrobewidget.widgetInstance
 
 @SuppressLint("ClickableViewAccessibility")
+@Suppress("DEPRECATION")
 class AirRobeConfirmation @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : RelativeLayout(context, attrs, defStyleAttr), AirRobeWidgetInstance.InstanceChangeListener, AirRobeEmailCheckListener {
+) : LinearLayout(context, attrs, defStyleAttr), AirRobeWidgetInstance.InstanceChangeListener, AirRobeEmailCheckListener {
     private var binding: AirrobeConfirmationBinding
+
+    companion object {
+        private const val TAG = "AirRobeConfirmation"
+    }
 
     private var orderId: String? = null
     private var email: String? = null
     private var fraudRisk: Boolean = false
 
-    companion object {
-        private const val TAG = "AirRobeMultiOptIn"
-    }
+    var borderColor: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        context.getColor(widgetInstance.borderColor) else
+        context.resources.getColor(widgetInstance.borderColor)
+        set(value) {
+            field = value
+            val mainBackground = binding.rlMainContainer.background as GradientDrawable
+            mainBackground.setStroke(1, value)
+        }
+
+    var textColor: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        context.getColor(widgetInstance.textColor) else
+        context.resources.getColor(widgetInstance.textColor)
+        set(value) {
+            field = value
+            binding.tvTitle.setTextColor(value)
+            binding.tvDescription.setTextColor(value)
+        }
+
+    var buttonBackgroundColor: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        context.getColor(widgetInstance.buttonBackgroundColor) else
+        context.resources.getColor(widgetInstance.buttonBackgroundColor)
+        set(value) {
+            field = value
+            binding.rlActionContainer.setBackgroundColor(value)
+        }
+
+    var buttonTextColor: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        context.getColor(widgetInstance.buttonTextColor) else
+        context.resources.getColor(widgetInstance.buttonTextColor)
+        set(value) {
+            field = value
+            binding.tvAction.setTextColor(value)
+            binding.btnLoading.indeterminateTintList = ColorStateList.valueOf(value)
+        }
 
     init {
         inflate(context, R.layout.airrobe_confirmation, this)
@@ -54,7 +92,26 @@ class AirRobeConfirmation @JvmOverloads constructor(
 
     private fun setupAttributes(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.AirRobeConfirmation, 0, 0)
-        
+        borderColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            typedArray.getColor(R.styleable.AirRobeConfirmation_borderColor, context.getColor(widgetInstance.borderColor))
+        } else {
+            typedArray.getColor(R.styleable.AirRobeConfirmation_borderColor, context.resources.getColor(widgetInstance.borderColor))
+        }
+        textColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            typedArray.getColor(R.styleable.AirRobeConfirmation_textColor, context.getColor(widgetInstance.textColor))
+        } else {
+            typedArray.getColor(R.styleable.AirRobeConfirmation_textColor, context.resources.getColor(widgetInstance.textColor))
+        }
+        buttonBackgroundColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            typedArray.getColor(R.styleable.AirRobeConfirmation_buttonBackgroundColor, context.getColor(widgetInstance.buttonBackgroundColor))
+        } else {
+            typedArray.getColor(R.styleable.AirRobeConfirmation_buttonBackgroundColor, context.resources.getColor(widgetInstance.buttonBackgroundColor))
+        }
+        buttonTextColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            typedArray.getColor(R.styleable.AirRobeConfirmation_buttonTextColor, context.getColor(widgetInstance.buttonTextColor))
+        } else {
+            typedArray.getColor(R.styleable.AirRobeConfirmation_buttonTextColor, context.resources.getColor(widgetInstance.buttonTextColor))
+        }
     }
 
     fun initialize(
