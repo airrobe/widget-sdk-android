@@ -14,42 +14,42 @@ internal val widgetInstance = AirRobeWidgetInstance
 object AirRobeWidget : AirRobeGetCategoryMappingListener {
     private const val TAG = "AirRobeWidget"
 
-    var borderColor: Int = R.color.airrobe_widget_default_border_color
+    var borderColor: Int = 0
         set(value) {
             field = value
             widgetInstance.borderColor = value
         }
-    var textColor: Int = R.color.airrobe_widget_default_text_color
+    var textColor: Int = 0
         set(value) {
             field = value
             widgetInstance.textColor = value
         }
-    var switchColor: Int = R.color.airrobe_widget_default_switch_color
+    var switchColor: Int = 0
         set(value) {
             field = value
             widgetInstance.switchColor = value
         }
-    var arrowColor: Int = R.color.airrobe_widget_default_arrow_color
+    var arrowColor: Int = 0
         set(value) {
             field = value
             widgetInstance.arrowColor = value
         }
-    var linkTextColor: Int = R.color.airrobe_widget_default_link_text_color
+    var linkTextColor: Int = 0
         set(value) {
             field = value
             widgetInstance.linkTextColor = value
         }
-    var buttonBackgroundColor: Int = R.color.airrobe_widget_default_button_background_color
+    var buttonBackgroundColor: Int = 0
         set(value) {
             field = value
             widgetInstance.buttonBackgroundColor = value
         }
-    var buttonTextColor: Int = R.color.airrobe_widget_default_button_text_color
+    var buttonTextColor: Int = 0
         set(value) {
             field = value
             widgetInstance.buttonTextColor = value
         }
-    var separatorColor: Int = R.color.airrobe_widget_default_separator_color
+    var separatorColor: Int = 0
         set(value) {
             field = value
             widgetInstance.separatorColor = value

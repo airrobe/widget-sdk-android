@@ -35,35 +35,51 @@ class AirRobeConfirmation @JvmOverloads constructor(
     private var email: String? = null
     private var fraudRisk: Boolean = false
 
-    var borderColor: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        context.getColor(widgetInstance.borderColor) else
-        context.resources.getColor(widgetInstance.borderColor)
+    var borderColor: Int =
+        if (widgetInstance.borderColor == 0)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                context.getColor(R.color.airrobe_widget_default_border_color) else
+                    context.resources.getColor(R.color.airrobe_widget_default_border_color)
+        else
+            widgetInstance.borderColor
         set(value) {
             field = value
             val mainBackground = binding.rlMainContainer.background as GradientDrawable
             mainBackground.setStroke(1, value)
         }
 
-    var textColor: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        context.getColor(widgetInstance.textColor) else
-        context.resources.getColor(widgetInstance.textColor)
+    var textColor: Int =
+        if (widgetInstance.textColor == 0)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                context.getColor(R.color.airrobe_widget_default_text_color) else
+                context.resources.getColor(R.color.airrobe_widget_default_text_color)
+        else
+            widgetInstance.textColor
         set(value) {
             field = value
             binding.tvTitle.setTextColor(value)
             binding.tvDescription.setTextColor(value)
         }
 
-    var buttonBackgroundColor: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        context.getColor(widgetInstance.buttonBackgroundColor) else
-        context.resources.getColor(widgetInstance.buttonBackgroundColor)
+    var buttonBackgroundColor: Int =
+        if (widgetInstance.buttonBackgroundColor == 0)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                context.getColor(R.color.airrobe_widget_default_button_background_color) else
+                context.resources.getColor(R.color.airrobe_widget_default_button_background_color)
+        else
+            widgetInstance.buttonBackgroundColor
         set(value) {
             field = value
             binding.rlActionContainer.setBackgroundColor(value)
         }
 
-    var buttonTextColor: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        context.getColor(widgetInstance.buttonTextColor) else
-        context.resources.getColor(widgetInstance.buttonTextColor)
+    var buttonTextColor: Int =
+        if (widgetInstance.buttonTextColor == 0)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                context.getColor(R.color.airrobe_widget_default_button_text_color) else
+                context.resources.getColor(R.color.airrobe_widget_default_button_text_color)
+        else
+            widgetInstance.buttonTextColor
         set(value) {
             field = value
             binding.tvAction.setTextColor(value)
@@ -93,24 +109,64 @@ class AirRobeConfirmation @JvmOverloads constructor(
     private fun setupAttributes(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.AirRobeConfirmation, 0, 0)
         borderColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            typedArray.getColor(R.styleable.AirRobeConfirmation_borderColor, context.getColor(widgetInstance.borderColor))
+            typedArray.getColor(R.styleable.AirRobeConfirmation_borderColor,
+                if (widgetInstance.borderColor == 0)
+                    context.getColor(R.color.airrobe_widget_default_border_color)
+                else
+                    widgetInstance.borderColor
+            )
         } else {
-            typedArray.getColor(R.styleable.AirRobeConfirmation_borderColor, context.resources.getColor(widgetInstance.borderColor))
+            typedArray.getColor(R.styleable.AirRobeConfirmation_borderColor,
+                if (widgetInstance.borderColor == 0)
+                    context.resources.getColor(R.color.airrobe_widget_default_border_color)
+                else
+                    widgetInstance.borderColor
+            )
         }
         textColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            typedArray.getColor(R.styleable.AirRobeConfirmation_textColor, context.getColor(widgetInstance.textColor))
+            typedArray.getColor(R.styleable.AirRobeConfirmation_textColor,
+                if (widgetInstance.textColor == 0)
+                    context.getColor(R.color.airrobe_widget_default_text_color)
+                else
+                    widgetInstance.textColor
+            )
         } else {
-            typedArray.getColor(R.styleable.AirRobeConfirmation_textColor, context.resources.getColor(widgetInstance.textColor))
+            typedArray.getColor(R.styleable.AirRobeConfirmation_textColor,
+                if (widgetInstance.textColor == 0)
+                    context.resources.getColor(R.color.airrobe_widget_default_text_color)
+                else
+                    widgetInstance.textColor
+            )
         }
         buttonBackgroundColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            typedArray.getColor(R.styleable.AirRobeConfirmation_buttonBackgroundColor, context.getColor(widgetInstance.buttonBackgroundColor))
+            typedArray.getColor(R.styleable.AirRobeConfirmation_buttonBackgroundColor,
+                if (widgetInstance.buttonBackgroundColor == 0)
+                    context.getColor(R.color.airrobe_widget_default_button_background_color)
+                else
+                    widgetInstance.buttonBackgroundColor
+            )
         } else {
-            typedArray.getColor(R.styleable.AirRobeConfirmation_buttonBackgroundColor, context.resources.getColor(widgetInstance.buttonBackgroundColor))
+            typedArray.getColor(R.styleable.AirRobeConfirmation_buttonBackgroundColor,
+                if (widgetInstance.buttonBackgroundColor == 0)
+                    context.resources.getColor(R.color.airrobe_widget_default_button_background_color)
+                else
+                    widgetInstance.buttonBackgroundColor
+            )
         }
         buttonTextColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            typedArray.getColor(R.styleable.AirRobeConfirmation_buttonTextColor, context.getColor(widgetInstance.buttonTextColor))
+            typedArray.getColor(R.styleable.AirRobeConfirmation_buttonTextColor,
+                if (widgetInstance.buttonTextColor == 0)
+                    context.getColor(R.color.airrobe_widget_default_button_text_color)
+                else
+                    widgetInstance.buttonTextColor
+            )
         } else {
-            typedArray.getColor(R.styleable.AirRobeConfirmation_buttonTextColor, context.resources.getColor(widgetInstance.buttonTextColor))
+            typedArray.getColor(R.styleable.AirRobeConfirmation_buttonTextColor,
+                if (widgetInstance.buttonTextColor == 0)
+                    context.resources.getColor(R.color.airrobe_widget_default_button_text_color)
+                else
+                    widgetInstance.buttonTextColor
+            )
         }
     }
 

@@ -27,6 +27,7 @@ class ApplicationController : Application() {
 //        AirRobeWidget.buttonBackgroundColor = Color.LTGRAY
 //        AirRobeWidget.buttonTextColor = Color.MAGENTA
 //        AirRobeWidget.separatorColor = Color.RED
+//        AirRobeWidget.linkTextColor = Color.GRAY
     }
 
     companion object {

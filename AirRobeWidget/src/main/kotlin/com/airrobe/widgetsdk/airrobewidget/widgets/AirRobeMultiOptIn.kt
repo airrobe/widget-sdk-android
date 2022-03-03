@@ -42,9 +42,13 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
     private var expandType: ExpandType = ExpandType.Closed
     private var items: Array<CharSequence>? = arrayOf()
 
-    var borderColor: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        context.getColor(widgetInstance.borderColor) else
-        context.resources.getColor(widgetInstance.borderColor)
+    var borderColor: Int =
+        if (widgetInstance.borderColor == 0)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                context.getColor(R.color.airrobe_widget_default_border_color) else
+                context.resources.getColor(R.color.airrobe_widget_default_border_color)
+        else
+            widgetInstance.borderColor
         set(value) {
             field = value
             val mainBackground = binding.llMainContainer.background as GradientDrawable
@@ -52,9 +56,13 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             setSwitchColor()
         }
 
-    var textColor: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        context.getColor(widgetInstance.textColor) else
-        context.resources.getColor(widgetInstance.textColor)
+    var textColor: Int =
+        if (widgetInstance.textColor == 0)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                context.getColor(R.color.airrobe_widget_default_text_color) else
+                context.resources.getColor(R.color.airrobe_widget_default_text_color)
+        else
+            widgetInstance.textColor
         set(value) {
             field = value
             binding.tvTitle.setTextColor(value)
@@ -63,25 +71,37 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             binding.tvExtraInfo.setTextColor(value)
         }
 
-    var switchColor: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        context.getColor(widgetInstance.switchColor) else
-        context.resources.getColor(widgetInstance.switchColor)
+    var switchColor: Int =
+        if (widgetInstance.switchColor == 0)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                context.getColor(R.color.airrobe_widget_default_switch_color) else
+                context.resources.getColor(R.color.airrobe_widget_default_switch_color)
+        else
+            widgetInstance.switchColor
         set(value) {
             field = value
             setSwitchColor()
         }
 
-    var arrowColor: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        context.getColor(widgetInstance.arrowColor) else
-        context.resources.getColor(widgetInstance.arrowColor)
+    var arrowColor: Int =
+        if (widgetInstance.arrowColor == 0)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                context.getColor(R.color.airrobe_widget_default_arrow_color) else
+                context.resources.getColor(R.color.airrobe_widget_default_arrow_color)
+        else
+            widgetInstance.arrowColor
         set(value) {
             field = value
             binding.ivArrowDown.setColorFilter(value, PorterDuff.Mode.SRC_ATOP)
         }
 
-    var linkTextColor: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        context.getColor(widgetInstance.linkTextColor) else
-        context.resources.getColor(widgetInstance.linkTextColor)
+    var linkTextColor: Int =
+        if (widgetInstance.linkTextColor == 0)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                context.getColor(R.color.airrobe_widget_default_link_text_color) else
+                context.resources.getColor(R.color.airrobe_widget_default_link_text_color)
+        else
+            widgetInstance.linkTextColor
         set(value) {
             field = value
             binding.tvDetailedDescription.setLinkTextColor(value)
@@ -103,29 +123,79 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
     private fun setupAttributes(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.AirRobeMultiOptIn, 0, 0)
         borderColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            typedArray.getColor(R.styleable.AirRobeMultiOptIn_borderColor, context.getColor(widgetInstance.borderColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_borderColor,
+                if (widgetInstance.borderColor == 0)
+                    context.getColor(R.color.airrobe_widget_default_border_color)
+                else
+                    widgetInstance.borderColor
+            )
         } else {
-            typedArray.getColor(R.styleable.AirRobeMultiOptIn_borderColor, context.resources.getColor(widgetInstance.borderColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_borderColor,
+                if (widgetInstance.borderColor == 0)
+                    context.resources.getColor(R.color.airrobe_widget_default_border_color)
+                else
+                    widgetInstance.borderColor
+            )
         }
         textColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            typedArray.getColor(R.styleable.AirRobeMultiOptIn_textColor, context.getColor(widgetInstance.textColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_textColor,
+                if (widgetInstance.textColor == 0)
+                    context.getColor(R.color.airrobe_widget_default_text_color)
+                else
+                    widgetInstance.textColor
+            )
         } else {
-            typedArray.getColor(R.styleable.AirRobeMultiOptIn_textColor, context.resources.getColor(widgetInstance.textColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_textColor,
+                if (widgetInstance.textColor == 0)
+                    context.resources.getColor(R.color.airrobe_widget_default_text_color)
+                else
+                    widgetInstance.textColor
+            )
         }
         switchColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            typedArray.getColor(R.styleable.AirRobeMultiOptIn_switchColor, context.getColor(widgetInstance.switchColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_switchColor,
+                if (widgetInstance.switchColor == 0)
+                    context.getColor(R.color.airrobe_widget_default_switch_color)
+                else
+                    widgetInstance.switchColor
+            )
         } else {
-            typedArray.getColor(R.styleable.AirRobeMultiOptIn_switchColor, context.resources.getColor(widgetInstance.switchColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_switchColor,
+                if (widgetInstance.switchColor == 0)
+                    context.resources.getColor(R.color.airrobe_widget_default_switch_color)
+                else
+                    widgetInstance.switchColor
+            )
         }
         arrowColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            typedArray.getColor(R.styleable.AirRobeMultiOptIn_arrowColor, context.getColor(widgetInstance.arrowColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_arrowColor,
+                if (widgetInstance.arrowColor == 0)
+                    context.getColor(R.color.airrobe_widget_default_arrow_color)
+                else
+                    widgetInstance.arrowColor
+            )
         } else {
-            typedArray.getColor(R.styleable.AirRobeMultiOptIn_arrowColor, context.resources.getColor(widgetInstance.arrowColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_arrowColor,
+                if (widgetInstance.arrowColor == 0)
+                    context.resources.getColor(R.color.airrobe_widget_default_arrow_color)
+                else
+                    widgetInstance.arrowColor
+            )
         }
         linkTextColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            typedArray.getColor(R.styleable.AirRobeMultiOptIn_linkTextColor, context.getColor(widgetInstance.linkTextColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_linkTextColor,
+                if (widgetInstance.linkTextColor == 0)
+                    context.getColor(R.color.airrobe_widget_default_link_text_color)
+                else
+                    widgetInstance.linkTextColor
+            )
         } else {
-            typedArray.getColor(R.styleable.AirRobeMultiOptIn_linkTextColor, context.resources.getColor(widgetInstance.linkTextColor))
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_linkTextColor,
+                if (widgetInstance.linkTextColor == 0)
+                    context.resources.getColor(R.color.airrobe_widget_default_link_text_color)
+                else
+                    widgetInstance.linkTextColor
+            )
         }
     }
 
