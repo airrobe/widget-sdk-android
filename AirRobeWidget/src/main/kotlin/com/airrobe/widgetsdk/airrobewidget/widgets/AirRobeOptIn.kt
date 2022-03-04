@@ -45,6 +45,7 @@ class AirRobeOptIn @JvmOverloads constructor(
     private var brand: String? = null
     private var material: String? = null
     private var category: String? = null
+    private var department: String? = null
     private var priceCents: Float = 0.0f
     private var originalFullPriceCents: Float = AirRobeConstants.FLOAT_NULL_MAGIC_VALUE
     private var rrpCents: Float = AirRobeConstants.FLOAT_NULL_MAGIC_VALUE
@@ -288,6 +289,7 @@ class AirRobeOptIn @JvmOverloads constructor(
         brand: String? = null,
         material: String? = null,
         category: String,
+        department: String? = null,
         priceCents: Float,
         originalFullPriceCents: Float = AirRobeConstants.FLOAT_NULL_MAGIC_VALUE,
         rrpCents: Float = AirRobeConstants.FLOAT_NULL_MAGIC_VALUE,
@@ -297,6 +299,7 @@ class AirRobeOptIn @JvmOverloads constructor(
         this.brand = brand
         this.material = material
         this.category = category
+        this.department = department
         this.priceCents = priceCents
         this.originalFullPriceCents = originalFullPriceCents
         this.rrpCents = rrpCents
