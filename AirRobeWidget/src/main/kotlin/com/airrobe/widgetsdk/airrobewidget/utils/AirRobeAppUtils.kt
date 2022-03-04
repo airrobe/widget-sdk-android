@@ -6,7 +6,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import com.airrobe.widgetsdk.airrobewidget.R
 
-object AirRobeAppUtils {
+internal object AirRobeAppUtils {
     fun touchAnimator(context: Context, v: View, event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {

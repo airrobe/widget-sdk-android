@@ -9,7 +9,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AirRobeEmailCheckController : Callback<String> {
+internal class AirRobeEmailCheckController : Callback<String> {
     var airRobeEmailCheckListener: AirRobeEmailCheckListener? = null
     fun start(email: String) {
         val retrofit = AirRobeApiService.EMAIL_CHECK_SERVICE

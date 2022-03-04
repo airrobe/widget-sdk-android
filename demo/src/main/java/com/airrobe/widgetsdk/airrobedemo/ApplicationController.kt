@@ -2,6 +2,7 @@ package com.airrobe.widgetsdk.airrobedemo
 
 import android.app.Application
 import android.content.Context
+import android.graphics.Color
 import com.airrobe.widgetsdk.airrobewidget.AirRobeWidget
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 
@@ -17,6 +18,16 @@ class ApplicationController : Application() {
                 "https://www.theiconic.com.au/privacy-policy"
             )
         )
+
+        // Way to set all widgets colors globally
+//        AirRobeWidget.borderColor = Color.BLUE
+//        AirRobeWidget.arrowColor = Color.GREEN
+//        AirRobeWidget.textColor = Color.YELLOW
+//        AirRobeWidget.switchColor = Color.CYAN
+//        AirRobeWidget.buttonBackgroundColor = Color.LTGRAY
+//        AirRobeWidget.buttonTextColor = Color.MAGENTA
+//        AirRobeWidget.separatorColor = Color.RED
+//        AirRobeWidget.linkTextColor = Color.GRAY
     }
 
     companion object {
