@@ -7,6 +7,15 @@ internal object AirRobeWidgetInstance {
     private var configuration: AirRobeWidgetConfig? = null
     var changeListener: InstanceChangeListener? = null
 
+    var borderColor: Int = 0
+    var textColor: Int = 0
+    var switchColor: Int = 0
+    var arrowColor: Int = 0
+    var linkTextColor: Int = 0
+    var buttonBorderColor: Int = 0
+    var buttonTextColor: Int = 0
+    var separatorColor: Int = 0
+
     fun getCategoryModel(): CategoryModel? {
         return categoryModel
     }

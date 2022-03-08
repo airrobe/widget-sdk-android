@@ -4,7 +4,7 @@ import com.airrobe.widgetsdk.airrobewidget.service.models.PriceEngineResponseMod
 import retrofit2.Call
 import retrofit2.http.*
 
-interface AirRobeApiInterface {
+internal interface AirRobeApiInterface {
     @Headers("Content-Type: application/json")
     @POST("/graphql")
     fun getCategoryMapping(@Body body: String): Call<String>

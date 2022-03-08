@@ -8,14 +8,12 @@ enum class Mode {
 interface AirRobeWidgetConfig {
     val appId: String
     val privacyPolicyURL: String
-    val color: String
     val mode: Mode
 }
 
 internal class AirRobeWidgetConfigImpl (
     override val appId: String,
     override val privacyPolicyURL: String,
-    override val color: String,
     override val mode: Mode
 ) : AirRobeWidgetConfig
 
@@ -30,8 +28,7 @@ internal class AirRobeWidgetConfigImpl (
 fun AirRobeWidgetConfig (
     appId: String,
     privacyPolicyURL: String,
-    color: String = "#42abc8",
     mode: Mode = Mode.PRODUCTION
 ) : AirRobeWidgetConfig = AirRobeWidgetConfigImpl(
-    appId, privacyPolicyURL, color, mode
+    appId, privacyPolicyURL, mode
 )

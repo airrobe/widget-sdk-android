@@ -36,15 +36,15 @@ You will need to keep track of the library version manually, and when you want t
 
 ## ProGuard
 
-If you are using ProGuard you might need to add OkHttp's rules: https://github.com/square/okhttp/#r8--proguard
+If you are using ProGuard you might need to add [OkHttp's rules][okhttp-rules]
 
 ## Getting Started
 
-The AirRobe SDK contains UI components that can be added to your product detail screens, cart screens, and order confirmation screens. The AirRobeOptIn component is intended to be used on a single product detail screens, the AirRobeMultiOptIn component on cart screen, and the AirRobeConfirmation component on the order confirmation screen.
+The AirRobe SDK contains UI components that can be added to your product detail screens, cart screens, and order confirmation screens. The `AirRobeOptIn` component is intended to be used on a single product detail screens, the `AirRobeMultiOptIn` component on cart screen, and the `AirRobeConfirmation` component on the order confirmation screen.
 
 ### Integration
 
-You are going to need your AirRobe `appId`, which is used to configure widgets and fetch up-to-date data mapping information. You can access your AppId at https://connector.airrobe.com/docs/android#android-getting_started-initialization
+You are going to need your AirRobe `appId`, which is used to configure widgets and fetch up-to-date data mapping information. You can access your `appId` [here][here]
 
 #### Initialization
 
@@ -59,10 +59,21 @@ AirRobeWidget.initialize(
     AirRobeWidgetConfig(
         appId = "APP_ID",           // required
         privacyPolicyURL = String,  // required - privacy policy url
-        color = String,             // optional - color HexCode, default value is "#42abc8"
         mode = enum                 // optional - (`Mode.PRODUCTION` or `Mode.SANDBOX`), default value is `Mode.PRODUCTION`
     )
 )
+```
+
+##### Color configuration
+```kotlin
+AirRobeWidget.borderColor = Color.rgb(255, 255, 255)         // the color of the widget border. default value is "#DFDFDF"
+AirRobeWidget.arrowColor = Color.rgb(255, 255, 255)          // the color of the widget drop down arrow icon. default value is "#42ABC8"
+AirRobeWidget.textColor = Color.rgb(255, 255, 255)           // the color of the widget text. default value is "#232323"
+AirRobeWidget.switchColor = Color.rgb(255, 255, 255)         // the color of the widget switch ON color. default value is "#42ABC8"
+AirRobeWidget.buttonBorderColor = Color.rgb(255, 255, 255)   // the color of the widget activate button border. default value is "#232323"
+AirRobeWidget.buttonTextColor = Color.rgb(255, 255, 255)     // the color of the widget activate button text. default value is "#232323"
+AirRobeWidget.separatorColor = Color.rgb(255, 255, 255)      // the color of the learn more dialog separators. default value is "#DFDFDF"
+AirRobeWidget.linkTextColor = Color.rgb(255, 255, 255)       // the color of the widget legal copy text. default value is "#696969"
 ```
 
 > **Note:**
@@ -74,15 +85,15 @@ AirRobe Widgets should be added by using XML or programmatically added inside yo
 
 #### AirRobeOptIn Initialization
 
-The AirRobeOptIn component should be added to your product details screen, passing arguments for the product's category and price, as well as material and brand if available. These attributes are used to fetch estimated resale price from the AirRobe Price Engine. Localisation attributes can also be provided.
+The AirRobeOptIn component should be added to your product details screen, passing arguments for the product's `category` and `price`, as well as `material` and `brand` if available. These attributes are used to fetch estimated resale price from the AirRobe Price Engine. Localisation attributes can also be provided.
 
-_Note: The widget will not be displayed unless the product is AirRobe-eligible. The AirRobeWidget Android SDK considers a product's category, price, and department when making an eligibility determination._
+_Note: The widget will not be displayed unless the product is AirRobe-eligible. The AirRobeWidget Android SDK considers a product's `category`, `price`, and `department` when making an eligibility determination._
 
-##### Through XML
+##### In xml
 
 ```xml
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:airrobe="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -90,12 +101,21 @@ _Note: The widget will not be displayed unless the product is AirRobe-eligible. 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
-
+    
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 ```
 
-##### Through Function
+##### Xml attributes
+```xml
+airrobe:borderColor="#DFDFDF"    <!-- the color of the widget border. default value is "#DFDFDF" -->
+airrobe:arrowColor="#42ABC8"     <!-- the color of the widget drop down arrow icon. default value is "#42ABC8" -->
+airrobe:linkTextColor="#696969"  <!-- the color of the widget legal copy text. default value is "#696969" -->
+airrobe:switchColor="#42ABC8"    <!-- the color of the widget switch ON color. default value is "#42ABC8" -->
+airrobe:textColor="#232323"      <!-- the color of the widget text. default value is "#232323" -->
+```
+
+##### In class
 
 ```kotlin
 val optInWidget = findViewById<AirRobeOptIn>(R.id.opt_in_widget)
@@ -110,6 +130,13 @@ optInWidget.initialize(
     currency = String,                // optional - default is "AUD"
     locale = String                   // optional - default is "en-AU"
 )
+
+// Color configuration
+optInWidget.borderColor = Color.rgb(255, 255, 255)
+optInWidget.textColor = Color.rgb(255, 255, 255)
+optInWidget.switchColor = Color.rgb(255, 255, 255)
+optInWidget.arrowColor = Color.rgb(255, 255, 255)
+optInWidget.linkTextColor = Color.rgb(255, 255, 255)
 ```
 
 #### AirRobeMultiOptIn Initialization
@@ -121,10 +148,11 @@ _Note - The widget will not be displayed on the page if the following conditions
     - The items argument has an empty array as a value.
     - All the product categories passed in haven't been mapped to the categories in AirRobe. However, it will be displayed if any one of the categories have been mapped to AirRobe.
 
-##### Through XML
+##### In xml
 
 ```xml
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:airrobe="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -136,13 +164,29 @@ _Note - The widget will not be displayed on the page if the following conditions
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-##### Through Function
+##### Xml attributes
+```xml
+airrobe:borderColor="#DFDFDF"    <!-- the color of the widget border. default value is "#DFDFDF" -->
+airrobe:arrowColor="#42ABC8"     <!-- the color of the widget drop down arrow icon. default value is "#42ABC8" -->
+airrobe:linkTextColor="#696969"  <!-- the color of the widget legal copy text. default value is "#696969" -->
+airrobe:switchColor="#42ABC8"    <!-- the color of the widget switch ON color. default value is "#42ABC8" -->
+airrobe:textColor="#232323"      <!-- the color of the widget text. default value is "#232323" -->
+```
+
+##### In class
 
 ```kotlin
 val multiOptInWidget = findViewById<AirRobeMultiOptIn>(R.id.multi_opt_in_widget)
 multiOptInWidget.initialize(
     items = arrayOf(String), // required - e.g. arrayOf("Accessories", "Accessories/Beauty", "Accessories/Bags/Leather bags/Weekender/Handbags", "Accessories/Bags/Clutches/Bum Bags")
 )
+
+// Color configuration
+multiOptInWidget.borderColor = Color.rgb(255, 255, 255)
+multiOptInWidget.textColor = Color.rgb(255, 255, 255)
+multiOptInWidget.switchColor = Color.rgb(255, 255, 255)
+multiOptInWidget.arrowColor = Color.rgb(255, 255, 255)
+multiOptInWidget.linkTextColor = Color.rgb(255, 255, 255)
 ```
 
 #### AirRobeConfirmation Initialization
@@ -154,11 +198,11 @@ _Note - The widget will not be displayed on the page if the following conditions
     - If orderId or email are not passed in.
     - If the user doesn't opt in.
 
-##### Through XML
+##### In xml
 
 ```xml
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:airrobe="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -170,7 +214,15 @@ _Note - The widget will not be displayed on the page if the following conditions
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-##### Through Function
+##### Xml attributes
+```xml
+airrobe:borderColor="#DFDFDF"         <!-- the color of the widget border. default value is "#DFDFDF" -->
+airrobe:textColor="#232323"           <!-- the color of the widget text. default value is "#232323" -->
+airrobe:buttonBorderColor="#232323"   <!-- the color of the widget activate button border. default value is "#232323" -->
+airrobe:buttonTextColor="#FFFFFF"     <!-- the color of the widget activate button text. default value is "#232323" -->
+```
+
+##### In class
 
 ```kotlin
 val confirmationWidget = findViewById<AirRobeConfirmation>(R.id.confirmation_widget)
@@ -179,6 +231,12 @@ confirmationWidget.initialize(
     email = String,      // required
     fraudRisk = Boolean  // optional - fraud status for the confirmation widget, default value is false.
 )
+
+// Color configuration
+confirmationWidget.borderColor = Color.rgb(255, 255, 255)
+confirmationWidget.textColor = Color.rgb(255, 255, 255)
+confirmationWidget.buttonBorderColor = Color.rgb(255, 255, 255)
+confirmationWidget.buttonTextColor = Color.rgb(255, 255, 255)
 ```
 
 ##### Other Functionality
@@ -198,3 +256,5 @@ The [example project][example] demonstrates how to include AirRobeWidget UI comp
 [latest-release]: https://github.com/airrobe/widget-sdk-android/releases/latest
 [example]: https://github.com/airrobe/widget-sdk-android/tree/master/demo
 [android-studio]: https://developer.android.com/studio
+[okhttp-rules]: https://github.com/square/okhttp/#r8--proguard
+[here]: https://connector.airrobe.com/docs/android#android-getting_started-initialization

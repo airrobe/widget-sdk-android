@@ -14,13 +14,54 @@ internal val widgetInstance = AirRobeWidgetInstance
 object AirRobeWidget : AirRobeGetCategoryMappingListener {
     private const val TAG = "AirRobeWidget"
 
+    var borderColor: Int = 0
+        set(value) {
+            field = value
+            widgetInstance.borderColor = value
+        }
+    var textColor: Int = 0
+        set(value) {
+            field = value
+            widgetInstance.textColor = value
+        }
+    var switchColor: Int = 0
+        set(value) {
+            field = value
+            widgetInstance.switchColor = value
+        }
+    var arrowColor: Int = 0
+        set(value) {
+            field = value
+            widgetInstance.arrowColor = value
+        }
+    var linkTextColor: Int = 0
+        set(value) {
+            field = value
+            widgetInstance.linkTextColor = value
+        }
+    var buttonBorderColor: Int = 0
+        set(value) {
+            field = value
+            widgetInstance.buttonBorderColor = value
+        }
+    var buttonTextColor: Int = 0
+        set(value) {
+            field = value
+            widgetInstance.buttonTextColor = value
+        }
+    var separatorColor: Int = 0
+        set(value) {
+            field = value
+            widgetInstance.separatorColor = value
+        }
+
     fun initialize(
         config: AirRobeWidgetConfig
     ) {
         widgetInstance.setConfig(config)
         val getCategoryMappingController = AirRobeGetCategoryMappingController()
         getCategoryMappingController.airRobeGetCategoryMappingListener = this
-        getCategoryMappingController.start(config.appId)
+        getCategoryMappingController.start(config.appId, config.mode)
     }
 
     fun resetOptedIn(context: Context) {

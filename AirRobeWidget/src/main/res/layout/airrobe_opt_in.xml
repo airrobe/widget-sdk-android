@@ -6,6 +6,7 @@
     android:padding="10dp">
 
     <LinearLayout
+        android:id="@+id/ll_main_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -49,7 +50,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/airrobe_added_to"
-                            android:textColor="#000"
                             android:textSize="16sp"
                             android:singleLine="true"
                             android:layout_marginTop="3dp"
@@ -75,7 +75,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/airrobe_description"
-                            android:textColor="#000"
                             android:textSize="14sp"
                             android:singleLine="true"
                             android:layout_marginEnd="10dp"/>
@@ -84,7 +83,6 @@
                             android:id="@+id/tv_potential_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="#000"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:singleLine="true"
@@ -96,7 +94,7 @@
                             style="?android:attr/progressBarPadding"
                             android:layout_width="16dp"
                             android:layout_height="16dp"
-                            android:indeterminateTint="#333"
+                            android:indeterminateTint="@color/airrobe_widget_default_text_color"
                             android:visibility="gone" />
 
                     </LinearLayout>
@@ -118,7 +116,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/airrobe_detailed_description"
-            android:textColor="#000"
             android:textSize="14sp"
             android:layout_marginTop="5dp"/>
 
@@ -129,7 +126,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/airrobe_extra_info"
-        android:textColor="#000"
         android:textSize="14sp"
         android:layout_marginTop="5dp"/>
 
