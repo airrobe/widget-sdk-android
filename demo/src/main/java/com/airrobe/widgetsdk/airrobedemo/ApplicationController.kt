@@ -24,7 +24,7 @@ class ApplicationController : Application() {
 //        AirRobeWidget.arrowColor = Color.GREEN
 //        AirRobeWidget.textColor = Color.YELLOW
 //        AirRobeWidget.switchColor = Color.CYAN
-//        AirRobeWidget.buttonBackgroundColor = Color.LTGRAY
+//        AirRobeWidget.buttonBorderColor = Color.LTGRAY
 //        AirRobeWidget.buttonTextColor = Color.MAGENTA
 //        AirRobeWidget.separatorColor = Color.RED
 //        AirRobeWidget.linkTextColor = Color.GRAY

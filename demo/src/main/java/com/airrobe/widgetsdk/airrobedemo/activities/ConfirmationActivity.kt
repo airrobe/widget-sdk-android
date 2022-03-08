@@ -18,7 +18,7 @@ class ConfirmationActivity : AppCompatActivity() {
         // Way to set widget colors
 //        confirmationWidget.borderColor = Color.BLUE
 //        confirmationWidget.textColor = Color.YELLOW
-//        confirmationWidget.buttonBackgroundColor = Color.GREEN
+//        confirmationWidget.buttonBorderColor = Color.GREEN
 //        confirmationWidget.buttonTextColor = Color.GRAY
     }
 }

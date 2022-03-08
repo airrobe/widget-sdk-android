@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="AirRobeWidget/src/main/res/drawable/activate_button_background.xml" value="0.2" />
         <entry key="AirRobeWidget/src/main/res/drawable/confirmation_background.xml" value="0.228125" />
         <entry key="AirRobeWidget/src/main/res/drawable/dialog_background.xml" value="0.228125" />
         <entry key="AirRobeWidget/src/main/res/drawable/ic_airrobe_logo.xml" value="0.36354166666666665" />

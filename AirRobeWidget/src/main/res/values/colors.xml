@@ -6,7 +6,7 @@
     <color name="airrobe_widget_default_switch_color">#42ABC8</color>
     <color name="airrobe_widget_default_arrow_color">#42ABC8</color>
     <color name="airrobe_widget_default_link_text_color">#696969</color>
-    <color name="airrobe_widget_default_button_background_color">#232323</color>
-    <color name="airrobe_widget_default_button_text_color">#FFFFFF</color>
+    <color name="airrobe_widget_default_button_border_color">#232323</color>
+    <color name="airrobe_widget_default_button_text_color">#232323</color>
     <color name="airrobe_widget_default_separator_color">#DFDFDF</color>
 </resources>

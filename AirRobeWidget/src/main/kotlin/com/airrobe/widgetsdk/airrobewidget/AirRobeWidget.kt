@@ -39,10 +39,10 @@ object AirRobeWidget : AirRobeGetCategoryMappingListener {
             field = value
             widgetInstance.linkTextColor = value
         }
-    var buttonBackgroundColor: Int = 0
+    var buttonBorderColor: Int = 0
         set(value) {
             field = value
-            widgetInstance.buttonBackgroundColor = value
+            widgetInstance.buttonBorderColor = value
         }
     var buttonTextColor: Int = 0
         set(value) {

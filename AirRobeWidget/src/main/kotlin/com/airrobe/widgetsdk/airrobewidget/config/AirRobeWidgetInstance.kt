@@ -12,7 +12,7 @@ internal object AirRobeWidgetInstance {
     var switchColor: Int = 0
     var arrowColor: Int = 0
     var linkTextColor: Int = 0
-    var buttonBackgroundColor: Int = 0
+    var buttonBorderColor: Int = 0
     var buttonTextColor: Int = 0
     var separatorColor: Int = 0
 
