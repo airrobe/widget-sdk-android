@@ -66,14 +66,14 @@ AirRobeWidget.initialize(
 
 ##### Color configuration
 ```kotlin
-AirRobeWidget.borderColor = Color.rgb(255, 255, 255) // the color of the widget border. default value is "#DFDFDF"
-AirRobeWidget.arrowColor = Color.rgb(255, 255, 255) // the color of the widget drop down arrow icon. default value is "#42ABC8"
-AirRobeWidget.textColor = Color.rgb(255, 255, 255) // the color of the widget text. default value is "#232323"
-AirRobeWidget.switchColor = Color.rgb(255, 255, 255) // the color of the widget switch ON color. default value is "#42ABC8"
-AirRobeWidget.buttonBorderColor = Color.rgb(255, 255, 255) // the color of the widget activate button border. default value is "#232323"
-AirRobeWidget.buttonTextColor = Color.rgb(255, 255, 255) // the color of the widget activate button text. default value is "#232323"
-AirRobeWidget.separatorColor = Color.rgb(255, 255, 255) // the color of the learn more dialog separators. default value is "#DFDFDF"
-AirRobeWidget.linkTextColor = Color.rgb(255, 255, 255) // the color of the widget legal copy text. default value is "#696969"
+AirRobeWidget.borderColor = Color.rgb(255, 255, 255)         // the color of the widget border. default value is "#DFDFDF"
+AirRobeWidget.arrowColor = Color.rgb(255, 255, 255)          // the color of the widget drop down arrow icon. default value is "#42ABC8"
+AirRobeWidget.textColor = Color.rgb(255, 255, 255)           // the color of the widget text. default value is "#232323"
+AirRobeWidget.switchColor = Color.rgb(255, 255, 255)         // the color of the widget switch ON color. default value is "#42ABC8"
+AirRobeWidget.buttonBorderColor = Color.rgb(255, 255, 255)   // the color of the widget activate button border. default value is "#232323"
+AirRobeWidget.buttonTextColor = Color.rgb(255, 255, 255)     // the color of the widget activate button text. default value is "#232323"
+AirRobeWidget.separatorColor = Color.rgb(255, 255, 255)      // the color of the learn more dialog separators. default value is "#DFDFDF"
+AirRobeWidget.linkTextColor = Color.rgb(255, 255, 255)       // the color of the widget legal copy text. default value is "#696969"
 ```
 
 > **Note:**
@@ -108,11 +108,11 @@ _Note: The widget will not be displayed unless the product is AirRobe-eligible. 
 
 ##### Xml attributes
 ```xml
-airrobe:borderColor="#DFDFDF" <!-- the color of the widget border. default value is "#DFDFDF" -->
-airrobe:arrowColor="#42ABC8" <!-- the color of the widget drop down arrow icon. default value is "#42ABC8" -->
-airrobe:linkTextColor="#696969" <!-- the color of the widget legal copy text. default value is "#696969" -->
-airrobe:switchColor="#42ABC8" <!-- the color of the widget switch ON color. default value is "#42ABC8" -->
-airrobe:textColor="#232323" <!-- the color of the widget text. default value is "#232323" -->
+airrobe:borderColor="#DFDFDF"    <!-- the color of the widget border. default value is "#DFDFDF" -->
+airrobe:arrowColor="#42ABC8"     <!-- the color of the widget drop down arrow icon. default value is "#42ABC8" -->
+airrobe:linkTextColor="#696969"  <!-- the color of the widget legal copy text. default value is "#696969" -->
+airrobe:switchColor="#42ABC8"    <!-- the color of the widget switch ON color. default value is "#42ABC8" -->
+airrobe:textColor="#232323"      <!-- the color of the widget text. default value is "#232323" -->
 ```
 
 ##### In class
@@ -166,11 +166,11 @@ _Note - The widget will not be displayed on the page if the following conditions
 
 ##### Xml attributes
 ```xml
-airrobe:borderColor="#DFDFDF" <!-- the color of the widget border. default value is "#DFDFDF" -->
-airrobe:arrowColor="#42ABC8" <!-- the color of the widget drop down arrow icon. default value is "#42ABC8" -->
-airrobe:linkTextColor="#696969" <!-- the color of the widget legal copy text. default value is "#696969" -->
-airrobe:switchColor="#42ABC8" <!-- the color of the widget switch ON color. default value is "#42ABC8" -->
-airrobe:textColor="#232323" <!-- the color of the widget text. default value is "#232323" -->
+airrobe:borderColor="#DFDFDF"    <!-- the color of the widget border. default value is "#DFDFDF" -->
+airrobe:arrowColor="#42ABC8"     <!-- the color of the widget drop down arrow icon. default value is "#42ABC8" -->
+airrobe:linkTextColor="#696969"  <!-- the color of the widget legal copy text. default value is "#696969" -->
+airrobe:switchColor="#42ABC8"    <!-- the color of the widget switch ON color. default value is "#42ABC8" -->
+airrobe:textColor="#232323"      <!-- the color of the widget text. default value is "#232323" -->
 ```
 
 ##### In class
@@ -216,10 +216,10 @@ _Note - The widget will not be displayed on the page if the following conditions
 
 ##### Xml attributes
 ```xml
-airrobe:borderColor="#DFDFDF" <!-- the color of the widget border. default value is "#DFDFDF" -->
-airrobe:textColor="#232323" <!-- the color of the widget text. default value is "#232323" -->
-airrobe:buttonBorderColor="#232323" <!-- the color of the widget activate button border. default value is "#232323" -->
-airrobe:buttonTextColor="#FFFFFF" /> <!-- the color of the widget activate button text. default value is "#232323" -->
+airrobe:borderColor="#DFDFDF"         <!-- the color of the widget border. default value is "#DFDFDF" -->
+airrobe:textColor="#232323"           <!-- the color of the widget text. default value is "#232323" -->
+airrobe:buttonBorderColor="#232323"   <!-- the color of the widget activate button border. default value is "#232323" -->
+airrobe:buttonTextColor="#FFFFFF"     <!-- the color of the widget activate button text. default value is "#232323" -->
 ```
 
 ##### In class
