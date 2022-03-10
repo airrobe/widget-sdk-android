@@ -1,9 +1,9 @@
 package com.airrobe.widgetsdk.airrobewidget.service.models
 
-data class EmailCheckResponseModel(
+internal data class EmailCheckResponseModel(
     var data: EmailCheckDataModel
 )
 
-data class EmailCheckDataModel(
+internal data class EmailCheckDataModel(
     var isCustomer: Boolean
 )
