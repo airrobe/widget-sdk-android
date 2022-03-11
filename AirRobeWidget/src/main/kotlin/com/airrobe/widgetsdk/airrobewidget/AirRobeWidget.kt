@@ -11,7 +11,7 @@ import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 
 internal val widgetInstance = AirRobeWidgetInstance
 
-object AirRobeWidget : AirRobeGetCategoryMappingListener {
+object AirRobeWidget {
     private const val TAG = "AirRobeWidget"
 
     var borderColor: Int = 0
@@ -60,7 +60,15 @@ object AirRobeWidget : AirRobeGetCategoryMappingListener {
     ) {
         widgetInstance.setConfig(config)
         val getCategoryMappingController = AirRobeGetCategoryMappingController()
-        getCategoryMappingController.airRobeGetCategoryMappingListener = this
+        getCategoryMappingController.airRobeGetCategoryMappingListener = object : AirRobeGetCategoryMappingListener {
+            override fun onSuccessGetCategoryMappingApi(categoryModel: CategoryModel) {
+                widgetInstance.setCategoryModel(categoryModel)
+            }
+
+            override fun onFailedGetCategoryMappingApi(error: String?) {
+                Log.e(TAG, error ?: "Email Check Api Failed")
+            }
+        }
         getCategoryMappingController.start(config.appId, config.mode)
     }
 
@@ -70,13 +78,5 @@ object AirRobeWidget : AirRobeGetCategoryMappingListener {
 
     fun orderOptedIn(context: Context): Boolean {
         return AirRobeSharedPreferenceManager.getOrderOptedIn(context)
-    }
-
-    override fun onSuccessGetCategoryMappingApi(categoryModel: CategoryModel) {
-        widgetInstance.setCategoryModel(categoryModel)
-    }
-
-    override fun onFailedGetCategoryMappingApi(error: String?) {
-        Log.e(TAG, error ?: "Email Check Api Failed")
     }
 }

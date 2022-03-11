@@ -28,7 +28,7 @@ import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 @Suppress("DEPRECATION")
 class AirRobeMultiOptIn @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr), AirRobeWidgetInstance.InstanceChangeListener {
+) : LinearLayout(context, attrs, defStyleAttr) {
     private var binding: AirrobeMultiOptInBinding
 
     companion object {
@@ -112,7 +112,20 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         inflate(context, R.layout.airrobe_multi_opt_in, this)
         binding = AirrobeMultiOptInBinding.bind(this)
 
-        widgetInstance.setInstanceChangeListener(this)
+        val listener = object : AirRobeWidgetInstance.InstanceChangeListener {
+            override fun onCategoryModelChange() {
+                post {
+                    initializeOptInWidget()
+                }
+            }
+
+            override fun onConfigChange() {
+                if (widgetInstance.getConfig() != null) {
+                    initialize()
+                }
+            }
+        }
+        widgetInstance.setInstanceChangeListener(listener)
         if (widgetInstance.getConfig() != null) {
             initialize()
         }
@@ -312,18 +325,6 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             visibility = GONE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
             Log.d(TAG, "Category is not eligible")
-        }
-    }
-
-    override fun onCategoryModelChange() {
-        post {
-            initializeOptInWidget()
-        }
-    }
-
-    override fun onConfigChange() {
-        if (widgetInstance.getConfig() != null) {
-            initialize()
         }
     }
 }

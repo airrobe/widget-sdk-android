@@ -30,7 +30,7 @@ import com.airrobe.widgetsdk.airrobewidget.widgetInstance
 @Suppress("DEPRECATION")
 class AirRobeOptIn @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr), AirRobeWidgetInstance.InstanceChangeListener, AirRobePriceEngineListener {
+) : LinearLayout(context, attrs, defStyleAttr) {
     private var binding: AirrobeOptInBinding
 
     companion object {
@@ -124,7 +124,20 @@ class AirRobeOptIn @JvmOverloads constructor(
         inflate(context, R.layout.airrobe_opt_in, this)
         binding = AirrobeOptInBinding.bind(this)
 
-        widgetInstance.setInstanceChangeListener(this)
+        val listener = object : AirRobeWidgetInstance.InstanceChangeListener {
+            override fun onCategoryModelChange() {
+                post {
+                    initializeOptInWidget()
+                }
+            }
+
+            override fun onConfigChange() {
+                if (widgetInstance.getConfig() != null) {
+                    initialize()
+                }
+            }
+        }
+        widgetInstance.setInstanceChangeListener(listener)
         if (widgetInstance.getConfig() != null) {
             initialize()
         }
@@ -357,47 +370,35 @@ class AirRobeOptIn @JvmOverloads constructor(
         binding.priceLoading.animate()
         val rrp = if (originalFullPriceCents == AirRobeConstants.FLOAT_NULL_MAGIC_VALUE) rrpCents else originalFullPriceCents
         val priceEngineController = AirRobePriceEngineController()
-        priceEngineController.airRobePriceEngineListener = this
+        priceEngineController.airRobePriceEngineListener = object : AirRobePriceEngineListener {
+            override fun onSuccessPriceEngineApi(resaleValue: Int?) {
+                binding.priceLoading.visibility = GONE
+                if (resaleValue == null) {
+                    Log.e(TAG, "Resale price is null")
+                    binding.tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value, fallbackResalePrice())
+                    checkIfPotentialValueTextCutOff(fallbackResalePrice())
+                } else {
+                    binding.tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value, resaleValue.toString())
+                    checkIfPotentialValueTextCutOff(resaleValue.toString())
+                }
+            }
+
+            override fun onFailedPriceEngineApi(error: String?) {
+                binding.priceLoading.visibility = GONE
+                if (error.isNullOrEmpty()) {
+                    Log.e(TAG, "PriceEngine Api failed")
+                } else {
+                    Log.e(TAG, error)
+                }
+                binding.tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value, fallbackResalePrice())
+                checkIfPotentialValueTextCutOff(fallbackResalePrice())
+            }
+        }
         priceEngineController.start(priceCents, if (rrp == AirRobeConstants.FLOAT_NULL_MAGIC_VALUE) null else rrp , category, brand, material)
-    }
-
-    override fun onSuccessPriceEngineApi(resaleValue: Int?) {
-        binding.priceLoading.visibility = GONE
-        if (resaleValue == null) {
-            Log.e(TAG, "Resale price is null")
-            binding.tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value, fallbackResalePrice())
-            checkIfPotentialValueTextCutOff(fallbackResalePrice())
-        } else {
-            binding.tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value, resaleValue.toString())
-            checkIfPotentialValueTextCutOff(resaleValue.toString())
-        }
-    }
-
-    override fun onFailedPriceEngineApi(error: String?) {
-        binding.priceLoading.visibility = GONE
-        if (error.isNullOrEmpty()) {
-            Log.e(TAG, "PriceEngine Api failed")
-        } else {
-            Log.e(TAG, error)
-        }
-        binding.tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value, fallbackResalePrice())
-        checkIfPotentialValueTextCutOff(fallbackResalePrice())
     }
 
     private fun fallbackResalePrice(): String {
         val resaleValue = (priceCents * 65) / 100
         return String.format("%.2f", resaleValue)
-    }
-
-    override fun onCategoryModelChange() {
-        post {
-            initializeOptInWidget()
-        }
-    }
-
-    override fun onConfigChange() {
-        if (widgetInstance.getConfig() != null) {
-            initialize()
-        }
     }
 }

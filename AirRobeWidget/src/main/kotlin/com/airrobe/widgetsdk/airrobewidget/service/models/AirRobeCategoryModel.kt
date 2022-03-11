@@ -1,6 +1,6 @@
 package com.airrobe.widgetsdk.airrobewidget.service.models
 
-data class CategoryModel (
+internal data class CategoryModel (
     var data: DataModel,
 ) {
     fun checkCategoryEligible(items: ArrayList<String>): String? {
@@ -37,15 +37,15 @@ data class CategoryModel (
     }
 }
 
-data class DataModel(
+internal data class DataModel(
     var shop: ShopModel
 )
 
-data class ShopModel(
+internal data class ShopModel(
     var categoryMappings: MutableList<CategoryMapping>
 )
 
-data class CategoryMapping(
+internal data class CategoryMapping(
     var from: String,
     var to: String?,
     var excluded: Boolean
