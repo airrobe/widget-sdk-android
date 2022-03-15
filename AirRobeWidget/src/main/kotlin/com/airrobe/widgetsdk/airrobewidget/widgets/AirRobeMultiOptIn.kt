@@ -119,14 +119,18 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 }
             }
 
+            override fun onMinPriceThresholdsChange() {
+
+            }
+
             override fun onConfigChange() {
-                if (widgetInstance.getConfig() != null) {
+                if (widgetInstance.configuration != null) {
                     initialize()
                 }
             }
         }
-        widgetInstance.setInstanceChangeListener(listener)
-        if (widgetInstance.getConfig() != null) {
+        widgetInstance.changeListener = listener
+        if (widgetInstance.configuration != null) {
             initialize()
         }
 
@@ -277,7 +281,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
     }
 
     private fun setExtraInfoText() {
-        val extraInfoText = context.resources.getString(R.string.airrobe_extra_info).replace("Privacy Policy", "<a href='${widgetInstance.getConfig()?.privacyPolicyURL}'>Privacy Policy</a>")
+        val extraInfoText = context.resources.getString(R.string.airrobe_extra_info).replace("Privacy Policy", "<a href='${widgetInstance.configuration?.privacyPolicyURL}'>Privacy Policy</a>")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             binding.tvExtraInfo.text = Html.fromHtml(extraInfoText, Html.FROM_HTML_MODE_COMPACT)
         } else {
@@ -294,13 +298,13 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
     }
 
     private fun initializeOptInWidget() {
-        if (widgetInstance.getConfig() == null) {
+        if (widgetInstance.configuration == null) {
             Log.e(TAG, "Widget sdk is not initialized yet")
             visibility = GONE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
             return
         }
-        if (widgetInstance.getCategoryModel() == null) {
+        if (widgetInstance.categoryModel == null) {
             Log.e(TAG, "Category Mapping Info is not loaded")
             visibility = GONE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
@@ -317,7 +321,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         for (item in items!!) {
             newItems.add(item.toString())
         }
-        val to = widgetInstance.getCategoryModel()!!.checkCategoryEligible(newItems)
+        val to = widgetInstance.categoryModel!!.checkCategoryEligible(newItems)
         if (to != null) {
             visibility = VISIBLE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, AirRobeSharedPreferenceManager.getOptedIn(context))

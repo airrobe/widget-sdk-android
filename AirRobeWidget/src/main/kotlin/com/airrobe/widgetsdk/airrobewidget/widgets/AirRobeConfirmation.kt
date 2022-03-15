@@ -98,11 +98,15 @@ class AirRobeConfirmation @JvmOverloads constructor(
                 }
             }
 
+            override fun onMinPriceThresholdsChange() {
+
+            }
+
             override fun onConfigChange() {
                 initialize()
             }
         }
-        widgetInstance.setInstanceChangeListener(listener)
+        widgetInstance.changeListener = listener
         initialize()
         setupAttributes(attrs)
     }
@@ -172,11 +176,11 @@ class AirRobeConfirmation @JvmOverloads constructor(
     }
 
     private fun initialize() {
-        if (widgetInstance.getConfig() != null) {
+        if (widgetInstance.configuration != null) {
             binding.tvAction.setOnTouchListener { v, event ->
                 if (AirRobeAppUtils.touchAnimator(context, v, event)) {
                     val intent = Intent(Intent.ACTION_VIEW)
-                    intent.data = Uri.parse(AirRobeConstants.ORDER_ACTIVATE_BASE_URL + widgetInstance.getConfig()?.appId + "-" + orderId)
+                    intent.data = Uri.parse(AirRobeConstants.ORDER_ACTIVATE_BASE_URL + widgetInstance.configuration?.appId + "-" + orderId)
                     context.startActivity(intent)
                 }
                 true
@@ -196,12 +200,12 @@ class AirRobeConfirmation @JvmOverloads constructor(
     }
 
     private fun initializeConfirmationWidget() {
-        if (widgetInstance.getConfig() == null) {
+        if (widgetInstance.configuration == null) {
             Log.e(TAG, "Widget sdk is not initialized yet")
             visibility = GONE
             return
         }
-        if (widgetInstance.getCategoryModel() == null) {
+        if (widgetInstance.categoryModel == null) {
             Log.e(TAG, "Category Mapping Info is not loaded")
             visibility = GONE
             return

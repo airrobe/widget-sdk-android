@@ -1,7 +1,7 @@
 package com.airrobe.widgetsdk.airrobewidget.service.models
 
-internal data class CategoryModel (
-    var data: DataModel,
+internal data class AirRobeCategoryModel (
+    var data: AirRobeCategoryDataModel
 ) {
     fun checkCategoryEligible(items: ArrayList<String>): String? {
         val eligibleItem = items.firstOrNull { bestCategoryMapping(factorize(it)) != null }
@@ -37,15 +37,15 @@ internal data class CategoryModel (
     }
 }
 
-internal data class DataModel(
-    var shop: ShopModel
+internal data class AirRobeCategoryDataModel(
+    var shop: AirRobeCategoryShopModel
 )
 
-internal data class ShopModel(
-    var categoryMappings: MutableList<CategoryMapping>
+internal data class AirRobeCategoryShopModel(
+    var categoryMappings: MutableList<AirRobeCategoryMapping>
 )
 
-internal data class CategoryMapping(
+internal data class AirRobeCategoryMapping(
     var from: String,
     var to: String?,
     var excluded: Boolean

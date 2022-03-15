@@ -6,7 +6,7 @@ import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeGetCategoryMappingController
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeGetCategoryMappingListener
-import com.airrobe.widgetsdk.airrobewidget.service.models.CategoryModel
+import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeCategoryModel
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 
 internal val widgetInstance = AirRobeWidgetInstance
@@ -58,11 +58,11 @@ object AirRobeWidget {
     fun initialize(
         config: AirRobeWidgetConfig
     ) {
-        widgetInstance.setConfig(config)
+        widgetInstance.configuration = config
         val getCategoryMappingController = AirRobeGetCategoryMappingController()
         getCategoryMappingController.airRobeGetCategoryMappingListener = object : AirRobeGetCategoryMappingListener {
-            override fun onSuccessGetCategoryMappingApi(categoryModel: CategoryModel) {
-                widgetInstance.setCategoryModel(categoryModel)
+            override fun onSuccessGetCategoryMappingApi(categoryModel: AirRobeCategoryModel) {
+                widgetInstance.categoryModel = categoryModel
             }
 
             override fun onFailedGetCategoryMappingApi(error: String?) {

@@ -30,4 +30,12 @@ internal object AirRobeAppUtils {
         }
         return false
     }
+
+    fun isBelowPriceThreshold(
+        department: String,
+        productPriceCents: Float? = null
+    ) : Boolean {
+        if (productPriceCents == null) return false
+        return true
+    }
 }

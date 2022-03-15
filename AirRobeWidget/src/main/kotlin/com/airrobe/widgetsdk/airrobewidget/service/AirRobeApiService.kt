@@ -45,7 +45,7 @@ internal object AirRobeApiService {
         httpClient.addInterceptor(UserAgentInterceptor())
     }
 
-    val CATEGORY_MAPPING_SERVICE_PRODUCTION: AirRobeApiInterface by lazy {
+    val MAIN_SERVICE_PRODUCTION: AirRobeApiInterface by lazy {
         Retrofit
             .Builder()
             .baseUrl(AirRobeConstants.AIRROBE_CONNECTOR_PRODUCTION)
@@ -55,7 +55,7 @@ internal object AirRobeApiService {
             .create(AirRobeApiInterface::class.java)
     }
 
-    val CATEGORY_MAPPING_SERVICE_SANDBOX: AirRobeApiInterface by lazy {
+    val MAIN_SERVICE_SANDBOX: AirRobeApiInterface by lazy {
         Retrofit
             .Builder()
             .baseUrl(AirRobeConstants.AIRROBE_CONNECTOR_SANDBOX)
