@@ -37,6 +37,16 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.6'
 }
 ```
+Also If not use `viewBinding` yet, we should include that as well.
+```gradle
+android {
+    ...
+    buildFeatures {
+        viewBinding true
+    }
+    ...
+}
+```
 
 You will need to keep track of the library version manually, and when you want to upgrade to a more recent version, you will need to manually download the library and replace it.
 
