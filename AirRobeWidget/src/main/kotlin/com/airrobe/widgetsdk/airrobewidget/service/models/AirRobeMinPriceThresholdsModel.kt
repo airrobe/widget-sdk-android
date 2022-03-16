@@ -13,5 +13,8 @@ internal data class AirRobeMinPriceShopModel(
 )
 
 internal data class AirRobeMinPriceThresholds(
-    var minimumPriceCents: Float
+    var minimumPriceCents: Float,
+    var id: Int,
+    var department: String,
+    var default: Boolean
 )

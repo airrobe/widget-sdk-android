@@ -10,7 +10,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-internal class AirRobeMinPriceThresholdController : Callback<String> {
+internal class AirRobeMinPriceThresholdsController : Callback<String> {
     var airRobeMinPriceThresholdListener: AirRobeMinPriceThresholdListener? = null
     fun start(mode: Mode) {
         val retrofit = if (mode == Mode.PRODUCTION) AirRobeApiService.MAIN_SERVICE_PRODUCTION else AirRobeApiService.MAIN_SERVICE_SANDBOX
@@ -37,14 +37,14 @@ internal class AirRobeMinPriceThresholdController : Callback<String> {
         if (response.isSuccessful) {
             val gson = Gson()
             val result = gson.fromJson(response.body(), AirRobeMinPriceThresholdsModel::class.java)
-            airRobeMinPriceThresholdListener?.onSuccessMinPriceThresholdApi(result)
+            airRobeMinPriceThresholdListener?.onSuccessMinPriceThresholdsApi(result)
         } else {
             val text = response.errorBody()?.string()
-            airRobeMinPriceThresholdListener?.onFailedMinPriceThresholdApi(text)
+            airRobeMinPriceThresholdListener?.onFailedMinPriceThresholdsApi(text)
         }
     }
 
     override fun onFailure(call: Call<String>, t: Throwable) {
-        airRobeMinPriceThresholdListener?.onFailedMinPriceThresholdApi()
+        airRobeMinPriceThresholdListener?.onFailedMinPriceThresholdsApi()
     }
 }
