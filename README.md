@@ -12,23 +12,39 @@ The AirRobeWidget Android SDK provides Circular Wardrobe widgets for your native
 
 Currently, we do not support any other installation methods, so for now the AirRobe SDK has to be manually integrated into your project.
 
-#### GitHub Release
-
-Download the [latest release][latest-release] source zip from GitHub and unzip into to any temporary directory outside your project directory.
-
 #### Project Integration
 
-Now that the AirRobeWidget SDK resides in your temporary directory, you can add this SDK as a module to your project with the following steps:
+- Download the [latest release's aar][latest-release-aar] from GitHub and copy it into to `your project -> app -> lib` directory.
+- Rename aar file into `AirRobeWidget.aar` for your convenience, but not required.
+- Add the imported aar to your `build.gradle` in your app level.
 
-- Open your project on [Android Studio][android-studio] IDE.
-- Import the module by going to `File -> New -> Import Module...`
-- Choose the library named `AirRobeWidget` inside the downloaded repo by manually inputting the path or through the file browser window showing by tapping the `Browse` icon.
-- Add the imported module to your `build.gradle`.
+> **Note:**
+> Since we don't have the library published on Maven yet, you should include all used libraries in our library to your `build.gradle`.
 
 ```gradle
 dependencies {
     // Other dependencies are here
-    implementation project(':AirRobeWidget')
+    implementation files("libs/AirRobeWidget.aar")
+
+    // We should include below used libraries.
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.preference:preference-ktx:1.2.0'
+
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.6'
+}
+```
+Also If not use `viewBinding` yet, we should include that as well.
+```gradle
+android {
+    ...
+    buildFeatures {
+        viewBinding true
+    }
+    ...
 }
 ```
 
@@ -253,7 +269,7 @@ confirmationWidget.buttonTextColor = Color.rgb(255, 255, 255)
 
 The [example project][example] demonstrates how to include AirRobeWidget UI components in a sample application.
 
-[latest-release]: https://github.com/airrobe/widget-sdk-android/releases/latest
+[latest-release-aar]: https://github.com/airrobe/widget-sdk-android/tree/master/AirRobeWidget/releases
 [example]: https://github.com/airrobe/widget-sdk-android/tree/master/demo
 [android-studio]: https://developer.android.com/studio
 [okhttp-rules]: https://github.com/square/okhttp/#r8--proguard
