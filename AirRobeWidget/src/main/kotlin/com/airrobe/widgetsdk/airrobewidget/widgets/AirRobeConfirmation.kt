@@ -90,16 +90,13 @@ class AirRobeConfirmation @JvmOverloads constructor(
     init {
         inflate(context, R.layout.airrobe_confirmation, this)
         binding = AirrobeConfirmationBinding.bind(this)
+        visibility = GONE
 
         val listener = object : AirRobeWidgetInstance.InstanceChangeListener {
-            override fun onCategoryModelChange() {
+            override fun onShopModelChange() {
                 post {
                     initializeConfirmationWidget()
                 }
-            }
-
-            override fun onMinPriceThresholdsChange() {
-
             }
 
             override fun onConfigChange() {
@@ -205,7 +202,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
             visibility = GONE
             return
         }
-        if (widgetInstance.categoryModel == null) {
+        if (widgetInstance.shopModel == null) {
             Log.e(TAG, "Category Mapping Info is not loaded")
             visibility = GONE
             return

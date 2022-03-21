@@ -123,16 +123,13 @@ class AirRobeOptIn @JvmOverloads constructor(
     init {
         inflate(context, R.layout.airrobe_opt_in, this)
         binding = AirrobeOptInBinding.bind(this)
+        visibility = GONE
 
         val listener = object : AirRobeWidgetInstance.InstanceChangeListener {
-            override fun onCategoryModelChange() {
+            override fun onShopModelChange() {
                 post {
                     initializeOptInWidget()
                 }
-            }
-
-            override fun onMinPriceThresholdsChange() {
-
             }
 
             override fun onConfigChange() {
@@ -332,7 +329,7 @@ class AirRobeOptIn @JvmOverloads constructor(
             visibility = GONE
             return
         }
-        if (widgetInstance.categoryModel == null) {
+        if (widgetInstance.shopModel == null) {
             Log.e(TAG, "Category Mapping Info is not loaded")
             visibility = GONE
             return
@@ -342,7 +339,7 @@ class AirRobeOptIn @JvmOverloads constructor(
             visibility = GONE
             return
         }
-        val to = widgetInstance.categoryModel!!.checkCategoryEligible(arrayListOf(category!!))
+        val to = widgetInstance.shopModel!!.checkCategoryEligible(arrayListOf(category!!))
         if (to != null) {
             visibility = VISIBLE
             checkIfPotentialValueTextCutOff()

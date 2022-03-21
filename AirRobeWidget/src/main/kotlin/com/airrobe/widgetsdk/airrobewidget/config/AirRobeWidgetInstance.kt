@@ -1,18 +1,12 @@
 package com.airrobe.widgetsdk.airrobewidget.config
 
-import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeCategoryModel
-import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeMinPriceThresholdsModel
+import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeGetShoppingDataModel
 
 internal object AirRobeWidgetInstance {
-    var categoryModel: AirRobeCategoryModel? = null
+    var shopModel: AirRobeGetShoppingDataModel? = null
         set(value) {
             field = value
-            changeListener?.onCategoryModelChange()
-        }
-    var minPriceThresholdsModel: AirRobeMinPriceThresholdsModel? = null
-        set(value) {
-            field = value
-            changeListener?.onMinPriceThresholdsChange()
+            changeListener?.onShopModelChange()
         }
     var configuration: AirRobeWidgetConfig? = null
         set(value) {
@@ -31,8 +25,7 @@ internal object AirRobeWidgetInstance {
     var separatorColor: Int = 0
 
     interface InstanceChangeListener {
-        fun onCategoryModelChange()
-        fun onMinPriceThresholdsChange()
+        fun onShopModelChange()
         fun onConfigChange()
     }
 }

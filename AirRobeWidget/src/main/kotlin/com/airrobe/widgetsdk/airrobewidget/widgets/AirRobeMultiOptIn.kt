@@ -111,16 +111,13 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
     init {
         inflate(context, R.layout.airrobe_multi_opt_in, this)
         binding = AirrobeMultiOptInBinding.bind(this)
+        visibility = GONE
 
         val listener = object : AirRobeWidgetInstance.InstanceChangeListener {
-            override fun onCategoryModelChange() {
+            override fun onShopModelChange() {
                 post {
                     initializeOptInWidget()
                 }
-            }
-
-            override fun onMinPriceThresholdsChange() {
-
             }
 
             override fun onConfigChange() {
@@ -304,7 +301,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
             return
         }
-        if (widgetInstance.categoryModel == null) {
+        if (widgetInstance.shopModel == null) {
             Log.e(TAG, "Category Mapping Info is not loaded")
             visibility = GONE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
@@ -321,7 +318,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         for (item in items!!) {
             newItems.add(item.toString())
         }
-        val to = widgetInstance.categoryModel!!.checkCategoryEligible(newItems)
+        val to = widgetInstance.shopModel!!.checkCategoryEligible(newItems)
         if (to != null) {
             visibility = VISIBLE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, AirRobeSharedPreferenceManager.getOptedIn(context))
