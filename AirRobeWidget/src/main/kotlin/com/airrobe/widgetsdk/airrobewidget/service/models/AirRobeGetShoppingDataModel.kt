@@ -36,11 +36,15 @@ internal data class AirRobeGetShoppingDataModel (
         return null
     }
 
-    fun isBelowPriceThreshold(department: String, price: Float) : Boolean {
+    fun isBelowPriceThreshold(department: String?, price: Float) : Boolean {
+        if (department.isNullOrEmpty()) return false
         val applicablePriceThreshold = data.shop.minimumPriceThresholds.firstOrNull {
             it.department?.lowercase() == department.lowercase()
+        } ?: data.shop.minimumPriceThresholds.firstOrNull {
+            it.default
         } ?: return false
-        return price < applicablePriceThreshold.minimumPriceCents
+
+        return price < (applicablePriceThreshold.minimumPriceCents / 100)
     }
 }
 

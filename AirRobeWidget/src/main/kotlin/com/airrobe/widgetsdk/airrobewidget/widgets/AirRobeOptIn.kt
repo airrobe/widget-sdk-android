@@ -341,9 +341,14 @@ class AirRobeOptIn @JvmOverloads constructor(
         }
         val to = widgetInstance.shopModel!!.checkCategoryEligible(arrayListOf(category!!))
         if (to != null) {
-            visibility = VISIBLE
-            checkIfPotentialValueTextCutOff()
-            callPriceEngine(to)
+            if (widgetInstance.shopModel!!.isBelowPriceThreshold(department, priceCents)) {
+                visibility = GONE
+                Log.d(TAG, "Below price threshold")
+            } else {
+                visibility = VISIBLE
+                checkIfPotentialValueTextCutOff()
+                callPriceEngine(to)
+            }
         } else {
             visibility = GONE
             Log.d(TAG, "Category is not eligible")
