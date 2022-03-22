@@ -6,7 +6,6 @@ import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -30,17 +29,14 @@ private class UserAgentInterceptor : Interceptor {
 }
 
 internal object AirRobeApiService {
-    private var logging: HttpLoggingInterceptor = HttpLoggingInterceptor()
     private val gson = GsonBuilder()
         .setLenient()
         .create()
-    private var httpClient: OkHttpClient.Builder
+    private var httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
+
     init {
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-        httpClient = OkHttpClient.Builder()
         httpClient.readTimeout(300, TimeUnit.SECONDS)
         httpClient.writeTimeout(300, TimeUnit.SECONDS)
-        httpClient.addInterceptor(logging)
         httpClient.addInterceptor(BearerInterceptor())
         httpClient.addInterceptor(UserAgentInterceptor())
     }

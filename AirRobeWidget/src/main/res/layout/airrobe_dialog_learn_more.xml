@@ -5,7 +5,7 @@
     android:background="@drawable/dialog_background">
 
     <RelativeLayout
-        android:id="@+id/ll_title_container"
+        android:id="@+id/rl_title_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp">
@@ -31,7 +31,7 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/ll_title_container" />
+        android:layout_below="@id/rl_title_container" />
 
     <TextView
         android:id="@+id/tv_title"
@@ -227,7 +227,7 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/learn_more_toggle_container_background">
 
-        <androidx.appcompat.widget.SwitchCompat
+        <Switch
             android:id="@+id/opt_in_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

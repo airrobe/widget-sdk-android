@@ -9,11 +9,12 @@ import android.net.Uri
 import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
-import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.RelativeLayout
+import android.widget.TextView
 import com.airrobe.widgetsdk.airrobewidget.R
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
-import com.airrobe.widgetsdk.airrobewidget.databinding.AirrobeConfirmationBinding
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeEmailCheckController
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeEmailCheckListener
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
@@ -24,8 +25,13 @@ import com.airrobe.widgetsdk.airrobewidget.widgetInstance
 @Suppress("DEPRECATION")
 class AirRobeConfirmation @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr) {
-    private var binding: AirrobeConfirmationBinding
+) : RelativeLayout(context, attrs, defStyleAttr) {
+    private var rlMainContainer: RelativeLayout
+    private var tvTitle: TextView
+    private var tvDescription: TextView
+    private var rlActionContainer: RelativeLayout
+    private var tvAction: TextView
+    private var btnLoading: ProgressBar
 
     companion object {
         private const val TAG = "AirRobeConfirmation"
@@ -44,7 +50,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
             widgetInstance.borderColor
         set(value) {
             field = value
-            val mainBackground = binding.rlMainContainer.background as GradientDrawable
+            val mainBackground = rlMainContainer.background as GradientDrawable
             mainBackground.setStroke(1, value)
         }
 
@@ -57,8 +63,8 @@ class AirRobeConfirmation @JvmOverloads constructor(
             widgetInstance.textColor
         set(value) {
             field = value
-            binding.tvTitle.setTextColor(value)
-            binding.tvDescription.setTextColor(value)
+            tvTitle.setTextColor(value)
+            tvDescription.setTextColor(value)
         }
 
     var buttonBorderColor: Int =
@@ -70,7 +76,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
             widgetInstance.buttonBorderColor
         set(value) {
             field = value
-            val background = binding.rlActionContainer.background as GradientDrawable
+            val background = rlActionContainer.background as GradientDrawable
             background.setStroke(1, value)
         }
 
@@ -83,14 +89,20 @@ class AirRobeConfirmation @JvmOverloads constructor(
             widgetInstance.buttonTextColor
         set(value) {
             field = value
-            binding.tvAction.setTextColor(value)
-            binding.btnLoading.indeterminateTintList = ColorStateList.valueOf(value)
+            tvAction.setTextColor(value)
+            btnLoading.indeterminateTintList = ColorStateList.valueOf(value)
         }
 
     init {
         inflate(context, R.layout.airrobe_confirmation, this)
-        binding = AirrobeConfirmationBinding.bind(this)
         visibility = GONE
+
+        rlMainContainer = findViewById(R.id.rl_main_container)
+        tvTitle = findViewById(R.id.tv_title)
+        tvDescription = findViewById(R.id.tv_description)
+        rlActionContainer = findViewById(R.id.rl_action_container)
+        tvAction = findViewById(R.id.tv_action)
+        btnLoading = findViewById(R.id.btn_loading)
 
         val listener = object : AirRobeWidgetInstance.InstanceChangeListener {
             override fun onShopModelChange() {
@@ -174,7 +186,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
 
     private fun initialize() {
         if (widgetInstance.configuration != null) {
-            binding.tvAction.setOnTouchListener { v, event ->
+            tvAction.setOnTouchListener { v, event ->
                 if (AirRobeAppUtils.touchAnimator(context, v, event)) {
                     val intent = Intent(Intent.ACTION_VIEW)
                     intent.data = Uri.parse(AirRobeConstants.ORDER_ACTIVATE_BASE_URL + widgetInstance.configuration?.appId + "-" + orderId)
@@ -214,8 +226,8 @@ class AirRobeConfirmation @JvmOverloads constructor(
         }
         if (AirRobeSharedPreferenceManager.getOrderOptedIn(context) && !fraudRisk) {
             visibility = VISIBLE
-            binding.btnLoading.visibility = VISIBLE
-            binding.btnLoading.animate()
+            btnLoading.visibility = VISIBLE
+            btnLoading.animate()
             emailCheck(email!!)
         } else {
             visibility = GONE
@@ -227,17 +239,17 @@ class AirRobeConfirmation @JvmOverloads constructor(
         val emailCheckController = AirRobeEmailCheckController()
         emailCheckController.airRobeEmailCheckListener = object : AirRobeEmailCheckListener {
             override fun onSuccessEmailCheckApi(isCustomer: Boolean) {
-                binding.btnLoading.visibility = GONE
+                btnLoading.visibility = GONE
                 if (isCustomer) {
-                    binding.tvAction.text = context.resources.getString(R.string.airrobe_order_confirmation_visit_text)
+                    tvAction.text = context.resources.getString(R.string.airrobe_order_confirmation_visit_text)
                 } else {
-                    binding.tvAction.text = context.resources.getString(R.string.airrobe_order_confirmation_activate_text)
+                    tvAction.text = context.resources.getString(R.string.airrobe_order_confirmation_activate_text)
                 }
             }
 
             override fun onFailedEmailCheckApi(error: String?) {
-                binding.btnLoading.visibility = GONE
-                binding.tvAction.text = context.resources.getString(R.string.airrobe_order_confirmation_activate_text)
+                btnLoading.visibility = GONE
+                tvAction.text = context.resources.getString(R.string.airrobe_order_confirmation_activate_text)
                 Log.e(TAG, error ?: "Email Check Api Failed")
             }
         }
