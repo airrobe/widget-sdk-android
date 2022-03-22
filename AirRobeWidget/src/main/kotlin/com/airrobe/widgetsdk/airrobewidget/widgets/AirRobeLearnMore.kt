@@ -78,7 +78,7 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
     }
 
     private fun initView() {
-        optInSwitchFromOptInWidget.isChecked = AirRobeSharedPreferenceManager.getOptedIn(context)
+        optInSwitch.isChecked = AirRobeSharedPreferenceManager.getOptedIn(context)
         optInSwitch.setOnCheckedChangeListener { _, isChecked ->
             AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
             optInSwitchFromOptInWidget.isChecked = isChecked
@@ -235,7 +235,7 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
         )
         val thumbColors = intArrayOf(
             Color.WHITE,
-            Color.WHITE
+            if (widgetInstance.switchColor == 0) context.getColor(R.color.airrobe_widget_default_switch_color) else widgetInstance.switchColor,
         )
         val trackColors = intArrayOf(
             if (widgetInstance.borderColor == 0) context.getColor(R.color.airrobe_widget_default_border_color) else widgetInstance.borderColor,

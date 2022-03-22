@@ -197,7 +197,7 @@ class AirRobeOptIn @JvmOverloads constructor(
         )
         val thumbColors = intArrayOf(
             Color.WHITE,
-            Color.WHITE
+            switchColor
         )
         val trackColors = intArrayOf(
             borderColor,
