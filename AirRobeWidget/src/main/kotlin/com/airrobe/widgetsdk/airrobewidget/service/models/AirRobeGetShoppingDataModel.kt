@@ -1,7 +1,7 @@
 package com.airrobe.widgetsdk.airrobewidget.service.models
 
-internal data class CategoryModel (
-    var data: DataModel,
+internal data class AirRobeGetShoppingDataModel (
+    var data: AirRobeShoppingDataModel
 ) {
     fun checkCategoryEligible(items: ArrayList<String>): String? {
         val eligibleItem = items.firstOrNull { bestCategoryMapping(factorize(it)) != null }
@@ -35,18 +35,36 @@ internal data class CategoryModel (
         }
         return null
     }
+
+    fun isBelowPriceThreshold(department: String?, price: Float) : Boolean {
+        if (department.isNullOrEmpty()) return false
+        val applicablePriceThreshold = data.shop.minimumPriceThresholds.firstOrNull {
+            it.department?.lowercase() == department.lowercase()
+        } ?: data.shop.minimumPriceThresholds.firstOrNull {
+            it.default
+        } ?: return false
+
+        return price < (applicablePriceThreshold.minimumPriceCents / 100)
+    }
 }
 
-internal data class DataModel(
-    var shop: ShopModel
+internal data class AirRobeShoppingDataModel(
+    var shop: AirRobeShopModel
 )
 
-internal data class ShopModel(
-    var categoryMappings: MutableList<CategoryMapping>
+internal data class AirRobeShopModel(
+    var categoryMappings: MutableList<AirRobeCategoryMapping>,
+    var minimumPriceThresholds: MutableList<AirRobeMinPriceThresholds>
 )
 
-internal data class CategoryMapping(
+internal data class AirRobeCategoryMapping(
     var from: String,
     var to: String?,
     var excluded: Boolean
+)
+
+internal data class AirRobeMinPriceThresholds(
+    var minimumPriceCents: Float,
+    var department: String?,
+    var default: Boolean
 )

@@ -7,7 +7,7 @@ import retrofit2.http.*
 internal interface AirRobeApiInterface {
     @Headers("Content-Type: application/json")
     @POST("/graphql")
-    fun getCategoryMapping(@Body body: String): Call<String>
+    fun mainGraphQL(@Body body: String): Call<String>
 
     @Headers("Content-Type: application/json")
     @POST("/graphql")

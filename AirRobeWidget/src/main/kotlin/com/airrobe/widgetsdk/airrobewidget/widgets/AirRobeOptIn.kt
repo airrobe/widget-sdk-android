@@ -123,22 +123,23 @@ class AirRobeOptIn @JvmOverloads constructor(
     init {
         inflate(context, R.layout.airrobe_opt_in, this)
         binding = AirrobeOptInBinding.bind(this)
+        visibility = GONE
 
         val listener = object : AirRobeWidgetInstance.InstanceChangeListener {
-            override fun onCategoryModelChange() {
+            override fun onShopModelChange() {
                 post {
                     initializeOptInWidget()
                 }
             }
 
             override fun onConfigChange() {
-                if (widgetInstance.getConfig() != null) {
+                if (widgetInstance.configuration != null) {
                     initialize()
                 }
             }
         }
-        widgetInstance.setInstanceChangeListener(listener)
-        if (widgetInstance.getConfig() != null) {
+        widgetInstance.changeListener = listener
+        if (widgetInstance.configuration != null) {
             initialize()
         }
 
@@ -289,7 +290,7 @@ class AirRobeOptIn @JvmOverloads constructor(
     }
 
     private fun setExtraInfoText() {
-        val extraInfoText = context.resources.getString(R.string.airrobe_extra_info).replace("Privacy Policy", "<a href='${widgetInstance.getConfig()?.privacyPolicyURL}'>Privacy Policy</a>")
+        val extraInfoText = context.resources.getString(R.string.airrobe_extra_info).replace("Privacy Policy", "<a href='${widgetInstance.configuration?.privacyPolicyURL}'>Privacy Policy</a>")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             binding.tvExtraInfo.text = Html.fromHtml(extraInfoText, Html.FROM_HTML_MODE_COMPACT)
         } else {
@@ -323,12 +324,12 @@ class AirRobeOptIn @JvmOverloads constructor(
     }
 
     private fun initializeOptInWidget() {
-        if (widgetInstance.getConfig() == null) {
+        if (widgetInstance.configuration == null) {
             Log.e(TAG, "Widget sdk is not initialized yet")
             visibility = GONE
             return
         }
-        if (widgetInstance.getCategoryModel() == null) {
+        if (widgetInstance.shopModel == null) {
             Log.e(TAG, "Category Mapping Info is not loaded")
             visibility = GONE
             return
@@ -338,11 +339,16 @@ class AirRobeOptIn @JvmOverloads constructor(
             visibility = GONE
             return
         }
-        val to = widgetInstance.getCategoryModel()!!.checkCategoryEligible(arrayListOf(category!!))
+        val to = widgetInstance.shopModel!!.checkCategoryEligible(arrayListOf(category!!))
         if (to != null) {
-            visibility = VISIBLE
-            checkIfPotentialValueTextCutOff()
-            callPriceEngine(to)
+            if (widgetInstance.shopModel!!.isBelowPriceThreshold(department, priceCents)) {
+                visibility = GONE
+                Log.d(TAG, "Below price threshold")
+            } else {
+                visibility = VISIBLE
+                checkIfPotentialValueTextCutOff()
+                callPriceEngine(to)
+            }
         } else {
             visibility = GONE
             Log.d(TAG, "Category is not eligible")

@@ -4,9 +4,9 @@ import android.content.Context
 import android.util.Log
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
-import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeGetCategoryMappingController
-import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeGetCategoryMappingListener
-import com.airrobe.widgetsdk.airrobewidget.service.models.CategoryModel
+import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeGetShoppingDataController
+import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeGetShoppingDataListener
+import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeGetShoppingDataModel
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 
 internal val widgetInstance = AirRobeWidgetInstance
@@ -58,18 +58,18 @@ object AirRobeWidget {
     fun initialize(
         config: AirRobeWidgetConfig
     ) {
-        widgetInstance.setConfig(config)
-        val getCategoryMappingController = AirRobeGetCategoryMappingController()
-        getCategoryMappingController.airRobeGetCategoryMappingListener = object : AirRobeGetCategoryMappingListener {
-            override fun onSuccessGetCategoryMappingApi(categoryModel: CategoryModel) {
-                widgetInstance.setCategoryModel(categoryModel)
+        widgetInstance.configuration = config
+        val getShoppingDataController = AirRobeGetShoppingDataController()
+        getShoppingDataController.airRobeGetShoppingDataListener = object : AirRobeGetShoppingDataListener {
+            override fun onSuccessGetShoppingDataApi(shopModel: AirRobeGetShoppingDataModel) {
+                widgetInstance.shopModel = shopModel
             }
 
-            override fun onFailedGetCategoryMappingApi(error: String?) {
-                Log.e(TAG, error ?: "Email Check Api Failed")
+            override fun onFailedGetShoppingDataApi(error: String?) {
+                Log.e(TAG, error ?: "Get Shopping Data Api Failed")
             }
         }
-        getCategoryMappingController.start(config.appId, config.mode)
+        getShoppingDataController.start(config.appId, config.mode)
     }
 
     fun resetOptedIn(context: Context) {
