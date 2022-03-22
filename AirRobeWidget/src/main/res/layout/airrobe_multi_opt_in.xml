@@ -19,7 +19,7 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <androidx.appcompat.widget.SwitchCompat
+            <Switch
                 android:id="@+id/opt_in_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

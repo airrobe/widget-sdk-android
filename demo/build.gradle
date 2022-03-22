@@ -32,7 +32,13 @@ android {
 }
 
 dependencies {
-    implementation project(':AirRobeWidget')
+    implementation files("libs/AirRobeWidget.aar")
+
+    // We should include below used libraries.
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
 
     implementation "androidx.core:core-ktx:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$rootProject.ext.appCompatLibVersion"

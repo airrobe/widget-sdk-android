@@ -6,13 +6,11 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
-import android.os.Build
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.util.AttributeSet
 import android.util.Log
-import android.widget.LinearLayout
 import com.airrobe.widgetsdk.airrobewidget.R
 import com.airrobe.widgetsdk.airrobewidget.widgetInstance
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
@@ -21,15 +19,20 @@ import android.text.TextPaint
 import android.text.Html
 import android.text.Spanned
 import android.view.View
-import androidx.core.graphics.drawable.DrawableCompat
-import com.airrobe.widgetsdk.airrobewidget.databinding.AirrobeMultiOptInBinding
+import android.widget.*
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 
-@Suppress("DEPRECATION")
 class AirRobeMultiOptIn @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
-    private var binding: AirrobeMultiOptInBinding
+    private var llMainContainer: LinearLayout
+    private var optInSwitch: Switch
+    private var llSwitchContainer: LinearLayout
+    private var tvTitle: TextView
+    private var tvDescription: TextView
+    private var tvDetailedDescription: TextView
+    private var tvExtraInfo: TextView
+    private var ivArrowDown: ImageView
 
     companion object {
         private const val TAG = "AirRobeMultiOptIn"
@@ -44,38 +47,32 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
 
     var borderColor: Int =
         if (widgetInstance.borderColor == 0)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                context.getColor(R.color.airrobe_widget_default_border_color) else
-                context.resources.getColor(R.color.airrobe_widget_default_border_color)
+            context.getColor(R.color.airrobe_widget_default_border_color)
         else
             widgetInstance.borderColor
         set(value) {
             field = value
-            val mainBackground = binding.llMainContainer.background as GradientDrawable
+            val mainBackground = llMainContainer.background as GradientDrawable
             mainBackground.setStroke(1, value)
             setSwitchColor()
         }
 
     var textColor: Int =
         if (widgetInstance.textColor == 0)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                context.getColor(R.color.airrobe_widget_default_text_color) else
-                context.resources.getColor(R.color.airrobe_widget_default_text_color)
+            context.getColor(R.color.airrobe_widget_default_text_color)
         else
             widgetInstance.textColor
         set(value) {
             field = value
-            binding.tvTitle.setTextColor(value)
-            binding.tvDescription.setTextColor(value)
-            binding.tvDetailedDescription.setTextColor(value)
-            binding.tvExtraInfo.setTextColor(value)
+            tvTitle.setTextColor(value)
+            tvDescription.setTextColor(value)
+            tvDetailedDescription.setTextColor(value)
+            tvExtraInfo.setTextColor(value)
         }
 
     var switchColor: Int =
         if (widgetInstance.switchColor == 0)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                context.getColor(R.color.airrobe_widget_default_switch_color) else
-                context.resources.getColor(R.color.airrobe_widget_default_switch_color)
+            context.getColor(R.color.airrobe_widget_default_switch_color)
         else
             widgetInstance.switchColor
         set(value) {
@@ -85,33 +82,37 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
 
     var arrowColor: Int =
         if (widgetInstance.arrowColor == 0)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                context.getColor(R.color.airrobe_widget_default_arrow_color) else
-                context.resources.getColor(R.color.airrobe_widget_default_arrow_color)
+            context.getColor(R.color.airrobe_widget_default_arrow_color)
         else
             widgetInstance.arrowColor
         set(value) {
             field = value
-            binding.ivArrowDown.setColorFilter(value, PorterDuff.Mode.SRC_ATOP)
+            ivArrowDown.setColorFilter(value, PorterDuff.Mode.SRC_ATOP)
         }
 
     var linkTextColor: Int =
         if (widgetInstance.linkTextColor == 0)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                context.getColor(R.color.airrobe_widget_default_link_text_color) else
-                context.resources.getColor(R.color.airrobe_widget_default_link_text_color)
+            context.getColor(R.color.airrobe_widget_default_link_text_color)
         else
             widgetInstance.linkTextColor
         set(value) {
             field = value
-            binding.tvDetailedDescription.setLinkTextColor(value)
-            binding.tvExtraInfo.setLinkTextColor(value)
+            tvDetailedDescription.setLinkTextColor(value)
+            tvExtraInfo.setLinkTextColor(value)
         }
 
     init {
         inflate(context, R.layout.airrobe_multi_opt_in, this)
-        binding = AirrobeMultiOptInBinding.bind(this)
         visibility = GONE
+
+        llMainContainer = findViewById(R.id.ll_main_container)
+        optInSwitch = findViewById(R.id.opt_in_switch)
+        llSwitchContainer = findViewById(R.id.ll_switch_container)
+        tvTitle = findViewById(R.id.tv_title)
+        tvDescription = findViewById(R.id.tv_description)
+        tvDetailedDescription = findViewById(R.id.tv_detailed_description)
+        tvExtraInfo = findViewById(R.id.tv_extra_info)
+        ivArrowDown = findViewById(R.id.iv_arrow_down)
 
         val listener = object : AirRobeWidgetInstance.InstanceChangeListener {
             override fun onShopModelChange() {
@@ -136,81 +137,41 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
 
     private fun setupAttributes(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.AirRobeMultiOptIn, 0, 0)
-        borderColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        borderColor =
             typedArray.getColor(R.styleable.AirRobeMultiOptIn_borderColor,
                 if (widgetInstance.borderColor == 0)
                     context.getColor(R.color.airrobe_widget_default_border_color)
                 else
                     widgetInstance.borderColor
             )
-        } else {
-            typedArray.getColor(R.styleable.AirRobeMultiOptIn_borderColor,
-                if (widgetInstance.borderColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_border_color)
-                else
-                    widgetInstance.borderColor
-            )
-        }
-        textColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        textColor =
             typedArray.getColor(R.styleable.AirRobeMultiOptIn_textColor,
                 if (widgetInstance.textColor == 0)
                     context.getColor(R.color.airrobe_widget_default_text_color)
                 else
                     widgetInstance.textColor
             )
-        } else {
-            typedArray.getColor(R.styleable.AirRobeMultiOptIn_textColor,
-                if (widgetInstance.textColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_text_color)
-                else
-                    widgetInstance.textColor
-            )
-        }
-        switchColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        switchColor =
             typedArray.getColor(R.styleable.AirRobeMultiOptIn_switchColor,
                 if (widgetInstance.switchColor == 0)
                     context.getColor(R.color.airrobe_widget_default_switch_color)
                 else
                     widgetInstance.switchColor
             )
-        } else {
-            typedArray.getColor(R.styleable.AirRobeMultiOptIn_switchColor,
-                if (widgetInstance.switchColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_switch_color)
-                else
-                    widgetInstance.switchColor
-            )
-        }
-        arrowColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        arrowColor =
             typedArray.getColor(R.styleable.AirRobeMultiOptIn_arrowColor,
                 if (widgetInstance.arrowColor == 0)
                     context.getColor(R.color.airrobe_widget_default_arrow_color)
                 else
                     widgetInstance.arrowColor
             )
-        } else {
-            typedArray.getColor(R.styleable.AirRobeMultiOptIn_arrowColor,
-                if (widgetInstance.arrowColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_arrow_color)
-                else
-                    widgetInstance.arrowColor
-            )
-        }
-        linkTextColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        linkTextColor =
             typedArray.getColor(R.styleable.AirRobeMultiOptIn_linkTextColor,
                 if (widgetInstance.linkTextColor == 0)
                     context.getColor(R.color.airrobe_widget_default_link_text_color)
                 else
                     widgetInstance.linkTextColor
             )
-        } else {
-            typedArray.getColor(R.styleable.AirRobeMultiOptIn_linkTextColor,
-                if (widgetInstance.linkTextColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_link_text_color)
-                else
-                    widgetInstance.linkTextColor
-            )
-        }
     }
 
     private fun setSwitchColor() {
@@ -220,33 +181,33 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         )
         val thumbColors = intArrayOf(
             Color.WHITE,
-            Color.WHITE
+            switchColor
         )
         val trackColors = intArrayOf(
             borderColor,
             switchColor
         )
-        DrawableCompat.setTintList(DrawableCompat.wrap(binding.optInSwitch.thumbDrawable), ColorStateList(states, thumbColors))
-        DrawableCompat.setTintList(DrawableCompat.wrap(binding.optInSwitch.trackDrawable), ColorStateList(states, trackColors))
+        optInSwitch.thumbTintList = ColorStateList(states, thumbColors)
+        optInSwitch.trackTintList = ColorStateList(states, trackColors)
     }
 
     private fun initialize() {
-        binding.tvDetailedDescription.visibility = GONE
-        binding.llSwitchContainer.setOnClickListener {
+        tvDetailedDescription.visibility = GONE
+        llSwitchContainer.setOnClickListener {
             if (expandType == ExpandType.Opened) {
-                binding.tvDetailedDescription.visibility = GONE
+                tvDetailedDescription.visibility = GONE
                 expandType = ExpandType.Closed
-                binding.ivArrowDown.animate().rotation(0.0f).duration = 80
+                ivArrowDown.animate().rotation(0.0f).duration = 80
             } else {
-                binding.tvDetailedDescription.visibility = VISIBLE
+                tvDetailedDescription.visibility = VISIBLE
                 expandType = ExpandType.Opened
-                binding.ivArrowDown.animate().rotation(180.0f).duration = 80
+                ivArrowDown.animate().rotation(180.0f).duration = 80
             }
         }
         setDetailedDescriptionText()
         setExtraInfoText()
-        binding.optInSwitch.isChecked = AirRobeSharedPreferenceManager.getOptedIn(context)
-        binding.optInSwitch.setOnCheckedChangeListener { _, isChecked ->
+        optInSwitch.isChecked = AirRobeSharedPreferenceManager.getOptedIn(context)
+        optInSwitch.setOnCheckedChangeListener { _, isChecked ->
             AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, isChecked)
         }
@@ -262,7 +223,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
 
             override fun onClick(p0: View) {
                 val dialog = AirRobeLearnMore(context)
-                dialog.optInSwitch = binding.optInSwitch
+                dialog.optInSwitchFromOptInWidget = optInSwitch
                 dialog.isFromMultiOptIn = false
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
@@ -273,18 +234,14 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         val start = detailedDescriptionText.indexOf(learnMoreText)
         val end = start + learnMoreText.length
         detailedDescriptionText.setSpan(cs, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        binding.tvDetailedDescription.text = detailedDescriptionText
-        binding.tvDetailedDescription.movementMethod = LinkMovementMethod.getInstance()
+        tvDetailedDescription.text = detailedDescriptionText
+        tvDetailedDescription.movementMethod = LinkMovementMethod.getInstance()
     }
 
     private fun setExtraInfoText() {
         val extraInfoText = context.resources.getString(R.string.airrobe_extra_info).replace("Privacy Policy", "<a href='${widgetInstance.configuration?.privacyPolicyURL}'>Privacy Policy</a>")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            binding.tvExtraInfo.text = Html.fromHtml(extraInfoText, Html.FROM_HTML_MODE_COMPACT)
-        } else {
-            binding.tvExtraInfo.text = Html.fromHtml(extraInfoText)
-        }
-        binding.tvExtraInfo.movementMethod = LinkMovementMethod.getInstance()
+        tvExtraInfo.text = Html.fromHtml(extraInfoText, Html.FROM_HTML_MODE_COMPACT)
+        tvExtraInfo.movementMethod = LinkMovementMethod.getInstance()
     }
 
     fun initialize(
