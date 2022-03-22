@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
-import android.os.Build
 import android.text.Html
 import android.text.SpannableString
 import android.text.Spanned
@@ -25,7 +24,6 @@ import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobePriceEngineL
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 import com.airrobe.widgetsdk.airrobewidget.widgetInstance
 
-@Suppress("DEPRECATION")
 class AirRobeOptIn @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
@@ -61,9 +59,7 @@ class AirRobeOptIn @JvmOverloads constructor(
 
     var borderColor: Int =
         if (widgetInstance.borderColor == 0)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                context.getColor(R.color.airrobe_widget_default_border_color) else
-                context.resources.getColor(R.color.airrobe_widget_default_border_color)
+            context.getColor(R.color.airrobe_widget_default_border_color)
         else
             widgetInstance.borderColor
         set(value) {
@@ -75,9 +71,7 @@ class AirRobeOptIn @JvmOverloads constructor(
 
     var textColor: Int =
         if (widgetInstance.textColor == 0)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                context.getColor(R.color.airrobe_widget_default_text_color) else
-                context.resources.getColor(R.color.airrobe_widget_default_text_color)
+            context.getColor(R.color.airrobe_widget_default_text_color)
         else
             widgetInstance.textColor
         set(value) {
@@ -92,9 +86,7 @@ class AirRobeOptIn @JvmOverloads constructor(
 
     var switchColor: Int =
         if (widgetInstance.switchColor == 0)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                context.getColor(R.color.airrobe_widget_default_switch_color) else
-                context.resources.getColor(R.color.airrobe_widget_default_switch_color)
+            context.getColor(R.color.airrobe_widget_default_switch_color)
         else
             widgetInstance.switchColor
         set(value) {
@@ -104,9 +96,7 @@ class AirRobeOptIn @JvmOverloads constructor(
 
     var arrowColor: Int =
         if (widgetInstance.arrowColor == 0)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                context.getColor(R.color.airrobe_widget_default_arrow_color) else
-                context.resources.getColor(R.color.airrobe_widget_default_arrow_color)
+            context.getColor(R.color.airrobe_widget_default_arrow_color)
         else
             widgetInstance.arrowColor
         set(value) {
@@ -116,9 +106,7 @@ class AirRobeOptIn @JvmOverloads constructor(
 
     var linkTextColor: Int =
         if (widgetInstance.linkTextColor == 0)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                context.getColor(R.color.airrobe_widget_default_link_text_color) else
-                context.resources.getColor(R.color.airrobe_widget_default_link_text_color)
+            context.getColor(R.color.airrobe_widget_default_link_text_color)
         else
             widgetInstance.linkTextColor
         set(value) {
@@ -165,81 +153,41 @@ class AirRobeOptIn @JvmOverloads constructor(
 
     private fun setupAttributes(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.AirRobeOptIn, 0, 0)
-        borderColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        borderColor =
             typedArray.getColor(R.styleable.AirRobeOptIn_borderColor,
                 if (widgetInstance.borderColor == 0)
                     context.getColor(R.color.airrobe_widget_default_border_color)
                 else
                     widgetInstance.borderColor
             )
-        } else {
-            typedArray.getColor(R.styleable.AirRobeOptIn_borderColor,
-                if (widgetInstance.borderColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_border_color)
-                else
-                    widgetInstance.borderColor
-            )
-        }
-        textColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        textColor =
             typedArray.getColor(R.styleable.AirRobeOptIn_textColor,
                 if (widgetInstance.textColor == 0)
                     context.getColor(R.color.airrobe_widget_default_text_color)
                 else
                     widgetInstance.textColor
             )
-        } else {
-            typedArray.getColor(R.styleable.AirRobeOptIn_textColor,
-                if (widgetInstance.textColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_text_color)
-                else
-                    widgetInstance.textColor
-            )
-        }
-        switchColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        switchColor =
             typedArray.getColor(R.styleable.AirRobeOptIn_switchColor,
                 if (widgetInstance.switchColor == 0)
                     context.getColor(R.color.airrobe_widget_default_switch_color)
                 else
                     widgetInstance.switchColor
             )
-        } else {
-            typedArray.getColor(R.styleable.AirRobeOptIn_switchColor,
-                if (widgetInstance.switchColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_switch_color)
-                else
-                    widgetInstance.switchColor
-            )
-        }
-        arrowColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        arrowColor =
             typedArray.getColor(R.styleable.AirRobeOptIn_arrowColor,
                 if (widgetInstance.arrowColor == 0)
                     context.getColor(R.color.airrobe_widget_default_arrow_color)
                 else
                     widgetInstance.arrowColor
             )
-        } else {
-            typedArray.getColor(R.styleable.AirRobeOptIn_arrowColor,
-                if (widgetInstance.arrowColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_arrow_color)
-                else
-                    widgetInstance.arrowColor
-            )
-        }
-        linkTextColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        linkTextColor =
             typedArray.getColor(R.styleable.AirRobeOptIn_linkTextColor,
                 if (widgetInstance.linkTextColor == 0)
                     context.getColor(R.color.airrobe_widget_default_link_text_color)
                 else
                     widgetInstance.linkTextColor
             )
-        } else {
-            typedArray.getColor(R.styleable.AirRobeOptIn_linkTextColor,
-                if (widgetInstance.linkTextColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_link_text_color)
-                else
-                    widgetInstance.linkTextColor
-            )
-        }
     }
 
     private fun setSwitchColor() {
@@ -255,10 +203,8 @@ class AirRobeOptIn @JvmOverloads constructor(
             borderColor,
             switchColor
         )
-        optInSwitch.thumbDrawable = ColorDrawable(switchColor)
-        optInSwitch.trackDrawable = ColorDrawable(borderColor)
-//        DrawableCompat.setTintList(DrawableCompat.wrap(binding.optInSwitch.thumbDrawable), ColorStateList(states, thumbColors))
-//        DrawableCompat.setTintList(DrawableCompat.wrap(binding.optInSwitch.trackDrawable), ColorStateList(states, trackColors))
+        optInSwitch.thumbTintList = ColorStateList(states, thumbColors)
+        optInSwitch.trackTintList = ColorStateList(states, trackColors)
     }
 
     private fun initialize() {
@@ -310,11 +256,7 @@ class AirRobeOptIn @JvmOverloads constructor(
 
     private fun setExtraInfoText() {
         val extraInfoText = context.resources.getString(R.string.airrobe_extra_info).replace("Privacy Policy", "<a href='${widgetInstance.configuration?.privacyPolicyURL}'>Privacy Policy</a>")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            tvExtraInfo.text = Html.fromHtml(extraInfoText, Html.FROM_HTML_MODE_COMPACT)
-        } else {
-            tvExtraInfo.text = Html.fromHtml(extraInfoText)
-        }
+        tvExtraInfo.text = Html.fromHtml(extraInfoText, Html.FROM_HTML_MODE_COMPACT)
         tvExtraInfo.movementMethod = LinkMovementMethod.getInstance()
     }
 

@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
 import android.net.Uri
-import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.ProgressBar
@@ -22,7 +21,6 @@ import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 import com.airrobe.widgetsdk.airrobewidget.widgetInstance
 
 @SuppressLint("ClickableViewAccessibility")
-@Suppress("DEPRECATION")
 class AirRobeConfirmation @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : RelativeLayout(context, attrs, defStyleAttr) {
@@ -43,9 +41,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
 
     var borderColor: Int =
         if (widgetInstance.borderColor == 0)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                context.getColor(R.color.airrobe_widget_default_border_color) else
-                    context.resources.getColor(R.color.airrobe_widget_default_border_color)
+            context.getColor(R.color.airrobe_widget_default_border_color)
         else
             widgetInstance.borderColor
         set(value) {
@@ -56,9 +52,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
 
     var textColor: Int =
         if (widgetInstance.textColor == 0)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                context.getColor(R.color.airrobe_widget_default_text_color) else
-                context.resources.getColor(R.color.airrobe_widget_default_text_color)
+            context.getColor(R.color.airrobe_widget_default_text_color)
         else
             widgetInstance.textColor
         set(value) {
@@ -69,9 +63,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
 
     var buttonBorderColor: Int =
         if (widgetInstance.buttonBorderColor == 0)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                context.getColor(R.color.airrobe_widget_default_button_border_color) else
-                context.resources.getColor(R.color.airrobe_widget_default_button_border_color)
+            context.getColor(R.color.airrobe_widget_default_button_border_color)
         else
             widgetInstance.buttonBorderColor
         set(value) {
@@ -82,9 +74,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
 
     var buttonTextColor: Int =
         if (widgetInstance.buttonTextColor == 0)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                context.getColor(R.color.airrobe_widget_default_button_text_color) else
-                context.resources.getColor(R.color.airrobe_widget_default_button_text_color)
+            context.getColor(R.color.airrobe_widget_default_button_text_color)
         else
             widgetInstance.buttonTextColor
         set(value) {
@@ -122,66 +112,34 @@ class AirRobeConfirmation @JvmOverloads constructor(
 
     private fun setupAttributes(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.AirRobeConfirmation, 0, 0)
-        borderColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        borderColor =
             typedArray.getColor(R.styleable.AirRobeConfirmation_borderColor,
                 if (widgetInstance.borderColor == 0)
                     context.getColor(R.color.airrobe_widget_default_border_color)
                 else
                     widgetInstance.borderColor
             )
-        } else {
-            typedArray.getColor(R.styleable.AirRobeConfirmation_borderColor,
-                if (widgetInstance.borderColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_border_color)
-                else
-                    widgetInstance.borderColor
-            )
-        }
-        textColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        textColor =
             typedArray.getColor(R.styleable.AirRobeConfirmation_textColor,
                 if (widgetInstance.textColor == 0)
                     context.getColor(R.color.airrobe_widget_default_text_color)
                 else
                     widgetInstance.textColor
             )
-        } else {
-            typedArray.getColor(R.styleable.AirRobeConfirmation_textColor,
-                if (widgetInstance.textColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_text_color)
-                else
-                    widgetInstance.textColor
-            )
-        }
-        buttonBorderColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        buttonBorderColor =
             typedArray.getColor(R.styleable.AirRobeConfirmation_buttonBackgroundColor,
                 if (widgetInstance.buttonBorderColor == 0)
                     context.getColor(R.color.airrobe_widget_default_button_border_color)
                 else
                     widgetInstance.buttonBorderColor
             )
-        } else {
-            typedArray.getColor(R.styleable.AirRobeConfirmation_buttonBackgroundColor,
-                if (widgetInstance.buttonBorderColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_button_border_color)
-                else
-                    widgetInstance.buttonBorderColor
-            )
-        }
-        buttonTextColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        buttonTextColor =
             typedArray.getColor(R.styleable.AirRobeConfirmation_buttonTextColor,
                 if (widgetInstance.buttonTextColor == 0)
                     context.getColor(R.color.airrobe_widget_default_button_text_color)
                 else
                     widgetInstance.buttonTextColor
             )
-        } else {
-            typedArray.getColor(R.styleable.AirRobeConfirmation_buttonTextColor,
-                if (widgetInstance.buttonTextColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_button_text_color)
-                else
-                    widgetInstance.buttonTextColor
-            )
-        }
     }
 
     private fun initialize() {

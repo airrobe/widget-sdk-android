@@ -23,7 +23,7 @@ task clean(type: Delete) {
 ext {
     // Demo Project
     targetSdkVersion = 32
-    minSdkVersion = 21
+    minSdkVersion = 24
     compileSdkVersion = targetSdkVersion
     appCompatLibVersion = '1.4.1'
     materialLibVersion = '1.5.0'
