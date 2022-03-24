@@ -1,30 +1,40 @@
 package com.airrobe.widgetsdk.airrobewidget.service.api_controllers
 
+import android.os.Handler
+import android.os.Looper
+import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.airrobe.widgetsdk.airrobewidget.service.AirRobeApiService
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobePriceEngineListener
-import com.airrobe.widgetsdk.airrobewidget.service.models.PriceEngineResponseModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import org.json.JSONObject
+import java.util.concurrent.Executors
 
-internal class AirRobePriceEngineController : Callback<PriceEngineResponseModel> {
-    var airRobePriceEngineListener: AirRobePriceEngineListener?  =null
+internal class AirRobePriceEngineController {
+    private val myExecutor = Executors.newSingleThreadExecutor()
+    private val myHandler = Handler(Looper.getMainLooper())
+    var airRobePriceEngineListener: AirRobePriceEngineListener?  = null
+
     fun start(price: Float, rrp: Float?, category: String, brand: String?, material: String?) {
-        val retrofit = AirRobeApiService.PRICE_ENGINE_SERVICE
-        retrofit.priceEngine(price, rrp, category, brand, material).enqueue(this)
-    }
+        myExecutor.execute {
+            val response = AirRobeApiService.requestGET(
+                AirRobeConstants.PRICE_ENGINE_HOST +
+                        "/v1?price=$price&rrp=$rrp&category=$category" +
+                        "&brand=$brand&material=$material"
+            )
 
-    override fun onResponse(call: Call<PriceEngineResponseModel>, response: Response<PriceEngineResponseModel>) {
-        if (response.isSuccessful) {
-            val result = response.body() as PriceEngineResponseModel
-            airRobePriceEngineListener?.onSuccessPriceEngineApi(result.result?.resaleValue)
-        } else {
-            val text = response.errorBody()?.string()
-            airRobePriceEngineListener?.onFailedPriceEngineApi(text)
+            myHandler.post {
+                if (response != null) {
+                    val obj = JSONObject(response)
+                    parseToModel(obj)
+                } else {
+                    airRobePriceEngineListener?.onFailedPriceEngineApi()
+                }
+            }
         }
     }
 
-    override fun onFailure(call: Call<PriceEngineResponseModel>, t: Throwable) {
-        airRobePriceEngineListener?.onFailedPriceEngineApi()
+    private fun parseToModel(jsonObject: JSONObject) {
+        val result = jsonObject.getJSONObject("result")
+        val resaleValue = result.getInt("resaleValue")
+        airRobePriceEngineListener?.onSuccessPriceEngineApi(resaleValue)
     }
 }
