@@ -64,7 +64,7 @@ internal data class AirRobeCategoryMapping(
 )
 
 internal data class AirRobeMinPriceThresholds(
-    var minimumPriceCents: Float,
+    var minimumPriceCents: Double,
     var department: String?,
     var default: Boolean
 )
