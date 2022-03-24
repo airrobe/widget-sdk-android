@@ -1,6 +1,5 @@
 package com.airrobe.widgetsdk.airrobewidget.service
 
-import android.util.Log
 import com.airrobe.widgetsdk.airrobewidget.BuildConfig
 import org.json.JSONObject
 import java.io.*
@@ -48,12 +47,10 @@ internal object AirRobeApiService {
     @Throws(IOException::class)
     fun requestGET(url: String?): String? {
         val obj = URL(url)
-        Log.d("TEST:::", url ?: "NULLL")
         val urlConnection = obj.openConnection() as HttpURLConnection
         urlConnection.requestMethod = GET
         val responseCode = urlConnection.responseCode
-        println("Response Code :: $responseCode")
-        return if (responseCode == HttpURLConnection.HTTP_OK) { // connection ok
+        return if (responseCode == HttpURLConnection.HTTP_OK) {
             val `in` = BufferedReader(InputStreamReader(urlConnection.inputStream))
             var inputLine: String?
             val response = StringBuffer()
