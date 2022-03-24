@@ -14,37 +14,14 @@ Currently, we do not support any other installation methods, so for now the AirR
 
 #### Project Integration
 
-- Download the [latest release's aar][latest-release-aar] from GitHub and copy it into to `your project -> app -> lib` directory.
+- Download the [latest release's aar][latest-release-aar] from GitHub and copy it into to `your project -> app -> libs` directory.
 - Rename aar file into `AirRobeWidget.aar` for your convenience, but not required.
 - Add the imported aar to your `build.gradle` in your app level.
-
-> **Note:**
-> Since we don't have the library published on Maven yet, you should include all used libraries in our library to your `build.gradle`.
 
 ```gradle
 dependencies {
     // Other dependencies are here
     implementation files("libs/AirRobeWidget.aar")
-
-    // We should include below used libraries.
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.preference:preference-ktx:1.2.0'
-
-    implementation 'com.google.code.gson:gson:2.9.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.6'
-}
-```
-Also If not use `viewBinding` yet, we should include that as well.
-```gradle
-android {
-    ...
-    buildFeatures {
-        viewBinding true
-    }
-    ...
 }
 ```
 
