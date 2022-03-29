@@ -95,133 +95,133 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
         val step1Background = rlStep1Container.background as GradientDrawable
         step1Background.setStroke(1,
             if (widgetInstance.borderColor == 0)
-                context.getColor(R.color.airrobe_widget_default_border_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_border_color)
             else
                 widgetInstance.borderColor
         )
         val step2Background = rlStep2Container.background as GradientDrawable
         step2Background.setStroke(1,
             if (widgetInstance.borderColor == 0)
-                context.getColor(R.color.airrobe_widget_default_border_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_border_color)
             else
                 widgetInstance.borderColor
         )
         val toggleBackground = rlToggleContainer.background as GradientDrawable
         toggleBackground.setStroke(1,
             if (widgetInstance.borderColor == 0)
-                context.getColor(R.color.airrobe_widget_default_border_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_border_color)
             else
                 widgetInstance.borderColor
         )
 
         divider.setBackgroundColor(
             if (widgetInstance.separatorColor == 0)
-                context.getColor(R.color.airrobe_widget_default_separator_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_separator_color)
             else
                 widgetInstance.separatorColor
         )
         step1Divider.setBackgroundColor(
             if (widgetInstance.separatorColor == 0)
-                context.getColor(R.color.airrobe_widget_default_separator_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_separator_color)
             else
                 widgetInstance.separatorColor
         )
         step2Divider.setBackgroundColor(
             if (widgetInstance.separatorColor == 0)
-                context.getColor(R.color.airrobe_widget_default_separator_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_separator_color)
             else
                 widgetInstance.separatorColor
         )
 
         tvTitle.setTextColor(
             if (widgetInstance.textColor == 0)
-                context.getColor(R.color.airrobe_widget_default_text_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
             else
                 widgetInstance.textColor
         )
         tvStep1Title.setTextColor(
             if (widgetInstance.textColor == 0)
-                context.getColor(R.color.airrobe_widget_default_text_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
             else
                 widgetInstance.textColor
         )
         tvStep1Description.setTextColor(
             if (widgetInstance.textColor == 0)
-                context.getColor(R.color.airrobe_widget_default_text_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
             else
                 widgetInstance.textColor
         )
         tvStep2Title.setTextColor(
             if (widgetInstance.textColor == 0)
-                context.getColor(R.color.airrobe_widget_default_text_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
             else
                 widgetInstance.textColor
         )
         tvStep2Description.setTextColor(
             if (widgetInstance.textColor == 0)
-                context.getColor(R.color.airrobe_widget_default_text_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
             else
                 widgetInstance.textColor
         )
         tvQuestion.setTextColor(
             if (widgetInstance.textColor == 0)
-                context.getColor(R.color.airrobe_widget_default_text_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
             else
                 widgetInstance.textColor
         )
         tvAnswer.setTextColor(
             if (widgetInstance.textColor == 0)
-                context.getColor(R.color.airrobe_widget_default_text_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
             else
                 widgetInstance.textColor
         )
         tvReady.setTextColor(
             if (widgetInstance.textColor == 0)
-                context.getColor(R.color.airrobe_widget_default_text_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
             else
                 widgetInstance.textColor
         )
         tvToggleOn.setTextColor(
             if (widgetInstance.textColor == 0)
-                context.getColor(R.color.airrobe_widget_default_text_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
             else
                 widgetInstance.textColor
         )
 
         ivClose.setColorFilter(
             if (widgetInstance.textColor == 0)
-                context.getColor(R.color.airrobe_widget_default_text_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
             else
                 widgetInstance.textColor
         )
         ivCheck.setColorFilter(
             if (widgetInstance.textColor == 0)
-                context.getColor(R.color.airrobe_widget_default_text_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
             else
                 widgetInstance.textColor
         )
         ivPlant1.setColorFilter(
             if (widgetInstance.textColor == 0)
-                context.getColor(R.color.airrobe_widget_default_text_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
             else
                 widgetInstance.textColor
         )
         ivEmoji.setColorFilter(
             if (widgetInstance.textColor == 0)
-                context.getColor(R.color.airrobe_widget_default_text_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
             else
                 widgetInstance.textColor
         )
         ivPlant2.setColorFilter(
             if (widgetInstance.textColor == 0)
-                context.getColor(R.color.airrobe_widget_default_text_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
             else
                 widgetInstance.textColor
         )
 
         tvFindOutMore.setLinkTextColor(
             if (widgetInstance.linkTextColor == 0)
-                context.getColor(R.color.airrobe_widget_default_link_text_color)
+                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_link_text_color)
             else
                 widgetInstance.linkTextColor
         )
@@ -235,14 +235,14 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
         )
         val thumbColors = intArrayOf(
             Color.WHITE,
-            if (widgetInstance.switchColor == 0) context.getColor(R.color.airrobe_widget_default_switch_color) else widgetInstance.switchColor,
+            if (widgetInstance.switchColor == 0) AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_switch_color) else widgetInstance.switchColor,
         )
         val trackColors = intArrayOf(
-            if (widgetInstance.borderColor == 0) context.getColor(R.color.airrobe_widget_default_border_color) else widgetInstance.borderColor,
-            if (widgetInstance.switchColor == 0) context.getColor(R.color.airrobe_widget_default_switch_color) else widgetInstance.switchColor,
+            if (widgetInstance.borderColor == 0) AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_border_color) else widgetInstance.borderColor,
+            if (widgetInstance.switchColor == 0) AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_switch_color) else widgetInstance.switchColor,
         )
-        optInSwitch.thumbTintList = ColorStateList(states, thumbColors)
-        optInSwitch.trackTintList = ColorStateList(states, trackColors)
+        optInSwitch.thumbDrawable.setTintList(ColorStateList(states, thumbColors))
+        optInSwitch.trackDrawable.setTintList(ColorStateList(states, trackColors))
     }
 
     @SuppressLint("ClickableViewAccessibility")
