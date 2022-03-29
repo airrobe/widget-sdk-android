@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
-import android.text.Html
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
@@ -21,6 +20,7 @@ import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobePriceEngineController
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobePriceEngineListener
+import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 import com.airrobe.widgetsdk.airrobewidget.widgetInstance
 
@@ -59,7 +59,7 @@ class AirRobeOptIn @JvmOverloads constructor(
 
     var borderColor: Int =
         if (widgetInstance.borderColor == 0)
-            context.resources.getColor(R.color.airrobe_widget_default_border_color)
+            AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_border_color)
         else
             widgetInstance.borderColor
         set(value) {
@@ -71,7 +71,7 @@ class AirRobeOptIn @JvmOverloads constructor(
 
     var textColor: Int =
         if (widgetInstance.textColor == 0)
-            context.resources.getColor(R.color.airrobe_widget_default_text_color)
+            AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
         else
             widgetInstance.textColor
         set(value) {
@@ -86,7 +86,7 @@ class AirRobeOptIn @JvmOverloads constructor(
 
     var switchColor: Int =
         if (widgetInstance.switchColor == 0)
-            context.resources.getColor(R.color.airrobe_widget_default_switch_color)
+            AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_switch_color)
         else
             widgetInstance.switchColor
         set(value) {
@@ -96,7 +96,7 @@ class AirRobeOptIn @JvmOverloads constructor(
 
     var arrowColor: Int =
         if (widgetInstance.arrowColor == 0)
-            context.resources.getColor(R.color.airrobe_widget_default_arrow_color)
+            AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_arrow_color)
         else
             widgetInstance.arrowColor
         set(value) {
@@ -106,7 +106,7 @@ class AirRobeOptIn @JvmOverloads constructor(
 
     var linkTextColor: Int =
         if (widgetInstance.linkTextColor == 0)
-            context.resources.getColor(R.color.airrobe_widget_default_link_text_color)
+            AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_link_text_color)
         else
             widgetInstance.linkTextColor
         set(value) {
@@ -156,35 +156,35 @@ class AirRobeOptIn @JvmOverloads constructor(
         borderColor =
             typedArray.getColor(R.styleable.AirRobeOptIn_borderColor,
                 if (widgetInstance.borderColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_border_color)
+                    AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_border_color)
                 else
                     widgetInstance.borderColor
             )
         textColor =
             typedArray.getColor(R.styleable.AirRobeOptIn_textColor,
                 if (widgetInstance.textColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_text_color)
+                    AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
                 else
                     widgetInstance.textColor
             )
         switchColor =
             typedArray.getColor(R.styleable.AirRobeOptIn_switchColor,
                 if (widgetInstance.switchColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_switch_color)
+                    AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_switch_color)
                 else
                     widgetInstance.switchColor
             )
         arrowColor =
             typedArray.getColor(R.styleable.AirRobeOptIn_arrowColor,
                 if (widgetInstance.arrowColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_arrow_color)
+                    AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_arrow_color)
                 else
                     widgetInstance.arrowColor
             )
         linkTextColor =
             typedArray.getColor(R.styleable.AirRobeOptIn_linkTextColor,
                 if (widgetInstance.linkTextColor == 0)
-                    context.resources.getColor(R.color.airrobe_widget_default_link_text_color)
+                    AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_link_text_color)
                 else
                     widgetInstance.linkTextColor
             )
@@ -256,7 +256,7 @@ class AirRobeOptIn @JvmOverloads constructor(
 
     private fun setExtraInfoText() {
         val extraInfoText = context.resources.getString(R.string.airrobe_extra_info).replace("Privacy Policy", "<a href='${widgetInstance.configuration?.privacyPolicyURL}'>Privacy Policy</a>")
-        tvExtraInfo.text = Html.fromHtml(extraInfoText)
+        tvExtraInfo.text = AirRobeAppUtils.fromHtml(extraInfoText)
         tvExtraInfo.movementMethod = LinkMovementMethod.getInstance()
     }
 

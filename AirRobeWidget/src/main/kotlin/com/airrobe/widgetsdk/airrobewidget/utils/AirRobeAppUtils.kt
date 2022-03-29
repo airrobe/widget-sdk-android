@@ -1,6 +1,9 @@
 package com.airrobe.widgetsdk.airrobewidget.utils
 
 import android.content.Context
+import android.os.Build
+import android.text.Html
+import android.text.Spanned
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -31,11 +34,17 @@ internal object AirRobeAppUtils {
         return false
     }
 
-    fun isBelowPriceThreshold(
-        department: String,
-        productPriceCents: Float? = null
-    ) : Boolean {
-        if (productPriceCents == null) return false
-        return true
+    fun getColor(context: Context, color: Int): Int {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return context.getColor(color)
+        }
+        return context.resources.getColor(color)
+    }
+
+    fun fromHtml(text: String): Spanned {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT)
+        }
+        return Html.fromHtml(text)
     }
 }
