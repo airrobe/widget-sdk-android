@@ -72,6 +72,19 @@ object AirRobeWidget {
         getShoppingDataController.start(config.appId, config.mode)
     }
 
+    fun checkMultiOptInEligibility(items: Array<CharSequence>): Boolean {
+        if (widgetInstance.shopModel == null || items.isNullOrEmpty()) {
+            return false
+        }
+
+        val newItems = arrayListOf<String>()
+        for (item in items) {
+            newItems.add(item.toString())
+        }
+        val to = widgetInstance.shopModel!!.checkCategoryEligible(newItems)
+        return to != null
+    }
+
     fun resetOptedIn(context: Context) {
         AirRobeSharedPreferenceManager.setOptedIn(context, false)
     }
