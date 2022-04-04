@@ -27,7 +27,7 @@ internal class AirRobeGetShoppingDataController {
                 """
                 query GetShoppingData {
                   shop(appId: "$appId") {
-                    categoryMappings {
+                    categoryMappings(mappedOrExcludedOnly: true) {
                       from
                       to
                       excluded
