@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import com.airrobe.widgetsdk.airrobewidget.R
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 import com.airrobe.widgetsdk.airrobewidget.config.Mode
@@ -28,7 +29,7 @@ internal class AirRobeTelemetryEventController {
             param.put("event_name", eventName)
             val properties = JSONObject()
             properties.put("source", "Android")
-            properties.put("version", Build.VERSION.RELEASE)
+            properties.put("version", context.getString(R.string.airrobe_widget_version))
             properties.put("split_test_variant", "default")
             properties.put("page_name", widgetName)
             param.put("properties", properties)
