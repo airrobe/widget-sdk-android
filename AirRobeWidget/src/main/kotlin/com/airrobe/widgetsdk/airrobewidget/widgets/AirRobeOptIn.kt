@@ -214,10 +214,12 @@ class AirRobeOptIn @JvmOverloads constructor(
                 tvDetailedDescription.visibility = GONE
                 expandType = ExpandType.Closed
                 ivArrowDown.animate().rotation(0.0f).duration = 80
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Widget folded", "OptedIn Widget")
             } else {
                 tvDetailedDescription.visibility = VISIBLE
                 expandType = ExpandType.Opened
                 ivArrowDown.animate().rotation(180.0f).duration = 80
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Widget expanded", "OptedIn Widget")
             }
         }
         setDetailedDescriptionText()
@@ -225,6 +227,11 @@ class AirRobeOptIn @JvmOverloads constructor(
         optInSwitch.isChecked = AirRobeSharedPreferenceManager.getOptedIn(context)
         optInSwitch.setOnCheckedChangeListener { _, isChecked ->
             AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
+            if (isChecked) {
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted in of AirRobe", "OptedIn Widget")
+            } else {
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "OptedIn Widget")
+            }
         }
         tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value_text)
     }
@@ -300,6 +307,7 @@ class AirRobeOptIn @JvmOverloads constructor(
             visibility = GONE
             return
         }
+        AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Initializing", "OptedIn Widget")
         val to = widgetInstance.shopModel!!.checkCategoryEligible(arrayListOf(category!!))
         if (to != null) {
             if (widgetInstance.shopModel!!.isBelowPriceThreshold(department, priceCents)) {

@@ -85,6 +85,11 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
             if (isFromMultiOptIn) {
                 AirRobeSharedPreferenceManager.setOrderOptedIn(context, isChecked)
             }
+            if (isChecked) {
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted in of AirRobe", "Learn More Widget")
+            } else {
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Learn More Widget")
+            }
         }
 
         tvFindOutMore.movementMethod = LinkMovementMethod.getInstance()

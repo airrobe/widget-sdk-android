@@ -5,6 +5,7 @@ import android.os.Looper
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.airrobe.widgetsdk.airrobewidget.service.AirRobeApiService
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeEmailCheckListener
+import org.json.JSONException
 import org.json.JSONObject
 import java.util.concurrent.Executors
 
@@ -42,8 +43,12 @@ internal class AirRobeEmailCheckController {
     }
 
     private fun parseToModel(jsonObject: JSONObject) {
-        val data = jsonObject.getJSONObject("data")
-        val isCustomer = data.getBoolean("isCustomer")
-        airRobeEmailCheckListener?.onSuccessEmailCheckApi(isCustomer)
+        try {
+            val data = jsonObject.getJSONObject("data")
+            val isCustomer = data.getBoolean("isCustomer")
+            airRobeEmailCheckListener?.onSuccessEmailCheckApi(isCustomer)
+        } catch (exception: JSONException) {
+            airRobeEmailCheckListener?.onFailedEmailCheckApi("Email Check JSON parse issue: " + exception.localizedMessage)
+        }
     }
 }

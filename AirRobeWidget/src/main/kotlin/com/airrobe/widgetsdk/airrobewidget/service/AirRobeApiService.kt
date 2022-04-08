@@ -3,7 +3,6 @@ package com.airrobe.widgetsdk.airrobewidget.service
 import com.airrobe.widgetsdk.airrobewidget.BuildConfig
 import org.json.JSONObject
 import java.io.*
-import java.lang.Exception
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
@@ -14,7 +13,7 @@ internal object AirRobeApiService {
     const val POST: String = "POST"
     private val userHeaderString: String = "airrobeWidget/${BuildConfig.VERSION_NAME} (Android ${android.os.Build.VERSION.RELEASE})"
 
-    fun requestPOST(r_url: String?, postDataParams: JSONObject): String? {
+    fun requestPOST(r_url: String?, postDataParams: JSONObject, isGraphQLQuery: Boolean = true): String? {
         val url = URL(r_url)
         val urlConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
         urlConnection.setRequestProperty("User-Agent", userHeaderString)
@@ -23,12 +22,20 @@ internal object AirRobeApiService {
         urlConnection.requestMethod = POST
         urlConnection.doInput = true
         urlConnection.doOutput = true
-        val os: OutputStream = urlConnection.outputStream
-        val writer = BufferedWriter(OutputStreamWriter(os, "UTF-8"))
-        writer.write(encodeParams(postDataParams))
-        writer.flush()
-        writer.close()
-        os.close()
+        if (isGraphQLQuery) {
+            val os: OutputStream = urlConnection.outputStream
+            val writer = BufferedWriter(OutputStreamWriter(os, "UTF-8"))
+            writer.write(encodeParams(postDataParams))
+            writer.flush()
+            writer.close()
+            os.close()
+        } else {
+            val dos = DataOutputStream(urlConnection.outputStream)
+            dos.writeBytes(postDataParams.toString())
+            dos.flush()
+            dos.close()
+        }
+
         return try {
             val responseCode: Int = urlConnection.responseCode // To Check for 200
             if (responseCode == HttpsURLConnection.HTTP_OK) {

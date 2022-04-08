@@ -198,10 +198,12 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 tvDetailedDescription.visibility = GONE
                 expandType = ExpandType.Closed
                 ivArrowDown.animate().rotation(0.0f).duration = 80
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Widget folded", "Multi-OptedIn Widget")
             } else {
                 tvDetailedDescription.visibility = VISIBLE
                 expandType = ExpandType.Opened
                 ivArrowDown.animate().rotation(180.0f).duration = 80
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Widget expanded", "Multi-OptedIn Widget")
             }
         }
         setDetailedDescriptionText()
@@ -210,6 +212,11 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         optInSwitch.setOnCheckedChangeListener { _, isChecked ->
             AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, isChecked)
+            if (isChecked) {
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted in of AirRobe", "Multi-OptedIn Widget")
+            } else {
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Multi-OptedIn Widget")
+            }
         }
     }
 
@@ -271,6 +278,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             return
         }
 
+        AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Initializing", "Multi-OptedIn Widget")
         val newItems = arrayListOf<String>()
         for (item in items!!) {
             newItems.add(item.toString())
