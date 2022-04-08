@@ -2,6 +2,7 @@ package com.airrobe.widgetsdk.airrobewidget
 
 import android.content.Context
 import android.util.Log
+import android.widget.RelativeLayout
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeGetShoppingDataController
@@ -9,6 +10,7 @@ import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeGetShoppingD
 import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeGetShoppingDataModel
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
+import com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeConfirmation
 
 internal val widgetInstance = AirRobeWidgetInstance
 
@@ -84,6 +86,13 @@ object AirRobeWidget {
         }
         val to = widgetInstance.shopModel!!.checkCategoryEligible(newItems)
         return to != null
+    }
+
+    fun checkConfirmationEligibility(context: Context, orderId: String, email: String, fraudRisk: Boolean): Boolean {
+        if (orderId.isEmpty() || email.isEmpty()) {
+            return false
+        }
+        return AirRobeSharedPreferenceManager.getOrderOptedIn(context) && !fraudRisk
     }
 
     fun resetOptedIn(context: Context) {
