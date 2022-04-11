@@ -198,12 +198,11 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 tvDetailedDescription.visibility = GONE
                 expandType = ExpandType.Closed
                 ivArrowDown.animate().rotation(0.0f).duration = 80
-                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Widget folded", "Multi-OptedIn Widget")
             } else {
                 tvDetailedDescription.visibility = VISIBLE
                 expandType = ExpandType.Opened
                 ivArrowDown.animate().rotation(180.0f).duration = 80
-                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Widget expanded", "Multi-OptedIn Widget")
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Widget Expand Arrow Click", "Cart")
             }
         }
         setDetailedDescriptionText()
@@ -213,9 +212,9 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, isChecked)
             if (isChecked) {
-                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted in of AirRobe", "Multi-OptedIn Widget")
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted in of AirRobe", "Cart")
             } else {
-                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Multi-OptedIn Widget")
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Cart")
             }
         }
     }
@@ -234,6 +233,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 dialog.isFromMultiOptIn = false
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Pop up click", "Cart")
             }
         }
 
@@ -278,7 +278,6 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             return
         }
 
-        AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Initializing", "Multi-OptedIn Widget")
         val newItems = arrayListOf<String>()
         for (item in items!!) {
             newItems.add(item.toString())

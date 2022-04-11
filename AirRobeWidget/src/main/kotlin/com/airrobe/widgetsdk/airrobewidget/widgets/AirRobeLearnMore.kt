@@ -86,9 +86,17 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
                 AirRobeSharedPreferenceManager.setOrderOptedIn(context, isChecked)
             }
             if (isChecked) {
-                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted in of AirRobe", "Learn More Widget")
+                if (isFromMultiOptIn) {
+                    AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted in of AirRobe", "Cart")
+                } else {
+                    AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted in of AirRobe", "Product")
+                }
             } else {
-                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Learn More Widget")
+                if (isFromMultiOptIn) {
+                    AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Cart")
+                } else {
+                    AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Product")
+                }
             }
         }
 

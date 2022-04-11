@@ -20,7 +20,7 @@ internal class AirRobeTelemetryEventController {
     private val myExecutor = Executors.newSingleThreadExecutor()
     private val myHandler = Handler(Looper.getMainLooper())
 
-    fun start(context: Context, config: AirRobeWidgetConfig, eventName: String, widgetName: String) {
+    fun start(context: Context, config: AirRobeWidgetConfig, eventName: String, pageName: String) {
         myExecutor.execute {
             val param = JSONObject()
             param.put("app_id", config.appId)
@@ -31,7 +31,7 @@ internal class AirRobeTelemetryEventController {
             properties.put("source", "Android")
             properties.put("version", context.getString(R.string.airrobe_widget_version))
             properties.put("split_test_variant", "default")
-            properties.put("page_name", widgetName)
+            properties.put("page_name", pageName)
             param.put("properties", properties)
 
             val response = AirRobeApiService.requestPOST(
