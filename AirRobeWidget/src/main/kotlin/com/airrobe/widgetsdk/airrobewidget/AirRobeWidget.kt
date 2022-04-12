@@ -11,8 +11,10 @@ import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeGetShoppingData
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 import com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeConfirmation
+import kotlin.math.roundToInt
 
 internal val widgetInstance = AirRobeWidgetInstance
+internal var sessionId = ""
 
 object AirRobeWidget {
     private const val TAG = "AirRobeWidget"
@@ -62,6 +64,7 @@ object AirRobeWidget {
         config: AirRobeWidgetConfig
     ) {
         widgetInstance.configuration = config
+        sessionId = ((System.currentTimeMillis() / 1000).toDouble().roundToInt()).toString()
         val getShoppingDataController = AirRobeGetShoppingDataController()
         getShoppingDataController.airRobeGetShoppingDataListener = object : AirRobeGetShoppingDataListener {
             override fun onSuccessGetShoppingDataApi(shopModel: AirRobeGetShoppingDataModel) {

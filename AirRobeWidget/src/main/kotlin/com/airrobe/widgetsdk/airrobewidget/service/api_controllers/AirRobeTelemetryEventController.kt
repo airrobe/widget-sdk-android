@@ -1,7 +1,6 @@
 package com.airrobe.widgetsdk.airrobewidget.service.api_controllers
 
 import android.content.Context
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -10,6 +9,7 @@ import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 import com.airrobe.widgetsdk.airrobewidget.config.Mode
 import com.airrobe.widgetsdk.airrobewidget.service.AirRobeApiService
+import com.airrobe.widgetsdk.airrobewidget.sessionId
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
 import org.json.JSONException
 import org.json.JSONObject
@@ -25,7 +25,7 @@ internal class AirRobeTelemetryEventController {
             val param = JSONObject()
             param.put("app_id", config.appId)
             param.put("anonymous_id", AirRobeAppUtils.getDeviceId(context))
-            param.put("session_id", Build.VERSION.CODENAME)
+            param.put("session_id", sessionId)
             param.put("event_name", eventName)
             val properties = JSONObject()
             properties.put("source", "Android")
