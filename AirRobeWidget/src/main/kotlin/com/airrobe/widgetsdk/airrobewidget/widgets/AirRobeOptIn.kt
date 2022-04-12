@@ -315,6 +315,7 @@ class AirRobeOptIn @JvmOverloads constructor(
             } else {
                 visibility = VISIBLE
                 checkIfPotentialValueTextCutOff()
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "pageview", "Product")
                 callPriceEngine(to)
             }
         } else {

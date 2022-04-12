@@ -188,6 +188,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
             visibility = VISIBLE
             btnLoading.visibility = VISIBLE
             btnLoading.animate()
+            AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "pageview", "Thank you")
             emailCheck(email!!)
         } else {
             visibility = GONE
