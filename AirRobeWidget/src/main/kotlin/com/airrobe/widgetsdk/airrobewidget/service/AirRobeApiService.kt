@@ -22,6 +22,7 @@ internal object AirRobeApiService {
             urlConnection.requestMethod = POST
             urlConnection.doInput = true
             urlConnection.doOutput = true
+
             if (isGraphQLQuery) {
                 val os: OutputStream = urlConnection.outputStream
                 val writer = BufferedWriter(OutputStreamWriter(os, "UTF-8"))
