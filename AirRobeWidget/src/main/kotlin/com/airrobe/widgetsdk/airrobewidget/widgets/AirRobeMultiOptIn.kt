@@ -286,7 +286,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         if (to != null) {
             visibility = VISIBLE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, AirRobeSharedPreferenceManager.getOptedIn(context))
-            AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Widget Expand Arrow Click", "Cart")
+            AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "pageview", "Cart")
         } else {
             visibility = GONE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
