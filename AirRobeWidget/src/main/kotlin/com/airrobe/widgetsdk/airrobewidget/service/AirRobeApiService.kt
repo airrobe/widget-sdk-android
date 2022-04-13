@@ -15,19 +15,6 @@ internal object AirRobeApiService {
 
     fun requestPOST(r_url: String?, postDataParams: JSONObject): String? {
         val url = URL(r_url)
-        val urlConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
-        urlConnection.setRequestProperty("User-Agent", userHeaderString)
-        urlConnection.readTimeout = 3000
-        urlConnection.connectTimeout = 3000
-        urlConnection.requestMethod = POST
-        urlConnection.doInput = true
-        urlConnection.doOutput = true
-        val os: OutputStream = urlConnection.outputStream
-        val writer = BufferedWriter(OutputStreamWriter(os, "UTF-8"))
-        writer.write(encodeParams(postDataParams))
-        writer.flush()
-        writer.close()
-        os.close()
         return try {
             val urlConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
             urlConnection.setRequestProperty("User-Agent", userHeaderString)
@@ -36,19 +23,12 @@ internal object AirRobeApiService {
             urlConnection.requestMethod = POST
             urlConnection.doInput = true
             urlConnection.doOutput = true
-            if (isGraphQLQuery) {
-                val os: OutputStream = urlConnection.outputStream
-                val writer = BufferedWriter(OutputStreamWriter(os, "UTF-8"))
-                writer.write(encodeParams(postDataParams))
-                writer.flush()
-                writer.close()
-                os.close()
-            } else {
-                val dos = DataOutputStream(urlConnection.outputStream)
-                dos.writeBytes(postDataParams.toString())
-                dos.flush()
-                dos.close()
-            }
+            val os: OutputStream = urlConnection.outputStream
+            val writer = BufferedWriter(OutputStreamWriter(os, "UTF-8"))
+            writer.write(encodeParams(postDataParams))
+            writer.flush()
+            writer.close()
+            os.close()
 
             val responseCode: Int = urlConnection.responseCode // To Check for 200
             if (responseCode == HttpsURLConnection.HTTP_OK) {
