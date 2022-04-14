@@ -32,8 +32,8 @@ android {
 }
 
 dependencies {
-    implementation files("libs/AirRobeWidget.aar")
-//    implementation project(':AirRobeWidget')
+//    implementation files("libs/AirRobeWidget.aar")
+    implementation project(':AirRobeWidget')
 
     implementation "androidx.core:core-ktx:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$rootProject.ext.appCompatLibVersion"

@@ -43,7 +43,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         Closed
     }
     private var expandType: ExpandType = ExpandType.Closed
-    private var items: Array<CharSequence>? = arrayOf()
+    private var items: ArrayList<String> = arrayListOf()
 
     var borderColor: Int =
         if (widgetInstance.borderColor == 0)
@@ -245,7 +245,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
     }
 
     fun initialize(
-        items: Array<CharSequence> = arrayOf()
+        items: ArrayList<String> = arrayListOf()
     ) {
         this.items = items
         initializeOptInWidget()
@@ -258,7 +258,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
             return
         }
-        if (widgetInstance.shopModel == null) {
+        if (widgetInstance.shopModel == null || widgetInstance.categoryMapping.categoryMappingsHashmap.isNullOrEmpty()) {
             Log.e(TAG, "Category Mapping Info is not loaded")
             visibility = GONE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
@@ -271,11 +271,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             return
         }
 
-        val newItems = arrayListOf<String>()
-        for (item in items!!) {
-            newItems.add(item.toString())
-        }
-        val to = widgetInstance.shopModel!!.checkCategoryEligible(newItems)
+        val to = widgetInstance.categoryMapping.checkCategoryEligible(items)
         if (to != null) {
             visibility = VISIBLE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, AirRobeSharedPreferenceManager.getOptedIn(context))
