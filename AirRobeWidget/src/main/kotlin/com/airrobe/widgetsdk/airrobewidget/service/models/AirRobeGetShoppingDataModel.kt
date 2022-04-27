@@ -3,6 +3,21 @@ package com.airrobe.widgetsdk.airrobewidget.service.models
 internal data class AirRobeGetShoppingDataModel (
     var data: AirRobeShoppingDataModel
 ) {
+    fun isBelowPriceThreshold(department: String?, price: Float) : Boolean {
+        if (department.isNullOrEmpty()) return false
+        val applicablePriceThreshold = data.shop.minimumPriceThresholds.firstOrNull {
+            it.department?.lowercase() == department.lowercase()
+        } ?: data.shop.minimumPriceThresholds.firstOrNull {
+            it.default
+        } ?: return false
+
+        return price < (applicablePriceThreshold.minimumPriceCents / 100)
+    }
+}
+
+internal data class AirRobeCategoryMappingHashMap(
+    var categoryMappingsHashmap: HashMap<String, AirRobeCategoryMapping>
+) {
     fun checkCategoryEligible(items: ArrayList<String>): String? {
         val eligibleItem = items.firstOrNull { bestCategoryMapping(factorize(it)) != null }
         return if (eligibleItem.isNullOrEmpty()) {
@@ -22,9 +37,8 @@ internal data class AirRobeGetShoppingDataModel (
     }
 
     private fun bestCategoryMapping(categoryArray: List<String>): String? {
-        val categoryMappings = data.shop.categoryMappings
         for (category in categoryArray) {
-            val filteredMapping = categoryMappings.firstOrNull { it.from == category }
+            val filteredMapping = categoryMappingsHashmap[category]
             if (filteredMapping != null) {
                 return if (filteredMapping.to.isNullOrEmpty() || filteredMapping.excluded) {
                     null
@@ -34,17 +48,6 @@ internal data class AirRobeGetShoppingDataModel (
             }
         }
         return null
-    }
-
-    fun isBelowPriceThreshold(department: String?, price: Float) : Boolean {
-        if (department.isNullOrEmpty()) return false
-        val applicablePriceThreshold = data.shop.minimumPriceThresholds.firstOrNull {
-            it.department?.lowercase() == department.lowercase()
-        } ?: data.shop.minimumPriceThresholds.firstOrNull {
-            it.default
-        } ?: return false
-
-        return price < (applicablePriceThreshold.minimumPriceCents / 100)
     }
 }
 
