@@ -1,5 +1,6 @@
 package com.airrobe.widgetsdk.airrobewidget.config
 
+import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeCategoryMappingHashMap
 import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeGetShoppingDataModel
 
 internal object AirRobeWidgetInstance {
@@ -8,6 +9,7 @@ internal object AirRobeWidgetInstance {
             field = value
             changeListener?.onShopModelChange()
         }
+    var categoryMapping = AirRobeCategoryMappingHashMap(HashMap())
     var configuration: AirRobeWidgetConfig? = null
         set(value) {
             field = value

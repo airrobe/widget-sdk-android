@@ -69,6 +69,9 @@ object AirRobeWidget {
         getShoppingDataController.airRobeGetShoppingDataListener = object : AirRobeGetShoppingDataListener {
             override fun onSuccessGetShoppingDataApi(shopModel: AirRobeGetShoppingDataModel) {
                 widgetInstance.shopModel = shopModel
+                for (i in 0 until shopModel.data.shop.categoryMappings.count()) {
+                    widgetInstance.categoryMapping.categoryMappingsHashmap[shopModel.data.shop.categoryMappings[i].from] = shopModel.data.shop.categoryMappings[i]
+                }
             }
 
             override fun onFailedGetShoppingDataApi(error: String?) {
@@ -78,16 +81,11 @@ object AirRobeWidget {
         getShoppingDataController.start(config.appId, config.mode)
     }
 
-    fun checkMultiOptInEligibility(items: Array<CharSequence>): Boolean {
-        if (widgetInstance.shopModel == null || items.isNullOrEmpty()) {
+    fun checkMultiOptInEligibility(items: ArrayList<String>): Boolean {
+        if (widgetInstance.shopModel == null || items.isNullOrEmpty() || widgetInstance.categoryMapping.categoryMappingsHashmap.isNullOrEmpty()) {
             return false
         }
-
-        val newItems = arrayListOf<String>()
-        for (item in items) {
-            newItems.add(item.toString())
-        }
-        val to = widgetInstance.shopModel!!.checkCategoryEligible(newItems)
+        val to = widgetInstance.categoryMapping.checkCategoryEligible(items)
         return to != null
     }
 

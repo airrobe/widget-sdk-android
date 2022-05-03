@@ -12,7 +12,7 @@ class MultiOptInActivity : AppCompatActivity() {
         setContentView(R.layout.activity_multi_opt_in)
         val optInWidget = findViewById<AirRobeMultiOptIn>(R.id.multi_opt_in_widget)
         optInWidget.initialize(
-            arrayOf("Accessories", "Accessories")
+            arrayListOf("Accessories", "Accessories")
         )
         // Way to set widget colors
 //        optInWidget.borderColor = Color.BLUE

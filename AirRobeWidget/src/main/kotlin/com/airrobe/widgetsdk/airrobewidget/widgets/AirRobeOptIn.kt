@@ -307,7 +307,7 @@ class AirRobeOptIn @JvmOverloads constructor(
             visibility = GONE
             return
         }
-        val to = widgetInstance.shopModel!!.checkCategoryEligible(arrayListOf(category!!))
+        val to = widgetInstance.categoryMapping.checkCategoryEligible(arrayListOf(category!!))
         if (to != null) {
             if (widgetInstance.shopModel!!.isBelowPriceThreshold(department, priceCents)) {
                 visibility = GONE
