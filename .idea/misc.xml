@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../../../../Users/king/.gradle/caches/transforms-3/27703e1cb205a8755e2c000f76f6c91a/transformed/jetified-AirRobeWidget/res/drawable/ic_airrobe_logo.xml" value="0.162" />
         <entry key="AirRobeWidget/src/main/res/drawable/activate_button_background.xml" value="0.2" />
         <entry key="AirRobeWidget/src/main/res/drawable/confirmation_background.xml" value="0.228125" />
         <entry key="AirRobeWidget/src/main/res/drawable/dialog_background.xml" value="0.228125" />
@@ -27,9 +28,13 @@
         <entry key="app/src/main/res/layout/activity_menu.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/activity_multi_opt_in.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/activity_opt_in.xml" value="0.21197916666666666" />
+        <entry key="demo/src/main/res/drawable/ic_airrobe_logo.xml" value="0.162" />
         <entry key="demo/src/main/res/layout/activity_confirmation.xml" value="0.24583333333333332" />
+        <entry key="demo/src/main/res/layout/activity_main.xml" value="0.12962962962962962" />
         <entry key="demo/src/main/res/layout/activity_multi_opt_in.xml" value="0.25364583333333335" />
         <entry key="demo/src/main/res/layout/activity_opt_in.xml" value="0.33" />
+        <entry key="demo/src/main/res/layout/activity_splash.xml" value="0.1828774062816616" />
+        <entry key="demo/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.162" />
       </map>
     </option>
   </component>

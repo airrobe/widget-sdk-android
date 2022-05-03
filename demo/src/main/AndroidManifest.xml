@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AirRobeDemo">
         <activity
-            android:name="com.airrobe.widgetsdk.airrobedemo.activities.MainActivity"
+            android:name="com.airrobe.widgetsdk.airrobedemo.activities.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
