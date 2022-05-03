@@ -1,15 +1,32 @@
 package com.airrobe.widgetsdk.airrobewidget.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
+import android.provider.Settings
 import android.text.Html
 import android.text.Spanned
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AnimationUtils
 import com.airrobe.widgetsdk.airrobewidget.R
+import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
+import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeTelemetryEventController
 
 internal object AirRobeAppUtils {
+    @SuppressLint("HardwareIds")
+    fun getDeviceId(context: Context): String {
+        return Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+    }
+
+    fun telemetryEvent(context: Context, config: AirRobeWidgetConfig?, eventName: String, pageName: String) {
+        if (config == null) {
+            return
+        }
+        val telemetryEventController = AirRobeTelemetryEventController()
+        telemetryEventController.start(context, config, eventName, pageName)
+    }
+
     fun touchAnimator(context: Context, v: View, event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {

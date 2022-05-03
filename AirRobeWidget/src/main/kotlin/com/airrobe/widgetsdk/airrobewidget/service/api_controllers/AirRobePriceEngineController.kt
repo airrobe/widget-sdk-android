@@ -5,6 +5,7 @@ import android.os.Looper
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.airrobe.widgetsdk.airrobewidget.service.AirRobeApiService
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobePriceEngineListener
+import org.json.JSONException
 import org.json.JSONObject
 import java.util.concurrent.Executors
 
@@ -33,8 +34,12 @@ internal class AirRobePriceEngineController {
     }
 
     private fun parseToModel(jsonObject: JSONObject) {
-        val result = jsonObject.getJSONObject("result")
-        val resaleValue = result.getInt("resaleValue")
-        airRobePriceEngineListener?.onSuccessPriceEngineApi(resaleValue)
+        try {
+            val result = jsonObject.getJSONObject("result")
+            val resaleValue = result.getInt("resaleValue")
+            airRobePriceEngineListener?.onSuccessPriceEngineApi(resaleValue)
+        } catch (exception: JSONException) {
+            airRobePriceEngineListener?.onFailedPriceEngineApi("Price Engine JSON parse issue: " + exception.localizedMessage)
+        }
     }
 }

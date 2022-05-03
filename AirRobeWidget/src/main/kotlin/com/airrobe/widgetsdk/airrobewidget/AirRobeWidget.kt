@@ -2,14 +2,19 @@ package com.airrobe.widgetsdk.airrobewidget
 
 import android.content.Context
 import android.util.Log
+import android.widget.RelativeLayout
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeGetShoppingDataController
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeGetShoppingDataListener
 import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeGetShoppingDataModel
+import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
+import com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeConfirmation
+import kotlin.math.roundToInt
 
 internal val widgetInstance = AirRobeWidgetInstance
+internal var sessionId = ""
 
 object AirRobeWidget {
     private const val TAG = "AirRobeWidget"
@@ -59,6 +64,7 @@ object AirRobeWidget {
         config: AirRobeWidgetConfig
     ) {
         widgetInstance.configuration = config
+        sessionId = ((System.currentTimeMillis() / 1000).toDouble().roundToInt()).toString()
         val getShoppingDataController = AirRobeGetShoppingDataController()
         getShoppingDataController.airRobeGetShoppingDataListener = object : AirRobeGetShoppingDataListener {
             override fun onSuccessGetShoppingDataApi(shopModel: AirRobeGetShoppingDataModel) {
@@ -81,6 +87,13 @@ object AirRobeWidget {
         }
         val to = widgetInstance.categoryMapping.checkCategoryEligible(items)
         return to != null
+    }
+
+    fun checkConfirmationEligibility(context: Context, orderId: String, email: String, fraudRisk: Boolean): Boolean {
+        if (orderId.isEmpty() || email.isEmpty()) {
+            return false
+        }
+        return AirRobeSharedPreferenceManager.getOrderOptedIn(context) && !fraudRisk
     }
 
     fun resetOptedIn(context: Context) {

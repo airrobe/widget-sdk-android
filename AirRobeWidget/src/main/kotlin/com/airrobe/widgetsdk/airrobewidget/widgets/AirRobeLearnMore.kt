@@ -85,6 +85,19 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
             if (isFromMultiOptIn) {
                 AirRobeSharedPreferenceManager.setOrderOptedIn(context, isChecked)
             }
+            if (isChecked) {
+                if (isFromMultiOptIn) {
+                    AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted in to AirRobe", "Cart")
+                } else {
+                    AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted in to AirRobe", "Product")
+                }
+            } else {
+                if (isFromMultiOptIn) {
+                    AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Cart")
+                } else {
+                    AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Product")
+                }
+            }
         }
 
         tvFindOutMore.movementMethod = LinkMovementMethod.getInstance()

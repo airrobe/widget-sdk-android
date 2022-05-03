@@ -149,6 +149,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
                     val intent = Intent(Intent.ACTION_VIEW)
                     intent.data = Uri.parse(AirRobeConstants.ORDER_ACTIVATE_BASE_URL + widgetInstance.configuration?.appId + "-" + orderId)
                     context.startActivity(intent)
+                    AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Claim link click", "Thank You")
                 }
                 true
             }
@@ -182,10 +183,12 @@ class AirRobeConfirmation @JvmOverloads constructor(
             visibility = GONE
             return
         }
+
         if (AirRobeSharedPreferenceManager.getOrderOptedIn(context) && !fraudRisk) {
             visibility = VISIBLE
             btnLoading.visibility = VISIBLE
             btnLoading.animate()
+            AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "pageview", "Thank you")
             emailCheck(email!!)
         } else {
             visibility = GONE

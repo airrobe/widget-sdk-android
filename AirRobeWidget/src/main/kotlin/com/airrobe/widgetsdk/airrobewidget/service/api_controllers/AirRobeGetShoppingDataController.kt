@@ -11,6 +11,7 @@ import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeCategoryMapping
 import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeGetShoppingDataModel
 import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeMinPriceThresholds
 import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeShopModel
+import org.json.JSONException
 import org.json.JSONObject
 import java.util.concurrent.Executors
 
@@ -62,41 +63,45 @@ internal class AirRobeGetShoppingDataController {
     }
 
     private fun parseToModel(jsonObject: JSONObject) {
-        val data = jsonObject.getJSONObject("data")
-        val shop = data.getJSONObject("shop")
-        val categoryMappings = shop.getJSONArray("categoryMappings")
-        val minimumPriceThresholds = shop.getJSONArray("minimumPriceThresholds")
-        val categoryMappingsArray: MutableList<AirRobeCategoryMapping> = arrayListOf()
-        for (i in 0 until categoryMappings.length()) {
-            val categoryMapping = categoryMappings.getJSONObject(i)
-            val from = categoryMapping.getString("from")
-            val to = categoryMapping.getString("to")
-            val excluded = categoryMapping.getBoolean("excluded")
-            categoryMappingsArray.add(
-                AirRobeCategoryMapping(
-                    from, to, excluded
+        try {
+            val data = jsonObject.getJSONObject("data")
+            val shop = data.getJSONObject("shop")
+            val categoryMappings = shop.getJSONArray("categoryMappings")
+            val minimumPriceThresholds = shop.getJSONArray("minimumPriceThresholds")
+            val categoryMappingsArray: MutableList<AirRobeCategoryMapping> = arrayListOf()
+            for (i in 0 until categoryMappings.length()) {
+                val categoryMapping = categoryMappings.getJSONObject(i)
+                val from = categoryMapping.getString("from")
+                val to = categoryMapping.getString("to")
+                val excluded = categoryMapping.getBoolean("excluded")
+                categoryMappingsArray.add(
+                    AirRobeCategoryMapping(
+                        from, to, excluded
+                    )
+                )
+            }
+            val minimumPriceThresholdsArray: MutableList<AirRobeMinPriceThresholds> = arrayListOf()
+            for (i in 0 until minimumPriceThresholds.length()) {
+                val minimumPriceThreshold = minimumPriceThresholds.getJSONObject(i)
+                val minimumPriceCents = minimumPriceThreshold.getDouble("minimumPriceCents")
+                val department = minimumPriceThreshold.getString("department")
+                val default = minimumPriceThreshold.getBoolean("default")
+                minimumPriceThresholdsArray.add(
+                    AirRobeMinPriceThresholds(
+                        minimumPriceCents, department, default
+                    )
+                )
+            }
+            val dataModel = AirRobeGetShoppingDataModel(
+                AirRobeShoppingDataModel(
+                    AirRobeShopModel(
+                        categoryMappingsArray, minimumPriceThresholdsArray
+                    )
                 )
             )
+            airRobeGetShoppingDataListener?.onSuccessGetShoppingDataApi(dataModel)
+        } catch (exception: JSONException) {
+            airRobeGetShoppingDataListener?.onFailedGetShoppingDataApi("Get Shopping Data JSON parse issue: " + exception.localizedMessage)
         }
-        val minimumPriceThresholdsArray: MutableList<AirRobeMinPriceThresholds> = arrayListOf()
-        for (i in 0 until minimumPriceThresholds.length()) {
-            val minimumPriceThreshold = minimumPriceThresholds.getJSONObject(i)
-            val minimumPriceCents = minimumPriceThreshold.getDouble("minimumPriceCents")
-            val department = minimumPriceThreshold.getString("department")
-            val default = minimumPriceThreshold.getBoolean("default")
-            minimumPriceThresholdsArray.add(
-                AirRobeMinPriceThresholds(
-                    minimumPriceCents, department, default
-                )
-            )
-        }
-        val dataModel = AirRobeGetShoppingDataModel(
-            AirRobeShoppingDataModel(
-                AirRobeShopModel(
-                    categoryMappingsArray, minimumPriceThresholdsArray
-                )
-            )
-        )
-        airRobeGetShoppingDataListener?.onSuccessGetShoppingDataApi(dataModel)
     }
 }

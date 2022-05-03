@@ -218,6 +218,7 @@ class AirRobeOptIn @JvmOverloads constructor(
                 tvDetailedDescription.visibility = VISIBLE
                 expandType = ExpandType.Opened
                 ivArrowDown.animate().rotation(180.0f).duration = 80
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Widget Expand Arrow Click", "Product")
             }
         }
         setDetailedDescriptionText()
@@ -225,6 +226,11 @@ class AirRobeOptIn @JvmOverloads constructor(
         optInSwitch.isChecked = AirRobeSharedPreferenceManager.getOptedIn(context)
         optInSwitch.setOnCheckedChangeListener { _, isChecked ->
             AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
+            if (isChecked) {
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted in to AirRobe", "Product")
+            } else {
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Product")
+            }
         }
         tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value_text)
     }
@@ -243,6 +249,7 @@ class AirRobeOptIn @JvmOverloads constructor(
                 dialog.isFromMultiOptIn = false
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Pop up click", "Product")
             }
         }
 
@@ -308,6 +315,7 @@ class AirRobeOptIn @JvmOverloads constructor(
             } else {
                 visibility = VISIBLE
                 checkIfPotentialValueTextCutOff()
+                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "pageview", "Product")
                 callPriceEngine(to)
             }
         } else {
