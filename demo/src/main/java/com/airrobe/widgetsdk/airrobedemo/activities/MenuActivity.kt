@@ -11,7 +11,7 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
         findViewById<Button>(R.id.btn_opt_in).setOnClickListener {
-            val intent = Intent(this, OptInActivity::class.java)
+            val intent = Intent(this, ProductListActivity::class.java)
             startActivity(intent)
         }
         findViewById<Button>(R.id.btn_multi_opt_in).setOnClickListener {

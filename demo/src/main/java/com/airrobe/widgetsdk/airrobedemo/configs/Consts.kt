@@ -8,14 +8,14 @@ import com.airrobe.widgetsdk.airrobedemo.models.ItemModel
 class Consts {
     companion object {
         val products = arrayListOf (
-            ItemModel(R.drawable.woman, "Aquila", "Montoro Messenger", "$340.00", "Accessories"),
-            ItemModel(R.drawable.woman, "Fjallraven", "Kanken Totepack", "$174.95", "Accessories"),
-            ItemModel(R.drawable.woman, "Stale Superior", "Downtown Weekender", "$59.99", "Accessories"),
-            ItemModel(R.drawable.woman, "Stale Superior", "Downtown Weekender", "$59.99", "Accessories"),
-            ItemModel(R.drawable.woman, "Happy Socks", "Get Set 24 days Of Holiday Socks", "$399.00", "Accessories/Beauty"),
-            ItemModel(R.drawable.woman, "Happy Socks", "Get Set Sports 3-Pack", "$54.95", "Accessories/Beauty"),
-            ItemModel(R.drawable.woman, "Tissot", "Supersport Gent", "$500.00", "Accessories/Beauty"),
-            ItemModel(R.drawable.woman, "Typo", "Art Gift Set", "$49.99", "Accessories/Beauty"),
+            ItemModel(R.drawable.bag1, "Aquila", "Montoro Messenger", "$340.00", "Accessories"),
+            ItemModel(R.drawable.bag2, "Fjallraven", "Kanken Totepack", "$174.95", "Accessories"),
+            ItemModel(R.drawable.bag3, "Stale Superior", "Downtown Weekender", "$59.99", "Accessories"),
+            ItemModel(R.drawable.bag4, "Stale Superior", "Downtown Weekender", "$59.99", "Accessories"),
+            ItemModel(R.drawable.gift1, "Happy Socks", "Get Set 24 days Of Holiday Socks", "$399.00", "Accessories/Beauty"),
+            ItemModel(R.drawable.gift2, "Happy Socks", "Get Set Sports 3-Pack", "$54.95", "Accessories/Beauty"),
+            ItemModel(R.drawable.gift3, "Tissot", "Supersport Gent", "$500.00", "Accessories/Beauty"),
+            ItemModel(R.drawable.gift4, "Typo", "Art Gift Set", "$49.99", "Accessories/Beauty"),
         )
 
         val brands = arrayListOf (

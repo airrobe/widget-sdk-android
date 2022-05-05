@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.airrobe.widgetsdk.airrobedemo.R
+import com.airrobe.widgetsdk.airrobedemo.activities.ProductListActivity
 import com.airrobe.widgetsdk.airrobedemo.activities.SubCategoryActivity
 import com.airrobe.widgetsdk.airrobedemo.utils.Utils
 
@@ -29,6 +30,9 @@ class SubCategoriesRVAdapter(
         holder.tvSubCategory.text = subCategoryModels[position]
         holder.llSubCategory.setOnTouchListener { view, motionEvent ->
             if (Utils.touchAnimator(activity, view, motionEvent)) {
+                val intent = Intent(activity, ProductListActivity::class.java)
+                intent.putExtra("subCategoryId", position)
+                activity.startActivity(intent)
             }
             true
         }
