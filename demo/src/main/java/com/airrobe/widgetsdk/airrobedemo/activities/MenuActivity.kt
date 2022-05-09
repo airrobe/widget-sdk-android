@@ -15,7 +15,7 @@ class MenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
         findViewById<Button>(R.id.btn_multi_opt_in).setOnClickListener {
-            val intent = Intent(this, MultiOptInActivity::class.java)
+            val intent = Intent(this, CartActivity::class.java)
             startActivity(intent)
         }
         findViewById<Button>(R.id.btn_confirmation).setOnClickListener {

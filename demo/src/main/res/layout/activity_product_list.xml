@@ -37,13 +37,15 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <ImageView
+            <ru.nikartm.support.ImageBadgeView
                 android:id="@+id/iv_cart"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/cart" />
+                android:src="@drawable/cart"
+                app:ibv_badgeTextSize="12sp"
+                app:ibv_fixedBadgeRadius="10dp"/>
 
         </RelativeLayout>
 

@@ -1,5 +1,6 @@
 package com.airrobe.widgetsdk.airrobedemo.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,6 +15,7 @@ import com.airrobe.widgetsdk.airrobedemo.utils.StatusBarTranslucent
 import com.airrobe.widgetsdk.airrobedemo.utils.Utils
 
 class SubCategoryActivity : AppCompatActivity() {
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sub_category)
