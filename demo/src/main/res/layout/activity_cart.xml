@@ -306,6 +306,7 @@
                 android:textColor="@color/second_label_color" />
 
             <EditText
+                android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Your email address"
@@ -316,6 +317,7 @@
                 android:background="@drawable/shape_edit_text_background" />
 
             <RelativeLayout
+                android:id="@+id/rl_place_order"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginVertical="30dp"
@@ -328,8 +330,8 @@
                     android:paddingHorizontal="20dp"
                     android:text="PLACE YOUR ORDER\n(You will receive 1 parcel)"
                     android:textAlignment="center"
-                    android:textSize="16sp"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
