@@ -82,7 +82,7 @@ object AirRobeWidget {
     }
 
     fun checkMultiOptInEligibility(items: ArrayList<String>): Boolean {
-        if (widgetInstance.shopModel == null || items.isNullOrEmpty() || widgetInstance.categoryMapping.categoryMappingsHashmap.isNullOrEmpty()) {
+        if (widgetInstance.shopModel == null || items.isEmpty() || widgetInstance.categoryMapping.categoryMappingsHashmap.isNullOrEmpty()) {
             return false
         }
         val to = widgetInstance.categoryMapping.checkCategoryEligible(items)
