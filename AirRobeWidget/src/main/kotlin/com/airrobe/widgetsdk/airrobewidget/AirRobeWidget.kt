@@ -6,6 +6,7 @@ import android.widget.RelativeLayout
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeGetShoppingDataController
+import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeTelemetryEventController
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeGetShoppingDataListener
 import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeGetShoppingDataModel
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
@@ -79,6 +80,14 @@ object AirRobeWidget {
             }
         }
         getShoppingDataController.start(config.appId, config.mode)
+    }
+
+    fun telemetryEvent(context: Context, config: AirRobeWidgetConfig?, eventName: String, pageName: String) {
+        if (config == null) {
+            return
+        }
+        val telemetryEventController = AirRobeTelemetryEventController()
+        telemetryEventController.start(context, config, eventName, pageName)
     }
 
     fun checkMultiOptInEligibility(items: ArrayList<String>): Boolean {

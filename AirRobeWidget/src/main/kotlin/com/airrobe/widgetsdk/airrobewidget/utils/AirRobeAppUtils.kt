@@ -19,14 +19,6 @@ internal object AirRobeAppUtils {
         return Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
     }
 
-    fun telemetryEvent(context: Context, config: AirRobeWidgetConfig?, eventName: String, pageName: String) {
-        if (config == null) {
-            return
-        }
-        val telemetryEventController = AirRobeTelemetryEventController()
-        telemetryEventController.start(context, config, eventName, pageName)
-    }
-
     fun touchAnimator(context: Context, v: View, event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {

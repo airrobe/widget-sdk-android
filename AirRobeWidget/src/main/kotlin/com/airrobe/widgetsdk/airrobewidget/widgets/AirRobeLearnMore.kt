@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.*
 import android.widget.*
+import com.airrobe.widgetsdk.airrobewidget.AirRobeWidget.telemetryEvent
 import com.airrobe.widgetsdk.airrobewidget.R
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
@@ -87,15 +88,15 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
             }
             if (isChecked) {
                 if (isFromMultiOptIn) {
-                    AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted in to AirRobe", "Cart")
+                    telemetryEvent(context, widgetInstance.configuration, "Opted in to AirRobe", "Cart")
                 } else {
-                    AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted in to AirRobe", "Product")
+                    telemetryEvent(context, widgetInstance.configuration, "Opted in to AirRobe", "Product")
                 }
             } else {
                 if (isFromMultiOptIn) {
-                    AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Cart")
+                    telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Cart")
                 } else {
-                    AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Product")
+                    telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Product")
                 }
             }
         }

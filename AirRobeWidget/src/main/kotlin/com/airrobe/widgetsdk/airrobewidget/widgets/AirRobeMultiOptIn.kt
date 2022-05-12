@@ -19,6 +19,7 @@ import android.text.TextPaint
 import android.text.Spanned
 import android.view.View
 import android.widget.*
+import com.airrobe.widgetsdk.airrobewidget.AirRobeWidget.telemetryEvent
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 
@@ -202,7 +203,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 tvDetailedDescription.visibility = VISIBLE
                 expandType = ExpandType.Opened
                 ivArrowDown.animate().rotation(180.0f).duration = 80
-                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Widget Expand Arrow Click", "Cart")
+                telemetryEvent(context, widgetInstance.configuration, "Widget Expand Arrow Click", "Cart")
             }
         }
         setDetailedDescriptionText()
@@ -212,9 +213,9 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, isChecked)
             if (isChecked) {
-                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted in to AirRobe", "Cart")
+                telemetryEvent(context, widgetInstance.configuration, "Opted in to AirRobe", "Cart")
             } else {
-                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Cart")
+                telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Cart")
             }
         }
     }
@@ -233,7 +234,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 dialog.isFromMultiOptIn = false
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
-                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Pop up click", "Cart")
+                telemetryEvent(context, widgetInstance.configuration, "Pop up click", "Cart")
             }
         }
 
@@ -265,13 +266,13 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
             return
         }
-        if (widgetInstance.shopModel == null || widgetInstance.categoryMapping.categoryMappingsHashmap.isNullOrEmpty()) {
+        if (widgetInstance.shopModel == null || widgetInstance.categoryMapping.categoryMappingsHashmap.isEmpty()) {
             Log.e(TAG, "Category Mapping Info is not loaded")
             visibility = GONE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
             return
         }
-        if (items.isNullOrEmpty()) {
+        if (items.isEmpty()) {
             Log.e(TAG, "Required params can't be empty")
             visibility = GONE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
@@ -282,7 +283,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         if (to != null) {
             visibility = VISIBLE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, AirRobeSharedPreferenceManager.getOptedIn(context))
-            AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "pageview", "Cart")
+            telemetryEvent(context, widgetInstance.configuration, "pageview", "Cart")
         } else {
             visibility = GONE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
