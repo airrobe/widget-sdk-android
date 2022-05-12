@@ -82,16 +82,16 @@ object AirRobeWidget {
         getShoppingDataController.start(config.appId, config.mode)
     }
 
-    fun telemetryEvent(context: Context, config: AirRobeWidgetConfig?, eventName: String, pageName: String) {
-        if (config == null) {
+    fun telemetryEvent(context: Context, eventName: String, pageName: String) {
+        if (widgetInstance.configuration == null) {
             return
         }
         val telemetryEventController = AirRobeTelemetryEventController()
-        telemetryEventController.start(context, config, eventName, pageName)
+        telemetryEventController.start(context, widgetInstance.configuration!!, eventName, pageName)
     }
 
     fun checkMultiOptInEligibility(items: ArrayList<String>): Boolean {
-        if (widgetInstance.shopModel == null || items.isNullOrEmpty() || widgetInstance.categoryMapping.categoryMappingsHashmap.isNullOrEmpty()) {
+        if (widgetInstance.shopModel == null || items.isEmpty() || widgetInstance.categoryMapping.categoryMappingsHashmap.isNullOrEmpty()) {
             return false
         }
         val to = widgetInstance.categoryMapping.checkCategoryEligible(items)

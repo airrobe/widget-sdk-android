@@ -203,7 +203,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 tvDetailedDescription.visibility = VISIBLE
                 expandType = ExpandType.Opened
                 ivArrowDown.animate().rotation(180.0f).duration = 80
-                telemetryEvent(context, widgetInstance.configuration, "Widget Expand Arrow Click", "Cart")
+                telemetryEvent(context, "Widget Expand Arrow Click", "Cart")
             }
         }
         setDetailedDescriptionText()
@@ -213,9 +213,9 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, isChecked)
             if (isChecked) {
-                telemetryEvent(context, widgetInstance.configuration, "Opted in to AirRobe", "Cart")
+                telemetryEvent(context, "Opted in to AirRobe", "Cart")
             } else {
-                telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Cart")
+                telemetryEvent(context, "Opted out of AirRobe", "Cart")
             }
         }
     }
@@ -234,7 +234,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 dialog.isFromMultiOptIn = false
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
-                telemetryEvent(context, widgetInstance.configuration, "Pop up click", "Cart")
+                telemetryEvent(context, "Pop up click", "Cart")
             }
         }
 
@@ -283,7 +283,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         if (to != null) {
             visibility = VISIBLE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, AirRobeSharedPreferenceManager.getOptedIn(context))
-            telemetryEvent(context, widgetInstance.configuration, "pageview", "Cart")
+            telemetryEvent(context, "pageview", "Cart")
         } else {
             visibility = GONE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)

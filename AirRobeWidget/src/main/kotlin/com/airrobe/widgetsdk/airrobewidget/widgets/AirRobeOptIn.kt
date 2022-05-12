@@ -219,7 +219,7 @@ class AirRobeOptIn @JvmOverloads constructor(
                 tvDetailedDescription.visibility = VISIBLE
                 expandType = ExpandType.Opened
                 ivArrowDown.animate().rotation(180.0f).duration = 80
-                telemetryEvent(context, widgetInstance.configuration, "Widget Expand Arrow Click", "Product")
+                telemetryEvent(context, "Widget Expand Arrow Click", "Product")
             }
         }
         setDetailedDescriptionText()
@@ -228,9 +228,9 @@ class AirRobeOptIn @JvmOverloads constructor(
         optInSwitch.setOnCheckedChangeListener { _, isChecked ->
             AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
             if (isChecked) {
-                telemetryEvent(context, widgetInstance.configuration, "Opted in to AirRobe", "Product")
+                telemetryEvent(context, "Opted in to AirRobe", "Product")
             } else {
-                telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Product")
+                telemetryEvent(context, "Opted out of AirRobe", "Product")
             }
         }
         tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value_text)
@@ -250,7 +250,7 @@ class AirRobeOptIn @JvmOverloads constructor(
                 dialog.isFromMultiOptIn = false
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
-                telemetryEvent(context, widgetInstance.configuration, "Pop up click", "Product")
+                telemetryEvent(context, "Pop up click", "Product")
             }
         }
 
@@ -316,7 +316,7 @@ class AirRobeOptIn @JvmOverloads constructor(
             } else {
                 visibility = VISIBLE
                 checkIfPotentialValueTextCutOff()
-                telemetryEvent(context, widgetInstance.configuration, "pageview", "Product")
+                telemetryEvent(context, "pageview", "Product")
                 callPriceEngine(to)
             }
         } else {

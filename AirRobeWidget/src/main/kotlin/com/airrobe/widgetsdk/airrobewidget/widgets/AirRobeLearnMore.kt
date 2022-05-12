@@ -88,15 +88,15 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
             }
             if (isChecked) {
                 if (isFromMultiOptIn) {
-                    telemetryEvent(context, widgetInstance.configuration, "Opted in to AirRobe", "Cart")
+                    telemetryEvent(context, "Opted in to AirRobe", "Cart")
                 } else {
-                    telemetryEvent(context, widgetInstance.configuration, "Opted in to AirRobe", "Product")
+                    telemetryEvent(context, "Opted in to AirRobe", "Product")
                 }
             } else {
                 if (isFromMultiOptIn) {
-                    telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Cart")
+                    telemetryEvent(context, "Opted out of AirRobe", "Cart")
                 } else {
-                    telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Product")
+                    telemetryEvent(context, "Opted out of AirRobe", "Product")
                 }
             }
         }
