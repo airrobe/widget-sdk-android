@@ -11,7 +11,6 @@ import android.util.Log
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
-import com.airrobe.widgetsdk.airrobewidget.AirRobeWidget.telemetryEvent
 import com.airrobe.widgetsdk.airrobewidget.R
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
@@ -150,7 +149,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
                     val intent = Intent(Intent.ACTION_VIEW)
                     intent.data = Uri.parse(AirRobeConstants.ORDER_ACTIVATE_BASE_URL + widgetInstance.configuration?.appId + "-" + orderId)
                     context.startActivity(intent)
-                    telemetryEvent(context, "Claim link click", "Thank You")
+                    AirRobeAppUtils.telemetryEvent(context, "Claim link click", "Thank You")
                 }
                 true
             }
@@ -189,7 +188,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
             visibility = VISIBLE
             btnLoading.visibility = VISIBLE
             btnLoading.animate()
-            telemetryEvent(context, "pageview", "Thank you")
+            AirRobeAppUtils.telemetryEvent(context, "pageview", "Thank you")
             emailCheck(email!!)
         } else {
             visibility = GONE

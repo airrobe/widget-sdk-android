@@ -2,16 +2,13 @@ package com.airrobe.widgetsdk.airrobewidget
 
 import android.content.Context
 import android.util.Log
-import android.widget.RelativeLayout
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeGetShoppingDataController
-import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeTelemetryEventController
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeGetShoppingDataListener
 import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeGetShoppingDataModel
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
-import com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeConfirmation
 import kotlin.math.roundToInt
 
 internal val widgetInstance = AirRobeWidgetInstance
@@ -82,12 +79,8 @@ object AirRobeWidget {
         getShoppingDataController.start(config.appId, config.mode)
     }
 
-    fun telemetryEvent(context: Context, eventName: String, pageName: String) {
-        if (widgetInstance.configuration == null) {
-            return
-        }
-        val telemetryEventController = AirRobeTelemetryEventController()
-        telemetryEventController.start(context, widgetInstance.configuration!!, eventName, pageName)
+    fun telemetryEvent(context: Context, pageName: String) {
+        AirRobeAppUtils.telemetryEvent(context, "pageview", pageName)
     }
 
     fun checkMultiOptInEligibility(items: ArrayList<String>): Boolean {

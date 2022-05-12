@@ -19,7 +19,6 @@ import android.text.TextPaint
 import android.text.Spanned
 import android.view.View
 import android.widget.*
-import com.airrobe.widgetsdk.airrobewidget.AirRobeWidget.telemetryEvent
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 
@@ -203,7 +202,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 tvDetailedDescription.visibility = VISIBLE
                 expandType = ExpandType.Opened
                 ivArrowDown.animate().rotation(180.0f).duration = 80
-                telemetryEvent(context, "Widget Expand Arrow Click", "Cart")
+                AirRobeAppUtils.telemetryEvent(context, "Widget Expand Arrow Click", "Cart")
             }
         }
         setDetailedDescriptionText()
@@ -213,9 +212,9 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, isChecked)
             if (isChecked) {
-                telemetryEvent(context, "Opted in to AirRobe", "Cart")
+                AirRobeAppUtils.telemetryEvent(context, "Opted in to AirRobe", "Cart")
             } else {
-                telemetryEvent(context, "Opted out of AirRobe", "Cart")
+                AirRobeAppUtils.telemetryEvent(context, "Opted out of AirRobe", "Cart")
             }
         }
     }
@@ -234,7 +233,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 dialog.isFromMultiOptIn = false
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
-                telemetryEvent(context, "Pop up click", "Cart")
+                AirRobeAppUtils.telemetryEvent(context, "Pop up click", "Cart")
             }
         }
 
@@ -283,7 +282,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         if (to != null) {
             visibility = VISIBLE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, AirRobeSharedPreferenceManager.getOptedIn(context))
-            telemetryEvent(context, "pageview", "Cart")
+            AirRobeAppUtils.telemetryEvent(context, "pageview", "Cart")
         } else {
             visibility = GONE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
