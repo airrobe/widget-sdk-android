@@ -148,7 +148,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
             tvAction.setOnTouchListener { v, event ->
                 if (AirRobeAppUtils.touchAnimator(context, v, event)) {
                     val intent = Intent(Intent.ACTION_VIEW)
-                    val baseUrl = if (widgetInstance.configuration?.mode == Mode.SANDBOX)
+                    val baseUrl = if (widgetInstance.configuration?.mode == Mode.PRODUCTION)
                         AirRobeConstants.ORDER_ACTIVATE_BASE_URL
                     else
                         AirRobeConstants.ORDER_ACTIVATE_SANDBOX_BASE_URL
