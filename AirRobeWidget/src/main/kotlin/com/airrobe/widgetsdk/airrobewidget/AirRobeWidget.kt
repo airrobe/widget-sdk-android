@@ -79,7 +79,7 @@ object AirRobeWidget {
         getShoppingDataController.start(config.appId, config.mode)
     }
 
-    fun telemetryEvent(context: Context, pageName: String) {
+    fun trackPageView(context: Context, pageName: String) {
         AirRobeAppUtils.telemetryEvent(context, "pageview", pageName)
     }
 
