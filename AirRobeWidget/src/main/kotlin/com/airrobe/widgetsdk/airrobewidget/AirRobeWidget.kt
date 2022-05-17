@@ -2,7 +2,6 @@ package com.airrobe.widgetsdk.airrobewidget
 
 import android.content.Context
 import android.util.Log
-import android.widget.RelativeLayout
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeGetShoppingDataController
@@ -10,7 +9,6 @@ import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeGetShoppingD
 import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeGetShoppingDataModel
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
-import com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeConfirmation
 import kotlin.math.roundToInt
 
 internal val widgetInstance = AirRobeWidgetInstance
@@ -81,8 +79,12 @@ object AirRobeWidget {
         getShoppingDataController.start(config.appId, config.mode)
     }
 
+    fun trackPageView(context: Context, pageName: String) {
+        AirRobeAppUtils.telemetryEvent(context, "pageview", pageName)
+    }
+
     fun checkMultiOptInEligibility(items: ArrayList<String>): Boolean {
-        if (widgetInstance.shopModel == null || items.isNullOrEmpty() || widgetInstance.categoryMapping.categoryMappingsHashmap.isNullOrEmpty()) {
+        if (widgetInstance.shopModel == null || items.isEmpty() || widgetInstance.categoryMapping.categoryMappingsHashmap.isNullOrEmpty()) {
             return false
         }
         val to = widgetInstance.categoryMapping.checkCategoryEligible(items)

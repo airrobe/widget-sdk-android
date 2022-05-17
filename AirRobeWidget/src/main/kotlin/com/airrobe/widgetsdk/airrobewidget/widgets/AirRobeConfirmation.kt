@@ -14,6 +14,7 @@ import android.widget.TextView
 import com.airrobe.widgetsdk.airrobewidget.R
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
+import com.airrobe.widgetsdk.airrobewidget.config.Mode
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeEmailCheckController
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeEmailCheckListener
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
@@ -147,9 +148,13 @@ class AirRobeConfirmation @JvmOverloads constructor(
             tvAction.setOnTouchListener { v, event ->
                 if (AirRobeAppUtils.touchAnimator(context, v, event)) {
                     val intent = Intent(Intent.ACTION_VIEW)
-                    intent.data = Uri.parse(AirRobeConstants.ORDER_ACTIVATE_BASE_URL + widgetInstance.configuration?.appId + "-" + orderId)
+                    val baseUrl = if (widgetInstance.configuration?.mode == Mode.PRODUCTION)
+                        AirRobeConstants.ORDER_ACTIVATE_BASE_URL
+                    else
+                        AirRobeConstants.ORDER_ACTIVATE_SANDBOX_BASE_URL
+                    intent.data = Uri.parse(baseUrl + widgetInstance.configuration?.appId + "-" + orderId + "/claim")
                     context.startActivity(intent)
-                    AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Claim link click", "Thank You")
+                    AirRobeAppUtils.telemetryEvent(context, "Claim link click", "Thank You")
                 }
                 true
             }
@@ -188,7 +193,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
             visibility = VISIBLE
             btnLoading.visibility = VISIBLE
             btnLoading.animate()
-            AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "pageview", "Thank you")
+            AirRobeAppUtils.telemetryEvent(context, "pageview", "Thank you")
             emailCheck(email!!)
         } else {
             visibility = GONE

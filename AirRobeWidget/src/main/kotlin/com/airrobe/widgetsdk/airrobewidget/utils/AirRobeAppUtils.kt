@@ -10,8 +10,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AnimationUtils
 import com.airrobe.widgetsdk.airrobewidget.R
-import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeTelemetryEventController
+import com.airrobe.widgetsdk.airrobewidget.widgetInstance
 
 internal object AirRobeAppUtils {
     @SuppressLint("HardwareIds")
@@ -19,12 +19,12 @@ internal object AirRobeAppUtils {
         return Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
     }
 
-    fun telemetryEvent(context: Context, config: AirRobeWidgetConfig?, eventName: String, pageName: String) {
-        if (config == null) {
+    fun telemetryEvent(context: Context, eventName: String, pageName: String) {
+        if (widgetInstance.configuration == null) {
             return
         }
         val telemetryEventController = AirRobeTelemetryEventController()
-        telemetryEventController.start(context, config, eventName, pageName)
+        telemetryEventController.start(context, widgetInstance.configuration!!, eventName, pageName)
     }
 
     fun touchAnimator(context: Context, v: View, event: MotionEvent): Boolean {

@@ -202,7 +202,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 tvDetailedDescription.visibility = VISIBLE
                 expandType = ExpandType.Opened
                 ivArrowDown.animate().rotation(180.0f).duration = 80
-                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Widget Expand Arrow Click", "Cart")
+                AirRobeAppUtils.telemetryEvent(context, "Widget Expand Arrow Click", "Cart")
             }
         }
         setDetailedDescriptionText()
@@ -212,9 +212,9 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, isChecked)
             if (isChecked) {
-                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted in to AirRobe", "Cart")
+                AirRobeAppUtils.telemetryEvent(context, "Opted in to AirRobe", "Cart")
             } else {
-                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Opted out of AirRobe", "Cart")
+                AirRobeAppUtils.telemetryEvent(context, "Opted out of AirRobe", "Cart")
             }
         }
     }
@@ -233,7 +233,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 dialog.isFromMultiOptIn = false
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
-                AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "Pop up click", "Cart")
+                AirRobeAppUtils.telemetryEvent(context, "Pop up click", "Cart")
             }
         }
 
@@ -265,13 +265,13 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
             return
         }
-        if (widgetInstance.shopModel == null || widgetInstance.categoryMapping.categoryMappingsHashmap.isNullOrEmpty()) {
+        if (widgetInstance.shopModel == null || widgetInstance.categoryMapping.categoryMappingsHashmap.isEmpty()) {
             Log.e(TAG, "Category Mapping Info is not loaded")
             visibility = GONE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
             return
         }
-        if (items.isNullOrEmpty()) {
+        if (items.isEmpty()) {
             Log.e(TAG, "Required params can't be empty")
             visibility = GONE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
@@ -282,7 +282,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         if (to != null) {
             visibility = VISIBLE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, AirRobeSharedPreferenceManager.getOptedIn(context))
-            AirRobeAppUtils.telemetryEvent(context, widgetInstance.configuration, "pageview", "Cart")
+            AirRobeAppUtils.telemetryEvent(context, "pageview", "Cart")
         } else {
             visibility = GONE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
