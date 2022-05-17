@@ -92,8 +92,7 @@ _Note: The widget will not be displayed unless the product is AirRobe-eligible. 
 
     <com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeOptIn
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
     
 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -151,8 +150,7 @@ _Note - The widget will not be displayed on the page if the following conditions
 
     <com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeMultiOptIn
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/category_array_list" />
+        android:layout_height="wrap_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
@@ -171,7 +169,7 @@ airrobe:textColor="#232323"      <!-- the color of the widget text. default valu
 ```kotlin
 val multiOptInWidget = findViewById<AirRobeMultiOptIn>(R.id.multi_opt_in_widget)
 multiOptInWidget.initialize(
-    items = arrayOf(String), // required - e.g. arrayOf("Accessories", "Accessories/Beauty", "Accessories/Bags/Leather bags/Weekender/Handbags", "Accessories/Bags/Clutches/Bum Bags")
+    items = arrayListOf(String), // required - e.g. arrayListOf("Accessories", "Accessories/Beauty", "Accessories/Bags/Leather bags/Weekender/Handbags", "Accessories/Bags/Clutches/Bum Bags")
 )
 
 // Color configuration
@@ -238,9 +236,27 @@ confirmationWidget.buttonTextColor = Color.rgb(255, 255, 255)
 
 `AirRobeWidget.resetOptedIn()`
 
-###### Get Order-Opt-In value
+###### Get Order-Opted-In value
 
 `AirRobeWidget.orderOptedIn()`
+
+###### Check Multi-Opt-In Eligibility
+
+```kotlin
+AirRobeWidget.checkMultiOptInEligibility(items: ArrayList<String>): Boolean
+```
+
+###### Check Confirmation Widget Eligibility
+
+```kotlin
+AirRobeWidget.checkConfirmationEligibility(context: Context, orderId: String, email: String, fraudRisk: Boolean): Boolean
+```
+
+###### Track Page View
+
+```kotlin
+AirRobeWidget.trackPageView(context: Context, pageName: String)
+```
 
 # Examples
 
