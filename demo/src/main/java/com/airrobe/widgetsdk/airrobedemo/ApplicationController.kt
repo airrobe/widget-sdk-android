@@ -3,10 +3,13 @@ package com.airrobe.widgetsdk.airrobedemo
 import android.app.Application
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import com.airrobe.widgetsdk.airrobewidget.AirRobeWidget
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
+import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeEventData
+import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeEventListener
 
-class ApplicationController : Application() {
+class ApplicationController : Application(), AirRobeEventListener {
     override fun onCreate() {
         super.onCreate()
         appContext = this
@@ -18,6 +21,7 @@ class ApplicationController : Application() {
                 "https://www.theiconic.com.au/privacy-policy"
             )
         )
+        AirRobeWidget.eventListener = this
 
         // Way to set all widgets colors globally
 //        AirRobeWidget.borderColor = Color.BLUE
@@ -46,5 +50,9 @@ class ApplicationController : Application() {
         fun context(): Context {
             return appContext
         }
+    }
+
+    override fun onEventEmitted(event: AirRobeEventData) {
+        Log.d("Demo", event.toString())
     }
 }

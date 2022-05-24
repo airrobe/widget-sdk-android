@@ -8,7 +8,9 @@ import com.airrobe.widgetsdk.airrobewidget.R
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 import com.airrobe.widgetsdk.airrobewidget.config.Mode
+import com.airrobe.widgetsdk.airrobewidget.eventListenerInstance
 import com.airrobe.widgetsdk.airrobewidget.service.AirRobeApiService
+import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeEventData
 import com.airrobe.widgetsdk.airrobewidget.sessionId
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
 import org.json.JSONException
@@ -19,6 +21,7 @@ internal class AirRobeTelemetryEventController {
     private val TAG = "Telemetry Event"
     private val myExecutor = Executors.newSingleThreadExecutor()
     private val myHandler = Handler(Looper.getMainLooper())
+    private lateinit var eventData: AirRobeEventData
 
     fun start(context: Context, config: AirRobeWidgetConfig, eventName: String, pageName: String) {
         myExecutor.execute {
@@ -33,6 +36,17 @@ internal class AirRobeTelemetryEventController {
             properties.put("split_test_variant", "default")
             properties.put("page_name", pageName)
             param.put("properties", properties)
+
+            eventData = AirRobeEventData(
+                config.appId,
+                AirRobeAppUtils.getDeviceId(context),
+                sessionId,
+                eventName,
+                "Android",
+                context.getString(R.string.airrobe_widget_version),
+                "default",
+                pageName
+            )
 
             val response = AirRobeApiService.requestPOST(
                 if (config.mode == Mode.PRODUCTION)
@@ -59,6 +73,7 @@ internal class AirRobeTelemetryEventController {
             val success = jsonObject.getBoolean("success")
             if (success) {
                 Log.d(TAG, "Telemetry Event API Succeed")
+                eventListenerInstance?.onEventEmitted(eventData)
             } else {
                 Log.e(TAG, "Telemetry Event API Failed")
             }
