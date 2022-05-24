@@ -2,12 +2,11 @@ package com.airrobe.widgetsdk.airrobedemo
 
 import android.app.Application
 import android.content.Context
-import android.graphics.Color
 import android.util.Log
 import com.airrobe.widgetsdk.airrobewidget.AirRobeWidget
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
-import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeEventData
-import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeEventListener
+import com.airrobe.widgetsdk.airrobewidget.config.AirRobeEventData
+import com.airrobe.widgetsdk.airrobewidget.config.AirRobeEventListener
 
 class ApplicationController : Application(), AirRobeEventListener {
     override fun onCreate() {

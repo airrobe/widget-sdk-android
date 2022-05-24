@@ -10,7 +10,7 @@ import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 import com.airrobe.widgetsdk.airrobewidget.config.Mode
 import com.airrobe.widgetsdk.airrobewidget.eventListenerInstance
 import com.airrobe.widgetsdk.airrobewidget.service.AirRobeApiService
-import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeEventData
+import com.airrobe.widgetsdk.airrobewidget.config.AirRobeEventData
 import com.airrobe.widgetsdk.airrobewidget.sessionId
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
 import org.json.JSONException

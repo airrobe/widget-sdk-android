@@ -5,7 +5,7 @@ import android.util.Log
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeGetShoppingDataController
-import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeEventListener
+import com.airrobe.widgetsdk.airrobewidget.config.AirRobeEventListener
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeGetShoppingDataListener
 import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeGetShoppingDataModel
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils

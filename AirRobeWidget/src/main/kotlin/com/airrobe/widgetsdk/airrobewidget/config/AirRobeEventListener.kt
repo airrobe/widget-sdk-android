@@ -1,4 +1,4 @@
-package com.airrobe.widgetsdk.airrobewidget.service.listeners
+package com.airrobe.widgetsdk.airrobewidget.config
 
 interface AirRobeEventListener {
     fun onEventEmitted(event: AirRobeEventData)
