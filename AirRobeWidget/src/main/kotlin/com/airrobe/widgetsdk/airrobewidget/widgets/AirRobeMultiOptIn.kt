@@ -20,6 +20,7 @@ import android.text.Spanned
 import android.view.View
 import android.widget.*
 import com.airrobe.widgetsdk.airrobewidget.config.EventName
+import com.airrobe.widgetsdk.airrobewidget.config.PageName
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 
@@ -199,6 +200,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 tvDetailedDescription.visibility = GONE
                 expandType = ExpandType.Closed
                 ivArrowDown.animate().rotation(0.0f).duration = 80
+                AirRobeAppUtils.telemetryEvent(context, EventName.WidgetCollapse.raw, PageName.Cart.raw)
             } else {
                 tvDetailedDescription.visibility = VISIBLE
                 expandType = ExpandType.Opened
@@ -276,6 +278,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             Log.e(TAG, "Required params can't be empty")
             visibility = GONE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
+            AirRobeAppUtils.telemetryEvent(context, EventName.WidgetNotRendered.raw, PageName.Cart.raw)
             return
         }
 
@@ -287,6 +290,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         } else {
             visibility = GONE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
+            AirRobeAppUtils.telemetryEvent(context, EventName.WidgetNotRendered.raw, PageName.Cart.raw)
             Log.d(TAG, "Category is not eligible")
         }
     }

@@ -186,6 +186,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
         if (orderId.isNullOrEmpty() || email.isNullOrEmpty()) {
             Log.e(TAG, "Required params can't be empty")
             visibility = GONE
+            AirRobeAppUtils.telemetryEvent(context, EventName.WidgetNotRendered.raw, PageName.ThankYou.raw)
             return
         }
 
@@ -197,6 +198,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
             emailCheck(email!!)
         } else {
             visibility = GONE
+            AirRobeAppUtils.telemetryEvent(context, EventName.WidgetNotRendered.raw, PageName.ThankYou.raw)
             Log.e(TAG, "Confirmation widget is not eligible to show up")
         }
     }
