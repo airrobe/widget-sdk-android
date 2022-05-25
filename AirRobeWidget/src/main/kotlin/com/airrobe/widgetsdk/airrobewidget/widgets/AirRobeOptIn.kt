@@ -18,6 +18,7 @@ import android.widget.*
 import com.airrobe.widgetsdk.airrobewidget.R
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
+import com.airrobe.widgetsdk.airrobewidget.config.EventName
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobePriceEngineController
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobePriceEngineListener
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
@@ -218,7 +219,7 @@ class AirRobeOptIn @JvmOverloads constructor(
                 tvDetailedDescription.visibility = VISIBLE
                 expandType = ExpandType.Opened
                 ivArrowDown.animate().rotation(180.0f).duration = 80
-                AirRobeAppUtils.telemetryEvent(context, "Widget Expand Arrow Click", "Product")
+                AirRobeAppUtils.telemetryEvent(context, EventName.WidgetExpand.raw, PageName.Product.raw)
             }
         }
         setDetailedDescriptionText()
@@ -227,9 +228,9 @@ class AirRobeOptIn @JvmOverloads constructor(
         optInSwitch.setOnCheckedChangeListener { _, isChecked ->
             AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
             if (isChecked) {
-                AirRobeAppUtils.telemetryEvent(context, "Opted in to AirRobe", "Product")
+                AirRobeAppUtils.telemetryEvent(context, EventName.OptedIn.raw, PageName.Product.raw)
             } else {
-                AirRobeAppUtils.telemetryEvent(context, "Opted out of AirRobe", "Product")
+                AirRobeAppUtils.telemetryEvent(context, EventName.OptedOut.raw, PageName.Product.raw)
             }
         }
         tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value_text)
@@ -249,7 +250,7 @@ class AirRobeOptIn @JvmOverloads constructor(
                 dialog.isFromMultiOptIn = false
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
-                AirRobeAppUtils.telemetryEvent(context, "Pop up click", "Product")
+                AirRobeAppUtils.telemetryEvent(context, EventName.PopupClick.raw, PageName.Product.raw)
             }
         }
 
@@ -315,7 +316,7 @@ class AirRobeOptIn @JvmOverloads constructor(
             } else {
                 visibility = VISIBLE
                 checkIfPotentialValueTextCutOff()
-                AirRobeAppUtils.telemetryEvent(context, "pageview", "Product")
+                AirRobeAppUtils.telemetryEvent(context, EventName.PageView.raw, PageName.Product.raw)
                 callPriceEngine(to)
             }
         } else {

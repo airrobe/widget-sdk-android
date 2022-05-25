@@ -6,6 +6,7 @@ import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeGetShoppingDataController
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeEventListener
+import com.airrobe.widgetsdk.airrobewidget.config.EventName
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeGetShoppingDataListener
 import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeGetShoppingDataModel
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
@@ -88,7 +89,7 @@ object AirRobeWidget {
     }
 
     fun trackPageView(context: Context, pageName: String) {
-        AirRobeAppUtils.telemetryEvent(context, "pageview", pageName)
+        AirRobeAppUtils.telemetryEvent(context, EventName.PageView.raw, pageName)
     }
 
     fun checkMultiOptInEligibility(items: ArrayList<String>): Boolean {

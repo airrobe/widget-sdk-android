@@ -12,9 +12,9 @@ import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.airrobe.widgetsdk.airrobewidget.R
+import com.airrobe.widgetsdk.airrobewidget.config.*
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
-import com.airrobe.widgetsdk.airrobewidget.config.Mode
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeEmailCheckController
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeEmailCheckListener
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
@@ -154,7 +154,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
                         AirRobeConstants.ORDER_ACTIVATE_SANDBOX_BASE_URL
                     intent.data = Uri.parse(baseUrl + widgetInstance.configuration?.appId + "-" + orderId + "/claim")
                     context.startActivity(intent)
-                    AirRobeAppUtils.telemetryEvent(context, "Claim link click", "Thank You")
+                    AirRobeAppUtils.telemetryEvent(context, EventName.ClaimLinkClick.raw, PageName.ThankYou.raw)
                 }
                 true
             }
@@ -193,7 +193,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
             visibility = VISIBLE
             btnLoading.visibility = VISIBLE
             btnLoading.animate()
-            AirRobeAppUtils.telemetryEvent(context, "pageview", "Thank you")
+            AirRobeAppUtils.telemetryEvent(context, EventName.PageView.raw, PageName.ThankYou.raw)
             emailCheck(email!!)
         } else {
             visibility = GONE

@@ -11,3 +11,20 @@ internal class AirRobeConstants {
         const val ORDER_ACTIVATE_SANDBOX_BASE_URL = "https://stg.marketplace.airdemo.link/en/orders/"
     }
 }
+
+enum class EventName(val raw: String) {
+    PageView("pageview"),
+    WidgetNotRendered("Widget not rendered"),
+    OptedIn("Opted in to AirRobe"),
+    OptedOut("Opted out of AirRobe"),
+    WidgetExpand("Widget Expand Arrow Click"),
+    WidgetCollapse("Widget Collapse Arrow Click"),
+    PopupClick("Pop up click"),
+    ClaimLinkClick("Claim link click")
+}
+
+enum class PageName(val raw: String) {
+    Product("Product"),
+    Cart("Cart"),
+    ThankYou("Thank You")
+}
