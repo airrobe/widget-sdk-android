@@ -20,11 +20,21 @@ enum class EventName(val raw: String) {
     WidgetExpand("Widget Expand Arrow Click"),
     WidgetCollapse("Widget Collapse Arrow Click"),
     PopupClick("Pop up click"),
-    ClaimLinkClick("Claim link click")
+    ClaimLinkClick("Claim link click"),
+    Other("Other");
+
+    companion object {
+        fun getByValue(value: String) = values().find { it.raw == value }
+    }
 }
 
 enum class PageName(val raw: String) {
     Product("Product"),
     Cart("Cart"),
-    ThankYou("Thank You")
+    ThankYou("Thank You"),
+    Other("Other");
+
+    companion object {
+        fun getByValue(value: String) = values().find { it.raw == value }
+    }
 }

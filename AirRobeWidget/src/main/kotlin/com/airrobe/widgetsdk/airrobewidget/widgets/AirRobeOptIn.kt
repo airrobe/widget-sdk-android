@@ -216,7 +216,6 @@ class AirRobeOptIn @JvmOverloads constructor(
                 tvDetailedDescription.visibility = GONE
                 expandType = ExpandType.Closed
                 ivArrowDown.animate().rotation(0.0f).duration = 80
-                AirRobeAppUtils.telemetryEvent(context, EventName.WidgetCollapse.raw, PageName.Product.raw)
             } else {
                 tvDetailedDescription.visibility = VISIBLE
                 expandType = ExpandType.Opened
@@ -308,14 +307,12 @@ class AirRobeOptIn @JvmOverloads constructor(
         if (category.isNullOrEmpty()) {
             Log.e(TAG, "Required params can't be empty")
             visibility = GONE
-            AirRobeAppUtils.telemetryEvent(context, EventName.WidgetNotRendered.raw, PageName.Product.raw)
             return
         }
         val to = widgetInstance.categoryMapping.checkCategoryEligible(arrayListOf(category!!))
         if (to != null) {
             if (widgetInstance.shopModel!!.isBelowPriceThreshold(department, priceCents)) {
                 visibility = GONE
-                AirRobeAppUtils.telemetryEvent(context, EventName.WidgetNotRendered.raw, PageName.Product.raw)
                 Log.d(TAG, "Below price threshold")
             } else {
                 visibility = VISIBLE
@@ -325,7 +322,6 @@ class AirRobeOptIn @JvmOverloads constructor(
             }
         } else {
             visibility = GONE
-            AirRobeAppUtils.telemetryEvent(context, EventName.WidgetNotRendered.raw, PageName.Product.raw)
             Log.d(TAG, "Category is not eligible")
         }
     }

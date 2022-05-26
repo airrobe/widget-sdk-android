@@ -5,12 +5,10 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import com.airrobe.widgetsdk.airrobewidget.R
+import com.airrobe.widgetsdk.airrobewidget.config.*
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
-import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
-import com.airrobe.widgetsdk.airrobewidget.config.Mode
 import com.airrobe.widgetsdk.airrobewidget.eventListenerInstance
 import com.airrobe.widgetsdk.airrobewidget.service.AirRobeApiService
-import com.airrobe.widgetsdk.airrobewidget.config.AirRobeEventData
 import com.airrobe.widgetsdk.airrobewidget.sessionId
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
 import org.json.JSONException
@@ -41,11 +39,11 @@ internal class AirRobeTelemetryEventController {
                 config.appId,
                 AirRobeAppUtils.getDeviceId(context),
                 sessionId,
-                eventName,
+                EventName.getByValue(eventName) ?: EventName.Other,
                 "Android",
                 context.getString(R.string.airrobe_widget_version),
                 "default",
-                pageName
+                PageName.getByValue(pageName) ?: PageName.Other
             )
 
             val response = AirRobeApiService.requestPOST(
