@@ -46,7 +46,7 @@ afterEvaluate {
 
                 groupId = 'com.airrobe.widgetsdk.airrobewidget'
                 artifactId = 'airrobe-widget-sdk'
-                version = '1.0.2'
+                version = '1.0.3'
             }
         }
     }

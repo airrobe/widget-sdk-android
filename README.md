@@ -8,24 +8,44 @@ The AirRobeWidget Android SDK provides Circular Wardrobe widgets for your native
 
 ## Installation
 
-### Manual
+### Use Gradle
 
-Currently, we do not support any other installation methods, so for now the AirRobe SDK has to be manually integrated into your project.
-
-#### Project Integration
-
-- Download the [latest release's aar][latest-release-aar] from GitHub and copy it into to `your project -> app -> libs` directory.
-- Rename aar file into `AirRobeWidget.aar` for your convenience, but not required.
-- Add the imported aar to your `build.gradle` in your app level.
-
+1. Add below in your root build.gradle at the end of repositories
 ```gradle
-dependencies {
-    // Other dependencies are here
-    implementation files("libs/AirRobeWidget.aar")
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
 }
 ```
 
-You will need to keep track of the library version manually, and when you want to upgrade to a more recent version, you will need to manually download the library and replace it.
+2. Add the dependency
+```gradle
+dependencies {
+    implementation 'com.github.airrobe:widget-sdk-android:x.x.x'
+}
+```
+
+### Or Maven
+
+```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+```
+
+Add the dependency
+```xml
+<dependency>
+    <groupId>com.github.airrobe</groupId>
+    <artifactId>widget-sdk-android</artifactId>
+    <version>Tag</version>
+</dependency>
+```
 
 ## ProGuard
 
