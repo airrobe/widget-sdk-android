@@ -13,6 +13,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import com.airrobe.widgetsdk.airrobewidget.R
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
+import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
 import com.airrobe.widgetsdk.airrobewidget.config.Mode
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeEmailCheckController
@@ -196,13 +197,16 @@ class AirRobeConfirmation @JvmOverloads constructor(
             btnLoading.animate()
             AirRobeAppUtils.telemetryEvent(context, "pageview", "Thank you")
             emailCheck(email!!)
-
-            val identifyOrderController = AirRobeIdentifyOrderController()
-            identifyOrderController.start(context, widgetInstance.configuration!!, orderId!!)
+            identifyOrder(widgetInstance.configuration!!, orderId!!)
         } else {
             visibility = GONE
             Log.e(TAG, "Confirmation widget is not eligible to show up")
         }
+    }
+
+    private fun identifyOrder(config: AirRobeWidgetConfig, orderId: String) {
+        val identifyOrderController = AirRobeIdentifyOrderController()
+        identifyOrderController.start(context, config, orderId)
     }
 
     private fun emailCheck(email: String) {
