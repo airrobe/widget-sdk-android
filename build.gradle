@@ -1,16 +1,19 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext.kotlin_version = '1.7.0'
+    ext.build_gradle = '7.2.1'
     ext.kotlin_gradle_plugin_version = '1.6.21'
+    ext.gradle_maven_publish_plugin = '0.19.0'
+    ext.java = '11'
 
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.1'
+        classpath "com.android.tools.build:gradle:$build_gradle"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_gradle_plugin_version"
-        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.19.0'
+        classpath "com.vanniktech:gradle-maven-publish-plugin:$gradle_maven_publish_plugin"
     }
 }
 
@@ -19,7 +22,6 @@ task clean(type: Delete) {
 }
 
 ext {
-    // Demo Project
     targetSdkVersion = 32
     minSdkVersion = 21
     compileSdkVersion = targetSdkVersion
