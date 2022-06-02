@@ -5,6 +5,8 @@ import android.util.Log
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeGetShoppingDataController
+import com.airrobe.widgetsdk.airrobewidget.config.AirRobeEventListener
+import com.airrobe.widgetsdk.airrobewidget.config.EventName
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeGetShoppingDataListener
 import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeGetShoppingDataModel
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
@@ -13,6 +15,7 @@ import kotlin.math.roundToInt
 
 internal val widgetInstance = AirRobeWidgetInstance
 internal var sessionId = ""
+internal var eventListenerInstance: AirRobeEventListener? = null
 
 object AirRobeWidget {
     private const val TAG = "AirRobeWidget"
@@ -58,6 +61,12 @@ object AirRobeWidget {
             widgetInstance.separatorColor = value
         }
 
+    var eventListener: AirRobeEventListener? = null
+        set(value) {
+            field = value
+            eventListenerInstance = value
+        }
+
     fun initialize(
         config: AirRobeWidgetConfig
     ) {
@@ -80,7 +89,7 @@ object AirRobeWidget {
     }
 
     fun trackPageView(context: Context, pageName: String) {
-        AirRobeAppUtils.telemetryEvent(context, "pageview", pageName)
+        AirRobeAppUtils.telemetryEvent(context, EventName.PageView.raw, pageName)
     }
 
     fun checkMultiOptInEligibility(items: ArrayList<String>): Boolean {

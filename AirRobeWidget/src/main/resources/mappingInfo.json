@@ -1,0 +1,425 @@
+{
+  "data": {
+    "shop": {
+      "categoryMappings": [
+        {
+          "from": "Accessories",
+          "to": "accessories",
+          "excluded": false
+        },
+        {
+          "from": "Accessories/All Team Sports",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Baby Carriers",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Beauty",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Belts",
+          "to": "belts",
+          "excluded": false
+        },
+        {
+          "from": "Accessories/Bibs",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Boxing",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Gifts",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Grooming",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Gym and Yoga",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Gym & Yoga",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Headwear",
+          "to": "hats-and-hair-accessories",
+          "excluded": false
+        },
+        {
+          "from": "Accessories/Headwear/Beauty",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Home",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Hosiery",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Key Rings",
+          "to": "accessories",
+          "excluded": false
+        },
+        {
+          "from": "Accessories/Mealtime",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Novelty Gifts",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Optical",
+          "to": "sunglasses-and-eyewear",
+          "excluded": false
+        },
+        {
+          "from": "Accessories/Outdoor Equipment",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Pets",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Scarves & Gloves",
+          "to": "scarves",
+          "excluded": false
+        },
+        {
+          "from": "Accessories/Skin Care",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Socks",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Socks & Tights",
+          "to": "hosiery-and-socks",
+          "excluded": false
+        },
+        {
+          "from": "Accessories/Sports Equipment",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Stationery",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Sunglasses",
+          "to": "sunglasses-and-eyewear",
+          "excluded": false
+        },
+        {
+          "from": "Accessories/Swim Accessories",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Swimming / Towels",
+          "to": "swimwear",
+          "excluded": false
+        },
+        {
+          "from": "Accessories/Team Sports",
+          "to": "accessories",
+          "excluded": false
+        },
+        {
+          "from": "Accessories/Tech Accessories",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Toys",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Travel and Luggage",
+          "to": "travel-bags",
+          "excluded": false
+        },
+        {
+          "from": "Accessories/Underwear",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Underwear & Socks",
+          "to": "intimates",
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Wellness",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Accessories/Wraps & Blankets",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Beauty",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Clothing",
+          "to": "clothing",
+          "excluded": false
+        },
+        {
+          "from": "Clothing/Accessories/Underwear",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Clothing/Coats & Jackets",
+          "to": "coats-and-jackets",
+          "excluded": false
+        },
+        {
+          "from": "Clothing/Compression",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Clothing/Dresses",
+          "to": "dresses",
+          "excluded": false
+        },
+        {
+          "from": "Clothing/Dresses & Onesies",
+          "to": "dresses",
+          "excluded": false
+        },
+        {
+          "from": "Clothing/Gifts sets",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Clothing/Jeans",
+          "to": "pants",
+          "excluded": false
+        },
+        {
+          "from": "Clothing/Jumpers & Cardigans",
+          "to": "knitwear-and-jumpers",
+          "excluded": false
+        },
+        {
+          "from": "Clothing/Jumpsuits & Playsuits",
+          "to": "jumpsuits-and-playsuits",
+          "excluded": false
+        },
+        {
+          "from": "Clothing/Lingerie",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Clothing/Onesies",
+          "to": "jumpsuits-and-playsuits",
+          "excluded": false
+        },
+        {
+          "from": "Clothing/Pants",
+          "to": "pants",
+          "excluded": false
+        },
+        {
+          "from": "Clothing/Rompers",
+          "to": "jumpsuits-and-playsuits",
+          "excluded": false
+        },
+        {
+          "from": "Clothing/Shorts",
+          "to": "shorts",
+          "excluded": false
+        },
+        {
+          "from": "Clothing/Skirts",
+          "to": "skirts",
+          "excluded": false
+        },
+        {
+          "from": "Clothing/Socks",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Clothing/Socks & Tights",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Clothing/Sports Bras & Crops",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Clothing/Suits & Blazers",
+          "to": "suits-and-blazers",
+          "excluded": false
+        },
+        {
+          "from": "Clothing/Swimwear",
+          "to": "swimwear",
+          "excluded": false
+        },
+        {
+          "from": "Clothing/Tops",
+          "to": "tops",
+          "excluded": false
+        },
+        {
+          "from": "Clothing/T-Shirts & Singlets",
+          "to": "tops",
+          "excluded": false
+        },
+        {
+          "from": "Clothing/Underwear",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Clothing/Underwear and Socks",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Clothing/Underwear & Socks",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Fashion",
+          "to": "clothing",
+          "excluded": false
+        },
+        {
+          "from": "hats/fancy-hats",
+          "to": "miscellaneous",
+          "excluded": false
+        },
+        {
+          "from": "Home",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Home/Bathroom",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Nursery",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Root Category/Clothing/Dresses/Bridesmaid Dresses/Maxi dresses/Cocktail Dresses/Formal Dresses/Midi Dresses",
+          "to": "dresses",
+          "excluded": false
+        },
+        {
+          "from": "Root Category/Clothing/Sleepwear/Gowns/Loungewear",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Shoes",
+          "to": "shoes",
+          "excluded": false
+        },
+        {
+          "from": "Shoes/Accessories",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Shoes/Slippers & Accessories",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Toys",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Underwear and Socks",
+          "to": null,
+          "excluded": true
+        },
+        {
+          "from": "Underwear & Socks",
+          "to": null,
+          "excluded": true
+        }
+      ],
+      "minimumPriceThresholds": [
+        {
+          "default": false,
+          "department": "kidswear",
+          "minimumPriceCents": 2990
+        },
+        {
+          "default": true,
+          "department": null,
+          "minimumPriceCents": 4990
+        },
+        {
+          "default": false,
+          "department": "kidswear",
+          "minimumPriceCents": 4000
+        },
+        {
+          "default": true,
+          "department": null,
+          "minimumPriceCents": 7000
+        },
+        {
+          "default": true,
+          "department": null,
+          "minimumPriceCents": 10000
+        }
+      ]
+    }
+  }
+}
