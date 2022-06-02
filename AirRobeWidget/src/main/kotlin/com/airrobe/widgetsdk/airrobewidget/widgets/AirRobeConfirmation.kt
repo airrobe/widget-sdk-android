@@ -206,7 +206,12 @@ class AirRobeConfirmation @JvmOverloads constructor(
 
     private fun identifyOrder(config: AirRobeWidgetConfig, orderId: String) {
         val identifyOrderController = AirRobeIdentifyOrderController()
-        identifyOrderController.start(context, config, orderId)
+        identifyOrderController.start(
+            context,
+            config,
+            orderId,
+            AirRobeSharedPreferenceManager.getOrderOptedIn(context)
+        )
     }
 
     private fun emailCheck(email: String) {
