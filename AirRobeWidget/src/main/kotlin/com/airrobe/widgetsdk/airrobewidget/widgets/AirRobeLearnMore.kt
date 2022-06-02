@@ -89,15 +89,15 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
             }
             if (isChecked) {
                 if (isFromMultiOptIn) {
-                    AirRobeAppUtils.telemetryEvent(context, EventName.OptedIn.raw, PageName.Cart.raw)
+                    AirRobeAppUtils.telemetryEvent(context, EventName.OptIn.raw, PageName.Cart.raw)
                 } else {
-                    AirRobeAppUtils.telemetryEvent(context, EventName.OptedIn.raw, PageName.Product.raw)
+                    AirRobeAppUtils.telemetryEvent(context, EventName.OptIn.raw, PageName.Product.raw)
                 }
             } else {
                 if (isFromMultiOptIn) {
-                    AirRobeAppUtils.telemetryEvent(context, EventName.OptedOut.raw, PageName.Cart.raw)
+                    AirRobeAppUtils.telemetryEvent(context, EventName.OptOut.raw, PageName.Cart.raw)
                 } else {
-                    AirRobeAppUtils.telemetryEvent(context, EventName.OptedOut.raw, PageName.Product.raw)
+                    AirRobeAppUtils.telemetryEvent(context, EventName.OptOut.raw, PageName.Product.raw)
                 }
             }
         }
@@ -267,6 +267,15 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
                 dismiss()
             }
             true
+        }
+    }
+
+    override fun dismiss() {
+        super.dismiss()
+        if (isFromMultiOptIn) {
+            AirRobeAppUtils.dispatchEvent(context, EventName.PopupClose.raw, PageName.Cart.raw)
+        } else {
+            AirRobeAppUtils.dispatchEvent(context, EventName.PopupClose.raw, PageName.Product.raw)
         }
     }
 }

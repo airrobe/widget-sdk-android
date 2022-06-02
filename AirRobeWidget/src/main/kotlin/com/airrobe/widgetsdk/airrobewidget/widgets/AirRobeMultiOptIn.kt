@@ -200,11 +200,12 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 tvDetailedDescription.visibility = GONE
                 expandType = ExpandType.Closed
                 ivArrowDown.animate().rotation(0.0f).duration = 80
+                AirRobeAppUtils.dispatchEvent(context, EventName.Collapse.raw, PageName.Cart.raw)
             } else {
                 tvDetailedDescription.visibility = VISIBLE
                 expandType = ExpandType.Opened
                 ivArrowDown.animate().rotation(180.0f).duration = 80
-                AirRobeAppUtils.telemetryEvent(context, EventName.WidgetExpand.raw, PageName.Cart.raw)
+                AirRobeAppUtils.telemetryEvent(context, EventName.Expand.raw, PageName.Cart.raw)
             }
         }
         setDetailedDescriptionText()
@@ -214,9 +215,9 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, isChecked)
             if (isChecked) {
-                AirRobeAppUtils.telemetryEvent(context, EventName.OptedIn.raw, PageName.Cart.raw)
+                AirRobeAppUtils.telemetryEvent(context, EventName.OptIn.raw, PageName.Cart.raw)
             } else {
-                AirRobeAppUtils.telemetryEvent(context, EventName.OptedOut.raw, PageName.Cart.raw)
+                AirRobeAppUtils.telemetryEvent(context, EventName.OptOut.raw, PageName.Cart.raw)
             }
         }
     }
@@ -235,7 +236,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 dialog.isFromMultiOptIn = false
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
-                AirRobeAppUtils.telemetryEvent(context, EventName.PopupClick.raw, PageName.Cart.raw)
+                AirRobeAppUtils.telemetryEvent(context, EventName.PopupOpen.raw, PageName.Cart.raw)
             }
         }
 
@@ -273,6 +274,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
             return
         }
+        AirRobeAppUtils.telemetryEvent(context, EventName.PageView.raw, PageName.Cart.raw)
         if (items.isEmpty()) {
             Log.e(TAG, "Required params can't be empty")
             visibility = GONE
@@ -284,10 +286,11 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         if (to != null) {
             visibility = VISIBLE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, AirRobeSharedPreferenceManager.getOptedIn(context))
-            AirRobeAppUtils.telemetryEvent(context, EventName.PageView.raw, PageName.Cart.raw)
+            AirRobeAppUtils.dispatchEvent(context, EventName.WidgetRender.raw, PageName.Cart.raw)
         } else {
             visibility = GONE
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
+            AirRobeAppUtils.dispatchEvent(context, EventName.WidgetNotRendered.raw, PageName.Cart.raw)
             Log.d(TAG, "Category is not eligible")
         }
     }

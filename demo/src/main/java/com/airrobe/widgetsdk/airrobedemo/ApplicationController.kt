@@ -52,21 +52,24 @@ class ApplicationController : Application(), AirRobeEventListener {
     override fun onEventEmitted(event: AirRobeEventData) {
         when (event.event_name) {
             EventName.PageView -> Log.d("Demo", "pageview")
+            EventName.WidgetRender -> Log.d("Demo", "widget rendered")
             EventName.WidgetNotRendered -> Log.d("Demo", "widget not rendered")
-            EventName.OptedIn -> Log.d("Demo", "opted in")
-            EventName.OptedOut -> Log.d("Demo", "opted out")
-            EventName.WidgetExpand -> Log.d("Demo", "widget expand")
-            EventName.WidgetCollapse -> Log.d("Demo", "widget collapse")
-            EventName.PopupClick -> Log.d("Demo", "popup click")
-            EventName.ClaimLinkClick -> Log.d("Demo", "claim link click")
-            EventName.Other -> Log.d("Demo", "Other")
+            EventName.OptIn -> Log.d("Demo", "opted in")
+            EventName.OptOut -> Log.d("Demo", "opted out")
+            EventName.Expand -> Log.d("Demo", "widget expand")
+            EventName.Collapse -> Log.d("Demo", "widget collapse")
+            EventName.PopupOpen -> Log.d("Demo", "popup open")
+            EventName.PopupClose -> Log.d("Demo", "popup close")
+            EventName.ConfirmationRender -> Log.d("Demo", "confirmation view rendered")
+            EventName.ConfirmationClick -> Log.d("Demo", "claim link click")
+            EventName.Other -> Log.d("Demo", "other")
         }
 
         when (event.page_name) {
             PageName.Product -> Log.d("Demo", "widget on product page")
             PageName.Cart -> Log.d("Demo", "widget on cart page")
             PageName.ThankYou -> Log.d("Demo", "widget on thank you page")
-            PageName.Other -> Log.d("Demo", "Other")
+            PageName.Other -> Log.d("Demo", "other")
         }
     }
 }

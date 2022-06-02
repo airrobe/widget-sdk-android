@@ -13,15 +13,18 @@ internal class AirRobeConstants {
 }
 
 enum class EventName(val raw: String) {
-    PageView("pageview"),
-    WidgetNotRendered("Widget not rendered"),
-    OptedIn("Opted in to AirRobe"),
-    OptedOut("Opted out of AirRobe"),
-    WidgetExpand("Widget Expand Arrow Click"),
-    WidgetCollapse("Widget Collapse Arrow Click"),
-    PopupClick("Pop up click"),
-    ClaimLinkClick("Claim link click"),
-    Other("Other");
+    PageView("airrobe-pageview"),
+    WidgetRender("airrobe-widget-render"),
+    WidgetNotRendered("airrobe-widget-not-rendered"),
+    OptIn("airrobe-widget-opt-in"),
+    OptOut("airrobe-widget-opt-out"),
+    Expand("airrobe-widget-expand"),
+    Collapse("airrobe-widget-collapse"),
+    PopupOpen("airrobe-widget-popup-open"),
+    PopupClose("airrobe-widget-popup-close"),
+    ConfirmationRender("airrobe-confirmation-render"),
+    ConfirmationClick("airrobe-confirmation-click"),
+    Other("other");
 
     companion object {
         fun getByValue(value: String) = values().find { it.raw == value }
