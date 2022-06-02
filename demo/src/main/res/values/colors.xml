@@ -6,5 +6,10 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="status_bar_color">#33000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="lightGray">#EEEEEE</color>
+    <color name="second_label_color">#999999</color>
+    <color name="darkGray">#333333</color>
+    <color name="button_background_color">#42ABC8</color>
 </resources>
