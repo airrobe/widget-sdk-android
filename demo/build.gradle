@@ -29,6 +29,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    namespace 'com.airrobe.widgetsdk.airrobedemo'
 }
 
 dependencies {
@@ -38,6 +39,8 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$rootProject.ext.appCompatLibVersion"
     implementation "com.google.android.material:material:$rootProject.ext.materialLibVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayoutVersion"
+    implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
+    implementation "io.github.nikartm:image-support:$rootProject.ext.imageSupportVersion"
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.extjunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.espressoCoreVersion"
