@@ -14,8 +14,9 @@ class ApplicationController : Application(), AirRobeEventListener {
         // Initialize SDK
         AirRobeWidget.initialize(
             AirRobeWidgetConfig(
-                "c43f2be28f1f",
-                "https://www.theiconic.com.au/privacy-policy"
+                "515b6ee129da",
+                "https://www.example.com/privacy-policy",
+                Mode.SANDBOX
             )
         )
         AirRobeWidget.eventListener = this
@@ -62,7 +63,6 @@ class ApplicationController : Application(), AirRobeEventListener {
             EventName.PopupClose -> Log.d("Demo", "popup close")
             EventName.ConfirmationRender -> Log.d("Demo", "confirmation view rendered")
             EventName.ConfirmationClick -> Log.d("Demo", "claim link click")
-            EventName.Other -> Log.d("Demo", "other")
         }
 
         when (event.page_name) {

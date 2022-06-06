@@ -21,6 +21,7 @@ import android.view.View
 import android.widget.*
 import com.airrobe.widgetsdk.airrobewidget.config.EventName
 import com.airrobe.widgetsdk.airrobewidget.config.PageName
+import com.airrobe.widgetsdk.airrobewidget.config.TelemetryEventName
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 
@@ -205,7 +206,8 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 tvDetailedDescription.visibility = VISIBLE
                 expandType = ExpandType.Opened
                 ivArrowDown.animate().rotation(180.0f).duration = 80
-                AirRobeAppUtils.telemetryEvent(context, EventName.Expand.raw, PageName.Cart.raw)
+                AirRobeAppUtils.telemetryEvent(context, TelemetryEventName.Expand.raw, PageName.Cart.raw)
+                AirRobeAppUtils.dispatchEvent(context, EventName.Expand.raw, PageName.Cart.raw)
             }
         }
         setDetailedDescriptionText()
@@ -216,10 +218,12 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, isChecked)
             if (isChecked) {
                 tvTitle.text = context.resources.getString(R.string.airrobe_added_to)
-                AirRobeAppUtils.telemetryEvent(context, EventName.OptIn.raw, PageName.Cart.raw)
+                AirRobeAppUtils.telemetryEvent(context, TelemetryEventName.OptIn.raw, PageName.Cart.raw)
+                AirRobeAppUtils.dispatchEvent(context, EventName.OptIn.raw, PageName.Cart.raw)
             } else {
                 tvTitle.text = context.resources.getString(R.string.airrobe_add_to)
-                AirRobeAppUtils.telemetryEvent(context, EventName.OptOut.raw, PageName.Cart.raw)
+                AirRobeAppUtils.telemetryEvent(context, TelemetryEventName.OptOut.raw, PageName.Cart.raw)
+                AirRobeAppUtils.dispatchEvent(context, EventName.OptOut.raw, PageName.Cart.raw)
             }
         }
     }
@@ -238,7 +242,8 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                 dialog.isFromMultiOptIn = false
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
-                AirRobeAppUtils.telemetryEvent(context, EventName.PopupOpen.raw, PageName.Cart.raw)
+                AirRobeAppUtils.telemetryEvent(context, TelemetryEventName.PopupOpen.raw, PageName.Cart.raw)
+                AirRobeAppUtils.dispatchEvent(context, EventName.PopupOpen.raw, PageName.Cart.raw)
             }
         }
 
@@ -276,7 +281,8 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
             return
         }
-        AirRobeAppUtils.telemetryEvent(context, EventName.PageView.raw, PageName.Cart.raw)
+        AirRobeAppUtils.telemetryEvent(context, TelemetryEventName.PageView.raw, PageName.Cart.raw)
+        AirRobeAppUtils.dispatchEvent(context, EventName.PageView.raw, PageName.Cart.raw)
         if (items.isEmpty()) {
             Log.e(TAG, "Required params can't be empty")
             visibility = GONE

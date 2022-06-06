@@ -156,7 +156,8 @@ class AirRobeConfirmation @JvmOverloads constructor(
                         AirRobeConstants.ORDER_ACTIVATE_SANDBOX_BASE_URL
                     intent.data = Uri.parse(baseUrl + widgetInstance.configuration?.appId + "-" + orderId + "/claim")
                     context.startActivity(intent)
-                    AirRobeAppUtils.telemetryEvent(context, EventName.ConfirmationClick.raw, PageName.ThankYou.raw)
+                    AirRobeAppUtils.telemetryEvent(context, TelemetryEventName.ConfirmationClick.raw, PageName.ThankYou.raw)
+                    AirRobeAppUtils.dispatchEvent(context, EventName.ConfirmationClick.raw, PageName.ThankYou.raw)
                 }
                 true
             }
@@ -185,7 +186,8 @@ class AirRobeConfirmation @JvmOverloads constructor(
             visibility = GONE
             return
         }
-        AirRobeAppUtils.telemetryEvent(context, EventName.PageView.raw, PageName.ThankYou.raw)
+        AirRobeAppUtils.telemetryEvent(context, TelemetryEventName.PageView.raw, PageName.ThankYou.raw)
+        AirRobeAppUtils.dispatchEvent(context, EventName.PageView.raw, PageName.ThankYou.raw)
         if (orderId.isNullOrEmpty() || email.isNullOrEmpty()) {
             Log.e(TAG, "Required params can't be empty")
             visibility = GONE

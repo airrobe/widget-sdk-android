@@ -13,6 +13,7 @@ import android.widget.*
 import com.airrobe.widgetsdk.airrobewidget.R
 import com.airrobe.widgetsdk.airrobewidget.config.EventName
 import com.airrobe.widgetsdk.airrobewidget.config.PageName
+import com.airrobe.widgetsdk.airrobewidget.config.TelemetryEventName
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 import com.airrobe.widgetsdk.airrobewidget.widgetInstance
@@ -89,15 +90,19 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
             }
             if (isChecked) {
                 if (isFromMultiOptIn) {
-                    AirRobeAppUtils.telemetryEvent(context, EventName.OptIn.raw, PageName.Cart.raw)
+                    AirRobeAppUtils.telemetryEvent(context, TelemetryEventName.OptIn.raw, PageName.Cart.raw)
+                    AirRobeAppUtils.dispatchEvent(context, EventName.OptIn.raw, PageName.Cart.raw)
                 } else {
-                    AirRobeAppUtils.telemetryEvent(context, EventName.OptIn.raw, PageName.Product.raw)
+                    AirRobeAppUtils.telemetryEvent(context, TelemetryEventName.OptIn.raw, PageName.Product.raw)
+                    AirRobeAppUtils.dispatchEvent(context, EventName.OptIn.raw, PageName.Product.raw)
                 }
             } else {
                 if (isFromMultiOptIn) {
-                    AirRobeAppUtils.telemetryEvent(context, EventName.OptOut.raw, PageName.Cart.raw)
+                    AirRobeAppUtils.telemetryEvent(context, TelemetryEventName.OptOut.raw, PageName.Cart.raw)
+                    AirRobeAppUtils.dispatchEvent(context, EventName.OptOut.raw, PageName.Cart.raw)
                 } else {
-                    AirRobeAppUtils.telemetryEvent(context, EventName.OptOut.raw, PageName.Product.raw)
+                    AirRobeAppUtils.telemetryEvent(context, TelemetryEventName.OptOut.raw, PageName.Product.raw)
+                    AirRobeAppUtils.dispatchEvent(context, EventName.OptOut.raw, PageName.Product.raw)
                 }
             }
         }
