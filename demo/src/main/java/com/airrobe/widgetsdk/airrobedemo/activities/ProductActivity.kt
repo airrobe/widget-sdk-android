@@ -38,7 +38,10 @@ class ProductActivity : AppCompatActivity() {
 
         val optInWidget = findViewById<AirRobeOptIn>(R.id.opt_in_widget)
         optInWidget.initialize(
+            brand = "Gucci",
+            material = "Leather",
             category = Consts.products[itemId].category,
+            department = "Womenswear",
             priceCents = Consts.products[itemId].price.replace("$", "").toFloat()
         )
 

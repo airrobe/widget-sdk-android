@@ -24,12 +24,29 @@ internal object AirRobeAppUtils {
         return Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
     }
 
-    fun telemetryEvent(context: Context, eventName: String, pageName: String) {
+    fun telemetryEvent(
+        context: Context,
+        eventName: String,
+        pageName: String,
+        brand: String? = null,
+        material: String? = null,
+        category: String? = null,
+        department: String? = null
+    ) {
         if (widgetInstance.configuration == null) {
             return
         }
         val telemetryEventController = AirRobeTelemetryEventController()
-        telemetryEventController.start(context, widgetInstance.configuration!!, eventName, pageName)
+        telemetryEventController.start(
+            context,
+            widgetInstance.configuration!!,
+            eventName,
+            pageName,
+            brand,
+            material,
+            category,
+            department
+        )
     }
 
     fun dispatchEvent(context: Context, eventName: String, pageName: String) {
@@ -40,7 +57,7 @@ internal object AirRobeAppUtils {
             widgetInstance.configuration!!.appId,
             getDeviceId(context),
             sessionId,
-            EventName.getByValue(eventName) ?: EventName.Other,
+            EventName.getByValue(eventName)!!,
             "Android",
             context.getString(R.string.airrobe_widget_version),
             "default",

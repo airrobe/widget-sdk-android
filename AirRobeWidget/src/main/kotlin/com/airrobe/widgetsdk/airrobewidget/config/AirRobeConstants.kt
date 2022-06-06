@@ -23,8 +23,20 @@ enum class EventName(val raw: String) {
     PopupOpen("airrobe-widget-popup-open"),
     PopupClose("airrobe-widget-popup-close"),
     ConfirmationRender("airrobe-confirmation-render"),
-    ConfirmationClick("airrobe-confirmation-click"),
-    Other("other");
+    ConfirmationClick("airrobe-confirmation-click");
+
+    companion object {
+        fun getByValue(value: String) = values().find { it.raw == value }
+    }
+}
+
+enum class TelemetryEventName(val raw: String) {
+    PageView("pageview"),
+    OptIn("Opted in to AirRobe"),
+    OptOut("Opted out of AirRobe"),
+    Expand("Widget Expand Arrow Click"),
+    PopupOpen("Pop up click"),
+    ConfirmationClick("Claim link click");
 
     companion object {
         fun getByValue(value: String) = values().find { it.raw == value }
