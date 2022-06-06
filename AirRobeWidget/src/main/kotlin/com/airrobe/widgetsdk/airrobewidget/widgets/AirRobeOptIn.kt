@@ -229,9 +229,12 @@ class AirRobeOptIn @JvmOverloads constructor(
         optInSwitch.isChecked = AirRobeSharedPreferenceManager.getOptedIn(context)
         optInSwitch.setOnCheckedChangeListener { _, isChecked ->
             AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
+
             if (isChecked) {
+                tvTitle.text = context.resources.getString(R.string.airrobe_added_to)
                 AirRobeAppUtils.telemetryEvent(context, EventName.OptIn.raw, PageName.Product.raw)
             } else {
+                tvTitle.text = context.resources.getString(R.string.airrobe_add_to)
                 AirRobeAppUtils.telemetryEvent(context, EventName.OptOut.raw, PageName.Product.raw)
             }
         }
