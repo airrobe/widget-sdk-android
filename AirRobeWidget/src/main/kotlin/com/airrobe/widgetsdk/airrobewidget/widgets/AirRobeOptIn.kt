@@ -240,7 +240,7 @@ class AirRobeOptIn @JvmOverloads constructor(
                 AirRobeAppUtils.dispatchEvent(context, EventName.OptOut.raw, PageName.Product.raw)
             }
         }
-        tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value_text)
+        tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value_without_value)
     }
 
     private fun setDetailedDescriptionText() {
@@ -345,17 +345,13 @@ class AirRobeOptIn @JvmOverloads constructor(
         }
     }
 
-    private fun checkIfPotentialValueTextCutOff(potentialValue: String? = null) {
+    private fun checkIfPotentialValueTextCutOff() {
         val runnable = Runnable {
             if (tvPotentialValue.layout == null) {
                 return@Runnable
             }
             if (tvPotentialValue.layout.getEllipsisCount(0) > 0) {
-                if (potentialValue == null) {
-                    tvPotentialValue.text = ""
-                } else {
-                    tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value_without_text, potentialValue)
-                }
+                tvDescription.text = context.resources.getString(R.string.airrobe_description_text_cut_off)
             }
         }
         tvPotentialValue.post(runnable)
@@ -372,10 +368,10 @@ class AirRobeOptIn @JvmOverloads constructor(
                 if (resaleValue == null) {
                     Log.e(TAG, "Resale price is null")
                     tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value, fallbackResalePrice())
-                    checkIfPotentialValueTextCutOff(fallbackResalePrice())
+                    checkIfPotentialValueTextCutOff()
                 } else {
                     tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value, resaleValue.toString())
-                    checkIfPotentialValueTextCutOff(resaleValue.toString())
+                    checkIfPotentialValueTextCutOff()
                 }
             }
 
@@ -387,7 +383,7 @@ class AirRobeOptIn @JvmOverloads constructor(
                     Log.e(TAG, error)
                 }
                 tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value, fallbackResalePrice())
-                checkIfPotentialValueTextCutOff(fallbackResalePrice())
+                checkIfPotentialValueTextCutOff()
             }
         }
         priceEngineController.start(priceCents, if (rrp == AirRobeConstants.FLOAT_NULL_MAGIC_VALUE) null else rrp , category, brand, material)
