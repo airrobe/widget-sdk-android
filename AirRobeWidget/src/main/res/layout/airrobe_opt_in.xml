@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/ll_main_container"
@@ -35,7 +34,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginHorizontal="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -75,18 +74,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/airrobe_description"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:singleLine="true"
-                            android:layout_marginEnd="10dp"/>
+                            android:layout_marginEnd="3dp"/>
 
                         <TextView
                             android:id="@+id/tv_potential_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold"
                             android:singleLine="true"
-                            android:layout_marginEnd="10dp"/>
+                            android:layout_marginEnd="5dp"/>
 
                         <ProgressBar
                             android:id="@+id/price_loading"

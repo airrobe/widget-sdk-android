@@ -4,11 +4,11 @@
     <string name="airrobe_added_to">Added To</string>
     <string name="airrobe_add_to">Add To</string>
 
-    <string name="airrobe_description">Wear now, re-sell later</string>
+    <string name="airrobe_description">Wear now, re-sell later.</string>
 
-    <string name="airrobe_potential_value_text">Potential value:</string>
+    <string name="airrobe_description_text_cut_off">Re-sell later.</string>
     <string name="airrobe_potential_value">Potential value: $%1$s</string>
-    <string name="airrobe_potential_value_without_text">$%1$s</string>
+    <string name="airrobe_potential_value_without_value">Potential value:</string>
 
     <string name="airrobe_detailed_description">We’ve partnered with AirRobe to enable you to join the circular fashion movement. Re-sell or rent your purchases on AirRobe’s marketplace – all with one simple click. Together, we can do our part to keep fashion out of landfill. Learn more.</string>
     <string name="airrobe_learn_more_link_text">Learn more.</string>
