@@ -1,5 +1,4 @@
 # AirRobeWidget
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.airrobe/airrobe-widget-sdk/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.airrobe/airrobe-widget-sdk)
 
 The AirRobeWidget Android SDK provides Circular Wardrobe widgets for your native Android application.
 
