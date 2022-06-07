@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = '1.7.0'
+    ext.kotlin_version = '1.8.0'
     ext.build_gradle = '7.2.1'
     ext.kotlin_gradle_plugin_version = '1.6.21'
     ext.gradle_maven_publish_plugin = '0.19.0'
@@ -25,8 +25,8 @@ ext {
     targetSdkVersion = 32
     minSdkVersion = 21
     compileSdkVersion = targetSdkVersion
-    appCompatLibVersion = '1.4.1'
-    materialLibVersion = '1.6.0'
+    appCompatLibVersion = '1.4.2'
+    materialLibVersion = '1.6.1'
     constraintLayoutVersion = '2.1.4'
     junitVersion = '4.13.2'
     extjunitVersion = '1.1.3'
