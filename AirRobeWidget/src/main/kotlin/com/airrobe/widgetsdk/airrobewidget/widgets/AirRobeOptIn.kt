@@ -334,7 +334,7 @@ class AirRobeOptIn @JvmOverloads constructor(
                 Log.d(TAG, "Below price threshold")
             } else {
                 visibility = VISIBLE
-                checkIfPotentialValueTextCutOff()
+                checkIfDescriptionTextCutOff()
                 callPriceEngine(to)
                 AirRobeAppUtils.dispatchEvent(context, EventName.WidgetRender.raw, PageName.Product.raw)
             }
@@ -345,7 +345,7 @@ class AirRobeOptIn @JvmOverloads constructor(
         }
     }
 
-    private fun checkIfPotentialValueTextCutOff() {
+    private fun checkIfDescriptionTextCutOff() {
         val runnable = Runnable {
             if (tvPotentialValue.layout == null) {
                 return@Runnable
@@ -354,7 +354,7 @@ class AirRobeOptIn @JvmOverloads constructor(
                 tvDescription.text = context.resources.getString(R.string.airrobe_description_text_cut_off)
             }
         }
-        tvPotentialValue.post(runnable)
+        tvDescription.post(runnable)
     }
 
     private fun callPriceEngine(category: String) {
@@ -368,10 +368,10 @@ class AirRobeOptIn @JvmOverloads constructor(
                 if (resaleValue == null) {
                     Log.e(TAG, "Resale price is null")
                     tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value, fallbackResalePrice())
-                    checkIfPotentialValueTextCutOff()
+                    checkIfDescriptionTextCutOff()
                 } else {
                     tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value, resaleValue.toString())
-                    checkIfPotentialValueTextCutOff()
+                    checkIfDescriptionTextCutOff()
                 }
             }
 
@@ -383,7 +383,7 @@ class AirRobeOptIn @JvmOverloads constructor(
                     Log.e(TAG, error)
                 }
                 tvPotentialValue.text = context.resources.getString(R.string.airrobe_potential_value, fallbackResalePrice())
-                checkIfPotentialValueTextCutOff()
+                checkIfDescriptionTextCutOff()
             }
         }
         priceEngineController.start(priceCents, if (rrp == AirRobeConstants.FLOAT_NULL_MAGIC_VALUE) null else rrp , category, brand, material)
