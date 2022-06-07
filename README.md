@@ -1,4 +1,5 @@
 # AirRobeWidget
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.airrobe/airrobe-widget-sdk/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.airrobe/airrobe-widget-sdk)
 
 The AirRobeWidget Android SDK provides Circular Wardrobe widgets for your native Android application.
 
@@ -10,40 +11,20 @@ The AirRobeWidget Android SDK provides Circular Wardrobe widgets for your native
 
 ### Use Gradle
 
-1. Add below in your root build.gradle at the end of repositories
-```gradle
-allprojects {
-    repositories {
-        ...
-        maven { url 'https://jitpack.io' }
-    }
-}
-```
-
-2. Add the dependency
 ```gradle
 dependencies {
-    implementation 'com.github.airrobe:widget-sdk-android:x.x.x'
+    implementation 'com.airrobe:airrobe-widget-sdk:x.x.x'
 }
 ```
 
 ### Or Maven
 
 ```xml
-<repositories>
-    <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    </repository>
-</repositories>
-```
-
-Add the dependency
-```xml
 <dependency>
-    <groupId>com.github.airrobe</groupId>
-    <artifactId>widget-sdk-android</artifactId>
-    <version>Tag</version>
+  <groupId>com.airrobe</groupId>
+  <artifactId>airrobe-widget-sdk</artifactId>
+  <version>x.x.x</version>
+  <type>module</type>
 </dependency>
 ```
 
