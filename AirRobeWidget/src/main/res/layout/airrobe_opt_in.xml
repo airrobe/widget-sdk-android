@@ -35,7 +35,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginHorizontal="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -77,7 +77,7 @@
                             android:text="@string/airrobe_description"
                             android:textSize="12sp"
                             android:singleLine="true"
-                            android:layout_marginEnd="10dp"/>
+                            android:layout_marginEnd="3dp"/>
 
                         <TextView
                             android:id="@+id/tv_potential_value"
@@ -86,7 +86,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold"
                             android:singleLine="true"
-                            android:layout_marginEnd="10dp"/>
+                            android:layout_marginEnd="5dp"/>
 
                         <ProgressBar
                             android:id="@+id/price_loading"
