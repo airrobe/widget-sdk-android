@@ -22,7 +22,7 @@
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/arrow_back"
-                app:tint="@color/darkGray" />
+                app:tint="@color/widget_text_color" />
 
             <TextView
                 android:id="@+id/tv_title"
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:letterSpacing="0.1"
-                android:textColor="@color/black"
+                android:textColor="@color/widget_text_color"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -71,7 +71,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="20dp"
                 android:textSize="14sp"
-                android:textColor="@color/second_label_color"/>
+                android:textColor="@color/widget_text_color" />
 
             <TextView
                 android:id="@+id/tv_product_title"
@@ -80,6 +80,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="20dp"
                 android:textSize="18sp"
+                android:textColor="@color/widget_text_color"
                 android:textStyle="bold" />
 
             <TextView
@@ -88,6 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="20dp"
+                android:textColor="@color/widget_text_color"
                 android:textSize="17sp" />
 
             <TextView
@@ -96,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="20dp"
                 android:layout_marginHorizontal="20dp"
+                android:textColor="@color/widget_text_color"
                 android:textSize="17sp" />
 
             <Button

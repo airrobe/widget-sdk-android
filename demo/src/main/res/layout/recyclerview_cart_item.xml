@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/black"
+            android:textColor="@color/widget_text_color"
             android:textStyle="bold" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="17sp"
-            android:textColor="@color/black"
+            android:textColor="@color/widget_text_color"
             android:layout_marginTop="10dp" />
 
         <TextView
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:text="Qty: 1    Size: 30"
             android:textSize="18sp"
-            android:textColor="@color/black"
+            android:textColor="@color/widget_text_color"
             android:textStyle="bold"
             android:layout_marginTop="20dp"/>
     </LinearLayout>

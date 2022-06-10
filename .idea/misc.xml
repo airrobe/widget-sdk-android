@@ -19,7 +19,7 @@
         <entry key="AirRobeWidget/src/main/res/layout/airrobe_confirmation.xml" value="0.40275650842266464" />
         <entry key="AirRobeWidget/src/main/res/layout/airrobe_dialog_learn_more.xml" value="0.21822916666666667" />
         <entry key="AirRobeWidget/src/main/res/layout/airrobe_multi_opt_in.xml" value="0.21197916666666666" />
-        <entry key="AirRobeWidget/src/main/res/layout/airrobe_opt_in.xml" value="0.25" />
+        <entry key="AirRobeWidget/src/main/res/layout/airrobe_opt_in.xml" value="0.5" />
         <entry key="AirRobeWidget/src/main/res/layout/dialog_learn_more.xml" value="0.25" />
         <entry key="AirRobeWidget/src/main/res/layout/layout_opt_in.xml" value="0.29030797101449274" />
         <entry key="AirRobeWidget/src/main/res/layout/layout_optin.xml" value="0.5162187210379982" />
@@ -29,6 +29,7 @@
         <entry key="app/src/main/res/layout/activity_multi_opt_in.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/activity_opt_in.xml" value="0.21197916666666666" />
         <entry key="demo/src/main/res/drawable/ic_airrobe_logo.xml" value="0.162" />
+        <entry key="demo/src/main/res/drawable/ic_launcher_background.xml" value="0.227" />
         <entry key="demo/src/main/res/drawable/shape_apply_btn_background.xml" value="0.164" />
         <entry key="demo/src/main/res/drawable/shape_edit_text_background.xml" value="0.164" />
         <entry key="demo/src/main/res/layout/activity_brand.xml" value="0.22" />

@@ -20,7 +20,7 @@
                 android:layout_centerInParent="true"
                 android:letterSpacing="0.1"
                 android:text="@string/airrobe"
-                android:textColor="@color/black"
+                android:textColor="@color/widget_text_color"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
