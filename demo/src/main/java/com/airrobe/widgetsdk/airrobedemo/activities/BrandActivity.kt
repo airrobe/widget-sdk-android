@@ -1,6 +1,8 @@
 package com.airrobe.widgetsdk.airrobedemo.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,5 +25,11 @@ class BrandActivity : AppCompatActivity() {
 
         val rvBrandAdapter = BrandsRVAdapter(this, Consts.brands)
         rvBrand.adapter = rvBrandAdapter
+
+        val btnLogo = findViewById<Button>(R.id.btn_logo_difference)
+        btnLogo.setOnClickListener {
+            val intent = Intent(this, LogosActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

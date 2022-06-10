@@ -32,6 +32,14 @@
         android:id="@+id/rv_brands"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/topbar_layout" />
+        android:layout_below="@id/topbar_layout"
+        android:layout_above="@id/btn_logo_difference"/>
+
+    <Button
+        android:id="@+id/btn_logo_difference"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logo Differences"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>
