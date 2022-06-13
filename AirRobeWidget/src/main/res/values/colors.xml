@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="airrobe_widget_default_modal_bg">#FFFFFF</color>
+    <color name="airrobe_widget_default_background_color">#FFFFFF</color>
     <color name="airrobe_widget_default_border_color">#DFDFDF</color>
     <color name="airrobe_widget_default_text_color">#232323</color>
     <color name="airrobe_widget_default_switch_color">#42ABC8</color>

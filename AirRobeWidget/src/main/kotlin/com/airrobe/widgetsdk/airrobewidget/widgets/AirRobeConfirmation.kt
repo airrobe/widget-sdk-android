@@ -42,6 +42,17 @@ class AirRobeConfirmation @JvmOverloads constructor(
     private var email: String? = null
     private var fraudRisk: Boolean = false
 
+    var widgetBackgroundColor: Int =
+        if (widgetInstance.backgroundColor == 0)
+            AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_background_color)
+        else
+            widgetInstance.backgroundColor
+        set(value) {
+            field = value
+            val mainBackground = rlMainContainer.background as GradientDrawable
+            mainBackground.setColor(value)
+        }
+
     var borderColor: Int =
         if (widgetInstance.borderColor == 0)
             AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_border_color)
@@ -115,6 +126,13 @@ class AirRobeConfirmation @JvmOverloads constructor(
 
     private fun setupAttributes(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.AirRobeConfirmation, 0, 0)
+        widgetBackgroundColor =
+            typedArray.getColor(R.styleable.AirRobeConfirmation_backgroundColor,
+                if (widgetInstance.backgroundColor == 0)
+                    AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_background_color)
+                else
+                    widgetInstance.backgroundColor
+            )
         borderColor =
             typedArray.getColor(R.styleable.AirRobeConfirmation_borderColor,
                 if (widgetInstance.borderColor == 0)
