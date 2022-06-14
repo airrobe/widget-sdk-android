@@ -20,6 +20,11 @@ internal var eventListenerInstance: AirRobeEventListener? = null
 object AirRobeWidget {
     private const val TAG = "AirRobeWidget"
 
+    var backgroundColor: Int = 0
+        set(value) {
+            field = value
+            widgetInstance.backgroundColor = value
+        }
     var borderColor: Int = 0
         set(value) {
             field = value
@@ -93,7 +98,7 @@ object AirRobeWidget {
     }
 
     fun checkMultiOptInEligibility(items: ArrayList<String>): Boolean {
-        if (widgetInstance.shopModel == null || items.isEmpty() || widgetInstance.categoryMapping.categoryMappingsHashmap.isNullOrEmpty()) {
+        if (widgetInstance.shopModel == null || items.isEmpty() || widgetInstance.categoryMapping.categoryMappingsHashmap.isEmpty()) {
             return false
         }
         val to = widgetInstance.categoryMapping.checkCategoryEligible(items)

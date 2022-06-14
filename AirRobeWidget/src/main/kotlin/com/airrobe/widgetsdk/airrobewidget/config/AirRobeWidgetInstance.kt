@@ -17,6 +17,7 @@ internal object AirRobeWidgetInstance {
         }
     var changeListener: InstanceChangeListener? = null
 
+    var backgroundColor: Int = 0
     var borderColor: Int = 0
     var textColor: Int = 0
     var switchColor: Int = 0
