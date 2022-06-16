@@ -236,11 +236,21 @@ confirmationWidget.buttonTextColor = Color.rgb(255, 255, 255)
 
 ###### Clear Cache (Opt value reset)
 
-`AirRobeWidget.resetOptedIn()`
+```kotlin
+AirRobeWidget.resetOptedIn()
+```
+
+###### Reset Order (When the order is completed and the confirmation widget is already rendered)
+
+```kotlin
+AirRobeWidget.resetOrder()
+```
 
 ###### Get Order-Opted-In value
 
-`AirRobeWidget.orderOptedIn()`
+```kotlin
+AirRobeWidget.orderOptedIn()
+```
 
 ###### Check Multi-Opt-In Eligibility
 
