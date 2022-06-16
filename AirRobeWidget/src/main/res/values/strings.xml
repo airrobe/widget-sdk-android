@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="airrobe_widget_version">1.0.5</string>
+    <string name="airrobe_widget_version">1.0.6</string>
     <string name="airrobe_added_to">Added To</string>
     <string name="airrobe_add_to">Add To</string>
 
