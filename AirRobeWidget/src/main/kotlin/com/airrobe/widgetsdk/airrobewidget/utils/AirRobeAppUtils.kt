@@ -50,7 +50,7 @@ internal object AirRobeAppUtils {
     }
 
     fun dispatchEvent(context: Context, eventName: String, pageName: String) {
-        if (widgetInstance.configuration == null) {
+        if (widgetInstance.configuration == null || EventName.getByValue(eventName) == null) {
             return
         }
         val eventData = AirRobeEventData(
