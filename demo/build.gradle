@@ -34,7 +34,7 @@ android {
 
 dependencies {
     implementation project(':AirRobeWidget')
-//    implementation "com.airrobe:airrobe-widget-sdk:1.0.3"
+//    implementation "com.airrobe:airrobe-widget-sdk:1.0.5"
 
     implementation "androidx.core:core-ktx:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$rootProject.ext.appCompatLibVersion"
