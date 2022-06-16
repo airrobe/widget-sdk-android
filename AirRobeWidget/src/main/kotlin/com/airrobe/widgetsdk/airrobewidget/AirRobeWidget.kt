@@ -116,6 +116,10 @@ object AirRobeWidget {
         AirRobeSharedPreferenceManager.setOptedIn(context, false)
     }
 
+    fun resetOrder(context: Context) {
+        AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
+    }
+
     fun orderOptedIn(context: Context): Boolean {
         return AirRobeSharedPreferenceManager.getOrderOptedIn(context)
     }
