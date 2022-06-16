@@ -240,7 +240,7 @@ confirmationWidget.buttonTextColor = Color.rgb(255, 255, 255)
 AirRobeWidget.resetOptedIn()
 ```
 
-###### Reset Order (When the order is completed and the confirmation widget is already rendered)
+###### Reset Order (OrderOptedIn value reset)
 
 ```kotlin
 AirRobeWidget.resetOrder()
