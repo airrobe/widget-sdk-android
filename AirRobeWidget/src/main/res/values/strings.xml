@@ -13,7 +13,7 @@
     <string name="airrobe_detailed_description">We’ve partnered with AirRobe to enable you to join the circular fashion movement. Re-sell or rent your purchases on AirRobe’s marketplace – all with one simple click. Together, we can do our part to keep fashion out of landfill. Learn more.</string>
     <string name="airrobe_learn_more_link_text">Learn more.</string>
 
-    <string name="airrobe_extra_info">By opting in you agree to THE ICONIC’s Privacy Policy and consent for us to share your details with AirRobe.</string>
+    <string name="airrobe_extra_info">By opting in you agree to %1$s’s Privacy Policy and consent for us to share your details with AirRobe.</string>
 
     <string name="airrobe_learn_more_title">HOW IT WORKS</string>
     <string name="airrobe_learn_more_step1_title">1. ADD TO AIRROBE</string>

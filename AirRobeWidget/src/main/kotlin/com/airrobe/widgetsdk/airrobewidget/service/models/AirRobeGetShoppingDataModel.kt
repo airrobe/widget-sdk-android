@@ -56,6 +56,7 @@ internal data class AirRobeShoppingDataModel(
 )
 
 internal data class AirRobeShopModel(
+    var companyName: String,
     var categoryMappings: MutableList<AirRobeCategoryMapping>,
     var minimumPriceThresholds: MutableList<AirRobeMinPriceThresholds>
 )

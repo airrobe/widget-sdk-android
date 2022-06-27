@@ -28,6 +28,7 @@ internal class AirRobeGetShoppingDataController {
                 """
                 query GetShoppingData {
                   shop(appId: "$appId") {
+                    name
                     categoryMappings(mappedOrExcludedOnly: true) {
                       from
                       to
@@ -66,6 +67,7 @@ internal class AirRobeGetShoppingDataController {
         try {
             val data = jsonObject.getJSONObject("data")
             val shop = data.getJSONObject("shop")
+            val companyName = shop.getString("name")
             val categoryMappings = shop.getJSONArray("categoryMappings")
             val minimumPriceThresholds = shop.getJSONArray("minimumPriceThresholds")
             val categoryMappingsArray: MutableList<AirRobeCategoryMapping> = arrayListOf()
@@ -95,7 +97,7 @@ internal class AirRobeGetShoppingDataController {
             val dataModel = AirRobeGetShoppingDataModel(
                 AirRobeShoppingDataModel(
                     AirRobeShopModel(
-                        categoryMappingsArray, minimumPriceThresholdsArray
+                        companyName, categoryMappingsArray, minimumPriceThresholdsArray
                     )
                 )
             )
