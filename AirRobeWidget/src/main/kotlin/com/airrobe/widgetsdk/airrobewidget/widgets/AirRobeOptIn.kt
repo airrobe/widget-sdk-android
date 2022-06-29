@@ -294,7 +294,7 @@ class AirRobeOptIn @JvmOverloads constructor(
 
     private fun setExtraInfoText() {
         var extraInfoText = context.resources.getString(R.string.airrobe_extra_info, widgetInstance.shopModel?.data?.shop?.companyName)
-        extraInfoText = extraInfoText.replace("Privacy Policy", "<a href='${widgetInstance.configuration?.privacyPolicyURL}'>Privacy Policy</a>")
+        extraInfoText = extraInfoText.replace("Privacy Policy", "<a href='${widgetInstance.shopModel?.data?.shop?.privacyUrl}'>Privacy Policy</a>")
         tvExtraInfo.text = AirRobeAppUtils.fromHtml(extraInfoText)
         tvExtraInfo.movementMethod = LinkMovementMethod.getInstance()
     }
