@@ -56,7 +56,7 @@ internal data class AirRobeShoppingDataModel(
 )
 
 internal data class AirRobeShopModel(
-    var companyName: String?,
+    var companyName: String,
     var privacyUrl: String?,
     var popupFindOutMoreUrl: String,
     var categoryMappings: MutableList<AirRobeCategoryMapping>,

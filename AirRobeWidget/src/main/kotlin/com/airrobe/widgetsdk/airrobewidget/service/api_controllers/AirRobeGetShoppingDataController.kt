@@ -70,11 +70,7 @@ internal class AirRobeGetShoppingDataController {
         try {
             val data = jsonObject.getJSONObject("data")
             val shop = data.getJSONObject("shop")
-            val companyName = try {
-                shop.getString("name")
-            } catch (exception: Exception) {
-                null
-            }
+            val companyName = shop.getString("name")
             val privacyUrl = try {
                 shop.getString("privacyUrl")
             } catch (exception: Exception) {
