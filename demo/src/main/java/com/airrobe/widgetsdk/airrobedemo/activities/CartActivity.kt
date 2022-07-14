@@ -15,6 +15,7 @@ import com.airrobe.widgetsdk.airrobedemo.ui.VerticalSpaceItemDecoration
 import com.airrobe.widgetsdk.airrobedemo.utils.SharedPreferenceManager
 import com.airrobe.widgetsdk.airrobedemo.utils.StatusBarTranslucent
 import com.airrobe.widgetsdk.airrobedemo.utils.Utils
+import com.airrobe.widgetsdk.airrobedemo.utils.Utils.toast
 import com.airrobe.widgetsdk.airrobewidget.widgets.AirRobeMultiOptIn
 
 class CartActivity : AppCompatActivity() {
@@ -46,9 +47,13 @@ class CartActivity : AppCompatActivity() {
         val rlPlaceOrder = findViewById<RelativeLayout>(R.id.rl_place_order)
         rlPlaceOrder.setOnTouchListener { view, motionEvent ->
             if (Utils.touchAnimator(this, view, motionEvent)) {
-                val intent = Intent(this, ConfirmationActivity::class.java)
-                intent.putExtra("email", etEmail.text.toString())
-                startActivity(intent)
+                if (Utils.isValidEmail(etEmail.text.toString())) {
+                    val intent = Intent(this, ConfirmationActivity::class.java)
+                    intent.putExtra("email", etEmail.text.toString())
+                    startActivity(intent)
+                } else {
+                    toast("Email is invalid.")
+                }
             }
             true
         }
