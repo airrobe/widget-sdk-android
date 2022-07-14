@@ -15,7 +15,6 @@ class ApplicationController : Application(), AirRobeEventListener {
         AirRobeWidget.initialize(
             AirRobeWidgetConfig(
                 "515b6ee129da",
-                "https://www.example.com/privacy-policy",
                 Mode.SANDBOX
             )
         )

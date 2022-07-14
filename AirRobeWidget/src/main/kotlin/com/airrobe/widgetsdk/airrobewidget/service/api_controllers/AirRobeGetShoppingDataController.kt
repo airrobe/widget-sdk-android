@@ -13,6 +13,7 @@ import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeMinPriceThresho
 import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeShopModel
 import org.json.JSONException
 import org.json.JSONObject
+import java.lang.Exception
 import java.util.concurrent.Executors
 
 internal class AirRobeGetShoppingDataController {
@@ -28,6 +29,9 @@ internal class AirRobeGetShoppingDataController {
                 """
                 query GetShoppingData {
                   shop(appId: "$appId") {
+                    name
+                    privacyUrl
+                    popupFindOutMoreUrl
                     categoryMappings(mappedOrExcludedOnly: true) {
                       from
                       to
@@ -66,6 +70,13 @@ internal class AirRobeGetShoppingDataController {
         try {
             val data = jsonObject.getJSONObject("data")
             val shop = data.getJSONObject("shop")
+            val companyName = shop.getString("name")
+            val privacyUrl = try {
+                shop.getString("privacyUrl")
+            } catch (exception: Exception) {
+                null
+            }
+            val popupFindOutMoreUrl = shop.getString("popupFindOutMoreUrl")
             val categoryMappings = shop.getJSONArray("categoryMappings")
             val minimumPriceThresholds = shop.getJSONArray("minimumPriceThresholds")
             val categoryMappingsArray: MutableList<AirRobeCategoryMapping> = arrayListOf()
@@ -95,7 +106,11 @@ internal class AirRobeGetShoppingDataController {
             val dataModel = AirRobeGetShoppingDataModel(
                 AirRobeShoppingDataModel(
                     AirRobeShopModel(
-                        categoryMappingsArray, minimumPriceThresholdsArray
+                        companyName,
+                        privacyUrl,
+                        popupFindOutMoreUrl,
+                        categoryMappingsArray,
+                        minimumPriceThresholdsArray
                     )
                 )
             )

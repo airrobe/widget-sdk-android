@@ -107,6 +107,9 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
             }
         }
 
+        var findOutMoreText = context.resources.getString(R.string.airrobe_learn_more_find_more_text)
+        findOutMoreText = findOutMoreText.replace(findOutMoreText, "<a href='${widgetInstance.shopModel?.data?.shop?.popupFindOutMoreUrl}'>$findOutMoreText</a>")
+        tvFindOutMore.text = AirRobeAppUtils.fromHtml(findOutMoreText)
         tvFindOutMore.movementMethod = LinkMovementMethod.getInstance()
         initColorSet()
     }
