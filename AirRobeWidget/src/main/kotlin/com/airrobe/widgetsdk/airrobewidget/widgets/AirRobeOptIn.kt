@@ -14,6 +14,7 @@ import android.text.style.ClickableSpan
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import android.webkit.URLUtil
 import android.widget.*
 import com.airrobe.widgetsdk.airrobewidget.R
 import com.airrobe.widgetsdk.airrobewidget.config.*
@@ -293,7 +294,7 @@ class AirRobeOptIn @JvmOverloads constructor(
     }
 
     private fun setExtraInfoText() {
-        if (widgetInstance.shopModel?.data?.shop?.privacyUrl.isNullOrEmpty() || widgetInstance.shopModel?.data?.shop?.companyName.isNullOrEmpty()) {
+        if (!URLUtil.isValidUrl(widgetInstance.shopModel?.data?.shop?.privacyUrl)) {
             tvExtraInfo.visibility = GONE
         } else {
             tvExtraInfo.visibility = VISIBLE
