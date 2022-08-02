@@ -53,7 +53,6 @@ import com.airrobe.widgetsdk.airrobewidget.config.Mode
 AirRobeWidget.initialize(
     AirRobeWidgetConfig(
         appId = "APP_ID",           // required
-        privacyPolicyURL = String,  // required - privacy policy url
         mode = enum                 // optional - (`Mode.PRODUCTION` or `Mode.SANDBOX`), default value is `Mode.PRODUCTION`
     )
 )
@@ -61,6 +60,7 @@ AirRobeWidget.initialize(
 
 ##### Color configuration
 ```kotlin
+AirRobeWidget.backgroundColor = Color.rgb(255, 255, 255)     // the color of the widget background. default value is "#FFFFFF"
 AirRobeWidget.borderColor = Color.rgb(255, 255, 255)         // the color of the widget border. default value is "#DFDFDF"
 AirRobeWidget.arrowColor = Color.rgb(255, 255, 255)          // the color of the widget drop down arrow icon. default value is "#42ABC8"
 AirRobeWidget.textColor = Color.rgb(255, 255, 255)           // the color of the widget text. default value is "#232323"
@@ -102,11 +102,12 @@ _Note: The widget will not be displayed unless the product is AirRobe-eligible. 
 
 ##### Xml attributes
 ```xml
-airrobe:borderColor="#DFDFDF"    <!-- the color of the widget border. default value is "#DFDFDF" -->
-airrobe:arrowColor="#42ABC8"     <!-- the color of the widget drop down arrow icon. default value is "#42ABC8" -->
-airrobe:linkTextColor="#696969"  <!-- the color of the widget legal copy text. default value is "#696969" -->
-airrobe:switchColor="#42ABC8"    <!-- the color of the widget switch ON color. default value is "#42ABC8" -->
-airrobe:textColor="#232323"      <!-- the color of the widget text. default value is "#232323" -->
+airrobe:backgroundColor="#FFFFFF"   <!-- the color of the widget background. default value is "#DFDFDF" -->
+airrobe:borderColor="#DFDFDF"       <!-- the color of the widget border. default value is "#DFDFDF" -->
+airrobe:arrowColor="#42ABC8"        <!-- the color of the widget drop down arrow icon. default value is "#42ABC8" -->
+airrobe:linkTextColor="#696969"     <!-- the color of the widget legal copy text. default value is "#696969" -->
+airrobe:switchColor="#42ABC8"       <!-- the color of the widget switch ON color. default value is "#42ABC8" -->
+airrobe:textColor="#232323"         <!-- the color of the widget text. default value is "#232323" -->
 ```
 
 ##### In class
@@ -126,6 +127,7 @@ optInWidget.initialize(
 )
 
 // Color configuration
+optInWidget.widgetBackgroundColor = Color.rgb(255, 255, 255)
 optInWidget.borderColor = Color.rgb(255, 255, 255)
 optInWidget.textColor = Color.rgb(255, 255, 255)
 optInWidget.switchColor = Color.rgb(255, 255, 255)
@@ -159,11 +161,12 @@ _Note - The widget will not be displayed on the page if the following conditions
 
 ##### Xml attributes
 ```xml
-airrobe:borderColor="#DFDFDF"    <!-- the color of the widget border. default value is "#DFDFDF" -->
-airrobe:arrowColor="#42ABC8"     <!-- the color of the widget drop down arrow icon. default value is "#42ABC8" -->
-airrobe:linkTextColor="#696969"  <!-- the color of the widget legal copy text. default value is "#696969" -->
-airrobe:switchColor="#42ABC8"    <!-- the color of the widget switch ON color. default value is "#42ABC8" -->
-airrobe:textColor="#232323"      <!-- the color of the widget text. default value is "#232323" -->
+airrobe:backgroundColor="#FFFFFF"   <!-- the color of the widget background. default value is "#DFDFDF" -->
+airrobe:borderColor="#DFDFDF"       <!-- the color of the widget border. default value is "#DFDFDF" -->
+airrobe:arrowColor="#42ABC8"        <!-- the color of the widget drop down arrow icon. default value is "#42ABC8" -->
+airrobe:linkTextColor="#696969"     <!-- the color of the widget legal copy text. default value is "#696969" -->
+airrobe:switchColor="#42ABC8"       <!-- the color of the widget switch ON color. default value is "#42ABC8" -->
+airrobe:textColor="#232323"         <!-- the color of the widget text. default value is "#232323" -->
 ```
 
 ##### In class
@@ -175,6 +178,7 @@ multiOptInWidget.initialize(
 )
 
 // Color configuration
+multiOptInWidget.widgetBackgroundColor = Color.rgb(255, 255, 255)
 multiOptInWidget.borderColor = Color.rgb(255, 255, 255)
 multiOptInWidget.textColor = Color.rgb(255, 255, 255)
 multiOptInWidget.switchColor = Color.rgb(255, 255, 255)
@@ -209,6 +213,7 @@ _Note - The widget will not be displayed on the page if the following conditions
 
 ##### Xml attributes
 ```xml
+airrobe:backgroundColor="#FFFFFF"     <!-- the color of the widget background. default value is "#DFDFDF" -->
 airrobe:borderColor="#DFDFDF"         <!-- the color of the widget border. default value is "#DFDFDF" -->
 airrobe:textColor="#232323"           <!-- the color of the widget text. default value is "#232323" -->
 airrobe:buttonBorderColor="#232323"   <!-- the color of the widget activate button border. default value is "#232323" -->
@@ -226,6 +231,7 @@ confirmationWidget.initialize(
 )
 
 // Color configuration
+confirmationWidget.widgetBackgroundColor = Color.rgb(255, 255, 255)
 confirmationWidget.borderColor = Color.rgb(255, 255, 255)
 confirmationWidget.textColor = Color.rgb(255, 255, 255)
 confirmationWidget.buttonBorderColor = Color.rgb(255, 255, 255)
