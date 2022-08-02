@@ -12,8 +12,10 @@ import com.airrobe.widgetsdk.airrobedemo.R
 import com.airrobe.widgetsdk.airrobedemo.adapters.CategoriesRVAdapter
 import com.airrobe.widgetsdk.airrobedemo.configs.Consts
 import com.airrobe.widgetsdk.airrobedemo.ui.VerticalSpaceItemDecoration
+import com.airrobe.widgetsdk.airrobedemo.utils.SharedPreferenceManager
 import com.airrobe.widgetsdk.airrobedemo.utils.StatusBarTranslucent
 import com.airrobe.widgetsdk.airrobedemo.utils.Utils
+import ru.nikartm.support.ImageBadgeView
 
 class CategoryActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
@@ -41,5 +43,21 @@ class CategoryActivity : AppCompatActivity() {
             }
             true
         }
+
+        val ivCart = findViewById<ImageBadgeView>(R.id.iv_cart)
+        ivCart.setOnTouchListener { view, motionEvent ->
+            if (Utils.touchAnimator(this, view, motionEvent)) {
+                val intent = Intent(this, CartActivity::class.java)
+                startActivity(intent)
+            }
+            true
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val items = SharedPreferenceManager.getCartItems(this)
+        val ivCart = findViewById<ImageBadgeView>(R.id.iv_cart)
+        ivCart.badgeValue = items.count()
     }
 }

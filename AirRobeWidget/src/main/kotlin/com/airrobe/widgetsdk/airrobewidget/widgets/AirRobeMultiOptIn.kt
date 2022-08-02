@@ -18,6 +18,7 @@ import android.text.TextPaint
 
 import android.text.Spanned
 import android.view.View
+import android.webkit.URLUtil
 import android.widget.*
 import com.airrobe.widgetsdk.airrobewidget.config.EventName
 import com.airrobe.widgetsdk.airrobewidget.config.PageName
@@ -278,9 +279,15 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
     }
 
     private fun setExtraInfoText() {
-        val extraInfoText = context.resources.getString(R.string.airrobe_extra_info).replace("Privacy Policy", "<a href='${widgetInstance.configuration?.privacyPolicyURL}'>Privacy Policy</a>")
-        tvExtraInfo.text = AirRobeAppUtils.fromHtml(extraInfoText)
-        tvExtraInfo.movementMethod = LinkMovementMethod.getInstance()
+        if (!URLUtil.isValidUrl(widgetInstance.shopModel?.data?.shop?.privacyUrl)) {
+            tvExtraInfo.visibility = GONE
+        } else {
+            tvExtraInfo.visibility = VISIBLE
+            var extraInfoText = context.resources.getString(R.string.airrobe_extra_info, widgetInstance.shopModel?.data?.shop?.companyName)
+            extraInfoText = extraInfoText.replace("Privacy Policy", "<a href='${widgetInstance.shopModel?.data?.shop?.privacyUrl}'>Privacy Policy</a>")
+            tvExtraInfo.text = AirRobeAppUtils.fromHtml(extraInfoText)
+            tvExtraInfo.movementMethod = LinkMovementMethod.getInstance()
+        }
     }
 
     fun initialize(
