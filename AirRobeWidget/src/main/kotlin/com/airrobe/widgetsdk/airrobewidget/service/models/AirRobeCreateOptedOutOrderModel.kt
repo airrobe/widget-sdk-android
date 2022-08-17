@@ -10,5 +10,5 @@ internal data class AirRobeCreateOptedOutOrderDataModel(
 
 internal data class AirRobeCreateOptedOutOrderSubModel(
     var created: Boolean,
-    var error: String
+    var error: String?
 )

@@ -18,24 +18,38 @@ internal class AirRobeCreateOptedOutOrderController {
 
     fun start(orderId: String, appId: String, orderSubTotalCents: Int, currency: String, mode: Mode) {
         myExecutor.execute {
-            val input = JSONObject()
-            input.put("id", orderId)
-            input.put("shopAppId", appId)
-            val subTotal = JSONObject()
-            subTotal.put("cents", orderSubTotalCents)
-            subTotal.put("currency", currency)
-            input.put("subtotal", subTotal)
             val param = JSONObject()
             param.put(
                 "query",
                 """
-                mutation CreateOptedOutOrder {
-                  createOptedOutOrder(input: "$input") {
+                mutation CreateOptedOutOrder(${'$'}input: CreateOptedOutOrderMutationInput!) {
+                  createOptedOutOrder(input: ${'$'}input) {
                     created
                     error
                   }
                 }
             """
+            )
+
+            val inputData = JSONObject()
+            inputData.put("id", orderId)
+            inputData.put("shopAppId", appId)
+
+            val subTotal = JSONObject()
+            subTotal.put("cents", orderSubTotalCents)
+            subTotal.put("currency", currency)
+            inputData.put("subtotal", subTotal)
+
+            val input = JSONObject()
+            input.put("input", inputData)
+
+            param.put(
+                "variables",
+                input
+            )
+            param.put(
+                "operationName",
+                "CreateOptedOutOrder"
             )
 
             val response = AirRobeApiService.requestPOST(
