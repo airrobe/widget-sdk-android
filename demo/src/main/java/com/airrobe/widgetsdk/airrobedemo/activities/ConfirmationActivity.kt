@@ -22,7 +22,7 @@ class ConfirmationActivity : AppCompatActivity() {
         confirmationWidget.initialize(
             orderId = "123456",
             email = email,
-            orderSubTotalCents = 10000
+            orderSubtotalCents = 10000
         )
 
         val ivBack = findViewById<ImageView>(R.id.iv_back)

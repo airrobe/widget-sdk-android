@@ -16,7 +16,7 @@ internal class AirRobeCreateOptedOutOrderController {
     private val myHandler = Handler(Looper.getMainLooper())
     var airRobeCreateOptedOutOrderListener: AirRobeCreateOptedOutOrderListener? = null
 
-    fun start(orderId: String, appId: String, orderSubTotalCents: Int, currency: String, mode: Mode) {
+    fun start(orderId: String, appId: String, orderSubtotalCents: Int, currency: String, mode: Mode) {
         myExecutor.execute {
             val param = JSONObject()
             param.put(
@@ -36,7 +36,7 @@ internal class AirRobeCreateOptedOutOrderController {
             inputData.put("shopAppId", appId)
 
             val subTotal = JSONObject()
-            subTotal.put("cents", orderSubTotalCents)
+            subTotal.put("cents", orderSubtotalCents)
             subTotal.put("currency", currency)
             inputData.put("subtotal", subTotal)
 

@@ -41,7 +41,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
 
     private var orderId: String? = null
     private var email: String? = null
-    private var orderSubTotalCents: Int = AirRobeConstants.INT_NULL_MAGIC_VALUE
+    private var orderSubtotalCents: Int = AirRobeConstants.INT_NULL_MAGIC_VALUE
     private var currency: String = "AUD"
     private var fraudRisk: Boolean = false
 
@@ -188,13 +188,13 @@ class AirRobeConfirmation @JvmOverloads constructor(
     fun initialize(
         orderId: String,
         email: String,
-        orderSubTotalCents: Int = AirRobeConstants.INT_NULL_MAGIC_VALUE,
+        orderSubtotalCents: Int = AirRobeConstants.INT_NULL_MAGIC_VALUE,
         currency: String = "AUD",
         fraudRisk: Boolean = false
     ) {
         this.orderId = orderId
         this.email = email
-        this.orderSubTotalCents = orderSubTotalCents
+        this.orderSubtotalCents = orderSubtotalCents
         this.currency = currency
         this.fraudRisk = fraudRisk
         initializeConfirmationWidget()
@@ -244,15 +244,15 @@ class AirRobeConfirmation @JvmOverloads constructor(
     }
 
     private fun createOptedOutOrder() {
-        if (orderId.isNullOrEmpty() || orderSubTotalCents == AirRobeConstants.INT_NULL_MAGIC_VALUE) {
-            Log.e(TAG, "Not able to call CreateOptedOutOrder because orderId or orderSubTotalCents is not passed.")
+        if (orderId.isNullOrEmpty() || orderSubtotalCents == AirRobeConstants.INT_NULL_MAGIC_VALUE) {
+            Log.e(TAG, "Not able to call CreateOptedOutOrder because orderId or orderSubtotalCents is not passed.")
             return
         }
         val createOptedOutOrderController = AirRobeCreateOptedOutOrderController()
         createOptedOutOrderController.start(
             orderId!!,
             widgetInstance.configuration!!.appId,
-            orderSubTotalCents,
+            orderSubtotalCents,
             currency,
             widgetInstance.configuration!!.mode
         )
