@@ -225,9 +225,11 @@ airrobe:buttonTextColor="#FFFFFF"     <!-- the color of the widget activate butt
 ```kotlin
 val confirmationWidget = findViewById<AirRobeConfirmation>(R.id.confirmation_widget)
 confirmationWidget.initialize(
-    orderId = String,    // required - e.g. "123456" - the order id you got from the checkout.
-    email = String,      // required
-    fraudRisk = Boolean  // optional - fraud status for the confirmation widget, default value is false.
+    orderId = String,           // required - e.g. "123456" - the order id you got from the checkout.
+    email = String,             // required
+    orderSubtotalCents = Int,   // required - Sum of line item prices including tax, less discounts, excluding any shipping costs.
+    currency = String,          // optional - the ISO 4217 currency code for the order subtotal, defaulting to "AUD" if omitted.
+    fraudRisk = Boolean         // optional - fraud status for the confirmation widget, default value is false.
 )
 
 // Color configuration
