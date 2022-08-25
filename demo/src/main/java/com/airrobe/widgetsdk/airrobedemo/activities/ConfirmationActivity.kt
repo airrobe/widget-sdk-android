@@ -21,7 +21,8 @@ class ConfirmationActivity : AppCompatActivity() {
         val email: String = intent.getStringExtra("email") ?: ""
         confirmationWidget.initialize(
             orderId = "123456",
-            email = email
+            email = email,
+            orderSubtotalCents = 10000
         )
 
         val ivBack = findViewById<ImageView>(R.id.iv_back)

@@ -16,6 +16,7 @@ import com.airrobe.widgetsdk.airrobewidget.config.*
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetInstance
+import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeCreateOptedOutOrderController
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeEmailCheckController
 import com.airrobe.widgetsdk.airrobewidget.service.api_controllers.AirRobeIdentifyOrderController
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeEmailCheckListener
@@ -40,6 +41,8 @@ class AirRobeConfirmation @JvmOverloads constructor(
 
     private var orderId: String? = null
     private var email: String? = null
+    private var orderSubtotalCents: Int = AirRobeConstants.INT_NULL_MAGIC_VALUE
+    private var currency: String = "AUD"
     private var fraudRisk: Boolean = false
 
     var widgetBackgroundColor: Int =
@@ -185,10 +188,14 @@ class AirRobeConfirmation @JvmOverloads constructor(
     fun initialize(
         orderId: String,
         email: String,
+        orderSubtotalCents: Int = AirRobeConstants.INT_NULL_MAGIC_VALUE,
+        currency: String = "AUD",
         fraudRisk: Boolean = false
     ) {
         this.orderId = orderId
         this.email = email
+        this.orderSubtotalCents = orderSubtotalCents
+        this.currency = currency
         this.fraudRisk = fraudRisk
         initializeConfirmationWidget()
     }
@@ -221,6 +228,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
             AirRobeAppUtils.dispatchEvent(context, EventName.ConfirmationRender.raw, PageName.ThankYou.raw)
         } else {
             visibility = GONE
+            createOptedOutOrder()
             Log.e(TAG, "Confirmation widget is not eligible to show up")
         }
     }
@@ -232,6 +240,21 @@ class AirRobeConfirmation @JvmOverloads constructor(
             config,
             orderId,
             AirRobeSharedPreferenceManager.getOrderOptedIn(context)
+        )
+    }
+
+    private fun createOptedOutOrder() {
+        if (orderId.isNullOrEmpty() || orderSubtotalCents == AirRobeConstants.INT_NULL_MAGIC_VALUE) {
+            Log.e(TAG, "Not able to call CreateOptedOutOrder because orderId or orderSubtotalCents is not passed.")
+            return
+        }
+        val createOptedOutOrderController = AirRobeCreateOptedOutOrderController()
+        createOptedOutOrderController.start(
+            orderId!!,
+            widgetInstance.configuration!!.appId,
+            orderSubtotalCents,
+            currency,
+            widgetInstance.configuration!!.mode
         )
     }
 
