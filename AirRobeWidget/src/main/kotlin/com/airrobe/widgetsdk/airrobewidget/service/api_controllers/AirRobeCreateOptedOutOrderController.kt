@@ -7,7 +7,8 @@ import com.airrobe.widgetsdk.airrobewidget.config.Mode
 import com.airrobe.widgetsdk.airrobewidget.service.AirRobeApiService
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeCreateOptedOutOrderListener
 import com.airrobe.widgetsdk.airrobewidget.service.models.*
-import org.json.JSONException
+import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import org.json.JSONObject
 import java.util.concurrent.Executors
 
@@ -62,31 +63,17 @@ internal class AirRobeCreateOptedOutOrderController {
 
             myHandler.post {
                 if (response != null) {
-                    val obj = JSONObject(response)
-                    parseToModel(obj)
+                    try {
+                        val data =
+                            Gson().fromJson(response, AirRobeCreateOptedOutOrderModel::class.java)
+                        airRobeCreateOptedOutOrderListener?.onSuccessCreateOptedOutOrderApi(data)
+                    } catch (exception: JsonSyntaxException) {
+                        airRobeCreateOptedOutOrderListener?.onFailedCreateOptedOutOrderApi("Create Opted Out Order JSON parse issue: " + exception.localizedMessage)
+                    }
                 } else {
                     airRobeCreateOptedOutOrderListener?.onFailedCreateOptedOutOrderApi()
                 }
             }
-        }
-    }
-
-    private fun parseToModel(jsonObject: JSONObject) {
-        try {
-            val data = jsonObject.getJSONObject("data")
-            val createOptedOutOrder = data.getJSONObject("createOptedOutOrder")
-            val created = createOptedOutOrder.getBoolean("created")
-            val error = createOptedOutOrder.getString("error")
-            val dataModel = AirRobeCreateOptedOutOrderModel(
-                AirRobeCreateOptedOutOrderDataModel(
-                    AirRobeCreateOptedOutOrderSubModel(
-                        created, error
-                    )
-                )
-            )
-            airRobeCreateOptedOutOrderListener?.onSuccessCreateOptedOutOrderApi(dataModel)
-        } catch (exception: JSONException) {
-            airRobeCreateOptedOutOrderListener?.onFailedCreateOptedOutOrderApi("Create Opted Out Order JSON parse issue: " + exception.localizedMessage)
         }
     }
 }

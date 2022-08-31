@@ -1,5 +1,8 @@
 package com.airrobe.widgetsdk.airrobewidget.service.models
 
+import android.content.Context
+import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
+
 internal data class AirRobeGetShoppingDataModel (
     var data: AirRobeShoppingDataModel
 ) {
@@ -12,6 +15,20 @@ internal data class AirRobeGetShoppingDataModel (
         } ?: return false
 
         return price < (applicablePriceThreshold.minimumPriceCents / 100)
+    }
+
+    fun getTargetSplitTestVariant(context: Context) : AirRobeWidgetVariant? {
+        val testVariant = AirRobeSharedPreferenceManager.getTargetSplitTestVariant(context)
+        if (testVariant != null && data.shop.widgetVariants.contains(testVariant)) {
+            return testVariant
+        }
+        if (data.shop.widgetVariants.isNotEmpty()) {
+            val newVariant = data.shop.widgetVariants.random()
+            AirRobeSharedPreferenceManager.setTargetSplitTestVariant(context, newVariant)
+            return newVariant
+        }
+        AirRobeSharedPreferenceManager.setTargetSplitTestVariant(context, null)
+        return null
     }
 }
 
@@ -60,7 +77,8 @@ internal data class AirRobeShopModel(
     var privacyUrl: String?,
     var popupFindOutMoreUrl: String,
     var categoryMappings: MutableList<AirRobeCategoryMapping>,
-    var minimumPriceThresholds: MutableList<AirRobeMinPriceThresholds>
+    var minimumPriceThresholds: MutableList<AirRobeMinPriceThresholds>,
+    var widgetVariants: MutableList<AirRobeWidgetVariant>
 )
 
 internal data class AirRobeCategoryMapping(
@@ -73,4 +91,9 @@ internal data class AirRobeMinPriceThresholds(
     var minimumPriceCents: Double,
     var department: String?,
     var default: Boolean
+)
+
+internal data class AirRobeWidgetVariant(
+    var enabled: Boolean,
+    var targetSplitTestVariant: String
 )

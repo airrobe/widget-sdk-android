@@ -10,6 +10,7 @@ import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.airrobe.widgetsdk.airrobewidget.service.AirRobeApiService
 import com.airrobe.widgetsdk.airrobewidget.sessionId
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
+import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeSharedPreferenceManager
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.concurrent.Executors
@@ -38,7 +39,7 @@ internal class AirRobeTelemetryEventController {
             val properties = JSONObject()
             properties.put("source", "Android")
             properties.put("version", context.getString(R.string.airrobe_widget_version))
-            properties.put("split_test_variant", "default")
+            properties.put("split_test_variant", AirRobeSharedPreferenceManager.getTargetSplitTestVariant(context)?.targetSplitTestVariant ?: "default")
             properties.put("page_name", pageName)
             if (!brand.isNullOrEmpty()) properties.put("brand", brand)
             if (!material.isNullOrEmpty()) properties.put("material", material)
