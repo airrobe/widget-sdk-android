@@ -27,7 +27,8 @@ internal class AirRobeTelemetryEventController {
         brand: String? = null,
         material: String? = null,
         category: String? = null,
-        department: String? = null
+        department: String? = null,
+        itemCount: Int? = null
     ) {
         myExecutor.execute {
             val param = JSONObject()
@@ -44,6 +45,7 @@ internal class AirRobeTelemetryEventController {
             if (!material.isNullOrEmpty()) properties.put("material", material)
             if (!category.isNullOrEmpty()) properties.put("category", category)
             if (!department.isNullOrEmpty()) properties.put("department", department)
+            if (itemCount != null) properties.put("itemCount", itemCount)
             param.put("properties", properties)
 
             val response = AirRobeApiService.requestPOST(
