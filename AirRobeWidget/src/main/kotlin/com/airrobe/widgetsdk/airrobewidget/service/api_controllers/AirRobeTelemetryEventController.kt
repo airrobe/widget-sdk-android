@@ -39,7 +39,7 @@ internal class AirRobeTelemetryEventController {
             val properties = JSONObject()
             properties.put("source", "Android")
             properties.put("version", context.getString(R.string.airrobe_widget_version))
-            properties.put("split_test_variant", AirRobeSharedPreferenceManager.getTargetSplitTestVariant(context)?.targetSplitTestVariant ?: "default")
+            properties.put("split_test_variant", AirRobeSharedPreferenceManager.getTargetSplitTestVariant(context)?.splitTestVariant ?: "default")
             properties.put("page_name", pageName)
             if (!brand.isNullOrEmpty()) properties.put("brand", brand)
             if (!material.isNullOrEmpty()) properties.put("material", material)

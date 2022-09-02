@@ -39,8 +39,8 @@ internal class AirRobeGetShoppingDataController {
                       minimumPriceCents
                     }
                     widgetVariants {
-                      enabled
-                      targetSplitTestVariant
+                      disabled
+                      splitTestVariant
                     }
                   }
                 }

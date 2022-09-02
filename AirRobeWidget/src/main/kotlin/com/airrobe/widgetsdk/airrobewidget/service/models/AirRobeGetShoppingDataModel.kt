@@ -94,6 +94,6 @@ internal data class AirRobeMinPriceThresholds(
 )
 
 internal data class AirRobeWidgetVariant(
-    var enabled: Boolean,
-    var targetSplitTestVariant: String
+    var disabled: Boolean,
+    var splitTestVariant: String?
 )
