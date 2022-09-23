@@ -11,7 +11,7 @@ internal object AirRobeSharedPreferenceManager {
     private enum class Keys(val raw: String) {
         OptedInKey("OptedInKey"),
         OrderOptedInKey("OrderOptedInKey"),
-        TargetSplitTestVariantKey("TargetSplitTestVariantKey")
+        SplitTestVariantKey("SplitTestVariantKey")
     }
 
     fun setOptedIn(context: Context, value: Boolean) {
@@ -34,17 +34,17 @@ internal object AirRobeSharedPreferenceManager {
         return context.getSharedPreferences(PREFERENCES_FILENAME, MODE_PRIVATE).getBoolean(Keys.OrderOptedInKey.raw, false)
     }
 
-    fun setTargetSplitTestVariant(context: Context, value: AirRobeWidgetVariant?) {
+    fun setSplitTestVariant(context: Context, value: AirRobeWidgetVariant?) {
         val editor = context.getSharedPreferences(PREFERENCES_FILENAME, MODE_PRIVATE).edit()
         val json = Gson().toJson(value)
-        editor.putString(Keys.TargetSplitTestVariantKey.raw, json)
+        editor.putString(Keys.SplitTestVariantKey.raw, json)
         editor.apply()
     }
 
-    fun getTargetSplitTestVariant(context: Context): AirRobeWidgetVariant? {
+    fun getSplitTestVariant(context: Context): AirRobeWidgetVariant? {
         return try {
             val json = context.getSharedPreferences(PREFERENCES_FILENAME, MODE_PRIVATE)
-                .getString(Keys.TargetSplitTestVariantKey.raw, "")
+                .getString(Keys.SplitTestVariantKey.raw, "")
             Gson().fromJson(json, AirRobeWidgetVariant::class.java)
         } catch (exception: JsonSyntaxException) {
             null

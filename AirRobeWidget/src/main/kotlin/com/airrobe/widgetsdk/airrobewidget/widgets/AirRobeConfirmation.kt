@@ -214,7 +214,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
         AirRobeAppUtils.telemetryEvent(context, TelemetryEventName.PageView.raw, PageName.ThankYou.raw)
         AirRobeAppUtils.dispatchEvent(context, EventName.PageView.raw, PageName.ThankYou.raw)
 
-        val testVariant = widgetInstance.shopModel!!.getTargetSplitTestVariant(context)
+        val testVariant = widgetInstance.shopModel!!.getSplitTestVariant(context)
         if (testVariant != null && testVariant.disabled) {
             Log.e(TAG, "Widget is not enabled in target variant")
             visibility = GONE

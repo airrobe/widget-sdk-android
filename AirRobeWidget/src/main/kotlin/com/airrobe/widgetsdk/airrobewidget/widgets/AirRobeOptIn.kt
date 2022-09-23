@@ -351,7 +351,7 @@ class AirRobeOptIn @JvmOverloads constructor(
         )
         AirRobeAppUtils.dispatchEvent(context, EventName.PageView.raw, PageName.Product.raw)
 
-        val testVariant = widgetInstance.shopModel!!.getTargetSplitTestVariant(context)
+        val testVariant = widgetInstance.shopModel!!.getSplitTestVariant(context)
         if (testVariant != null && testVariant.disabled) {
             Log.e(TAG, "Widget is not enabled in target variant")
             visibility = GONE

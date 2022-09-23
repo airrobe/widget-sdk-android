@@ -60,7 +60,7 @@ internal object AirRobeAppUtils {
             EventName.getByValue(eventName)!!,
             "Android",
             context.getString(R.string.airrobe_widget_version),
-            AirRobeSharedPreferenceManager.getTargetSplitTestVariant(context)?.splitTestVariant ?: "default",
+            AirRobeSharedPreferenceManager.getSplitTestVariant(context)?.splitTestVariant ?: "default",
             PageName.getByValue(pageName) ?: PageName.Other
         )
         eventListenerInstance?.onEventEmitted(eventData)

@@ -17,17 +17,17 @@ internal data class AirRobeGetShoppingDataModel (
         return price < (applicablePriceThreshold.minimumPriceCents / 100)
     }
 
-    fun getTargetSplitTestVariant(context: Context) : AirRobeWidgetVariant? {
-        val testVariant = AirRobeSharedPreferenceManager.getTargetSplitTestVariant(context)
+    fun getSplitTestVariant(context: Context) : AirRobeWidgetVariant? {
+        val testVariant = AirRobeSharedPreferenceManager.getSplitTestVariant(context)
         if (testVariant != null && data.shop.widgetVariants.contains(testVariant)) {
             return testVariant
         }
         if (data.shop.widgetVariants.isNotEmpty()) {
             val newVariant = data.shop.widgetVariants.random()
-            AirRobeSharedPreferenceManager.setTargetSplitTestVariant(context, newVariant)
+            AirRobeSharedPreferenceManager.setSplitTestVariant(context, newVariant)
             return newVariant
         }
-        AirRobeSharedPreferenceManager.setTargetSplitTestVariant(context, null)
+        AirRobeSharedPreferenceManager.setSplitTestVariant(context, null)
         return null
     }
 }

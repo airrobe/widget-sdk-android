@@ -21,7 +21,7 @@ internal class AirRobeIdentifyOrderController {
             param.put("anonymous_id", AirRobeAppUtils.getDeviceId(context))
             param.put("session_id", sessionId)
             param.put("external_order_id", orderId)
-            param.put("split_test_variant", AirRobeSharedPreferenceManager.getTargetSplitTestVariant(context)?.splitTestVariant ?: "default")
+            param.put("split_test_variant", AirRobeSharedPreferenceManager.getSplitTestVariant(context)?.splitTestVariant ?: "default")
             param.put("opted_in", orderOptedIn)
 
             AirRobeApiService.requestPOST(
