@@ -10,8 +10,12 @@ import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.airrobe.widgetsdk.airrobewidget.service.AirRobeApiService
 import com.airrobe.widgetsdk.airrobewidget.sessionId
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
+import com.airrobe.widgetsdk.airrobewidget.utils.DateUtils
+import com.airrobe.widgetsdk.airrobewidget.utils.DateUtils.toIsoString
 import org.json.JSONException
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.Executors
 
 internal class AirRobeTelemetryEventController {
@@ -36,6 +40,7 @@ internal class AirRobeTelemetryEventController {
             param.put("anonymous_id", AirRobeAppUtils.getDeviceId(context))
             param.put("session_id", sessionId)
             param.put("event_name", eventName)
+            param.put("created_at", Date().toIsoString())
             val properties = JSONObject()
             properties.put("source", "Android")
             properties.put("version", context.getString(R.string.airrobe_widget_version))
@@ -48,11 +53,8 @@ internal class AirRobeTelemetryEventController {
             if (itemCount != null) properties.put("itemCount", itemCount)
             param.put("properties", properties)
 
-            val response = AirRobeApiService.requestPOST(
-                if (config.mode == Mode.PRODUCTION)
-                    AirRobeConstants.AIRROBE_CONNECTOR_PRODUCTION + "/telemetry_events"
-                else
-                    AirRobeConstants.AIRROBE_CONNECTOR_SANDBOX + "/telemetry_events",
+            val response = AirRobeApiService.requestPUT(
+                AirRobeConstants.TELEMETRY_EVENT_HOST + "/v1",
                 param,
                 false
             )
