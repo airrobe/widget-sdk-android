@@ -6,15 +6,12 @@ import android.os.Looper
 import android.util.Log
 import com.airrobe.widgetsdk.airrobewidget.R
 import com.airrobe.widgetsdk.airrobewidget.config.*
-import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.airrobe.widgetsdk.airrobewidget.service.AirRobeApiService
 import com.airrobe.widgetsdk.airrobewidget.sessionId
 import com.airrobe.widgetsdk.airrobewidget.utils.AirRobeAppUtils
-import com.airrobe.widgetsdk.airrobewidget.utils.DateUtils
 import com.airrobe.widgetsdk.airrobewidget.utils.DateUtils.toIsoString
 import org.json.JSONException
 import org.json.JSONObject
-import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Executors
 
@@ -54,7 +51,10 @@ internal class AirRobeTelemetryEventController {
             param.put("properties", properties)
 
             val response = AirRobeApiService.requestPUT(
-                AirRobeConstants.TELEMETRY_EVENT_HOST + "/v1",
+                if (config.mode == Mode.PRODUCTION)
+                    TelemetryEventHost.Production.raw + "/v1"
+                else
+                    TelemetryEventHost.Sandbox.raw + "/va",
                 param,
                 false
             )
