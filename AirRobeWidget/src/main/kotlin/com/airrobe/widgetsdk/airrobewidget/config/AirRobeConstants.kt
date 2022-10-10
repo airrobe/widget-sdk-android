@@ -6,7 +6,7 @@ internal enum class Connector(val raw: String) {
 }
 
 internal enum class TelemetryEventHost(val raw: String) {
-    Sandbox("http://events.stg.airdemo.link"),
+    Sandbox("https://events.stg.airdemo.link"),
     Production("https://events.airrobe.com")
 }
 

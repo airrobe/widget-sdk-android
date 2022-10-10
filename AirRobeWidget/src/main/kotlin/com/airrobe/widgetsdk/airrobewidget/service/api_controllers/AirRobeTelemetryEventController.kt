@@ -54,7 +54,7 @@ internal class AirRobeTelemetryEventController {
                 if (config.mode == Mode.PRODUCTION)
                     TelemetryEventHost.Production.raw + "/v1"
                 else
-                    TelemetryEventHost.Sandbox.raw + "/va",
+                    TelemetryEventHost.Sandbox.raw + "/v1",
                 param,
                 false
             )
