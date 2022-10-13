@@ -6,14 +6,10 @@ import com.airrobe.widgetsdk.airrobewidget.config.Connector
 import com.airrobe.widgetsdk.airrobewidget.config.Mode
 import com.airrobe.widgetsdk.airrobewidget.service.AirRobeApiService
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeGetShoppingDataListener
-import com.airrobe.widgetsdk.airrobewidget.service.models.*
-import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeCategoryMapping
 import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeGetShoppingDataModel
-import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeMinPriceThresholds
-import com.airrobe.widgetsdk.airrobewidget.service.models.AirRobeShopModel
-import org.json.JSONException
+import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import org.json.JSONObject
-import java.lang.Exception
 import java.util.concurrent.Executors
 
 internal class AirRobeGetShoppingDataController {
@@ -42,6 +38,10 @@ internal class AirRobeGetShoppingDataController {
                       department
                       minimumPriceCents
                     }
+                    widgetVariants {
+                      disabled
+                      splitTestVariant
+                    }
                   }
                 }
             """
@@ -57,66 +57,17 @@ internal class AirRobeGetShoppingDataController {
 
             myHandler.post {
                 if (response != null) {
-                    val obj = JSONObject(response)
-                    parseToModel(obj)
+                    try {
+                        val data =
+                            Gson().fromJson(response, AirRobeGetShoppingDataModel::class.java)
+                        airRobeGetShoppingDataListener?.onSuccessGetShoppingDataApi(data)
+                    } catch (exception: JsonSyntaxException) {
+                        airRobeGetShoppingDataListener?.onFailedGetShoppingDataApi("Get Shopping Data JSON parse issue: " + exception.localizedMessage)
+                    }
                 } else {
                     airRobeGetShoppingDataListener?.onFailedGetShoppingDataApi()
                 }
             }
-        }
-    }
-
-    private fun parseToModel(jsonObject: JSONObject) {
-        try {
-            val data = jsonObject.getJSONObject("data")
-            val shop = data.getJSONObject("shop")
-            val companyName = shop.getString("name")
-            val privacyUrl = try {
-                shop.getString("privacyUrl")
-            } catch (exception: Exception) {
-                null
-            }
-            val popupFindOutMoreUrl = shop.getString("popupFindOutMoreUrl")
-            val categoryMappings = shop.getJSONArray("categoryMappings")
-            val minimumPriceThresholds = shop.getJSONArray("minimumPriceThresholds")
-            val categoryMappingsArray: MutableList<AirRobeCategoryMapping> = arrayListOf()
-            for (i in 0 until categoryMappings.length()) {
-                val categoryMapping = categoryMappings.getJSONObject(i)
-                val from = categoryMapping.getString("from")
-                val to = categoryMapping.getString("to")
-                val excluded = categoryMapping.getBoolean("excluded")
-                categoryMappingsArray.add(
-                    AirRobeCategoryMapping(
-                        from, to, excluded
-                    )
-                )
-            }
-            val minimumPriceThresholdsArray: MutableList<AirRobeMinPriceThresholds> = arrayListOf()
-            for (i in 0 until minimumPriceThresholds.length()) {
-                val minimumPriceThreshold = minimumPriceThresholds.getJSONObject(i)
-                val minimumPriceCents = minimumPriceThreshold.getDouble("minimumPriceCents")
-                val department = minimumPriceThreshold.getString("department")
-                val default = minimumPriceThreshold.getBoolean("default")
-                minimumPriceThresholdsArray.add(
-                    AirRobeMinPriceThresholds(
-                        minimumPriceCents, department, default
-                    )
-                )
-            }
-            val dataModel = AirRobeGetShoppingDataModel(
-                AirRobeShoppingDataModel(
-                    AirRobeShopModel(
-                        companyName,
-                        privacyUrl,
-                        popupFindOutMoreUrl,
-                        categoryMappingsArray,
-                        minimumPriceThresholdsArray
-                    )
-                )
-            )
-            airRobeGetShoppingDataListener?.onSuccessGetShoppingDataApi(dataModel)
-        } catch (exception: JSONException) {
-            airRobeGetShoppingDataListener?.onFailedGetShoppingDataApi("Get Shopping Data JSON parse issue: " + exception.localizedMessage)
         }
     }
 }

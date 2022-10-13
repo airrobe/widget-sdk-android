@@ -312,6 +312,14 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         }
         AirRobeAppUtils.telemetryEvent(context, TelemetryEventName.PageView.raw, PageName.Cart.raw, itemCount = items.size)
         AirRobeAppUtils.dispatchEvent(context, EventName.PageView.raw, PageName.Cart.raw)
+
+        val testVariant = widgetInstance.shopModel!!.getSplitTestVariant(context)
+        if (testVariant != null && testVariant.disabled) {
+            Log.e(TAG, "Widget is not enabled in target variant")
+            visibility = GONE
+            return
+        }
+
         if (items.isEmpty()) {
             Log.e(TAG, "Required params can't be empty")
             visibility = GONE

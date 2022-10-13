@@ -53,8 +53,8 @@ android {
 }
 
 dependencies {
+    implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
-    testImplementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.extjunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.espressoCoreVersion"
 }
