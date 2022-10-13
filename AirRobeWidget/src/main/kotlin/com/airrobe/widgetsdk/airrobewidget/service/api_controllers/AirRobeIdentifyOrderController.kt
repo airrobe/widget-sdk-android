@@ -1,8 +1,8 @@
 package com.airrobe.widgetsdk.airrobewidget.service.api_controllers
 
 import android.content.Context
-import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
 import com.airrobe.widgetsdk.airrobewidget.config.AirRobeWidgetConfig
+import com.airrobe.widgetsdk.airrobewidget.config.Connector
 import com.airrobe.widgetsdk.airrobewidget.config.Mode
 import com.airrobe.widgetsdk.airrobewidget.service.AirRobeApiService
 import com.airrobe.widgetsdk.airrobewidget.sessionId
@@ -26,9 +26,9 @@ internal class AirRobeIdentifyOrderController {
 
             AirRobeApiService.requestPOST(
                 if (config.mode == Mode.PRODUCTION)
-                    AirRobeConstants.AIRROBE_CONNECTOR_PRODUCTION + "/internal_webhooks/identify_order"
+                    Connector.Production.raw + "/internal_webhooks/identify_order"
                 else
-                    AirRobeConstants.AIRROBE_CONNECTOR_SANDBOX + "/internal_webhooks/identify_order",
+                    Connector.Sandbox.raw + "/internal_webhooks/identify_order",
                 param,
                 false
             )

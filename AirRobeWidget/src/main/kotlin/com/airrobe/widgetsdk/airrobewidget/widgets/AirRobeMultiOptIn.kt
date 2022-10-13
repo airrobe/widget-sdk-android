@@ -310,7 +310,7 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
             AirRobeSharedPreferenceManager.setOrderOptedIn(context, false)
             return
         }
-        AirRobeAppUtils.telemetryEvent(context, TelemetryEventName.PageView.raw, PageName.Cart.raw)
+        AirRobeAppUtils.telemetryEvent(context, TelemetryEventName.PageView.raw, PageName.Cart.raw, itemCount = items.size)
         AirRobeAppUtils.dispatchEvent(context, EventName.PageView.raw, PageName.Cart.raw)
 
         val testVariant = widgetInstance.shopModel!!.getSplitTestVariant(context)

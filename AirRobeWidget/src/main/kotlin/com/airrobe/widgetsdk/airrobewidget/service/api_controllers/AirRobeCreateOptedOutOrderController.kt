@@ -2,7 +2,7 @@ package com.airrobe.widgetsdk.airrobewidget.service.api_controllers
 
 import android.os.Handler
 import android.os.Looper
-import com.airrobe.widgetsdk.airrobewidget.config.AirRobeConstants
+import com.airrobe.widgetsdk.airrobewidget.config.Connector
 import com.airrobe.widgetsdk.airrobewidget.config.Mode
 import com.airrobe.widgetsdk.airrobewidget.service.AirRobeApiService
 import com.airrobe.widgetsdk.airrobewidget.service.listeners.AirRobeCreateOptedOutOrderListener
@@ -55,9 +55,9 @@ internal class AirRobeCreateOptedOutOrderController {
 
             val response = AirRobeApiService.requestPOST(
                 if (mode == Mode.PRODUCTION)
-                    AirRobeConstants.AIRROBE_CONNECTOR_PRODUCTION + "/graphql"
+                    Connector.Production.raw + "/graphql"
                 else
-                    AirRobeConstants.AIRROBE_CONNECTOR_SANDBOX + "/graphql",
+                    Connector.Sandbox.raw + "/graphql",
                 param
             )
 
