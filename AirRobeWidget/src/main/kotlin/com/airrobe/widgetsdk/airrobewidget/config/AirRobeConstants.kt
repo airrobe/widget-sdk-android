@@ -1,11 +1,19 @@
 package com.airrobe.widgetsdk.airrobewidget.config
 
+internal enum class Connector(val raw: String) {
+    Sandbox("https://sandbox.connector.airrobe.com"),
+    Production("https://connector.airrobe.com")
+}
+
+internal enum class TelemetryEventHost(val raw: String) {
+    Sandbox("https://events.stg.airdemo.link"),
+    Production("https://events.airrobe.com")
+}
+
 internal class AirRobeConstants {
     companion object {
         const val FLOAT_NULL_MAGIC_VALUE = 0.000003f
         const val INT_NULL_MAGIC_VALUE = -987654321
-        const val AIRROBE_CONNECTOR_SANDBOX = "https://sandbox.connector.airrobe.com"
-        const val AIRROBE_CONNECTOR_PRODUCTION = "https://connector.airrobe.com"
         const val PRICE_ENGINE_HOST = "https://price-engine.airrobe.com"
         const val EMAIL_CHECK_HOST = "https://shop.airrobe.com"
         const val ORDER_ACTIVATE_BASE_URL = "https://shop.airrobe.com/en/orders/"

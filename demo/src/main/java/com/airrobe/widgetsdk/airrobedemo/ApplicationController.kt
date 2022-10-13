@@ -14,7 +14,7 @@ class ApplicationController : Application(), AirRobeEventListener {
         // Initialize SDK
         AirRobeWidget.initialize(
             AirRobeWidgetConfig(
-                "515b6ee129da",
+                "927fbe5e7924",
                 Mode.SANDBOX
             )
         )
