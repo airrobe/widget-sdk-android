@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_main_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="24dp"
+    android:background="@drawable/confirmation_background">
+
+    <LinearLayout
+        android:id="@+id/rl_title_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center|bottom">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/airrobe_order_confirmation_title"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/ic_airrobe_logo"
+            android:contentDescription="@string/logo_content_description" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_title_container"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="@string/airrobe_order_confirmation_description"
+        android:textAlignment="center"
+        android:textSize="14sp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_action_container"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/tv_description"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/activate_button_background_enhanced">
+
+        <TextView
+            android:id="@+id/tv_action"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="15sp" />
+
+        <ProgressBar
+            android:id="@+id/btn_loading"
+            style="?android:attr/progressBarPadding"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

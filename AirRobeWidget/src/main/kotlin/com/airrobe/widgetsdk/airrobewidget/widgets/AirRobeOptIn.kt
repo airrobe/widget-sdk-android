@@ -128,7 +128,7 @@ class AirRobeOptIn @JvmOverloads constructor(
         }
 
     init {
-        inflate(context, R.layout.airrobe_opt_in, this)
+        inflate(context, R.layout.airrobe_opt_in_default, this)
         visibility = GONE
 
         llMainContainer = findViewById(R.id.ll_main_container)

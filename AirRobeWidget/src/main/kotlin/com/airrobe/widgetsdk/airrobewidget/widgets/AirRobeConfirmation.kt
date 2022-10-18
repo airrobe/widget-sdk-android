@@ -101,7 +101,7 @@ class AirRobeConfirmation @JvmOverloads constructor(
         }
 
     init {
-        inflate(context, R.layout.airrobe_confirmation, this)
+        inflate(context, R.layout.airrobe_confirmation_default, this)
         visibility = GONE
 
         rlMainContainer = findViewById(R.id.rl_main_container)

@@ -51,7 +51,7 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        setContentView(R.layout.airrobe_dialog_learn_more)
+        setContentView(R.layout.airrobe_dialog_learn_more_default)
 
         optInSwitch = findViewById(R.id.opt_in_switch)
         tvFindOutMore = findViewById(R.id.tv_find_out_more)
