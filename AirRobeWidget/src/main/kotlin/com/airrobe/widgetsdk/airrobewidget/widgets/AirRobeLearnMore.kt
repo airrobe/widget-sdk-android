@@ -37,9 +37,7 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
     private lateinit var tvReady: TextView
     private lateinit var tvToggleOn: TextView
     private lateinit var ivClose: ImageView
-    private lateinit var ivCheck: ImageView
     private lateinit var ivPlant1: ImageView
-    private lateinit var ivEmoji: ImageView
     private lateinit var ivPlant2: ImageView
     lateinit var optInSwitchFromOptInWidget: Switch
     var isFromMultiOptIn: Boolean = false
@@ -71,9 +69,7 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
         tvReady = findViewById(R.id.tv_ready)
         tvToggleOn = findViewById(R.id.tv_toggle_on)
         ivClose = findViewById(R.id.iv_close)
-        ivCheck = findViewById(R.id.iv_check)
         ivPlant1 = findViewById(R.id.iv_plant1)
-        ivEmoji = findViewById(R.id.iv_emoji)
         ivPlant2 = findViewById(R.id.iv_plant2)
 
         initView()
@@ -217,19 +213,7 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
             else
                 widgetInstance.textColor
         )
-        ivCheck.setColorFilter(
-            if (widgetInstance.textColor == 0)
-                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
-            else
-                widgetInstance.textColor
-        )
         ivPlant1.setColorFilter(
-            if (widgetInstance.textColor == 0)
-                AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
-            else
-                widgetInstance.textColor
-        )
-        ivEmoji.setColorFilter(
             if (widgetInstance.textColor == 0)
                 AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_text_color)
             else

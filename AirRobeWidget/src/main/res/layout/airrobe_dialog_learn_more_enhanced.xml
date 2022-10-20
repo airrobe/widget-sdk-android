@@ -23,7 +23,7 @@
             android:layout_height="25dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/close_icon"
+            android:src="@drawable/ic_close_enhanced"
             android:contentDescription="@string/close_content_description" />
 
     </RelativeLayout>
@@ -68,7 +68,7 @@
         android:text="@string/airrobe_learn_more_step1_title_enhanced"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:drawableLeft="@drawable/circled_number_1"
+        android:drawableLeft="@drawable/ic_circled_number_1"
         android:drawablePadding="8dp"
         android:layout_marginTop="28dp"
         android:gravity="center_vertical" />
@@ -83,7 +83,7 @@
             android:id="@+id/iv_step2"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/circled_number_2"
+            android:src="@drawable/ic_circled_number_2"
             android:contentDescription="@string/circled_number_2_content_description"/>
 
         <LinearLayout
@@ -122,7 +122,7 @@
             android:id="@+id/iv_step3"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/circled_number_3"
+            android:src="@drawable/ic_circled_number_3"
             android:contentDescription="@string/circled_number_3_content_description" />
 
         <LinearLayout

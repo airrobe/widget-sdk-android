@@ -35,7 +35,7 @@ class AirRobeOptIn @JvmOverloads constructor(
     private var tvTitle: TextView
     private var tvDescription: TextView
     private var tvDetailedDescription: TextView
-    private var tvExtraInfo: TextView
+    private lateinit var tvExtraInfo: TextView
     private var tvPotentialValue: TextView
     private var priceLoading: ProgressBar
     private var ivArrowDown: ImageView
@@ -48,6 +48,9 @@ class AirRobeOptIn @JvmOverloads constructor(
         Opened,
         Closed
     }
+
+    private val testVariant = widgetInstance.shopModel?.getSplitTestVariant(context)
+
     private var expandType: ExpandType = ExpandType.Closed
     private var brand: String? = null
     private var material: String? = null
@@ -58,16 +61,6 @@ class AirRobeOptIn @JvmOverloads constructor(
     private var rrpCents: Float = AirRobeConstants.FLOAT_NULL_MAGIC_VALUE
     private var currency: String? = "AUD"
     private var locale: String? = "en-AU"
-
-    var widgetBackgroundColor: Int =
-        if (widgetInstance.backgroundColor == 0)
-            AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_background_color)
-        else
-            widgetInstance.backgroundColor
-        set(value) {
-            field = value
-            setBackgroundColor(value)
-        }
 
     var borderColor: Int =
         if (widgetInstance.borderColor == 0)
@@ -128,7 +121,16 @@ class AirRobeOptIn @JvmOverloads constructor(
         }
 
     init {
-        inflate(context, R.layout.airrobe_opt_in_default, this)
+        when (testVariant?.splitTestVariant) {
+            AirRobeVariants.Enhanced.raw -> {
+                inflate(context, R.layout.airrobe_opt_in_enhanced, this)
+            }
+            else -> {
+                inflate(context, R.layout.airrobe_opt_in_default, this)
+                tvExtraInfo = findViewById(R.id.tv_extra_info)
+            }
+        }
+
         visibility = GONE
 
         llMainContainer = findViewById(R.id.ll_main_container)
@@ -137,7 +139,6 @@ class AirRobeOptIn @JvmOverloads constructor(
         tvTitle = findViewById(R.id.tv_title)
         tvDescription = findViewById(R.id.tv_description)
         tvDetailedDescription = findViewById(R.id.tv_detailed_description)
-        tvExtraInfo = findViewById(R.id.tv_extra_info)
         tvPotentialValue = findViewById(R.id.tv_potential_value)
         priceLoading = findViewById(R.id.price_loading)
         ivArrowDown = findViewById(R.id.iv_arrow_down)
@@ -165,13 +166,6 @@ class AirRobeOptIn @JvmOverloads constructor(
 
     private fun setupAttributes(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.AirRobeOptIn, 0, 0)
-        widgetBackgroundColor =
-            typedArray.getColor(R.styleable.AirRobeOptIn_backgroundColor,
-                if (widgetInstance.backgroundColor == 0)
-                    AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_background_color)
-                else
-                    widgetInstance.backgroundColor
-            )
         borderColor =
             typedArray.getColor(R.styleable.AirRobeOptIn_borderColor,
                 if (widgetInstance.borderColor == 0)

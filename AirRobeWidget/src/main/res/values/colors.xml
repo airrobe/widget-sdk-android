@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="airrobe_widget_default_modal_bg">#FFFFFF</color>
-    <color name="airrobe_widget_default_background_color">#FFFFFF</color>
     <color name="airrobe_widget_default_border_color">#DFDFDF</color>
     <color name="airrobe_widget_default_text_color">#232323</color>
     <color name="airrobe_widget_default_switch_color">#42ABC8</color>
@@ -10,4 +9,14 @@
     <color name="airrobe_widget_default_button_border_color">#232323</color>
     <color name="airrobe_widget_default_button_text_color">#232323</color>
     <color name="airrobe_widget_default_separator_color">#DFDFDF</color>
+
+    <color name="airrobe_widget_enhanced_modal_bg">#FFFFFF</color>
+    <color name="airrobe_widget_enhanced_border_color">#000000</color>
+    <color name="airrobe_widget_enhanced_text_color">#222222</color>
+    <color name="airrobe_widget_enhanced_switch_color">#42ABC8</color>
+    <color name="airrobe_widget_enhanced_arrow_color">#42ABC8</color>
+    <color name="airrobe_widget_enhanced_link_text_color">#696969</color>
+    <color name="airrobe_widget_enhanced_button_border_color">#232323</color>
+    <color name="airrobe_widget_enhanced_button_text_color">#232323</color>
+    <color name="airrobe_widget_enhanced_separator_color">#DFDFDF</color>
 </resources>

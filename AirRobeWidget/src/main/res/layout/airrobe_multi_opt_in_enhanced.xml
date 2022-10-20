@@ -17,7 +17,9 @@
             android:id="@+id/opt_in_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false" />
+            android:checked="false"
+            android:thumb="@drawable/airrobe_switch_thumb_enhanced"
+            android:track="@drawable/airrobe_switch_track_enhanced" />
 
         <LinearLayout
             android:id="@+id/ll_switch_container"
