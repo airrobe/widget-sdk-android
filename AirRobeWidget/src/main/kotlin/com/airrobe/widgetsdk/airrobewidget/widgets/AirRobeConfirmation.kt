@@ -39,6 +39,8 @@ class AirRobeConfirmation @JvmOverloads constructor(
         private const val TAG = "AirRobeConfirmation"
     }
 
+    private val testVariant = widgetInstance.shopModel?.getSplitTestVariant(context)
+
     private var orderId: String? = null
     private var email: String? = null
     private var orderSubtotalCents: Int = AirRobeConstants.INT_NULL_MAGIC_VALUE
@@ -47,7 +49,13 @@ class AirRobeConfirmation @JvmOverloads constructor(
 
     var borderColor: Int =
         if (widgetInstance.borderColor == 0)
-            AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_border_color)
+            AirRobeAppUtils.getColor(
+                context,
+                if (testVariant?.splitTestVariant.equals(AirRobeVariants.Enhanced.raw))
+                    R.color.airrobe_widget_enhanced_border_color
+                else
+                    R.color.airrobe_widget_default_border_color
+            )
         else
             widgetInstance.borderColor
         set(value) {
@@ -58,7 +66,13 @@ class AirRobeConfirmation @JvmOverloads constructor(
 
     var textColor: Int =
         if (widgetInstance.textColor == 0)
-            AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_text_color)
+            AirRobeAppUtils.getColor(
+                context,
+                if (testVariant?.splitTestVariant.equals(AirRobeVariants.Enhanced.raw))
+                    R.color.airrobe_widget_enhanced_text_color
+                else
+                    R.color.airrobe_widget_default_text_color
+            )
         else
             widgetInstance.textColor
         set(value) {
@@ -69,7 +83,13 @@ class AirRobeConfirmation @JvmOverloads constructor(
 
     var buttonBorderColor: Int =
         if (widgetInstance.buttonBorderColor == 0)
-            AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_confirmation_button_border_color)
+            AirRobeAppUtils.getColor(
+                context,
+                if (testVariant?.splitTestVariant.equals(AirRobeVariants.Enhanced.raw))
+                    R.color.airrobe_widget_enhanced_confirmation_button_border_color
+                else
+                    R.color.airrobe_widget_default_confirmation_button_border_color
+            )
         else
             widgetInstance.buttonBorderColor
         set(value) {
@@ -80,7 +100,13 @@ class AirRobeConfirmation @JvmOverloads constructor(
 
     var buttonTextColor: Int =
         if (widgetInstance.buttonTextColor == 0)
-            AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_confirmation_button_text_color)
+            AirRobeAppUtils.getColor(
+                context,
+                if (testVariant?.splitTestVariant.equals(AirRobeVariants.Enhanced.raw))
+                    R.color.airrobe_widget_enhanced_confirmation_button_text_color
+                else
+                    R.color.airrobe_widget_default_confirmation_button_text_color
+            )
         else
             widgetInstance.buttonTextColor
         set(value) {
@@ -89,8 +115,31 @@ class AirRobeConfirmation @JvmOverloads constructor(
             btnLoading.indeterminateTintList = ColorStateList.valueOf(value)
         }
 
+    var buttonBackgroundColor: Int =
+        if (widgetInstance.buttonBackgroundColor == 0)
+            AirRobeAppUtils.getColor(
+                context,
+                if (testVariant?.splitTestVariant.equals(AirRobeVariants.Enhanced.raw))
+                    R.color.airrobe_widget_enhanced_confirmation_button_background_color
+                else
+                    R.color.airrobe_widget_enhanced_confirmation_button_background_color
+            )
+        else
+            widgetInstance.buttonBackgroundColor
+        set(value) {
+            field = value
+            rlActionContainer.setBackgroundColor(value)
+        }
+
     init {
-        inflate(context, R.layout.airrobe_confirmation_default, this)
+        when (testVariant?.splitTestVariant) {
+            AirRobeVariants.Enhanced.raw -> {
+                inflate(context, R.layout.airrobe_confirmation_enhanced, this)
+            }
+            else -> {
+                inflate(context, R.layout.airrobe_confirmation_default, this)
+            }
+        }
         visibility = GONE
 
         rlMainContainer = findViewById(R.id.rl_main_container)
@@ -121,30 +170,67 @@ class AirRobeConfirmation @JvmOverloads constructor(
         borderColor =
             typedArray.getColor(R.styleable.AirRobeConfirmation_borderColor,
                 if (widgetInstance.borderColor == 0)
-                    AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_border_color)
+                    AirRobeAppUtils.getColor(
+                        context,
+                        if (testVariant?.splitTestVariant.equals(AirRobeVariants.Enhanced.raw))
+                            R.color.airrobe_widget_enhanced_border_color
+                        else
+                            R.color.airrobe_widget_default_border_color
+                    )
                 else
                     widgetInstance.borderColor
             )
         textColor =
             typedArray.getColor(R.styleable.AirRobeConfirmation_textColor,
                 if (widgetInstance.textColor == 0)
-                    AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_text_color)
+                    AirRobeAppUtils.getColor(
+                        context,
+                        if (testVariant?.splitTestVariant.equals(AirRobeVariants.Enhanced.raw))
+                            R.color.airrobe_widget_enhanced_text_color
+                        else
+                            R.color.airrobe_widget_default_text_color
+                    )
                 else
                     widgetInstance.textColor
             )
         buttonBorderColor =
             typedArray.getColor(R.styleable.AirRobeConfirmation_buttonBackgroundColor,
                 if (widgetInstance.buttonBorderColor == 0)
-                    AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_confirmation_button_border_color)
+                    AirRobeAppUtils.getColor(
+                        context,
+                        if (testVariant?.splitTestVariant.equals(AirRobeVariants.Enhanced.raw))
+                            R.color.airrobe_widget_enhanced_confirmation_button_border_color
+                        else
+                            R.color.airrobe_widget_default_confirmation_button_border_color
+                    )
                 else
                     widgetInstance.buttonBorderColor
             )
         buttonTextColor =
             typedArray.getColor(R.styleable.AirRobeConfirmation_buttonTextColor,
                 if (widgetInstance.buttonTextColor == 0)
-                    AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_confirmation_button_text_color)
+                    AirRobeAppUtils.getColor(
+                        context,
+                        if (testVariant?.splitTestVariant.equals(AirRobeVariants.Enhanced.raw))
+                            R.color.airrobe_widget_enhanced_confirmation_button_text_color
+                        else
+                            R.color.airrobe_widget_default_confirmation_button_text_color
+                    )
                 else
                     widgetInstance.buttonTextColor
+            )
+        buttonBackgroundColor =
+            typedArray.getColor(R.styleable.AirRobeConfirmation_buttonBackgroundColor,
+                if (widgetInstance.buttonBackgroundColor == 0)
+                    AirRobeAppUtils.getColor(
+                        context,
+                        if (testVariant?.splitTestVariant.equals(AirRobeVariants.Enhanced.raw))
+                            R.color.airrobe_widget_enhanced_confirmation_button_background_color
+                        else
+                            R.color.airrobe_widget_default_confirmation_button_background_color
+                    )
+                else
+                    widgetInstance.buttonBackgroundColor
             )
     }
 
