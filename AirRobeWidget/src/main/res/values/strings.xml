@@ -34,6 +34,11 @@
 
 
     <string name="airrobe_description_enhanced"><u>Save to resell later.</u></string>
+    <string name="airrobe_potential_value_enhanced">Estimated resale: $%1$s</string>
+    <string name="airrobe_potential_value_without_value_enhanced">Estimated resale:</string>
+    <string name="airrobe_potential_value_enhanced_cut_off">Est. resale: $%1$s</string>
+    <string name="airrobe_potential_value_without_value_enhanced_cut_off">Est. resale:</string>
+
     <string name="airrobe_detailed_description_enhanced">AirRobe is the easiest way to resell, rent or recycle your fashion. “Add to AirRobe” to save all product details and imagery to your own digital Circular Wardrobe™ so you can list later on the AirRobe pre-loved marketplace in seconds. No fee to add. No commitment. Learn more.</string>
 
     <string name="airrobe_order_confirmation_description_enhanced">Simply activate your free account below to resell your items back into a circular economy after you’ve loved and worn them.</string>

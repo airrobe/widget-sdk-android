@@ -2,21 +2,22 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/airrobe_switch_thumb_on_layer_enhanced"
         android:top="3dp"
         android:bottom="3dp"
         android:left="3dp"
         android:right="3dp">
         <shape android:shape="oval">
-            <solid android:color="@color/airrobe_widget_enhanced_button_text_color" />
+            <solid android:color="@color/airrobe_widget_enhanced_switch_thumb_on_color" />
             <size android:height="32dp"
                 android:width="32dp" />
         </shape>
     </item>
 
     <item android:drawable="@drawable/ic_switch_check"
-        android:bottom="8dp"
-        android:top="8dp"
-        android:left="8dp"
-        android:right="8dp" />
+        android:bottom="12dp"
+        android:top="12dp"
+        android:left="12dp"
+        android:right="12dp" />
 
 </layer-list>

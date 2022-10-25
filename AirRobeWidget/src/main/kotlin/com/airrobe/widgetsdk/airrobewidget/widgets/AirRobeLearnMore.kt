@@ -242,11 +242,11 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
         )
         val thumbColors = intArrayOf(
             Color.WHITE,
-            if (widgetInstance.switchColor == 0) AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_switch_color) else widgetInstance.switchColor,
+            if (widgetInstance.switchOnColor == 0) AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_switch_on_color) else widgetInstance.switchOnColor,
         )
         val trackColors = intArrayOf(
             if (widgetInstance.borderColor == 0) AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_border_color) else widgetInstance.borderColor,
-            if (widgetInstance.switchColor == 0) AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_switch_color) else widgetInstance.switchColor,
+            if (widgetInstance.switchOnColor == 0) AirRobeAppUtils.getColor(context,R.color.airrobe_widget_default_switch_on_color) else widgetInstance.switchOnColor,
         )
         optInSwitch.thumbDrawable.setTintList(ColorStateList(states, thumbColors))
         optInSwitch.trackDrawable.setTintList(ColorStateList(states, trackColors))

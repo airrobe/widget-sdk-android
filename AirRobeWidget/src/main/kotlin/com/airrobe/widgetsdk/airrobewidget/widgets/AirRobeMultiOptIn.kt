@@ -49,16 +49,6 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
     private var expandType: ExpandType = ExpandType.Closed
     private var items: ArrayList<String> = arrayListOf()
 
-    var widgetBackgroundColor: Int =
-        if (widgetInstance.backgroundColor == 0)
-            AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_background_color)
-        else
-            widgetInstance.backgroundColor
-        set(value) {
-            field = value
-            setBackgroundColor(value)
-        }
-
     var borderColor: Int =
         if (widgetInstance.borderColor == 0)
             AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_border_color)
@@ -85,10 +75,10 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
         }
 
     var switchColor: Int =
-        if (widgetInstance.switchColor == 0)
-            AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_switch_color)
+        if (widgetInstance.switchOnColor == 0)
+            AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_switch_on_color)
         else
-            widgetInstance.switchColor
+            widgetInstance.switchOnColor
         set(value) {
             field = value
             setSwitchColor()
@@ -151,13 +141,6 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
 
     private fun setupAttributes(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.AirRobeMultiOptIn, 0, 0)
-        widgetBackgroundColor =
-            typedArray.getColor(R.styleable.AirRobeMultiOptIn_backgroundColor,
-                if (widgetInstance.backgroundColor == 0)
-                    AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_background_color)
-                else
-                    widgetInstance.backgroundColor
-            )
         borderColor =
             typedArray.getColor(R.styleable.AirRobeMultiOptIn_borderColor,
                 if (widgetInstance.borderColor == 0)
@@ -173,11 +156,11 @@ class AirRobeMultiOptIn @JvmOverloads constructor(
                     widgetInstance.textColor
             )
         switchColor =
-            typedArray.getColor(R.styleable.AirRobeMultiOptIn_switchColor,
-                if (widgetInstance.switchColor == 0)
-                    AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_switch_color)
+            typedArray.getColor(R.styleable.AirRobeMultiOptIn_switchOnColor,
+                if (widgetInstance.switchOnColor == 0)
+                    AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_switch_on_color)
                 else
-                    widgetInstance.switchColor
+                    widgetInstance.switchOnColor
             )
         arrowColor =
             typedArray.getColor(R.styleable.AirRobeMultiOptIn_arrowColor,
