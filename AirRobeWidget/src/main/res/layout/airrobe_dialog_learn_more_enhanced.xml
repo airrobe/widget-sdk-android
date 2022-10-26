@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:background="@drawable/dialog_background_enhanced">
 
     <RelativeLayout
         android:id="@+id/rl_title_container"
@@ -172,6 +173,7 @@
                 android:gravity="center_vertical">
 
                 <TextView
+                    android:id="@+id/tv_opt_in_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/airrobe_add_to"
@@ -190,6 +192,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_opt_in_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/airrobe_learn_more_opt_in_description_enhanced"
@@ -201,7 +204,9 @@
             android:id="@+id/opt_in_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:thumb="@drawable/airrobe_switch_thumb_enhanced"
+            android:track="@drawable/airrobe_switch_track_enhanced" />
 
     </LinearLayout>
 
