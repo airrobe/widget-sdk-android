@@ -128,7 +128,8 @@ class AirRobeConfirmation @JvmOverloads constructor(
             widgetInstance.buttonBackgroundColor
         set(value) {
             field = value
-            rlActionContainer.setBackgroundColor(value)
+            val background = rlActionContainer.background as GradientDrawable
+            background.setColor(value)
         }
 
     init {

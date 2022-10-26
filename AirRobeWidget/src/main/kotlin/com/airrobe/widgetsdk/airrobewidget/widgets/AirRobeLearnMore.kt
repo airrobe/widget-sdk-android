@@ -122,10 +122,12 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
 
     private fun initView() {
         optInSwitch.isChecked = AirRobeSharedPreferenceManager.getOptedIn(context)
-        if (optInSwitch.isChecked) {
-            tvOptInTitle.text = context.resources.getString(R.string.airrobe_added_to)
-        } else {
-            tvOptInTitle.text = context.resources.getString(R.string.airrobe_add_to)
+        if (testVariant?.splitTestVariant.equals(AirRobeVariants.Enhanced.raw)) {
+            if (optInSwitch.isChecked) {
+                tvOptInTitle.text = context.resources.getString(R.string.airrobe_added_to)
+            } else {
+                tvOptInTitle.text = context.resources.getString(R.string.airrobe_add_to)
+            }
         }
         optInSwitch.setOnCheckedChangeListener { _, isChecked ->
             AirRobeSharedPreferenceManager.setOptedIn(context, isChecked)
@@ -134,7 +136,8 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
                 AirRobeSharedPreferenceManager.setOrderOptedIn(context, isChecked)
             }
             if (isChecked) {
-                tvOptInTitle.text = context.resources.getString(R.string.airrobe_added_to)
+                if (testVariant?.splitTestVariant.equals(AirRobeVariants.Enhanced.raw))
+                    tvOptInTitle.text = context.resources.getString(R.string.airrobe_added_to)
                 if (isFromMultiOptIn) {
                     AirRobeAppUtils.telemetryEvent(context, TelemetryEventName.OptIn.raw, PageName.Cart.raw)
                     AirRobeAppUtils.dispatchEvent(context, EventName.OptIn.raw, PageName.Cart.raw)
@@ -143,7 +146,8 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
                     AirRobeAppUtils.dispatchEvent(context, EventName.OptIn.raw, PageName.Product.raw)
                 }
             } else {
-                tvOptInTitle.text = context.resources.getString(R.string.airrobe_add_to)
+                if (testVariant?.splitTestVariant.equals(AirRobeVariants.Enhanced.raw))
+                    tvOptInTitle.text = context.resources.getString(R.string.airrobe_add_to)
                 if (isFromMultiOptIn) {
                     AirRobeAppUtils.telemetryEvent(context, TelemetryEventName.OptOut.raw, PageName.Cart.raw)
                     AirRobeAppUtils.dispatchEvent(context, EventName.OptOut.raw, PageName.Cart.raw)
@@ -394,11 +398,21 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
         if (testVariant?.splitTestVariant.equals(AirRobeVariants.Enhanced.raw)) {
             val thumbOffLayerDrawable: LayerDrawable = context.getDrawable(R.drawable.airrobe_switch_thumb_enhanced_false) as LayerDrawable
             val thumbOffGradientDrawable: GradientDrawable = thumbOffLayerDrawable.findDrawableByLayerId(R.id.airrobe_switch_thumb_off_layer_enhanced) as GradientDrawable
-            thumbOffGradientDrawable.setColor(widgetInstance.switchThumbOffColor)
+            thumbOffGradientDrawable.setColor(
+                if (widgetInstance.switchThumbOffColor == 0)
+                    AirRobeAppUtils.getColor(context, R.color.airrobe_widget_enhanced_switch_thumb_off_color)
+                else
+                    widgetInstance.switchThumbOffColor
+            )
 
             val thumbOnLayerDrawable: LayerDrawable = context.getDrawable(R.drawable.airrobe_switch_thumb_enhanced_true) as LayerDrawable
             val thumbOnGradientDrawable: GradientDrawable = thumbOnLayerDrawable.findDrawableByLayerId(R.id.airrobe_switch_thumb_on_layer_enhanced) as GradientDrawable
-            thumbOnGradientDrawable.setColor(widgetInstance.switchThumbOnColor)
+            thumbOnGradientDrawable.setColor(
+                if (widgetInstance.switchThumbOnColor == 0)
+                    AirRobeAppUtils.getColor(context, R.color.airrobe_widget_enhanced_switch_thumb_on_color)
+                else
+                    widgetInstance.switchThumbOnColor
+            )
 
             val thumbLayerDrawable: StateListDrawable = context.getDrawable(R.drawable.airrobe_switch_thumb_enhanced) as StateListDrawable
             thumbLayerDrawable.addState(intArrayOf(-android.R.attr.state_checked), thumbOffLayerDrawable)
@@ -406,11 +420,21 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
 
             val trackOffLayerDrawable: LayerDrawable = context.getDrawable(R.drawable.airrobe_switch_track_off_enhanced) as LayerDrawable
             val trackOffGradientDrawable: GradientDrawable = trackOffLayerDrawable.findDrawableByLayerId(R.id.airrobe_switch_track_off_layer_enhanced) as GradientDrawable
-            trackOffGradientDrawable.setColor(widgetInstance.switchOffColor)
+            trackOffGradientDrawable.setColor(
+                if (widgetInstance.switchOffColor == 0)
+                    AirRobeAppUtils.getColor(context, R.color.airrobe_widget_enhanced_switch_off_color)
+                else
+                    widgetInstance.switchOffColor
+            )
 
             val trackOnLayerDrawable: LayerDrawable = context.getDrawable(R.drawable.airrobe_switch_track_on_enhanced) as LayerDrawable
             val trackOnGradientDrawable: GradientDrawable = trackOnLayerDrawable.findDrawableByLayerId(R.id.airrobe_switch_track_on_layer_enhanced) as GradientDrawable
-            trackOnGradientDrawable.setColor(widgetInstance.switchOnColor)
+            trackOnGradientDrawable.setColor(
+                if (widgetInstance.switchOnColor == 0)
+                    AirRobeAppUtils.getColor(context, R.color.airrobe_widget_enhanced_switch_on_color)
+                else
+                    widgetInstance.switchOnColor
+            )
 
             val trackLayerDrawable: StateListDrawable = context.getDrawable(R.drawable.airrobe_switch_track_enhanced) as StateListDrawable
             trackLayerDrawable.addState(intArrayOf(-android.R.attr.state_checked), trackOffLayerDrawable)
@@ -424,12 +448,24 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
                 intArrayOf(android.R.attr.state_checked)
             )
             val thumbColors = intArrayOf(
-                widgetInstance.switchThumbOffColor,
-                widgetInstance.switchThumbOnColor
+                if (widgetInstance.switchThumbOffColor == 0)
+                    AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_switch_thumb_off_color)
+                else
+                    widgetInstance.switchThumbOffColor,
+                if (widgetInstance.switchThumbOnColor == 0)
+                    AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_switch_thumb_on_color)
+                else
+                    widgetInstance.switchThumbOnColor
             )
             val trackColors = intArrayOf(
-                widgetInstance.switchOffColor,
-                widgetInstance.switchOnColor
+                if (widgetInstance.switchOffColor == 0)
+                    AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_switch_off_color)
+                else
+                    widgetInstance.switchOffColor,
+                if (widgetInstance.switchOnColor == 0)
+                    AirRobeAppUtils.getColor(context, R.color.airrobe_widget_default_switch_on_color)
+                else
+                    widgetInstance.switchOnColor
             )
             optInSwitch.thumbDrawable.setTintList(ColorStateList(states, thumbColors))
             optInSwitch.trackDrawable.setTintList(ColorStateList(states, trackColors))
@@ -444,11 +480,13 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
             true
         }
 
-        tvClose.setOnTouchListener { v, event ->
-            if (AirRobeAppUtils.touchAnimator(context, v, event)) {
-                dismiss()
+        if (testVariant?.splitTestVariant.equals(AirRobeVariants.Enhanced.raw)) {
+            tvClose.setOnTouchListener { v, event ->
+                if (AirRobeAppUtils.touchAnimator(context, v, event)) {
+                    dismiss()
+                }
+                true
             }
-            true
         }
     }
 
