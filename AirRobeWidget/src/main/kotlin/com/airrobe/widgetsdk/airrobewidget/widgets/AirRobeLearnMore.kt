@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.StateListDrawable
@@ -118,7 +117,7 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
         optInSwitch = findViewById(R.id.opt_in_switch)
 
         initView()
-        onClick()
+        onClickActions()
     }
 
     private fun initView() {
@@ -437,7 +436,7 @@ internal class AirRobeLearnMore(context: Context) : Dialog(context) {
         }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun onClick() {
+    private fun onClickActions() {
         ivClose.setOnTouchListener { v, event ->
             if (AirRobeAppUtils.touchAnimator(context, v, event)) {
                 dismiss()
