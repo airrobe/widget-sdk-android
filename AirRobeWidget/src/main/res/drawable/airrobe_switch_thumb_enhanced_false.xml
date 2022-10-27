@@ -9,15 +9,12 @@
         android:right="3dp">
         <shape android:shape="oval">
             <solid android:color="@color/airrobe_widget_enhanced_switch_thumb_off_color" />
-            <size android:height="32dp"
-                android:width="32dp" />
+            <size android:height="26dp"
+                android:width="26dp" />
         </shape>
     </item>
 
     <item android:drawable="@drawable/ic_switch_arrow"
-        android:bottom="12dp"
-        android:top="12dp"
-        android:left="12dp"
-        android:right="12dp" />
+        android:gravity="center"/>
 
 </layer-list>
