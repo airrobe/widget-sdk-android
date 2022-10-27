@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="airrobe_widget_default_modal_bg">#FFFFFF</color>
-    <color name="airrobe_widget_default_background_color">#FFFFFF</color>
     <color name="airrobe_widget_default_border_color">#DFDFDF</color>
     <color name="airrobe_widget_default_text_color">#232323</color>
-    <color name="airrobe_widget_default_switch_color">#42ABC8</color>
+    <color name="airrobe_widget_default_switch_on_color">#42ABC8</color>
+    <color name="airrobe_widget_default_switch_off_color">#DFDFDF</color>
+    <color name="airrobe_widget_default_switch_thumb_on_color">#FFFFFF</color>
+    <color name="airrobe_widget_default_switch_thumb_off_color">#FFFFFF</color>
     <color name="airrobe_widget_default_arrow_color">#42ABC8</color>
     <color name="airrobe_widget_default_link_text_color">#696969</color>
-    <color name="airrobe_widget_default_button_border_color">#232323</color>
-    <color name="airrobe_widget_default_button_text_color">#232323</color>
+    <color name="airrobe_widget_default_confirmation_button_border_color">#232323</color>
+    <color name="airrobe_widget_default_confirmation_button_background_color">#FFFFFF</color>
+    <color name="airrobe_widget_default_confirmation_button_text_color">#232323</color>
     <color name="airrobe_widget_default_separator_color">#DFDFDF</color>
+
+    <color name="airrobe_widget_enhanced_modal_bg">#FFFFFF</color>
+    <color name="airrobe_widget_enhanced_border_color">#000000</color>
+    <color name="airrobe_widget_enhanced_text_color">#222222</color>
+    <color name="airrobe_widget_enhanced_switch_on_color">#222222</color>
+    <color name="airrobe_widget_enhanced_switch_off_color">#FFFFFF</color>
+    <color name="airrobe_widget_enhanced_switch_thumb_on_color">#FFFFFF</color>
+    <color name="airrobe_widget_enhanced_switch_thumb_off_color">#222222</color>
+    <color name="airrobe_widget_enhanced_switch_border_color">#B2B2B2</color>
+    <color name="airrobe_widget_enhanced_popup_switch_container_background_color">#F1F1F1</color>
+    <color name="airrobe_widget_enhanced_arrow_color">#222222</color>
+    <color name="airrobe_widget_enhanced_link_text_color">#222222</color>
+    <color name="airrobe_widget_enhanced_confirmation_button_border_color">#FFFFFF</color>
+    <color name="airrobe_widget_enhanced_confirmation_button_background_color">#111111</color>
+    <color name="airrobe_widget_enhanced_confirmation_button_text_color">#FFFFFF</color>
+    <color name="airrobe_widget_enhanced_separator_color">#222222</color>
 </resources>

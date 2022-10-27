@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/dialog_background_enhanced">
+
+    <RelativeLayout
+        android:id="@+id/rl_title_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="21dp"
+            android:src="@drawable/ic_airrobe_logo"
+            android:contentDescription="@string/logo_content_description"/>
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_close_enhanced"
+            android:contentDescription="@string/close_content_description" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/airrobe_learn_more_title_enhanced"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/tv_sub_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/airrobe_learn_more_sub_title_enhanced"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_how_it_works_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/airrobe_learn_more_how_it_works_title_enhanced"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/tv_step1_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/airrobe_learn_more_step1_title_enhanced"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:drawableLeft="@drawable/ic_circled_number_1"
+        android:drawablePadding="8dp"
+        android:layout_marginTop="28dp"
+        android:gravity="center_vertical" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <ImageView
+            android:id="@+id/iv_step2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_circled_number_2"
+            android:contentDescription="@string/circled_number_2_content_description"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:id="@+id/tv_step2_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/airrobe_learn_more_step2_title_enhanced"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_step2_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/airrobe_learn_more_step2_description_enhanced"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <ImageView
+            android:id="@+id/iv_step3"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_circled_number_3"
+            android:contentDescription="@string/circled_number_3_content_description" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:id="@+id/tv_step3_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/airrobe_learn_more_step3_title_enhanced"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_step3_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/airrobe_learn_more_step3_description_enhanced"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_opt_in_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:padding="16dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_opt_in_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/airrobe_add_to"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="1dp" />
+                
+                <ImageView
+                    android:layout_width="71dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/ic_airrobe_logo"
+                    android:layout_marginStart="5dp"
+                    android:contentDescription="@string/logo_content_description" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_opt_in_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/airrobe_learn_more_opt_in_description_enhanced"
+                android:textSize="12sp" />
+                
+        </LinearLayout>
+
+        <Switch
+            android:id="@+id/opt_in_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:thumb="@drawable/airrobe_switch_thumb_enhanced"
+            android:track="@drawable/airrobe_switch_track_enhanced" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp">
+
+        <TextView
+            android:id="@+id/tv_find_out_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/airrobe_learn_more_text_enhanced"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/airrobe_learn_more_close_enhanced"
+            android:textSize="12sp"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+</LinearLayout>

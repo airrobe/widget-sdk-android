@@ -24,11 +24,16 @@ class ApplicationController : Application(), AirRobeEventListener {
 //        AirRobeWidget.borderColor = Color.BLUE
 //        AirRobeWidget.arrowColor = Color.GREEN
 //        AirRobeWidget.textColor = Color.YELLOW
-//        AirRobeWidget.switchColor = Color.CYAN
+//        AirRobeWidget.switchOnColor = Color.CYAN
+//        AirRobeWidget.switchOffColor = Color.CYAN
+//        AirRobeWidget.switchThumbOnColor = Color.CYAN
+//        AirRobeWidget.switchThumbOffColor = Color.CYAN
 //        AirRobeWidget.buttonBorderColor = Color.LTGRAY
 //        AirRobeWidget.buttonTextColor = Color.MAGENTA
+//        AirRobeWidget.buttonBackgroundColor = Color.MAGENTA
 //        AirRobeWidget.separatorColor = Color.RED
 //        AirRobeWidget.linkTextColor = Color.GRAY
+//        AirRobeWidget.popupSwitchContainerBackgroundColor = Color.GRAY
     }
 
     companion object {

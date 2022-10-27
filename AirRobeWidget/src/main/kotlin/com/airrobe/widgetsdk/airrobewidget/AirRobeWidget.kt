@@ -20,11 +20,6 @@ internal var eventListenerInstance: AirRobeEventListener? = null
 object AirRobeWidget {
     private const val TAG = "AirRobeWidget"
 
-    var backgroundColor: Int = 0
-        set(value) {
-            field = value
-            widgetInstance.backgroundColor = value
-        }
     var borderColor: Int = 0
         set(value) {
             field = value
@@ -35,10 +30,25 @@ object AirRobeWidget {
             field = value
             widgetInstance.textColor = value
         }
-    var switchColor: Int = 0
+    var switchOnColor: Int = 0
         set(value) {
             field = value
-            widgetInstance.switchColor = value
+            widgetInstance.switchOnColor = value
+        }
+    var switchOffColor: Int = 0
+        set(value) {
+            field = value
+            widgetInstance.switchOffColor = value
+        }
+    var switchThumbOnColor: Int = 0
+        set(value) {
+            field = value
+            widgetInstance.switchThumbOnColor = value
+        }
+    var switchThumbOffColor: Int = 0
+        set(value) {
+            field = value
+            widgetInstance.switchThumbOffColor = value
         }
     var arrowColor: Int = 0
         set(value) {
@@ -60,10 +70,20 @@ object AirRobeWidget {
             field = value
             widgetInstance.buttonTextColor = value
         }
+    var buttonBackgroundColor: Int = 0
+        set(value) {
+            field = value
+            widgetInstance.buttonBackgroundColor = value
+        }
     var separatorColor: Int = 0
         set(value) {
             field = value
             widgetInstance.separatorColor = value
+        }
+    var popupSwitchContainerBackgroundColor: Int = 0
+        set(value) {
+            field = value
+            widgetInstance.popupSwitchContainerBackgroundColor = value
         }
 
     var eventListener: AirRobeEventListener? = null

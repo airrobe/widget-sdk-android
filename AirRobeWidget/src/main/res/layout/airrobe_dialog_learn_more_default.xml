@@ -14,7 +14,8 @@
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_airrobe_logo" />
+            android:src="@drawable/ic_airrobe_logo"
+            android:contentDescription="@string/logo_content_description" />
 
         <ImageView
             android:id="@+id/iv_close"
@@ -23,7 +24,8 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="5dp"
-            android:src="@drawable/ic_close" />
+            android:src="@drawable/ic_close"
+            android:contentDescription="@string/close_content_description" />
 
     </RelativeLayout>
 
@@ -53,36 +55,21 @@
         android:layout_marginHorizontal="20dp"
         android:background="@drawable/learn_more_step_background">
 
-        <LinearLayout
-            android:id="@+id/ll_step1_title_container"
+        <TextView
+            android:id="@+id/tv_step1_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/tv_step1_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/airrobe_learn_more_step1_title"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:id="@+id/iv_check"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_check_in_circle" />
-
-        </LinearLayout>
+            android:text="@string/airrobe_learn_more_step1_title"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:drawableEnd="@drawable/ic_check_in_circle"
+            android:padding="10dp" />
 
         <View
             android:id="@+id/step1_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@id/ll_step1_title_container" />
+            android:layout_below="@id/tv_step1_title" />
 
         <TextView
             android:id="@+id/tv_step1_description"
@@ -102,7 +89,8 @@
             android:layout_marginTop="-20dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="-10dp"
-            android:src="@drawable/ic_plant" />
+            android:src="@drawable/ic_plant"
+            android:contentDescription="@string/plant_content_description" />
 
     </RelativeLayout>
 
@@ -140,36 +128,21 @@
         android:layout_marginHorizontal="20dp"
         android:background="@drawable/learn_more_step_background">
 
-        <LinearLayout
-            android:id="@+id/ll_step2_title_container"
+        <TextView
+            android:id="@+id/tv_step2_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:text="@string/airrobe_learn_more_step2_title"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:padding="10dp"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/tv_step2_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/airrobe_learn_more_step2_title"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:id="@+id/iv_emoji"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_smile_emoji" />
-
-        </LinearLayout>
+            android:drawableEnd="@drawable/ic_smile_emoji" />
 
         <View
             android:id="@+id/step2_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@id/ll_step2_title_container" />
+            android:layout_below="@id/tv_step2_title" />
 
         <TextView
             android:id="@+id/tv_step2_description"
@@ -189,7 +162,8 @@
             android:layout_marginTop="-20dp"
             android:layout_marginBottom="-10dp"
             android:layout_marginEnd="10dp"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/plant_content_description" />
 
     </RelativeLayout>
 
@@ -204,7 +178,7 @@
         android:textSize="14sp"
         android:textStyle="bold"
         android:textAlignment="center"
-        android:gravity="center"/>
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/tv_toggle_on"
@@ -217,7 +191,7 @@
         android:text="@string/airrobe_learn_more_toggle_on"
         android:textSize="15sp"
         android:textAlignment="center"
-        android:gravity="center"/>
+        android:gravity="center" />
 
     <RelativeLayout
         android:id="@+id/rl_toggle_container"
