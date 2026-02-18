@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="airrobe_widget_version">1.0.8</string>
+
     <string name="airrobe_added_to">Added To</string>
     <string name="airrobe_add_to">Add To</string>
 
@@ -30,4 +31,35 @@
     <string name="airrobe_order_confirmation_description">Simply activate your free account below to re-sell your items back into a circular economy after you`ve worn and loved them.</string>
     <string name="airrobe_order_confirmation_activate_text">ACTIVATE YOUR AIRROBE ACCOUNT</string>
     <string name="airrobe_order_confirmation_visit_text">VISIT YOUR AIRROBE ACCOUNT</string>
+
+
+    <string name="airrobe_description_enhanced"><u>Save to resell later.</u></string>
+    <string name="airrobe_potential_value_enhanced">Estimated resale: $%1$s</string>
+    <string name="airrobe_potential_value_without_value_enhanced">Estimated resale:</string>
+    <string name="airrobe_potential_value_enhanced_cut_off">Est. resale: $%1$s</string>
+    <string name="airrobe_potential_value_without_value_enhanced_cut_off">Est. resale:</string>
+
+    <string name="airrobe_detailed_description_enhanced">AirRobe is the easiest way to resell, rent or recycle your fashion. “Add to AirRobe” to save all product details and imagery to your own digital Circular Wardrobe™ so you can list later on the AirRobe pre-loved marketplace in seconds. No fee to add. No commitment. Learn more.</string>
+
+    <string name="airrobe_order_confirmation_description_enhanced">Simply activate your free account below to resell your items back into a circular economy after you’ve loved and worn them.</string>
+
+    <string name="airrobe_learn_more_title_enhanced">The easiest way to resell, rent or recycle.</string>
+    <string name="airrobe_learn_more_sub_title_enhanced">Save your purchases to AirRobe so you can repurpose them later in seconds on the AirRobe pre-loved designer marketplace.\n\nNo fee to add. No commitment.</string>
+    <string name="airrobe_learn_more_how_it_works_title_enhanced">HOW AIRROBE WORKS</string>
+    <string name="airrobe_learn_more_step1_title_enhanced">SHOP AS USUAL</string>
+    <string name="airrobe_learn_more_step2_title_enhanced">‘Add to AirRobe’</string>
+    <string name="airrobe_learn_more_step2_description_enhanced">All product detail &amp; imagery will be saved to your digital Circular Wardrobe™ on AirRobe. Simply set up your account post-purchase.</string>
+    <string name="airrobe_learn_more_step3_title_enhanced">RESELL, RENT OR RECYCLE LATER</string>
+    <string name="airrobe_learn_more_step3_description_enhanced">Once you’ve worn and loved an item, easily list from your AirRobe Circular Wardrobe™ in seconds.</string>
+    <string name="airrobe_learn_more_opt_in_description_enhanced">Save to resell later.</string>
+    <string name="airrobe_learn_more_text_enhanced"><u>LEARN MORE</u></string>
+    <string name="airrobe_learn_more_close_enhanced"><u>CLOSE</u></string>
+
+
+    <string name="logo_content_description">logo</string>
+    <string name="close_content_description">close</string>
+    <string name="circled_number_2_content_description">circled number 2</string>
+    <string name="circled_number_3_content_description">circled number 3</string>
+    <string name="plant_content_description">plant</string>
+    <string name="arrow_content_description">arrow</string>
 </resources>

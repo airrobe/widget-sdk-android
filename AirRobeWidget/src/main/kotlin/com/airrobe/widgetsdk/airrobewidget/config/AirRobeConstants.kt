@@ -21,6 +21,11 @@ internal class AirRobeConstants {
     }
 }
 
+internal enum class AirRobeVariants(val raw: String) {
+    Default("default"),
+    Enhanced("enhanced")
+}
+
 enum class EventName(val raw: String) {
     PageView("airrobe-pageview"),
     WidgetRender("airrobe-widget-render"),

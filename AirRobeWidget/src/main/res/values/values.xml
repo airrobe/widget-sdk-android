@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="backgroundColor" format="color" />
     <attr name="borderColor" format="color" />
     <attr name="textColor" format="color" />
-    <attr name="switchColor" format="color" />
+    <attr name="switchOnColor" format="color" />
+    <attr name="switchOffColor" format="color" />
+    <attr name="switchThumbOnColor" format="color" />
+    <attr name="switchThumbOffColor" format="color" />
     <attr name="arrowColor" format="color" />
     <attr name="linkTextColor" format="color" />
     <declare-styleable name="AirRobeOptIn">
-        <attr name="backgroundColor" />
         <attr name="borderColor" />
         <attr name="textColor" />
-        <attr name="switchColor" />
+        <attr name="switchOnColor" />
+        <attr name="switchOffColor" />
+        <attr name="switchThumbOnColor" />
+        <attr name="switchThumbOffColor" />
         <attr name="arrowColor" />
         <attr name="linkTextColor" />
     </declare-styleable>
     <declare-styleable name="AirRobeMultiOptIn">
-        <attr name="backgroundColor" />
         <attr name="borderColor" />
         <attr name="textColor" />
-        <attr name="switchColor" />
+        <attr name="switchOnColor" />
+        <attr name="switchOffColor" />
+        <attr name="switchThumbOnColor" />
+        <attr name="switchThumbOffColor" />
         <attr name="arrowColor" />
         <attr name="linkTextColor" />
     </declare-styleable>
     <declare-styleable name="AirRobeConfirmation">
-        <attr name="backgroundColor" />
         <attr name="borderColor" />
         <attr name="textColor" />
         <attr name="buttonBackgroundColor" format="color" />
         <attr name="buttonTextColor" format="color" />
+        <attr name="buttonBorderColor" format="color" />
     </declare-styleable>
 </resources>
